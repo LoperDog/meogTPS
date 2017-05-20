@@ -5,3 +5,5 @@ ProjectSettings/*
 meogTPS.sln
 Temp/*
 meogTPS.csproj
+./Assembly-CSharp.csproj
+
