@@ -3,14 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterSuper{
+    
+    // 공격 시작시간과 공격 
+    protected float m_CurrentAtrack;
+    protected float m_TimeAttack;
 
+    protected bool IsAttack = false;
+
+    public virtual void CharacterUpdate()
+    {
+        if (IsAttack)
+        {
+            m_CurrentAtrack += Time.deltaTime;
+        }
+
+    }
+    // 생성자.
+    public CharacterSuper()
+    {
+        m_CurrentAtrack = 0.0f;
+        m_TimeAttack = 0.5f;
+
+    }
     public virtual void Attack()
     {
-        Debug.Log("qwjkonrqwokrnqwk");
+        if(m_CurrentAtrack > m_TimeAttack && !IsAttack)
+        {
+
+        }
     }
 
     public virtual void Move()
     {
-        Debug.Log("asdsadasd");
+        Debug.Log("상속전 공격");
+    }
+    // 소멸
+    ~CharacterSuper()
+    {
+
     }
 }
