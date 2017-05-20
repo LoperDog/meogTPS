@@ -2,4 +2,6 @@
 Library/*
 obj/*
 ProjectSettings/*
-./meogTPS.sln
+meogTPS.sln
+Temp/*
+meogTPS.csproj
