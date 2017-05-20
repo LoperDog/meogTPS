@@ -2,15 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-<<<<<<< HEAD
 public class CharacterMgr : MonoBehaviour
 {
-=======
-public class CharacterMgr : MonoBehaviour {
     [SerializeField]
     private ConfigClass config;
-    
->>>>>>> 344abec1adddcec408cbb36bd306df2594b6791f
+
     public enum Chacracter_Type
     {
         Dubu,
@@ -48,13 +44,10 @@ public class CharacterMgr : MonoBehaviour {
     private CharacterSuper thisCharacter;
 
     // 캐릭터를 만들기 위해 아이디를 받는다.
-<<<<<<< HEAD
+
 	void Start ()
     {
-=======
-	void Start () {
         config = new ConfigClass();
->>>>>>> 344abec1adddcec408cbb36bd306df2594b6791f
         // 캐릭터 생성
         switch (Character_ID)
         {
@@ -78,24 +71,21 @@ public class CharacterMgr : MonoBehaviour {
         }
 	}
 	
-<<<<<<< HEAD
 	void Update ()
     {
-        thisCharacter.Attack();
-=======
-	void Update () {
         //캐릭터 업데이트
         thisCharacter.CharacterUpdate();
-
->>>>>>> 344abec1adddcec408cbb36bd306df2594b6791f
 	}
+
     public void Key_H(float H)
     {
 
     }
+
     public void Key_V(float V)
     {
 
     }
+
     public void SetCharID(Chacracter_Type Code) { Character_ID = Code; }
 }
