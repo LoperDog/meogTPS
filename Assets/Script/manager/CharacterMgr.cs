@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterMgr : MonoBehaviour {
+public class CharacterMgr : MonoBehaviour
+{
     public enum Chacracter_Type
     {
         Dubu,
         Mandu
     };
+
     [SerializeField]
     private float Char_Max_HP;
     [SerializeField]
@@ -32,7 +34,8 @@ public class CharacterMgr : MonoBehaviour {
     private CharacterSuper thisCharacter;
 
     // 캐릭터를 만들기 위해 아이디를 받는다.
-	void Start () {
+	void Start ()
+    {
         // 캐릭터 생성
         switch (Character_ID)
         {
@@ -46,7 +49,8 @@ public class CharacterMgr : MonoBehaviour {
         }
 	}
 	
-	void Update () {
+	void Update ()
+    {
         thisCharacter.Attack();
 	}
     public void SetCharID(Chacracter_Type Code) { Character_ID = Code; }
