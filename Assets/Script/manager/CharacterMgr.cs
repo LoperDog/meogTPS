@@ -2,30 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterMgr : MonoBehaviour
-{
-    public enum Chacracter_Type
+public class CharacterMgr : MonoBehaviour {
+    public enum ChacracterCode
     {
         Dubu,
         Mandu
     };
+    [SerializeField]
+    private float CharHPMax;
+    [SerializeField]
+    private float CharHPCurrent;
 
     [SerializeField]
-    private float Char_Max_HP;
+    private int CharBulletMax;
     [SerializeField]
-    private float Char_Current_HP;
-
-    [SerializeField]
-    private int Char_Max_Bullet;
-    [SerializeField]
-    private int Char_Current_Bullet;
+    private int CharBulletCurrent;
 
 
     [SerializeField]
-    private int Player_ID;
+    private int PlayerID;
 
     [SerializeField]
-    private Chacracter_Type Character_ID;
+    private ChacracterCode CharacterID;
 
     [SerializeField]
     private UISuper thisUI;
@@ -36,12 +34,12 @@ public class CharacterMgr : MonoBehaviour
     // 캐릭터를 만들기 위해 아이디를 받는다.
 	void Start () {
         // 캐릭터 생성
-        switch (Character_ID)
+        switch (CharacterID)
         {
-            case Chacracter_Type.Dubu:
+            case ChacracterCode.Dubu:
                 thisCharacter = new DubuCharacter();
                 break;
-            case Chacracter_Type.Mandu:
+            case ChacracterCode.Mandu:
                 thisCharacter = new ManduCharacter();
                 break;
 
@@ -51,5 +49,5 @@ public class CharacterMgr : MonoBehaviour
 	void Update () {
         thisCharacter.Attack();
 	}
-    public void SetCharID(Chacracter_Type Code) { Character_ID = Code; }
+    public void SetCharID(ChacracterCode Code) { CharacterID = Code; }
 }
