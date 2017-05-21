@@ -59,6 +59,7 @@ public class CharacterMgr : MonoBehaviour
     private bool Key_Shift = false;
     // 재장전
     private bool Key_R = false;
+    private bool Key_Space = false;
     #endregion
 
     // 캐릭터를 만들기 위해 아이디를 받는다.
@@ -138,6 +139,7 @@ public class CharacterMgr : MonoBehaviour
         Click_Right = Input.GetMouseButton(1);
         Key_Shift = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
         Key_R = Input.GetKey(KeyCode.R);
+        Key_Space = Input.GetKey(KeyCode.Space);
     }
     public void PlayAnimation()
     {

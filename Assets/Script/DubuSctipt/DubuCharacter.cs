@@ -8,6 +8,8 @@ public class DubuCharacter : CharacterSuper {
     public DubuCharacter()
     {
 
+        m_CurrentAtrack = 0.0f;
+        m_TimeAttack = 0.5f;
     }
     public override void Attack()
     {
