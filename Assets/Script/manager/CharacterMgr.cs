@@ -96,6 +96,7 @@ public class CharacterMgr : MonoBehaviour
 
                 break;
         }
+        thisCharacter.SetPlayerTr(Player_tr);
         // 나일때 할일
         if (_networkView.isMine)
         {

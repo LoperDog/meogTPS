@@ -106,6 +106,7 @@ public class CharacterSuper{
     {
         m_Move_Speed = moveSpeed;
     }
+    public virtual void SetPlayerTr(Transform player) { Player_tr = player}
     #endregion
     #region 캐릭터 상태값 가져오기
     public virtual bool GetAttackorReload() { return IsAttack || IsReLoad; }
