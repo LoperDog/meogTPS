@@ -32,9 +32,10 @@ public class CharacterSuper{
         {
             m_CurrentAtrack += Time.deltaTime;
             // 만약 
-            if(m_CurrentAtrack > )
+            if(m_CurrentAtrack > m_TimeAttack)
             {
-
+                IsAttack = false;
+                m_CurrentAtrack = 0.0f;
             }
         }
 
