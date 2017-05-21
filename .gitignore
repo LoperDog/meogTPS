@@ -7,3 +7,4 @@ Temp/*
 meogTPS.csproj
 ./Assembly-CSharp.csproj
 
+Assets/main/LightingData.asset

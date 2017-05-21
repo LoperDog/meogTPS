@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimationSuper
+public class AnimationSuper : MonoBehaviour
 {
     protected Animator m_Anim;
     
-    public virtual void Move()
+    public AnimationSuper()
     {
-
+        m_Anim = GetComponent<Animator>();
     }
-    public virtual void Attack()
-    {
 
+    ~AnimationSuper()
+    {
+        m_Anim = null;
     }
 }
