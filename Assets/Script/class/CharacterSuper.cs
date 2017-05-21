@@ -38,7 +38,7 @@ public class CharacterSuper{
                 m_CurrentAtrack = 0.0f;
             }
         }
-
+        Move();
     }
     // 생성자.
     public CharacterSuper()
@@ -76,6 +76,9 @@ public class CharacterSuper{
     public virtual void Move()
     {
         Debug.Log("상속전 이동");
+        Vector3 Move = (Vector3.forward * m_Move_V) + (Vector3.right * m_Move_H);
+        Player_tr.transform.position = Player_tr.position + Move;
+        Player_tr.LookAt(Player_tr.position + Move);
     }
     public virtual void ReLoad()
     {
@@ -106,7 +109,10 @@ public class CharacterSuper{
     {
         m_Move_Speed = moveSpeed;
     }
-    public virtual void SetPlayerTr(Transform player) { Player_tr = player}
+    public virtual void SetPlayerTr(Transform player) { Player_tr = player; }
+    public virtual void SetCharacterMove(float H, float V) {
+        m_Move_H = H; m_Move_V = V;
+    }
     #endregion
     #region 캐릭터 상태값 가져오기
     public virtual bool GetAttackorReload() { return IsAttack || IsReLoad; }
@@ -114,7 +120,6 @@ public class CharacterSuper{
     public virtual float GetMoveV() { return m_Move_V; }
     // 0 이라면 트루
     public virtual bool GetEmptyBullet() { return m_Current_Bullet == 0; }
-    public virtual void SetCharacterMove(float H,float V) { m_Move_H = H; m_Move_V = V; }
     #endregion
     // 소멸
     ~CharacterSuper()

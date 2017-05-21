@@ -81,7 +81,7 @@ public class CharacterMgr : MonoBehaviour
                 thisCharacter.SetBullet(config.DubuBullet);
                 thisCharacter.SetMoveSpeed(config.DubuAttackSpeed);
                 // 애니매이션 추후 수정
-                thisAnim = new AnimationSuper();
+                //thisAnim = new AnimationSuper();
                 break;
             case Chacracter_Type.Mandu:
                 Char_Current_HP =       config.ManduHP;
@@ -90,7 +90,7 @@ public class CharacterMgr : MonoBehaviour
                 thisCharacter.SetBullet(config.ManduBullet);
                 thisCharacter.SetMoveSpeed(config.ManduMoveSpeed);
                 // 애니매이션 추후 수정
-                thisAnim = new AnimationSuper();
+                //thisAnim = new AnimationSuper();
                 break;
             default:
 
@@ -98,10 +98,10 @@ public class CharacterMgr : MonoBehaviour
         }
         thisCharacter.SetPlayerTr(Player_tr);
         // 나일때 할일
-        if (_networkView.isMine)
-        {
+        //if (_networkView.isMine)
+        //{
 
-        }
+        //}
 	}
 	
 	void Update ()
@@ -110,12 +110,13 @@ public class CharacterMgr : MonoBehaviour
         thisCharacter.CharacterUpdate();
 
         //입력을 받고 저장한다.
-        if (_networkView.isMine)
-        {
+        //if (_networkView.isMine)
+        //{
             InputControll();
             // 키를 적용해준다.
             thisCharacter.SetCharacterMove(Key_H, Key_V);
-        }
+        //}
+        /*
         else
         {
             if (Vector3.Distance(Player_tr.position, Char_Pos) >= 2.0f)
@@ -131,7 +132,7 @@ public class CharacterMgr : MonoBehaviour
                 Player_tr.rotation = Quaternion.Slerp(Player_tr.rotation, Char_Rot, Time.deltaTime * 10.0f);
 
             }
-        }
+        }*/
 	}
 
     public void InputControll()
