@@ -27,9 +27,15 @@ public class CharacterSuper{
     protected GameObject Bullet;
     public virtual void CharacterUpdate()
     {
+        //공격중이라면
         if (IsAttack)
         {
             m_CurrentAtrack += Time.deltaTime;
+            // 만약 
+            if(m_CurrentAtrack > )
+            {
+
+            }
         }
 
     }
@@ -106,7 +112,7 @@ public class CharacterSuper{
     public virtual float GetMoveV() { return m_Move_V; }
     // 0 이라면 트루
     public virtual bool GetEmptyBullet() { return m_Current_Bullet == 0; }
-
+    public virtual void SetCharacterMove(float H,float V) { m_Move_H = H; m_Move_V = V; }
     #endregion
     // 소멸
     ~CharacterSuper()

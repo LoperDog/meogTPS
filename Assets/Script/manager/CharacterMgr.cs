@@ -112,6 +112,8 @@ public class CharacterMgr : MonoBehaviour
         if (_networkView.isMine)
         {
             InputControll();
+            // 키를 적용해준다.
+            thisCharacter.SetCharacterMove(Key_H, Key_V);
         }
         else
         {
