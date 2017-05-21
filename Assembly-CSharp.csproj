@@ -48,10 +48,13 @@
   <ItemGroup>
      <Compile Include="Assets\Script\DubuSctipt\DubuCharacter.cs" />
      <Compile Include="Assets\Script\DubuSctipt\ManduCharacter.cs" />
+     <Compile Include="Assets\Script\class\AnimationSuper.cs" />
      <Compile Include="Assets\Script\class\BulletSuper.cs" />
      <Compile Include="Assets\Script\class\CharacterSuper.cs" />
+     <Compile Include="Assets\Script\class\ConfigClass.cs" />
      <Compile Include="Assets\Script\class\UISuper.cs" />
      <Compile Include="Assets\Script\manager\CharacterMgr.cs" />
+     <Compile Include="Assets\Script\manager\NetworkMgr.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

@@ -71,7 +71,10 @@ public class CharacterMgr : MonoBehaviour {
 	void Update () {
         //캐릭터 업데이트
         thisCharacter.CharacterUpdate();
+        if (Input.GetKey)
+        {
 
+        }
 	}
     public void Key_H(float H)
     {
