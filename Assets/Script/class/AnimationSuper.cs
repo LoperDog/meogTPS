@@ -12,20 +12,23 @@ public class AnimationSuper : MonoBehaviour
         m_Anim = GetComponent<Animator>();
     }
     // 이동 애니매이션 정의
-    protected virtual void PlayMove()
+    public virtual void PlayMove()
     {
 
     }
     // 공격 애니매이션 정의
-    protected virtual void PlayAttack()
+    public virtual void PlayAttack()
     {
 
     }
     // 재장전 애니매이션 정의
-    protected virtual void PlayReload()
+    public virtual void PlayReload()
     {
 
     }
+    public virtual void SetChar(CharacterSuper CharScript) { m_Char_State = CharScript; }
+
+
     ~AnimationSuper()
     {
         m_Anim = null;

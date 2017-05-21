@@ -21,23 +21,19 @@ public class CharacterMgr : MonoBehaviour
         Dubu,
         Mandu
     };
-
+    #region 캐릭터 정보
     [SerializeField]
     private float Char_Max_HP;
     [SerializeField]
     private float Char_Current_HP;
 
     [SerializeField]
-    private int Char_Max_Bullet;
-    [SerializeField]
-    private int Char_Current_Bullet;
-
-    [SerializeField]
-    private float Char_Move_Speed;
-
-    [SerializeField]
     private int Player_ID;
+    [SerializeField]
+    private bool IsDead = false;
 
+    #endregion
+    #region 캐릭터 내부 스크립트 혹은 클래스
     // 필요한 기능등 붙이기
     [SerializeField]
     private Chacracter_Type Character_ID;
@@ -51,9 +47,7 @@ public class CharacterMgr : MonoBehaviour
 
     // 이 캐릭터가 실행할 스크립트
     private CharacterSuper thisCharacter;
-
-
-
+    #endregion
     #region 캐릭터키값
     // 이동키
     private float Key_H = 0.0f;
@@ -84,12 +78,18 @@ public class CharacterMgr : MonoBehaviour
                 Char_Max_HP =           config.DubuHP;
                 thisCharacter = new DubuCharacter();
                 thisCharacter.SetBullet(config.DubuBullet);
+                thisCharacter.SetMoveSpeed(config.DubuAttackSpeed);
+                // 애니매이션 추후 수정
+                thisAnim = new AnimationSuper();
                 break;
             case Chacracter_Type.Mandu:
                 Char_Current_HP =       config.ManduHP;
                 Char_Max_HP =           config.ManduHP;
                 thisCharacter = new ManduCharacter();
                 thisCharacter.SetBullet(config.ManduBullet);
+                thisCharacter.SetMoveSpeed(config.ManduMoveSpeed);
+                // 애니매이션 추후 수정
+                thisAnim = new AnimationSuper();
                 break;
             default:
 
@@ -142,8 +142,9 @@ public class CharacterMgr : MonoBehaviour
     public void PlayAnimation()
     {
         // 이동 애니매이션
-
+        thisAnim.PlayMove();
         // 공격 애니매이션
+
         // 재장전 애니매이션
     }
 

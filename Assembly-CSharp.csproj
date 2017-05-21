@@ -57,6 +57,8 @@
      <Compile Include="Assets\Script\class\UISuper.cs" />
      <Compile Include="Assets\Script\manager\CharacterMgr.cs" />
      <Compile Include="Assets\Script\manager\NetworkMgr.cs" />
+     <None Include="Assets\Effect\Toon,Head\Toon.shader" />
+     <None Include="Assets\Prefab\Toon.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
