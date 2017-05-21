@@ -10,6 +10,9 @@ public class CharacterSuper{
 
     protected bool IsAttack = false;
 
+    protected int m_Current_Bullet = 0;
+    protected int m_Max_Bullet = 0;
+
     public virtual void CharacterUpdate()
     {
         if (IsAttack)
@@ -25,6 +28,7 @@ public class CharacterSuper{
         m_TimeAttack = 0.5f;
 
     }
+    #region 캐릭터 기능 정의
     public virtual void Attack()
     {
         if(m_CurrentAtrack > m_TimeAttack && !IsAttack)
@@ -36,6 +40,16 @@ public class CharacterSuper{
     public virtual void Move()
     {
         Debug.Log("상속전 공격");
+    }
+    public virtual void ReLoad()
+    {
+
+    }
+    #endregion 
+    public virtual void SetBullet(int bulletMax)
+    {
+        m_Max_Bullet = bulletMax;
+        m_Current_Bullet = bulletMax;
     }
     // 소멸
     ~CharacterSuper()
