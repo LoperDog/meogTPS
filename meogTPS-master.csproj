@@ -75,10 +75,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Script\Cam.cs" />
+    <Compile Include="Assets\Script\Camera\Cam.cs" />
+    <Compile Include="Assets\Script\Camera\Practice_cam.cs" />
+    <Compile Include="Assets\Script\Camera\Practice_cam2.cs" />
     <Compile Include="Assets\Script\DubuSctipt\DubuCharacter.cs" />
     <Compile Include="Assets\Script\DubuSctipt\ManduCharacter.cs" />
-    <Compile Include="Assets\Script\Practice_cam.cs" />
     <Compile Include="Assets\Script\class\AnimationSuper.cs" />
     <Compile Include="Assets\Script\class\BulletSuper.cs" />
     <Compile Include="Assets\Script\class\CharacterSuper.cs" />

@@ -78,7 +78,7 @@ public class CharacterSuper{
         Debug.Log("상속전 이동");
         Vector3 Move = (Vector3.forward * m_Move_V) + (Vector3.right * m_Move_H);
         Player_tr.transform.position = Player_tr.position + Move;
-        Player_tr.LookAt(Player_tr.position + Move);
+        //Player_tr.LookAt(Player_tr.position + Move);
     }
     public virtual void ReLoad()
     {
