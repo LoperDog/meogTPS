@@ -5,26 +5,24 @@ using UnityEngine;
 public class Practice_cam2 : MonoBehaviour
 {
     private Transform Cam_Tr;
-    public Transform Target;
+    public Transform Target_tr;
 
-    private float X = 0.4f;
-    private float Y = 1.0f;
-    private float Z = -2.0f;
+    public float X = 0.0f;
+    public float Y = 1.0f;
+    public float Z = 3.0f;
 
-    private float mouse_x = 0.0f;
-    Vector3 Cam_position;
     Vector3 Gap;
 
 	void Start ()
     {
         Cam_Tr = GetComponent<Transform>();
-        Cam_Tr.position = new Vector3(X, Y, Z);
-        Gap = Cam_Tr.position - Target.transform.position;
+        Target_tr = Target_tr.GetComponent<Transform>();
+        Gap = Cam_Tr.position - Target_tr.position;
     }
 
     void LateUpdate()
     {
-        mouse_x = Input.GetAxis("Mouse X");
-        Cam_Tr.position = Target.transform.position + Gap;
+        Cam_Tr.position = Target_tr.position + Gap;
+        Cam_Tr.eulerAngles= new Vector3(Target_tr.rotation.eulerAngles.x, Target_tr.rotation.eulerAngles.y, Target_tr.rotation.eulerAngles.z);
     }
 }

@@ -22,6 +22,11 @@ public class CharacterSuper{
     protected float m_Move_H = 0.0f;
     protected float m_Move_V = 0.0f;
 
+    //회전
+    protected float Min_X = -360.0f;
+    protected float Max_X = 360.0f;
+    protected float Sens_X = 100.0f;
+    protected float Rotation_X = 0.0f;
 
     protected Transform Player_tr;
     protected Transform Camera_tr;
@@ -80,12 +85,14 @@ public class CharacterSuper{
         Move = Move.normalized;
         Player_tr.transform.position = Player_tr.position + Move* m_Move_Speed * Time.deltaTime;*/
 
-        Vector3 forward = Camera_tr.TransformDirection(Vector3.forward);
+        Vector3 forward = Player_tr.TransformDirection(Vector3.forward);
         forward = forward.normalized;
 
         Vector3 right = new Vector3(forward.z, 0, -forward.x);
         Vector3 moveDirection = (m_Move_H * right) + (m_Move_V * forward);
         Player_tr.position = Player_tr.position + moveDirection * m_Move_Speed * Time.deltaTime;
+        Rotation_X += Input.GetAxis("Mouse X") * Sens_X * Time.deltaTime;
+        Player_tr.localEulerAngles = new Vector3(0, Rotation_X, 0);
     }
     public virtual void ReLoad()
     {
@@ -118,9 +125,7 @@ public class CharacterSuper{
     }
     public virtual void SetPlayerTr(Transform player) { Player_tr = player; }
     public virtual void SetCameraTr(Transform camera) { Camera_tr = camera; }
-    public virtual void SetCharacterMove(float H, float V) {
-        m_Move_H = H; m_Move_V = V;
-    }
+    public virtual void SetCharacterMove(float H, float V) {m_Move_H = H; m_Move_V = V;}
     #endregion
     #region 캐릭터 상태값 가져오기
     public virtual bool GetAttackorReload() { return IsAttack || IsReLoad; }
