@@ -25,7 +25,6 @@ public class Practice_cam2 : MonoBehaviour
     void LateUpdate()
     {
         mouse_x = Input.GetAxis("Mouse X");
-        //Cam_Tr.position = Target.transform.position + Gap;
-        transform.RotateAround(Target.transform.position+Gap, Vector3.up, mouse_x * 20 * Time.deltaTime);
+        Cam_Tr.position = Target.transform.position + Gap;
     }
 }

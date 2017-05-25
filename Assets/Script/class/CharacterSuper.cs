@@ -24,6 +24,7 @@ public class CharacterSuper{
 
 
     protected Transform Player_tr;
+    protected Transform Camera_tr;
     protected GameObject Bullet;
     public virtual void CharacterUpdate()
     {
@@ -74,13 +75,17 @@ public class CharacterSuper{
     }
 
     public virtual void Move()
-    {
+    {/*
         Vector3 Move = (Vector3.forward * m_Move_V) + (Vector3.right * m_Move_H);
-        Player_tr.transform.position = Player_tr.position + Move* m_Move_Speed * Time.deltaTime;
-        Player_tr.LookAt(Player_tr.position + Move);
+        Move = Move.normalized;
+        Player_tr.transform.position = Player_tr.position + Move* m_Move_Speed * Time.deltaTime;*/
 
-        //Quaternion NewRotation = Quaternion.LookRotation(Player_tr.position + Move);
-        //Player_tr.rotation = Quaternion.Slerp(Player_tr.rotation, NewRotation, 200 * Time.deltaTime);
+        Vector3 forward = Camera_tr.TransformDirection(Vector3.forward);
+        forward = forward.normalized;
+
+        Vector3 right = new Vector3(forward.z, 0, -forward.x);
+        Vector3 moveDirection = (m_Move_H * right) + (m_Move_V * forward);
+        Player_tr.position = Player_tr.position + moveDirection * m_Move_Speed * Time.deltaTime;
     }
     public virtual void ReLoad()
     {
@@ -112,6 +117,7 @@ public class CharacterSuper{
         m_Move_Speed = moveSpeed;
     }
     public virtual void SetPlayerTr(Transform player) { Player_tr = player; }
+    public virtual void SetCameraTr(Transform camera) { Camera_tr = camera; }
     public virtual void SetCharacterMove(float H, float V) {
         m_Move_H = H; m_Move_V = V;
     }

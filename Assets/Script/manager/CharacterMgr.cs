@@ -8,6 +8,7 @@ public class CharacterMgr : MonoBehaviour
     private ConfigClass config;
 
     private Transform Player_tr;
+    private Transform Camera_tr;
 
     private NetworkView _networkView;
     private Vector3 Char_Pos;
@@ -67,6 +68,7 @@ public class CharacterMgr : MonoBehaviour
     {
         // 캐릭터 받아오기 세팅
         Player_tr = GetComponent<Transform>();
+        Camera_tr = Camera.main.GetComponent<Transform>();
         _networkView = GetComponent<NetworkView>();
 
 
@@ -97,6 +99,7 @@ public class CharacterMgr : MonoBehaviour
                 break;
         }
         thisCharacter.SetPlayerTr(Player_tr);
+        thisCharacter.SetCameraTr(Camera_tr);
         // 나일때 할일
         //if (_networkView.isMine)
         //{
