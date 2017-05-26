@@ -17,12 +17,10 @@ public class Practice_cam2 : MonoBehaviour
     {
         Cam_Tr = GetComponent<Transform>();
         Target_tr = Target_tr.GetComponent<Transform>();
-        Gap = Cam_Tr.position - Target_tr.position;
     }
 
     void LateUpdate()
     {
-        Cam_Tr.position = Target_tr.position + Gap;
         Cam_Tr.eulerAngles= new Vector3(Target_tr.rotation.eulerAngles.x, Target_tr.rotation.eulerAngles.y, Target_tr.rotation.eulerAngles.z);
     }
 }

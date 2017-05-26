@@ -12,6 +12,8 @@ public class CharacterSuper{
 
     protected bool IsAttack = false;
     protected bool IsReLoad = false;
+    protected bool Is_Ground;
+    protected bool Is_Jump;
 
     protected int m_Current_Bullet = 0;
     protected int m_Max_Bullet = 0;
@@ -29,10 +31,24 @@ public class CharacterSuper{
     protected float Rotation_X = 0.0f;
 
     protected Transform Player_tr;
+    protected Rigidbody Player_rb;
     protected Transform Camera_tr;
+
     protected GameObject Bullet;
+
     public virtual void CharacterUpdate()
     {
+        Debug.Log(Is_Ground);
+        RaycastHit hit;
+        Debug.DrawRay(Player_tr.position, Vector3.down * 0.3f, Color.red);
+        if (Physics.Raycast(Player_tr.position,Vector3.down,out hit,0.3f))
+        {
+            if(hit.collider.tag=="GROUND")
+            {
+                Is_Ground = true;
+            }
+            Is_Ground = false;
+        }
         //공격중이라면
         if (IsAttack)
         {
@@ -45,6 +61,7 @@ public class CharacterSuper{
             }
         }
         Move();
+        Jump();
     }
     // 생성자.
     public CharacterSuper()
@@ -94,6 +111,19 @@ public class CharacterSuper{
         Rotation_X += Input.GetAxis("Mouse X") * Sens_X * Time.deltaTime;
         Player_tr.localEulerAngles = new Vector3(0, Rotation_X, 0);
     }
+    public virtual void Jump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && Is_Ground)
+        {
+            Is_Jump = true;
+        }
+
+        if (Is_Jump)
+        {
+            Player_rb.AddForce(0, 300, 0);
+        }
+
+    }
     public virtual void ReLoad()
     {
 
@@ -125,6 +155,7 @@ public class CharacterSuper{
     }
     public virtual void SetPlayerTr(Transform player) { Player_tr = player; }
     public virtual void SetCameraTr(Transform camera) { Camera_tr = camera; }
+    public virtual void SetPlayerRb(Rigidbody rigidbody) { Player_rb = rigidbody; }
     public virtual void SetCharacterMove(float H, float V) {m_Move_H = H; m_Move_V = V;}
     #endregion
     #region 캐릭터 상태값 가져오기

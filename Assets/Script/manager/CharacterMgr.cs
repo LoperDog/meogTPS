@@ -8,6 +8,7 @@ public class CharacterMgr : MonoBehaviour
     private ConfigClass config;
 
     private Transform Player_tr;
+    private Rigidbody Player_rb;
     private Transform Camera_tr;
 
     private NetworkView _networkView;
@@ -68,6 +69,7 @@ public class CharacterMgr : MonoBehaviour
     {
         // 캐릭터 받아오기 세팅
         Player_tr = GetComponent<Transform>();
+        Player_rb = GetComponent<Rigidbody>();
         Camera_tr = Camera.main.GetComponent<Transform>();
         _networkView = GetComponent<NetworkView>();
 
@@ -99,6 +101,7 @@ public class CharacterMgr : MonoBehaviour
                 break;
         }
         thisCharacter.SetPlayerTr(Player_tr);
+        thisCharacter.SetPlayerRb(Player_rb);
         thisCharacter.SetCameraTr(Camera_tr);
         // 나일때 할일
         //if (_networkView.isMine)
@@ -158,4 +161,9 @@ public class CharacterMgr : MonoBehaviour
     }
 
     public void SetCharID(Chacracter_Type Code) { Character_ID = Code; }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        
+    }
 }
