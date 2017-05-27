@@ -12,7 +12,7 @@ public class CharacterSuper{
 
     protected bool IsAttack = false;
     protected bool IsReLoad = false;
-    protected bool Is_Ground;
+    protected bool Is_Ground = true;
     protected bool Is_Jump;
 
     protected int m_Current_Bullet = 0;
@@ -39,16 +39,6 @@ public class CharacterSuper{
     public virtual void CharacterUpdate()
     {
         Debug.Log(Is_Ground);
-        RaycastHit hit;
-        Debug.DrawRay(Player_tr.position, Vector3.down * 0.3f, Color.red);
-        if (Physics.Raycast(Player_tr.position,Vector3.down,out hit,0.3f))
-        {
-            if(hit.collider.tag=="GROUND")
-            {
-                Is_Ground = true;
-            }
-            Is_Ground = false;
-        }
         //공격중이라면
         if (IsAttack)
         {
@@ -60,6 +50,7 @@ public class CharacterSuper{
                 m_CurrentAtrack = 0.0f;
             }
         }
+        Check_Ground();
         Move();
         Jump();
     }
@@ -121,8 +112,23 @@ public class CharacterSuper{
         if (Is_Jump)
         {
             Player_rb.AddForce(0, 300, 0);
+            Is_Jump = false;
         }
 
+    }
+    public virtual void Check_Ground()
+    {
+        RaycastHit hit;
+        Debug.DrawRay(Player_tr.position, Vector3.down * 0.05f, Color.red);
+        if (Physics.Raycast(Player_tr.position, Vector3.down, out hit, 0.05f))
+        {
+            if (hit.collider.tag == "GROUND")
+            {
+                Is_Ground = true;
+                return;
+            }
+        }
+        Is_Ground = false;
     }
     public virtual void ReLoad()
     {
