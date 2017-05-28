@@ -46,7 +46,10 @@ public class CharacterSuper : MonoBehaviour{
 
     protected Transform Player_tr;
     protected GameObject Player_Object;
-    protected List<GameObject> Bullet;
+    // 조금 알아보고 쓰자.
+    protected GameObject BaseBullet;
+    protected Dictionary<int, Queue<GameObject>> BulletPool = new Dictionary<int, Queue<GameObject>>();
+
     protected CoroutinClass coroutine;
     protected GameObject FirePoint;
 
@@ -147,6 +150,23 @@ public class CharacterSuper : MonoBehaviour{
         Debug.Log("상속전 공격 -> 오브젝트를 생성시킨다.");
 
     }
+    public virtual void ReuseBullet(GameObject Object,Vector3 position, Quaternion rotation)
+    {
+        int poolkey = Object.GetInstanceID();
+
+        if (BulletPool.ContainsKey(poolkey))
+        {
+            GameObject objectToReuse = BulletPool[poolkey].Dequeue();
+            BulletPool[poolkey].Enqueue(objectToReuse);
+
+            // 활성화 시킨다.
+            objectToReuse.SetActive(true);
+            // 오브젝트 사용하기 위해 세팅을 하자.
+            // 발사할 위치를 정하거나 하는 둥의 액션.
+
+        }
+    }
+
     public virtual void StartReload()
     {
         Debug.Log("상속전 캐릭터 재장전 시작");
@@ -184,7 +204,31 @@ public class CharacterSuper : MonoBehaviour{
     public virtual void SetCameraTr(Transform camera) { Camera_tr = camera; }
     public virtual void SetPlayerRb(Rigidbody rigidbody) { Player_rb = rigidbody; }
     public virtual void SetCharacterMove(float H, float V) {m_Move_H = H; m_Move_V = V;}
+    public virtual void SetBulletObject(GameObject bullet) { BaseBullet = bullet; }
 
+    public virtual void CreateBullet(int size, GameObject Object)
+    {
+        /*
+         * 오브젝트 풀에 여러 가지 총알을 만들수 있는 여부를 둔 이유는
+         * 캐릭터의 메인이 되는 총알이 아닌 것들 또한 사용하게 하기위해서이다.
+         * 즉 특수기가 연속 발사이거나 하는 등의 경우를 상정해 두고 작업 하기 위함.
+         */
+        // 총알 인스턴스의 고유 값을 가져온다.
+        int poolkey = Object.GetInstanceID();
+
+        // 이미 총알 풀에 그값이 있는지 없는지 검사 한다. 없어야 넣는다.
+        if (!BulletPool.ContainsKey(poolkey))
+        {
+            // 풀에 키값을 넣고 그에 맞는 총알 큐를 만든다.
+            BulletPool.Add(poolkey, new Queue<GameObject>());
+            for(int i = 0; i < size; i++)
+            {
+                GameObject newBullet = Instantiate(Object) as GameObject;
+                newBullet.SetActive(false);
+                BulletPool[poolkey].Enqueue(newBullet);
+            }
+        }
+    }
     #endregion
 
     #region 아이템 영역
@@ -214,6 +258,7 @@ public class CharacterSuper : MonoBehaviour{
     public virtual void SetRun(bool KeyShift){ IsRun = KeyShift;}
     public virtual void SetMoveH(float KeyH) { m_Move_H = KeyH; }
     public virtual void SetMoveV(float KeyV) { m_Move_V = KeyV; }
+    
     #endregion
     #region 캐릭터 상태값 가져오기
     public virtual bool GetAttackorReload() { return IsAttack || IsReLoad; }

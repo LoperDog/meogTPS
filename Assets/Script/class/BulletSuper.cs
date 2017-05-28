@@ -1,8 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class BulletSuper : MonoBehaviour {
+    // 생존 시간
+    public float m_CurrentLifeTime = 0.0f;
+    public float m_MaxLifeTime = 1.0f;
 
     // 총알을 발사하기 위한 준비
     protected float BulletSpeed;
@@ -18,7 +22,7 @@ public class BulletSuper : MonoBehaviour {
         Bullet_tr.position = position;
         Bullet_tr.rotation = rotation;
         BulletSpeed = FireSpeed;
-
+        m_CurrentLifeTime = 0.0f;
     }
 
     // 충돌처리
