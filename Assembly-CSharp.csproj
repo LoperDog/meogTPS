@@ -50,12 +50,16 @@
      <Compile Include="Assets\Script\DubuSctipt\DubuCharacter.cs" />
      <Compile Include="Assets\Script\DubuSctipt\ManduCharacter.cs" />
      <Compile Include="Assets\Script\Practice_cam.cs" />
+     <Compile Include="Assets\Script\TestScript\TestScript.cs" />
+     <Compile Include="Assets\Script\TestScript\coroutinTestSuper.cs" />
      <Compile Include="Assets\Script\class\AnimationSuper.cs" />
      <Compile Include="Assets\Script\class\BulletSuper.cs" />
      <Compile Include="Assets\Script\class\CharacterSuper.cs" />
      <Compile Include="Assets\Script\class\ConfigClass.cs" />
+     <Compile Include="Assets\Script\class\CoroutinClass.cs" />
      <Compile Include="Assets\Script\class\UISuper.cs" />
      <Compile Include="Assets\Script\manager\CharacterMgr.cs" />
+     <Compile Include="Assets\Script\manager\GameMgr.cs" />
      <Compile Include="Assets\Script\manager\NetworkMgr.cs" />
      <None Include="Assets\Effect\Toon,Head\Toon.shader" />
      <None Include="Assets\Prefab\Toon.shader" />
