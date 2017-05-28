@@ -135,7 +135,7 @@ ModelImporter:
     13700000: CH_Tofu
     13700002: Tofu
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:
