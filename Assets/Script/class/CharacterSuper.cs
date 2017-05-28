@@ -33,7 +33,7 @@ public class CharacterSuper : MonoBehaviour{
     //이동
     protected float m_Move_H = 0.0f;
     protected float m_Move_V = 0.0f;
-    protected float m_Move_Speed = 1.0f;
+    protected float m_Move_Speed = 5.0f;
 
     //회전
     protected float Min_X = -360.0f;
@@ -58,7 +58,7 @@ public class CharacterSuper : MonoBehaviour{
         //공격중이라면
         if (IsAttack)
         {
-            coroutine.StartAttackSetting();
+            //coroutine.StartAttackSetting();
             IsAttack = false;
         }
         Check_Ground();
@@ -125,14 +125,20 @@ public class CharacterSuper : MonoBehaviour{
     }
     public virtual void Check_Ground()
     {
+        Debug.Log(Is_Ground);
         RaycastHit hit;
-        Debug.DrawRay(Player_tr.position, Vector3.down * 0.05f, Color.red);
-        if (Physics.Raycast(Player_tr.position, Vector3.down, out hit, 0.05f))
+        Debug.DrawRay(Player_tr.position, Vector3.down * 0.3f, Color.red);
+        if (Physics.Raycast(Player_tr.position, Vector3.down, out hit, 0.3f))
         {
             if (hit.collider.tag == "GROUND")
             {
                 Is_Ground = true;
+                //Player_tr.position = new Vector3(Player_tr.position.x, 0, Player_tr.position.z);
                 return;
+            }
+            else
+            {
+                //Player_tr.position = new Vector3(Player_tr.position.x, 0, Player_tr.position.z);
             }
         }
         Is_Ground = false;

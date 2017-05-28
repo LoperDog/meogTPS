@@ -9,18 +9,18 @@ public class AnimationSuper
         
     public AnimationSuper()
     {
+
     }
     // 애니매이션 플레이
     public virtual void PlayAnimation()
     {
-
+        PlayMove();
     }
     // 이동 애니매이션 정의
     public virtual void PlayMove()
     {
-        if (m_Char_State.GetIsRun())
-        {
-        }
+        m_Anim.SetFloat("H",m_Char_State.GetMoveH());
+        m_Anim.SetFloat("V",m_Char_State.GetMoveV());
     }
     // 공격 애니매이션 정의
     public virtual void PlayAttack()
