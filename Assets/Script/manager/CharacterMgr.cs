@@ -87,6 +87,9 @@ public class CharacterMgr : MonoBehaviour
                 Char_Max_HP =           config.DubuHP;
                 thisCharacter = new DubuCharacter();
                 thisCharacter.SetBullet(config.DubuBullet);
+                thisCharacter.SetCurrentSpeed(config.DubuCurrentSpeed);
+                thisCharacter.SetMoveSpeed(config.DubuMoveSpeed);
+                thisCharacter.SetRunSpeed(config.DubuRunSpeed);
                 thisCharacter.SetMoveSpeed(config.DubuAttackSpeed);
                 FirePoint.transform.localPosition = config.DubuFirePosition;
                 // 애니매이션 추후 수정
@@ -97,7 +100,10 @@ public class CharacterMgr : MonoBehaviour
                 Char_Max_HP =           config.ManduHP;
                 thisCharacter = new ManduCharacter();
                 thisCharacter.SetBullet(config.ManduBullet);
+                thisCharacter.SetCurrentSpeed(config.ManduCurrentSpeed);
                 thisCharacter.SetMoveSpeed(config.ManduMoveSpeed);
+                thisCharacter.SetMoveSpeed(config.ManduMoveSpeed);
+                thisCharacter.SetRunSpeed(config.ManduRunSpeed);
                 FirePoint.transform.localPosition = config.ManduFirePosition;
                 // 애니매이션 추후 수정
                 thisAnim = new AnimationSuper();

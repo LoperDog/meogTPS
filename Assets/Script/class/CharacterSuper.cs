@@ -33,7 +33,9 @@ public class CharacterSuper : MonoBehaviour{
     //이동
     protected float m_Move_H = 0.0f;
     protected float m_Move_V = 0.0f;
-    protected float m_Move_Speed = 5.0f;
+    protected float m_Current_Speed;
+    protected float m_Move_Speed = 1.0f;
+    protected float m_Run_Speed = 2.0f;
 
     //회전
     protected float Min_X = -360.0f;
@@ -41,7 +43,7 @@ public class CharacterSuper : MonoBehaviour{
     protected float Sens_X = 100.0f;
     protected float Rotation_X = 0.0f;
 
-    //달리기
+    //점프
     protected float Jump_Force = 300.0f;
 
     protected Transform Player_tr;
@@ -63,6 +65,7 @@ public class CharacterSuper : MonoBehaviour{
         }
         Check_Ground();
         Move();
+        Run();
         Jump();
     }
     // 생성자.
@@ -105,9 +108,20 @@ public class CharacterSuper : MonoBehaviour{
 
         Vector3 right = new Vector3(forward.z, 0, -forward.x);
         Vector3 moveDirection = (m_Move_H * right) + (m_Move_V * forward);
-        Player_tr.position = Player_tr.position + moveDirection * m_Move_Speed * Time.deltaTime;
+        Player_tr.position = Player_tr.position + moveDirection * m_Current_Speed * Time.deltaTime;
         Rotation_X += Input.GetAxis("Mouse X") * Sens_X * Time.deltaTime;
         Player_tr.localEulerAngles = new Vector3(0, Rotation_X, 0);
+    }
+    public virtual void Run()
+    {
+        if (Input.GetKey(KeyCode.LeftShift) && (m_Move_V > 0.1))
+        {
+            m_Current_Speed = m_Run_Speed;
+        }
+        else
+        {
+            m_Current_Speed = m_Move_Speed;
+        }
     }
     public virtual void Jump()
     {
@@ -176,6 +190,14 @@ public class CharacterSuper : MonoBehaviour{
     public virtual void SetMoveSpeed(float moveSpeed)
     {
         m_Move_Speed = moveSpeed;
+    }
+    public virtual void SetCurrentSpeed(float currentSpeed)
+    {
+        m_Current_Speed = currentSpeed;
+    }
+    public virtual void SetRunSpeed(float run_Speed)
+    {
+        m_Run_Speed = run_Speed;
     }
     public virtual void SetPlayerTr(Transform player) {
         Player_tr = player;
