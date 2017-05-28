@@ -20,6 +20,8 @@ public class CoroutinClass : MonoBehaviour {
     {
         StartCoroutine(EndBuffItem(time, code, value));
     }
+
+
     // 시간초 후에 캐릭터를 확인한다.
     public virtual IEnumerator SetAttackState()
     {

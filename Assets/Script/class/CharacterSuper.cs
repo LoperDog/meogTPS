@@ -21,7 +21,7 @@ public class CharacterSuper : MonoBehaviour{
     public float m_CurrentReload;
     public float m_TimeReload;
     
-    public bool IsAttack = false;
+    public bool IsAttack = true;
     public bool IsReLoad = false;
     protected bool Is_Ground = true;
     protected bool Is_Jump;
@@ -53,17 +53,11 @@ public class CharacterSuper : MonoBehaviour{
     
     public virtual void CharacterUpdate()
     {
-        Debug.Log(Is_Ground);
         //공격중이라면
         if (IsAttack)
         {
-            m_CurrentAtrack += Time.deltaTime;
-            // 만약 
-            if(m_CurrentAtrack > m_TimeAttack)
-            {
-                IsAttack = false;
-                m_CurrentAtrack = 0.0f;
-            }
+            coroutine.StartAttackSetting();
+            IsAttack = false;
         }
         Check_Ground();
         Move();
@@ -72,7 +66,7 @@ public class CharacterSuper : MonoBehaviour{
     // 생성자.
     public CharacterSuper()
     {
-        m_CurrentAtrack = 0.0f;
+        m_CurrentAtrack = 1.0f;
         m_TimeAttack = 0.5f;
         m_CurrentReload = 0.0f;
         m_TimeReload = 1.0f;
@@ -169,10 +163,14 @@ public class CharacterSuper : MonoBehaviour{
     {
         m_Move_Speed = moveSpeed;
     }
-    public virtual void SetPlayerTr(Transform player) { Player_tr = player; SetPlayerOb(); Debug.Log(Player_Object); SetCoroutine(); }
-    public virtual void SetPlayerOb() { Player_Object = Player_tr.GetComponent<GameObject>(); }
-    public virtual void SetCoroutine() {
-        coroutine = Player_Object.AddComponent<CoroutinClass>();
+    public virtual void SetPlayerTr(Transform player) {
+        Player_tr = player;
+    }
+    public virtual void SetPlayerOb(GameObject player_ob) {
+        Player_Object = player_ob;
+    }
+    public virtual void SetCoroutine(CoroutinClass co) {
+        coroutine = co;
         coroutine.SetCharacterScript(this);
     }
     public virtual void SetCameraTr(Transform camera) { Camera_tr = camera; }

@@ -105,7 +105,8 @@ public class CharacterMgr : MonoBehaviour
                 break;
         }
         // 애니매이션 정의
-        Debug.Log(gameObject.GetComponent<Animator>().name);
+        thisCharacter.SetPlayerOb(gameObject);
+        thisCharacter.SetCoroutine(gameObject.AddComponent<CoroutinClass>());
         thisAnim.SetAnimator(gameObject.GetComponent<Animator>());
 
         thisCharacter.SetPlayerTr(Player_tr);
@@ -146,11 +147,9 @@ public class CharacterMgr : MonoBehaviour
                 Player_tr.rotation = Quaternion.Slerp(Player_tr.rotation, Char_Rot, Time.deltaTime * 10.0f);
 
             }
-<<<<<<< HEAD
         }
         // 상태에 맞춰서 알아서 애니매이션 플레이
         thisAnim.PlayAnimation();
-=======
         }*/
 	}
 
