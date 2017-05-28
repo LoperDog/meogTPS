@@ -89,7 +89,7 @@ public class CharacterMgr : MonoBehaviour
                 thisCharacter.SetBullet(config.DubuBullet);
                 thisCharacter.SetMoveSpeed(config.DubuAttackSpeed);
                 // 애니매이션 추후 수정
-                //thisAnim = new AnimationSuper();
+                thisAnim = new AnimationSuper();
                 break;
             case Chacracter_Type.Mandu:
                 Char_Current_HP =       config.ManduHP;
@@ -98,14 +98,15 @@ public class CharacterMgr : MonoBehaviour
                 thisCharacter.SetBullet(config.ManduBullet);
                 thisCharacter.SetMoveSpeed(config.ManduMoveSpeed);
                 // 애니매이션 추후 수정
-                //thisAnim = new AnimationSuper();
+                thisAnim = new AnimationSuper();
                 break;
             default:
 
                 break;
         }
         // 애니매이션 정의
-        thisAnim.SetAnimator(GetComponent<Animator>());
+        Debug.Log(gameObject.GetComponent<Animator>().name);
+        thisAnim.SetAnimator(gameObject.GetComponent<Animator>());
 
         thisCharacter.SetPlayerTr(Player_tr);
         thisCharacter.SetPlayerRb(Player_rb);

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterSuper{
+public class CharacterSuper : MonoBehaviour{
     
     // 버프 아이템이나 종류
     public enum ItemCode
@@ -171,7 +171,10 @@ public class CharacterSuper{
     }
     public virtual void SetPlayerTr(Transform player) { Player_tr = player; SetPlayerOb(); Debug.Log(Player_Object); SetCoroutine(); }
     public virtual void SetPlayerOb() { Player_Object = Player_tr.GetComponent<GameObject>(); }
-    public virtual void SetCoroutine() { coroutine = Player_Object.AddComponent<CoroutinClass>(); coroutine.SetCharacterScript(this); }
+    public virtual void SetCoroutine() {
+        coroutine = Player_Object.AddComponent<CoroutinClass>();
+        coroutine.SetCharacterScript(this);
+    }
     public virtual void SetCameraTr(Transform camera) { Camera_tr = camera; }
     public virtual void SetPlayerRb(Rigidbody rigidbody) { Player_rb = rigidbody; }
     public virtual void SetCharacterMove(float H, float V) {m_Move_H = H; m_Move_V = V;}
