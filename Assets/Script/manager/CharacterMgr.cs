@@ -215,7 +215,6 @@ public class CharacterMgr : MonoBehaviour
             float recvh = 0.0f;
             float recvv = 0.0f;
             bool recvshift = false;
-            bool click_L = false;
             // 데이터 수신
             stream.Serialize(ref revPos);
             stream.Serialize(ref revRot);

@@ -222,6 +222,8 @@ public class CharacterSuper : MonoBehaviour{
     public virtual float GetMoveH() { return m_Move_H; }
     public virtual float GetMoveV() { return m_Move_V; }
     public virtual bool GetIsRun() { return IsRun; }
+    public virtual bool GetIsJump() { return Is_Jump; }
+    public virtual bool GetIsGroud() { return Is_Ground; }
     // 0 이라면 트루
     public virtual bool GetEmptyBullet() { return m_Current_Bullet == 0; }
     #endregion
