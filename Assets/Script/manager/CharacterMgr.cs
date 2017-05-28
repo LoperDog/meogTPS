@@ -5,7 +5,7 @@ using UnityEngine;
 public class CharacterMgr : MonoBehaviour
 {
     public GameObject tempBullet;
-
+    public GameObject FirePoint;
     [SerializeField]
     private ConfigClass config;
 
@@ -88,6 +88,7 @@ public class CharacterMgr : MonoBehaviour
                 thisCharacter = new DubuCharacter();
                 thisCharacter.SetBullet(config.DubuBullet);
                 thisCharacter.SetMoveSpeed(config.DubuAttackSpeed);
+                FirePoint.transform.localPosition = config.DubuFirePosition;
                 // 애니매이션 추후 수정
                 thisAnim = new AnimationSuper();
                 break;
@@ -97,6 +98,7 @@ public class CharacterMgr : MonoBehaviour
                 thisCharacter = new ManduCharacter();
                 thisCharacter.SetBullet(config.ManduBullet);
                 thisCharacter.SetMoveSpeed(config.ManduMoveSpeed);
+                FirePoint.transform.localPosition = config.ManduFirePosition;
                 // 애니매이션 추후 수정
                 thisAnim = new AnimationSuper();
                 break;
@@ -104,14 +106,15 @@ public class CharacterMgr : MonoBehaviour
 
                 break;
         }
-        // 애니매이션 정의
+        // 세팅
         thisCharacter.SetPlayerOb(gameObject);
         thisCharacter.SetCoroutine(gameObject.AddComponent<CoroutinClass>());
         thisAnim.SetAnimator(gameObject.GetComponent<Animator>());
-
+        
         thisCharacter.SetPlayerTr(Player_tr);
         thisCharacter.SetPlayerRb(Player_rb);
         thisCharacter.SetCameraTr(Camera_tr);
+        thisCharacter.SetFirePoint(FirePoint);
         // 나일때 할일
         //if (_networkView.isMine)
         //{

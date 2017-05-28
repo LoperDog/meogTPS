@@ -47,6 +47,7 @@ public class CharacterSuper : MonoBehaviour{
     protected GameObject Player_Object;
     protected List<GameObject> Bullet;
     protected CoroutinClass coroutine;
+    protected GameObject FirePoint;
 
     protected Rigidbody Player_rb;
     protected Transform Camera_tr;
@@ -154,6 +155,10 @@ public class CharacterSuper : MonoBehaviour{
     #endregion
 
     #region 캐릭터 기본 세팅
+    public virtual void SetFirePoint(GameObject point)
+    {
+        FirePoint = point;
+    }
     public virtual void SetBullet(int bulletMax)
     {
         m_Max_Bullet = bulletMax;
