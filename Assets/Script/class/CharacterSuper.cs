@@ -18,17 +18,19 @@ public class CharacterSuper{
     protected int m_Current_Bullet = 0;
     protected int m_Max_Bullet = 0;
 
-    protected float m_Move_Speed = 1.0f;
-
-    //이동중임을 알아낸다.
+    //이동
     protected float m_Move_H = 0.0f;
     protected float m_Move_V = 0.0f;
+    protected float m_Move_Speed = 1.0f;
 
     //회전
     protected float Min_X = -360.0f;
     protected float Max_X = 360.0f;
     protected float Sens_X = 100.0f;
     protected float Rotation_X = 0.0f;
+
+    //달리기
+    protected float Jump_Force = 300.0f;
 
     protected Transform Player_tr;
     protected Rigidbody Player_rb;
@@ -88,11 +90,7 @@ public class CharacterSuper{
     }
 
     public virtual void Move()
-    {/*
-        Vector3 Move = (Vector3.forward * m_Move_V) + (Vector3.right * m_Move_H);
-        Move = Move.normalized;
-        Player_tr.transform.position = Player_tr.position + Move* m_Move_Speed * Time.deltaTime;*/
-
+    {
         Vector3 forward = Player_tr.TransformDirection(Vector3.forward);
         forward = forward.normalized;
 
@@ -111,7 +109,7 @@ public class CharacterSuper{
 
         if (Is_Jump)
         {
-            Player_rb.AddForce(0, 300, 0);
+            Player_rb.AddForce(0, Jump_Force, 0);
             Is_Jump = false;
         }
 
