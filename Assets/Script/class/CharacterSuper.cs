@@ -21,8 +21,15 @@ public class CharacterSuper{
     public float m_CurrentReload;
     public float m_TimeReload;
 
+<<<<<<< HEAD
     public bool IsAttack = false;
     public bool IsReLoad = false;
+=======
+    protected bool IsAttack = false;
+    protected bool IsReLoad = false;
+    protected bool Is_Ground = true;
+    protected bool Is_Jump;
+>>>>>>> e796adeb35940fe6ceccdbe11870096783c48dd9
 
     protected int m_Current_Bullet = 0;
     protected int m_Max_Bullet = 0;
@@ -33,14 +40,27 @@ public class CharacterSuper{
     protected float m_Move_H = 0.0f;
     protected float m_Move_V = 0.0f;
 
+    //회전
+    protected float Min_X = -360.0f;
+    protected float Max_X = 360.0f;
+    protected float Sens_X = 100.0f;
+    protected float Rotation_X = 0.0f;
 
     protected Transform Player_tr;
+<<<<<<< HEAD
     protected GameObject Player_Object;
     protected List<GameObject> Bullet;
     protected CoroutinClass coroutine;
+=======
+    protected Rigidbody Player_rb;
+    protected Transform Camera_tr;
+
+    protected GameObject Bullet;
+>>>>>>> e796adeb35940fe6ceccdbe11870096783c48dd9
 
     public virtual void CharacterUpdate()
     {
+        Debug.Log(Is_Ground);
         //공격중이라면
         if (IsAttack)
         {
@@ -52,7 +72,9 @@ public class CharacterSuper{
                 m_CurrentAtrack = 0.0f;
             }
         }
-
+        Check_Ground();
+        Move();
+        Jump();
     }
     // 생성자.
     public CharacterSuper()
@@ -87,8 +109,47 @@ public class CharacterSuper{
     }
 
     public virtual void Move()
+    {/*
+        Vector3 Move = (Vector3.forward * m_Move_V) + (Vector3.right * m_Move_H);
+        Move = Move.normalized;
+        Player_tr.transform.position = Player_tr.position + Move* m_Move_Speed * Time.deltaTime;*/
+
+        Vector3 forward = Player_tr.TransformDirection(Vector3.forward);
+        forward = forward.normalized;
+
+        Vector3 right = new Vector3(forward.z, 0, -forward.x);
+        Vector3 moveDirection = (m_Move_H * right) + (m_Move_V * forward);
+        Player_tr.position = Player_tr.position + moveDirection * m_Move_Speed * Time.deltaTime;
+        Rotation_X += Input.GetAxis("Mouse X") * Sens_X * Time.deltaTime;
+        Player_tr.localEulerAngles = new Vector3(0, Rotation_X, 0);
+    }
+    public virtual void Jump()
     {
-        Debug.Log("상속전 이동");
+        if (Input.GetKeyDown(KeyCode.Space) && Is_Ground)
+        {
+            Is_Jump = true;
+        }
+
+        if (Is_Jump)
+        {
+            Player_rb.AddForce(0, 300, 0);
+            Is_Jump = false;
+        }
+
+    }
+    public virtual void Check_Ground()
+    {
+        RaycastHit hit;
+        Debug.DrawRay(Player_tr.position, Vector3.down * 0.05f, Color.red);
+        if (Physics.Raycast(Player_tr.position, Vector3.down, out hit, 0.05f))
+        {
+            if (hit.collider.tag == "GROUND")
+            {
+                Is_Ground = true;
+                return;
+            }
+        }
+        Is_Ground = false;
     }
     public virtual void ReLoad()
     {
@@ -119,9 +180,16 @@ public class CharacterSuper{
     {
         m_Move_Speed = moveSpeed;
     }
+<<<<<<< HEAD
     public virtual void SetPlayerTr(Transform player) { Player_tr = player; SetPlayerOb(); Debug.Log(Player_Object); SetCoroutine(); }
     public virtual void SetPlayerOb() { Player_Object = Player_tr.GetComponent<GameObject>(); }
     public virtual void SetCoroutine() { coroutine = Player_Object.AddComponent<CoroutinClass>(); coroutine.SetCharacterScript(this); }
+=======
+    public virtual void SetPlayerTr(Transform player) { Player_tr = player; }
+    public virtual void SetCameraTr(Transform camera) { Camera_tr = camera; }
+    public virtual void SetPlayerRb(Rigidbody rigidbody) { Player_rb = rigidbody; }
+    public virtual void SetCharacterMove(float H, float V) {m_Move_H = H; m_Move_V = V;}
+>>>>>>> e796adeb35940fe6ceccdbe11870096783c48dd9
     #endregion
 
     #region 아이템 영역
@@ -156,7 +224,6 @@ public class CharacterSuper{
     public virtual float GetMoveV() { return m_Move_V; }
     // 0 이라면 트루
     public virtual bool GetEmptyBullet() { return m_Current_Bullet == 0; }
-    public virtual void SetCharacterMove(float H,float V) { m_Move_H = H; m_Move_V = V; }
     #endregion
     
     // 소멸

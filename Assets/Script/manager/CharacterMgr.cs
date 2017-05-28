@@ -10,6 +10,8 @@ public class CharacterMgr : MonoBehaviour
     private ConfigClass config;
 
     private Transform Player_tr;
+    private Rigidbody Player_rb;
+    private Transform Camera_tr;
 
     private NetworkView _networkView;
     private Vector3 Char_Pos;
@@ -71,6 +73,8 @@ public class CharacterMgr : MonoBehaviour
     {
         // 캐릭터 받아오기 세팅
         Player_tr = GetComponent<Transform>();
+        Player_rb = GetComponent<Rigidbody>();
+        Camera_tr = Camera.main.GetComponent<Transform>();
         _networkView = GetComponent<NetworkView>();
 
 
@@ -85,7 +89,7 @@ public class CharacterMgr : MonoBehaviour
                 thisCharacter.SetBullet(config.DubuBullet);
                 thisCharacter.SetMoveSpeed(config.DubuAttackSpeed);
                 // 애니매이션 추후 수정
-                thisAnim = new AnimationSuper();
+                //thisAnim = new AnimationSuper();
                 break;
             case Chacracter_Type.Mandu:
                 Char_Current_HP =       config.ManduHP;
@@ -94,7 +98,7 @@ public class CharacterMgr : MonoBehaviour
                 thisCharacter.SetBullet(config.ManduBullet);
                 thisCharacter.SetMoveSpeed(config.ManduMoveSpeed);
                 // 애니매이션 추후 수정
-                thisAnim = new AnimationSuper();
+                //thisAnim = new AnimationSuper();
                 break;
             default:
 
@@ -104,11 +108,13 @@ public class CharacterMgr : MonoBehaviour
         thisAnim.SetAnimator(GetComponent<Animator>());
 
         thisCharacter.SetPlayerTr(Player_tr);
+        thisCharacter.SetPlayerRb(Player_rb);
+        thisCharacter.SetCameraTr(Camera_tr);
         // 나일때 할일
-        if (_networkView.isMine)
-        {
+        //if (_networkView.isMine)
+        //{
 
-        }
+        //}
 	}
 	
 	void Update ()
@@ -117,12 +123,13 @@ public class CharacterMgr : MonoBehaviour
         thisCharacter.CharacterUpdate();
 
         //입력을 받고 저장한다.
-        if (_networkView.isMine)
-        {
+        //if (_networkView.isMine)
+        //{
             InputControll();
             // 키를 적용해준다.
             thisCharacter.SetCharacterMove(Key_H, Key_V);
-        }
+        //}
+        /*
         else
         {
             if (Vector3.Distance(Player_tr.position, Char_Pos) >= 2.0f)
@@ -138,9 +145,13 @@ public class CharacterMgr : MonoBehaviour
                 Player_tr.rotation = Quaternion.Slerp(Player_tr.rotation, Char_Rot, Time.deltaTime * 10.0f);
 
             }
+<<<<<<< HEAD
         }
         // 상태에 맞춰서 알아서 애니매이션 플레이
         thisAnim.PlayAnimation();
+=======
+        }*/
+>>>>>>> e796adeb35940fe6ceccdbe11870096783c48dd9
 	}
 
     public void InputControll()
@@ -163,6 +174,7 @@ public class CharacterMgr : MonoBehaviour
     }
 
     public void SetCharID(Chacracter_Type Code) { Character_ID = Code; }
+<<<<<<< HEAD
     
     #region 네트워크 콜백
     void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
@@ -213,4 +225,11 @@ public class CharacterMgr : MonoBehaviour
         }
     }
     #endregion
+=======
+
+    void OnCollisionEnter(Collision collision)
+    {
+        
+    }
+>>>>>>> e796adeb35940fe6ceccdbe11870096783c48dd9
 }

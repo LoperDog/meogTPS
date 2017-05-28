@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DubuCharacter : CharacterSuper {
-
+    /*
     // 생성자 관리
     public DubuCharacter()
     {
@@ -23,5 +23,6 @@ public class DubuCharacter : CharacterSuper {
     ~DubuCharacter()
     {
 
-    }
+    }*/
+
 }
