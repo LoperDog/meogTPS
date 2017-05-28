@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CharacterMgr : MonoBehaviour
 {
+    public GameObject tempBullet;
+
     [SerializeField]
     private ConfigClass config;
 
@@ -17,6 +19,8 @@ public class CharacterMgr : MonoBehaviour
 
     [SerializeField]
     List<GameObject> LoadChar;
+    [SerializeField]
+    public List<GameObject> LoadBullet;
 
     public enum Chacracter_Type
     {
@@ -52,16 +56,16 @@ public class CharacterMgr : MonoBehaviour
     #endregion
     #region 캐릭터키값
     // 이동키
-    private float Key_H = 0.0f;
+    private float Key_H = 0.0f;             //키동기 필요
     private float Key_V = 0.0f;
     // 공격키
-    private bool Click_Left = false;
+    private bool Click_Left = false;        // 개별동기
     private bool Click_Right = false;
     // 달리기 키
-    private bool Key_Shift = false;
+    private bool Key_Shift = false;         // 키동기 필요
     // 재장전
-    private bool Key_R = false;
-    private bool Key_Space = false;
+    private bool Key_R = false;             // 개별 동기
+    private bool Key_Space = false;         // 개별 동기
     #endregion
 
     // 캐릭터를 만들기 위해 아이디를 받는다.
@@ -100,6 +104,9 @@ public class CharacterMgr : MonoBehaviour
 
                 break;
         }
+        // 애니매이션 정의
+        thisAnim.SetAnimator(GetComponent<Animator>());
+
         thisCharacter.SetPlayerTr(Player_tr);
         thisCharacter.SetPlayerRb(Player_rb);
         thisCharacter.SetCameraTr(Camera_tr);
@@ -138,6 +145,11 @@ public class CharacterMgr : MonoBehaviour
                 Player_tr.rotation = Quaternion.Slerp(Player_tr.rotation, Char_Rot, Time.deltaTime * 10.0f);
 
             }
+<<<<<<< HEAD
+        }
+        // 상태에 맞춰서 알아서 애니매이션 플레이
+        thisAnim.PlayAnimation();
+=======
         }*/
 	}
 
@@ -161,9 +173,54 @@ public class CharacterMgr : MonoBehaviour
     }
 
     public void SetCharID(Chacracter_Type Code) { Character_ID = Code; }
-
-    void OnCollisionEnter(Collision collision)
+    
+    #region 네트워크 콜백
+    void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
     {
-        
+        if (stream.isWriting)
+        {
+            // 위치, 각도
+            Vector3 pos = Player_tr.position;
+            Quaternion rot = Player_tr.rotation;
+
+            // 키 동기화
+
+
+            // 위치 전송
+            stream.Serialize(ref pos);
+            stream.Serialize(ref rot);
+
+            // 키동기 -> 움직임등의 연속적인 것들만 동기화 시킨다.
+            stream.Serialize(ref Key_H);
+            stream.Serialize(ref Key_V);
+            stream.Serialize(ref Key_Shift);
+
+
+
+        }
+        else
+        {
+            Vector3 revPos = Vector3.zero;
+            Quaternion revRot = Quaternion.identity;
+
+            float recvh = 0.0f;
+            float recvv = 0.0f;
+            bool recvshift = false;
+            // 데이터 수신
+            stream.Serialize(ref revPos);
+            stream.Serialize(ref revRot);
+
+            // 이동키
+            stream.Serialize(ref recvh);
+            stream.Serialize(ref recvv);
+            stream.Serialize(ref recvshift);
+
+            Player_tr.position = revPos;
+            Player_tr.rotation = revRot;
+            Key_H = recvh;
+            Key_V = recvv;
+            Key_Shift = recvshift;
+        }
     }
+    #endregion
 }
