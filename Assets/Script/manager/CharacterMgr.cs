@@ -109,6 +109,7 @@ public class CharacterMgr : MonoBehaviour
         // 세팅
         thisCharacter.SetPlayerOb(gameObject);
         thisCharacter.SetCoroutine(gameObject.AddComponent<CoroutinClass>());
+        thisAnim.SetChar(thisCharacter);
         thisAnim.SetAnimator(gameObject.GetComponent<Animator>());
         
         thisCharacter.SetPlayerTr(Player_tr);
@@ -150,10 +151,9 @@ public class CharacterMgr : MonoBehaviour
                 Player_tr.rotation = Quaternion.Slerp(Player_tr.rotation, Char_Rot, Time.deltaTime * 10.0f);
 
             }
-        }
+        }*/
         // 상태에 맞춰서 알아서 애니매이션 플레이
         thisAnim.PlayAnimation();
-        }*/
 	}
 
     public void InputControll()
