@@ -25,6 +25,7 @@ public class CharacterSuper : MonoBehaviour{
     public bool IsReLoad = false;
     protected bool Is_Ground = true;
     protected bool Is_Jump;
+    protected bool IsRun = false;
 
     protected int m_Current_Bullet = 0;
     protected int m_Max_Bullet = 0;
@@ -80,6 +81,7 @@ public class CharacterSuper : MonoBehaviour{
         {
             //공격 시작 코드
             m_Current_Bullet--;
+            IsAttack = true;
             ShotBullet();
         }
         // 공격이 시작될수 있는데 총알이 없다면 - 공격 불가 상태
@@ -143,6 +145,7 @@ public class CharacterSuper : MonoBehaviour{
     public virtual void ShotBullet()
     {
         Debug.Log("상속전 공격 -> 오브젝트를 생성시킨다.");
+
     }
     public virtual void StartReload()
     {
@@ -190,8 +193,7 @@ public class CharacterSuper : MonoBehaviour{
         switch (code)
         {
             case ItemCode.Buff_Attack:
-
-                break;
+                
                 break;
             case ItemCode.Buff_DotHill:
                 break;
@@ -208,11 +210,18 @@ public class CharacterSuper : MonoBehaviour{
         coroutine.StartBuffSetting(time, code, val);
     }
     #endregion
-
+    #region 키세팅영역
+    public virtual void SetRun(bool KeyShift){ IsRun = KeyShift;}
+    public virtual void SetMoveH(float KeyH) { m_Move_H = KeyH; }
+    public virtual void SetMoveV(float KeyV) { m_Move_V = KeyV; }
+    #endregion
     #region 캐릭터 상태값 가져오기
     public virtual bool GetAttackorReload() { return IsAttack || IsReLoad; }
+    public virtual bool GetIsAttack() { return IsAttack; }
+    public virtual bool GetIsReload() { return IsReLoad; }
     public virtual float GetMoveH() { return m_Move_H; }
     public virtual float GetMoveV() { return m_Move_V; }
+    public virtual bool GetIsRun() { return IsRun; }
     // 0 이라면 트루
     public virtual bool GetEmptyBullet() { return m_Current_Bullet == 0; }
     #endregion

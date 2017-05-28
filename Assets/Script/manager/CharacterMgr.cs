@@ -158,11 +158,18 @@ public class CharacterMgr : MonoBehaviour
 
     public void InputControll()
     {
+        // 여기서 키동기화를 맞추지 않을꺼니 더이상 필요가 없음. 전부 Get,Set함수로 바꿔야 함.
         Key_H = Input.GetAxis("Horizontal");
         Key_V = Input.GetAxis("Vertical");
-        Click_Left = Input.GetMouseButton(0);
+        //Click_Left = Input.GetMouseButton(0);
+        if (Input.GetMouseButton(0)) {
+            thisCharacter.Attack();
+            // 네트워크 알피씨를 날려야 한다.
+
+        }
         Click_Right = Input.GetMouseButton(1);
         Key_Shift = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+        thisCharacter.SetRun(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift));
         Key_R = Input.GetKey(KeyCode.R);
         Key_Space = Input.GetKey(KeyCode.Space);
     }
@@ -187,8 +194,7 @@ public class CharacterMgr : MonoBehaviour
             Quaternion rot = Player_tr.rotation;
 
             // 키 동기화
-
-
+            Key_Shift = thisCharacter.GetIsRun();
             // 위치 전송
             stream.Serialize(ref pos);
             stream.Serialize(ref rot);
@@ -209,6 +215,7 @@ public class CharacterMgr : MonoBehaviour
             float recvh = 0.0f;
             float recvv = 0.0f;
             bool recvshift = false;
+            bool click_L = false;
             // 데이터 수신
             stream.Serialize(ref revPos);
             stream.Serialize(ref revRot);
@@ -222,7 +229,7 @@ public class CharacterMgr : MonoBehaviour
             Player_tr.rotation = revRot;
             Key_H = recvh;
             Key_V = recvv;
-            Key_Shift = recvshift;
+            thisCharacter.SetRun(recvshift);
         }
     }
     #endregion

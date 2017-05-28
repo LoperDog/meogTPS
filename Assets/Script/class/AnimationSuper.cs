@@ -18,7 +18,9 @@ public class AnimationSuper
     // 이동 애니매이션 정의
     public virtual void PlayMove()
     {
-
+        if (m_Char_State.GetIsRun())
+        {
+        }
     }
     // 공격 애니매이션 정의
     public virtual void PlayAttack()
