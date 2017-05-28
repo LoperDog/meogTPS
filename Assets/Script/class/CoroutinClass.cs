@@ -39,22 +39,22 @@ public class CoroutinClass : MonoBehaviour {
         yield return new WaitForSeconds(time);
         switch (Code)
         {
-            case ItemCode.Buff_Attack:
+            case CharacterSuper.ItemCode.Buff_Attack:
 
                 break;
-            case ItemCode.Buff_Speed:
+            case CharacterSuper.ItemCode.Buff_Speed:
 
                 break;
-            case ItemCode.Buff_DotHill:
+            case CharacterSuper.ItemCode.Buff_DotHill:
 
                 break;
-            case ItemCode.Nuff_Attack:
+            case CharacterSuper.ItemCode.Nuff_Attack:
 
                 break;
-            case ItemCode.Nuff_Speed:
+            case CharacterSuper.ItemCode.Nuff_Speed:
 
                 break;
-            case ItemCode.Nuff_DotDemage:
+            case CharacterSuper.ItemCode.Nuff_DotDemage:
 
                 break;
             default:

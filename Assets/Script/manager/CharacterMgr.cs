@@ -151,7 +151,6 @@ public class CharacterMgr : MonoBehaviour
         thisAnim.PlayAnimation();
 =======
         }*/
->>>>>>> e796adeb35940fe6ceccdbe11870096783c48dd9
 	}
 
     public void InputControll()
@@ -174,7 +173,6 @@ public class CharacterMgr : MonoBehaviour
     }
 
     public void SetCharID(Chacracter_Type Code) { Character_ID = Code; }
-<<<<<<< HEAD
     
     #region 네트워크 콜백
     void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
@@ -225,11 +223,4 @@ public class CharacterMgr : MonoBehaviour
         }
     }
     #endregion
-=======
-
-    void OnCollisionEnter(Collision collision)
-    {
-        
-    }
->>>>>>> e796adeb35940fe6ceccdbe11870096783c48dd9
 }

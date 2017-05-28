@@ -20,16 +20,11 @@ public class CharacterSuper{
     public float m_TimeAttack;
     public float m_CurrentReload;
     public float m_TimeReload;
-
-<<<<<<< HEAD
+    
     public bool IsAttack = false;
     public bool IsReLoad = false;
-=======
-    protected bool IsAttack = false;
-    protected bool IsReLoad = false;
     protected bool Is_Ground = true;
     protected bool Is_Jump;
->>>>>>> e796adeb35940fe6ceccdbe11870096783c48dd9
 
     protected int m_Current_Bullet = 0;
     protected int m_Max_Bullet = 0;
@@ -47,17 +42,13 @@ public class CharacterSuper{
     protected float Rotation_X = 0.0f;
 
     protected Transform Player_tr;
-<<<<<<< HEAD
     protected GameObject Player_Object;
     protected List<GameObject> Bullet;
     protected CoroutinClass coroutine;
-=======
+
     protected Rigidbody Player_rb;
     protected Transform Camera_tr;
-
-    protected GameObject Bullet;
->>>>>>> e796adeb35940fe6ceccdbe11870096783c48dd9
-
+    
     public virtual void CharacterUpdate()
     {
         Debug.Log(Is_Ground);
@@ -180,16 +171,13 @@ public class CharacterSuper{
     {
         m_Move_Speed = moveSpeed;
     }
-<<<<<<< HEAD
     public virtual void SetPlayerTr(Transform player) { Player_tr = player; SetPlayerOb(); Debug.Log(Player_Object); SetCoroutine(); }
     public virtual void SetPlayerOb() { Player_Object = Player_tr.GetComponent<GameObject>(); }
     public virtual void SetCoroutine() { coroutine = Player_Object.AddComponent<CoroutinClass>(); coroutine.SetCharacterScript(this); }
-=======
-    public virtual void SetPlayerTr(Transform player) { Player_tr = player; }
     public virtual void SetCameraTr(Transform camera) { Camera_tr = camera; }
     public virtual void SetPlayerRb(Rigidbody rigidbody) { Player_rb = rigidbody; }
     public virtual void SetCharacterMove(float H, float V) {m_Move_H = H; m_Move_V = V;}
->>>>>>> e796adeb35940fe6ceccdbe11870096783c48dd9
+
     #endregion
 
     #region 아이템 영역
@@ -200,7 +188,6 @@ public class CharacterSuper{
             case ItemCode.Buff_Attack:
 
                 break;
-            case ItemCode.Buff_Speed:
                 break;
             case ItemCode.Buff_DotHill:
                 break;
