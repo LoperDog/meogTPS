@@ -21,6 +21,8 @@ public class CharacterMgr : MonoBehaviour
     List<GameObject> LoadChar;
     [SerializeField]
     public List<GameObject> LoadBullet;
+    [SerializeField]
+    public GameMgr MyMgr;
 
     public enum Chacracter_Type
     {
@@ -37,6 +39,9 @@ public class CharacterMgr : MonoBehaviour
     private int Player_ID;
     [SerializeField]
     private bool IsDead = false;
+
+    [SerializeField]
+    public int PlayerCode = 0;
 
     #endregion
     #region 캐릭터 내부 스크립트 혹은 클래스
@@ -69,7 +74,7 @@ public class CharacterMgr : MonoBehaviour
     #endregion
 
     // 캐릭터를 만들기 위해 아이디를 받는다.
-    void Start ()
+    void Start()
     {
         // 캐릭터 받아오기 세팅
         Player_tr = GetComponent<Transform>();
@@ -83,8 +88,8 @@ public class CharacterMgr : MonoBehaviour
         switch (Character_ID)
         {
             case Chacracter_Type.Dubu:
-                Char_Current_HP =       config.DubuHP;
-                Char_Max_HP =           config.DubuHP;
+                Char_Current_HP = config.DubuHP;
+                Char_Max_HP = config.DubuHP;
                 thisCharacter = new DubuCharacter();
                 thisCharacter.SetBullet(config.DubuBullet);
                 thisCharacter.SetMoveSpeed(config.DubuMoveSpeed);
@@ -95,8 +100,8 @@ public class CharacterMgr : MonoBehaviour
                 thisAnim = new AnimationSuper();
                 break;
             case Chacracter_Type.Mandu:
-                Char_Current_HP =       config.ManduHP;
-                Char_Max_HP =           config.ManduHP;
+                Char_Current_HP = config.ManduHP;
+                Char_Max_HP = config.ManduHP;
                 thisCharacter = new ManduCharacter();
                 thisCharacter.SetBullet(config.ManduBullet);
                 thisCharacter.SetMoveSpeed(config.ManduMoveSpeed);
@@ -115,7 +120,7 @@ public class CharacterMgr : MonoBehaviour
         thisCharacter.SetCoroutine(gameObject.AddComponent<CoroutinClass>());
         thisAnim.SetChar(thisCharacter);
         thisAnim.SetAnimator(gameObject.GetComponent<Animator>());
-        
+
         thisCharacter.SetPlayerTr(Player_tr);
         thisCharacter.SetPlayerRb(Player_rb);
         thisCharacter.SetCameraTr(Camera_tr);
@@ -125,9 +130,9 @@ public class CharacterMgr : MonoBehaviour
         //{
 
         //}
-	}
-	
-	void Update ()
+    }
+
+    void Update()
     {
         //캐릭터 업데이트
         //thisCharacter.CharacterUpdate();
@@ -135,9 +140,15 @@ public class CharacterMgr : MonoBehaviour
         //입력을 받고 저장한다.
         //if (_networkView.isMine)
         //{
+<<<<<<< HEAD
+        InputControll();
+        // 키를 적용해준다.
+        thisCharacter.SetCharacterMove(Key_H, Key_V);
+=======
             //InputControll();
             // 키를 적용해준다.
             //thisCharacter.SetCharacterMove(Key_H, Key_V);
+>>>>>>> 0d2f1fd6f6e84d40d29f2a4e55bb4b8b33e09e65
         //}
         /*
         else
@@ -157,8 +168,13 @@ public class CharacterMgr : MonoBehaviour
             }
         }*/
         // 상태에 맞춰서 알아서 애니매이션 플레이
+<<<<<<< HEAD
+        thisAnim.PlayAnimation();
+    }
+=======
         //thisAnim.PlayAnimation();
 	}
+>>>>>>> 0d2f1fd6f6e84d40d29f2a4e55bb4b8b33e09e65
 
     void FixedUpdate()
     {
@@ -195,18 +211,36 @@ public class CharacterMgr : MonoBehaviour
     }
 
     public void SetCharID(Chacracter_Type Code) { Character_ID = Code; }
-    
+    #region RPC함수
+    // 플레이어의 타겟이 맞았을때
+    [RPC]
+    public void HitTheTarget(NetworkView temp)
+    {
+
+    }
+    [RPC]
+    public void KeyEvent()
+    {
+
+    }
+    #endregion
     #region 네트워크 콜백
     void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
     {
         if (stream.isWriting)
         {
+            // 임시 각자의 코드 값 세팅
+            int CharCode = MyMgr.GetPlayerCode();
+
             // 위치, 각도
             Vector3 pos = Player_tr.position;
             Quaternion rot = Player_tr.rotation;
 
             // 키 동기화
             Key_Shift = thisCharacter.GetIsRun();
+
+            // 임시로 캐릭터 번호 맞추기
+
             // 위치 전송
             stream.Serialize(ref pos);
             stream.Serialize(ref rot);
@@ -221,12 +255,19 @@ public class CharacterMgr : MonoBehaviour
         }
         else
         {
+            // 임시 코드
+            int CodeTemp = 0;
+
             Vector3 revPos = Vector3.zero;
             Quaternion revRot = Quaternion.identity;
 
             float recvh = 0.0f;
             float recvv = 0.0f;
             bool recvshift = false;
+
+            // 캐릭터 코드 수신.
+            stream.Serialize(ref CodeTemp);
+
             // 데이터 수신
             stream.Serialize(ref revPos);
             stream.Serialize(ref revRot);
@@ -235,6 +276,9 @@ public class CharacterMgr : MonoBehaviour
             stream.Serialize(ref recvh);
             stream.Serialize(ref recvv);
             stream.Serialize(ref recvshift);
+
+            // 플레이어 코드 업데이트
+            thisCharacter.SetPlayerCode(CodeTemp);
 
             Player_tr.position = revPos;
             Player_tr.rotation = revRot;

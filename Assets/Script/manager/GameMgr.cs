@@ -15,4 +15,5 @@ public class GameMgr : MonoBehaviour {
 		
 	}
     public void SetPlayerCode(int Code) { PlayerCode = Code; }
+    public int GetPlayerCode() { return PlayerCode; }
 }
