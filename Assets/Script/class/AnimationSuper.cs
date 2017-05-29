@@ -21,6 +21,19 @@ public class AnimationSuper
     {
         m_Anim.SetFloat("H",m_Char_State.GetMoveH());
         m_Anim.SetFloat("V",m_Char_State.GetMoveV());
+
+        if (m_Char_State.GetIsGroud() && Input.GetKeyDown(KeyCode.Space))//점프
+        {
+            m_Anim.SetTrigger("Jump_S");
+        }
+        else if(!m_Char_State.GetIsGroud())
+        {
+            m_Anim.SetTrigger("Jump_ing");
+        }
+        else if(m_Char_State.GetIsGroud())
+        {
+            m_Anim.SetTrigger("Landing");
+        }
     }
     // 공격 애니매이션 정의
     public virtual void PlayAttack()

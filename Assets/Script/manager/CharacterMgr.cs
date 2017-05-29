@@ -92,10 +92,9 @@ public class CharacterMgr : MonoBehaviour
                 Char_Max_HP = config.DubuHP;
                 thisCharacter = new DubuCharacter();
                 thisCharacter.SetBullet(config.DubuBullet);
-                thisCharacter.SetCurrentSpeed(config.DubuCurrentSpeed);
                 thisCharacter.SetMoveSpeed(config.DubuMoveSpeed);
                 thisCharacter.SetRunSpeed(config.DubuRunSpeed);
-                thisCharacter.SetMoveSpeed(config.DubuAttackSpeed);
+                thisCharacter.SetJumpForce(config.DubuJumpForce);
                 FirePoint.transform.localPosition = config.DubuFirePosition;
                 // 애니매이션 추후 수정
                 thisAnim = new AnimationSuper();
@@ -105,10 +104,9 @@ public class CharacterMgr : MonoBehaviour
                 Char_Max_HP = config.ManduHP;
                 thisCharacter = new ManduCharacter();
                 thisCharacter.SetBullet(config.ManduBullet);
-                thisCharacter.SetCurrentSpeed(config.ManduCurrentSpeed);
-                thisCharacter.SetMoveSpeed(config.ManduMoveSpeed);
                 thisCharacter.SetMoveSpeed(config.ManduMoveSpeed);
                 thisCharacter.SetRunSpeed(config.ManduRunSpeed);
+                thisCharacter.SetJumpForce(config.ManduJumpForce);
                 FirePoint.transform.localPosition = config.ManduFirePosition;
                 // 애니매이션 추후 수정
                 thisAnim = new AnimationSuper();
@@ -137,14 +135,20 @@ public class CharacterMgr : MonoBehaviour
     void Update()
     {
         //캐릭터 업데이트
-        thisCharacter.CharacterUpdate();
+        //thisCharacter.CharacterUpdate();
 
         //입력을 받고 저장한다.
         //if (_networkView.isMine)
         //{
+<<<<<<< HEAD
         InputControll();
         // 키를 적용해준다.
         thisCharacter.SetCharacterMove(Key_H, Key_V);
+=======
+            //InputControll();
+            // 키를 적용해준다.
+            //thisCharacter.SetCharacterMove(Key_H, Key_V);
+>>>>>>> 0d2f1fd6f6e84d40d29f2a4e55bb4b8b33e09e65
         //}
         /*
         else
@@ -164,6 +168,19 @@ public class CharacterMgr : MonoBehaviour
             }
         }*/
         // 상태에 맞춰서 알아서 애니매이션 플레이
+<<<<<<< HEAD
+        thisAnim.PlayAnimation();
+    }
+=======
+        //thisAnim.PlayAnimation();
+	}
+>>>>>>> 0d2f1fd6f6e84d40d29f2a4e55bb4b8b33e09e65
+
+    void FixedUpdate()
+    {
+        thisCharacter.CharacterUpdate();
+        InputControll();
+        thisCharacter.SetCharacterMove(Key_H, Key_V);
         thisAnim.PlayAnimation();
     }
 
