@@ -44,7 +44,7 @@ public class CharacterSuper : MonoBehaviour{
     protected float Rotation_X = 0.0f;
 
     //점프
-    protected float Jump_Force = 300.0f;
+    protected float Jump_Force = 250.0f;
 
     protected Transform Player_tr;
     protected GameObject Player_Object;
@@ -142,7 +142,6 @@ public class CharacterSuper : MonoBehaviour{
     }
     public virtual void Check_Ground()
     {
-        Debug.Log(Is_Ground);
         RaycastHit hit;
         Debug.DrawRay(Player_tr.position, Vector3.down * 0.3f, Color.red);
         if (Physics.Raycast(Player_tr.position, Vector3.down, out hit, 0.3f))
@@ -150,12 +149,7 @@ public class CharacterSuper : MonoBehaviour{
             if (hit.collider.tag == "GROUND")
             {
                 Is_Ground = true;
-                //Player_tr.position = new Vector3(Player_tr.position.x, 0, Player_tr.position.z);
                 return;
-            }
-            else
-            {
-                //Player_tr.position = new Vector3(Player_tr.position.x, 0, Player_tr.position.z);
             }
         }
         Is_Ground = false;
@@ -210,10 +204,6 @@ public class CharacterSuper : MonoBehaviour{
     public virtual void SetMoveSpeed(float moveSpeed)
     {
         m_Move_Speed = moveSpeed;
-    }
-    public virtual void SetCurrentSpeed(float currentSpeed)
-    {
-        m_Current_Speed = currentSpeed;
     }
     public virtual void SetRunSpeed(float run_Speed)
     {
