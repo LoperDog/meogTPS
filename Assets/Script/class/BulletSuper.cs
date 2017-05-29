@@ -33,7 +33,8 @@ public class BulletSuper : MonoBehaviour {
         IsLift = false;
         if(col.tag == "PLAYER" && PlayerCode == Mgr.GetPlayerCode())
         {
-
+            Debug.Log("PlayerGetYa!");
+            SetBulletEnalbed();
         }
 
     }
@@ -44,7 +45,8 @@ public class BulletSuper : MonoBehaviour {
         IsLift = false;
         if (col.transform.tag == "PLAYER" && PlayerCode == Mgr.GetPlayerCode())
         {
-
+            Debug.Log("PlayerGetYa!");
+            SetBulletEnalbed();
         }
     }
 
@@ -84,7 +86,7 @@ public class BulletSuper : MonoBehaviour {
         if (IsLift)
         {
             // 총알이 살아 있는 동안 할행동
-
+            Bullet_tr.Translate(Bullet_tr.forward * BulletSpeed * Time.deltaTime);
         }
     }
 
