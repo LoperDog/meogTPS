@@ -20,7 +20,9 @@ public class CharacterSuper : MonoBehaviour{
     public float m_TimeAttack;
     public float m_CurrentReload;
     public float m_TimeReload;
-    
+
+    public int PlayerCode;
+
     public bool IsAttack = true;
     public bool IsReLoad = false;
     protected bool Is_Ground = true;
@@ -78,6 +80,7 @@ public class CharacterSuper : MonoBehaviour{
         m_TimeAttack = 0.5f;
         m_CurrentReload = 0.0f;
         m_TimeReload = 1.0f;
+        PlayerCode = 0;
     }
     #region 캐릭터 기능 정의
     public virtual void Attack()
@@ -183,6 +186,8 @@ public class CharacterSuper : MonoBehaviour{
             objectToReuse.SetActive(true);
             // 오브젝트 사용하기 위해 세팅을 하자.
             // 발사할 위치를 정하거나 하는 둥의 액션.
+            objectToReuse.GetComponent<BulletSuper>().FireBullet(FirePoint.transform.position,
+                FirePoint.transform.rotation,10.0f,PlayerCode);
 
         }
     }
@@ -233,6 +238,8 @@ public class CharacterSuper : MonoBehaviour{
     public virtual void SetPlayerRb(Rigidbody rigidbody) { Player_rb = rigidbody; }
     public virtual void SetCharacterMove(float H, float V) {m_Move_H = H; m_Move_V = V;}
     public virtual void SetBulletObject(GameObject bullet) { BaseBullet = bullet; }
+
+    public virtual void SetPlayerCode(int Code) { PlayerCode = Code; }
 
     public virtual void CreateBullet(int size, GameObject Object)
     {
