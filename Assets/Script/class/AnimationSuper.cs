@@ -15,6 +15,8 @@ public class AnimationSuper
     public virtual void PlayAnimation()
     {
         PlayMove();
+        PlayRun();
+        PlayAttack();
     }
     // 이동 애니매이션 정의
     public virtual void PlayMove()
@@ -35,10 +37,28 @@ public class AnimationSuper
             m_Anim.SetTrigger("Landing");
         }
     }
+    public virtual void PlayRun()
+    {
+        if (m_Char_State.GetIsRun())
+        {
+            m_Anim.SetBool("Is_Run", true);
+        }
+        else
+        {
+            m_Anim.SetBool("Is_Run", false);
+        }
+    }
     // 공격 애니매이션 정의
     public virtual void PlayAttack()
     {
-
+        if (m_Char_State.GetIsAttack())
+        {
+            m_Anim.SetBool("Is_Attack",true);
+        }
+        else
+        {
+            m_Anim.SetBool("Is_Attack", false);
+        }
     }
     // 재장전 애니매이션 정의
     public virtual void PlayReload()

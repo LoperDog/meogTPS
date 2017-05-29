@@ -95,7 +95,6 @@ public class CharacterSuper : MonoBehaviour{
         {
             // 리로드 시작.
             IsReLoad = true;
-            
         }
         // 
         else
@@ -117,7 +116,7 @@ public class CharacterSuper : MonoBehaviour{
     }
     public virtual void Run()
     {
-        if (Input.GetKey(KeyCode.LeftShift) && (m_Move_V > 0.1))
+        if (Input.GetKey(KeyCode.LeftShift) && (m_Move_V > 0.1) && Is_Ground)
         {
             m_Current_Speed = m_Run_Speed;
         }
