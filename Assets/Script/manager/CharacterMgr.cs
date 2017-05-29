@@ -89,6 +89,7 @@ public class CharacterMgr : MonoBehaviour
                 thisCharacter.SetBullet(config.DubuBullet);
                 thisCharacter.SetMoveSpeed(config.DubuMoveSpeed);
                 thisCharacter.SetRunSpeed(config.DubuRunSpeed);
+                thisCharacter.SetJumpForce(config.DubuJumpForce);
                 FirePoint.transform.localPosition = config.DubuFirePosition;
                 // 애니매이션 추후 수정
                 thisAnim = new AnimationSuper();
@@ -100,6 +101,7 @@ public class CharacterMgr : MonoBehaviour
                 thisCharacter.SetBullet(config.ManduBullet);
                 thisCharacter.SetMoveSpeed(config.ManduMoveSpeed);
                 thisCharacter.SetRunSpeed(config.ManduRunSpeed);
+                thisCharacter.SetJumpForce(config.ManduJumpForce);
                 FirePoint.transform.localPosition = config.ManduFirePosition;
                 // 애니매이션 추후 수정
                 thisAnim = new AnimationSuper();
@@ -128,14 +130,14 @@ public class CharacterMgr : MonoBehaviour
 	void Update ()
     {
         //캐릭터 업데이트
-        thisCharacter.CharacterUpdate();
+        //thisCharacter.CharacterUpdate();
 
         //입력을 받고 저장한다.
         //if (_networkView.isMine)
         //{
-            InputControll();
+            //InputControll();
             // 키를 적용해준다.
-            thisCharacter.SetCharacterMove(Key_H, Key_V);
+            //thisCharacter.SetCharacterMove(Key_H, Key_V);
         //}
         /*
         else
@@ -155,8 +157,16 @@ public class CharacterMgr : MonoBehaviour
             }
         }*/
         // 상태에 맞춰서 알아서 애니매이션 플레이
-        thisAnim.PlayAnimation();
+        //thisAnim.PlayAnimation();
 	}
+
+    void FixedUpdate()
+    {
+        thisCharacter.CharacterUpdate();
+        InputControll();
+        thisCharacter.SetCharacterMove(Key_H, Key_V);
+        thisAnim.PlayAnimation();
+    }
 
     public void InputControll()
     {

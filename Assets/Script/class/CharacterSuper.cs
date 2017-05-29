@@ -44,7 +44,7 @@ public class CharacterSuper : MonoBehaviour{
     protected float Rotation_X = 0.0f;
 
     //점프
-    protected float Jump_Force = 250.0f;
+    protected float m_Jump_Force = 250.0f;
 
     protected Transform Player_tr;
     protected GameObject Player_Object;
@@ -135,7 +135,7 @@ public class CharacterSuper : MonoBehaviour{
 
         if (Is_Jump)
         {
-            Player_rb.AddForce(0, Jump_Force, 0);
+            Player_rb.AddForce(0, m_Jump_Force, 0);
             Is_Jump = false;
         }
 
@@ -143,8 +143,8 @@ public class CharacterSuper : MonoBehaviour{
     public virtual void Check_Ground()
     {
         RaycastHit hit;
-        Debug.DrawRay(Player_tr.position, Vector3.down * 0.3f, Color.red);
-        if (Physics.Raycast(Player_tr.position, Vector3.down, out hit, 0.3f))
+        Debug.DrawRay(Player_tr.position, Vector3.down * 0.01f, Color.red);
+        if (Physics.Raycast(Player_tr.position, Vector3.down, out hit, 0.01f))
         {
             if (hit.collider.tag == "GROUND")
             {
@@ -192,29 +192,17 @@ public class CharacterSuper : MonoBehaviour{
     #endregion
 
     #region 캐릭터 기본 세팅
-    public virtual void SetFirePoint(GameObject point)
-    {
-        FirePoint = point;
-    }
+    public virtual void SetFirePoint(GameObject point) { FirePoint = point; }
     public virtual void SetBullet(int bulletMax)
     {
         m_Max_Bullet = bulletMax;
         m_Current_Bullet = bulletMax;
     }
-    public virtual void SetMoveSpeed(float moveSpeed)
-    {
-        m_Move_Speed = moveSpeed;
-    }
-    public virtual void SetRunSpeed(float run_Speed)
-    {
-        m_Run_Speed = run_Speed;
-    }
-    public virtual void SetPlayerTr(Transform player) {
-        Player_tr = player;
-    }
-    public virtual void SetPlayerOb(GameObject player_ob) {
-        Player_Object = player_ob;
-    }
+    public virtual void SetMoveSpeed(float moveSpeed) { m_Move_Speed = moveSpeed; }
+    public virtual void SetRunSpeed(float run_Speed) { m_Run_Speed = run_Speed; }
+    public virtual void SetJumpForce(float jump_Force) { m_Jump_Force = jump_Force; }
+    public virtual void SetPlayerTr(Transform player) { Player_tr = player; }
+    public virtual void SetPlayerOb(GameObject player_ob) { Player_Object = player_ob; }
     public virtual void SetCoroutine(CoroutinClass co) {
         coroutine = co;
         coroutine.SetCharacterScript(this);

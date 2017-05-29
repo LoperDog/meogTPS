@@ -30,6 +30,10 @@ public class AnimationSuper
         {
             m_Anim.SetTrigger("Jump_ing");
         }
+        else if(m_Char_State.GetIsGroud())
+        {
+            m_Anim.SetTrigger("Landing");
+        }
     }
     // 공격 애니매이션 정의
     public virtual void PlayAttack()
