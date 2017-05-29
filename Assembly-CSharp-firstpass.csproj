@@ -6,10 +6,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{C090928D-44FE-0559-C043-2CCB40627CD6}</ProjectGuid>
+    <ProjectGuid>{F965F2F3-7559-90DA-7795-06DC876339C6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <AssemblyName>Assembly-CSharp-firstpass</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>Assets</BaseDirectory>
@@ -46,63 +46,44 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Runtime\Attributes\GetSetAttribute.cs" />
-     <Compile Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Runtime\Attributes\MinAttribute.cs" />
-     <Compile Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Runtime\Attributes\TrackballAttribute.cs" />
-     <Compile Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Runtime\Attributes\TrackballGroupAttribute.cs" />
-     <Compile Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Runtime\Components\AmbientOcclusionComponent.cs" />
-     <Compile Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Runtime\Components\BloomComponent.cs" />
-     <Compile Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Runtime\Components\BuiltinDebugViewsComponent.cs" />
-     <Compile Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Runtime\Components\ChromaticAberrationComponent.cs" />
-     <Compile Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Runtime\Components\ColorGradingComponent.cs" />
-     <Compile Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Runtime\Components\DepthOfFieldComponent.cs" />
-     <Compile Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Runtime\Components\EyeAdaptationComponent.cs" />
-     <Compile Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Runtime\Components\FxaaComponent.cs" />
-     <Compile Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Runtime\Components\GrainComponent.cs" />
-     <Compile Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Runtime\Components\MotionBlurComponent.cs" />
-     <Compile Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Runtime\Components\ScreenSpaceReflectionComponent.cs" />
-     <Compile Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Runtime\Components\TaaComponent.cs" />
-     <Compile Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Runtime\Components\UserLutComponent.cs" />
-     <Compile Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Runtime\Components\VignetteComponent.cs" />
-     <Compile Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Runtime\Models\AmbientOcclusionModel.cs" />
-     <Compile Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Runtime\Models\AntialiasingModel.cs" />
-     <Compile Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Runtime\Models\BloomModel.cs" />
-     <Compile Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Runtime\Models\BuiltinDebugViewsModel.cs" />
-     <Compile Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Runtime\Models\ChromaticAberrationModel.cs" />
-     <Compile Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Runtime\Models\ColorGradingModel.cs" />
-     <Compile Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Runtime\Models\DepthOfFieldModel.cs" />
-     <Compile Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Runtime\Models\EyeAdaptationModel.cs" />
-     <Compile Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Runtime\Models\GrainModel.cs" />
-     <Compile Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Runtime\Models\MotionBlurModel.cs" />
-     <Compile Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Runtime\Models\ScreenSpaceReflectionModel.cs" />
-     <Compile Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Runtime\Models\UserLutModel.cs" />
-     <Compile Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Runtime\Models\VignetteModel.cs" />
-     <Compile Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Runtime\PostProcessingBehaviour.cs" />
-     <Compile Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Runtime\PostProcessingComponent.cs" />
-     <Compile Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Runtime\PostProcessingContext.cs" />
-     <Compile Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Runtime\PostProcessingModel.cs" />
-     <Compile Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Runtime\PostProcessingProfile.cs" />
-     <Compile Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Runtime\Utils\ColorGradingCurve.cs" />
-     <Compile Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Runtime\Utils\GraphicsUtils.cs" />
-     <Compile Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Runtime\Utils\MaterialFactory.cs" />
-     <Compile Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Runtime\Utils\ReflectionUtils.cs" />
-     <Compile Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Runtime\Utils\RenderTextureFactory.cs" />
-     <Compile Include="Assets\Script\Camera\Cam.cs" />
-     <Compile Include="Assets\Script\Camera\Practice_cam.cs" />
-     <Compile Include="Assets\Script\Camera\Practice_cam2.cs" />
-     <Compile Include="Assets\Script\CharacterSctipt\DubuCharacter.cs" />
-     <Compile Include="Assets\Script\CharacterSctipt\ManduCharacter.cs" />
-     <Compile Include="Assets\Script\TestScript\TestScript.cs" />
-     <Compile Include="Assets\Script\TestScript\coroutinTestSuper.cs" />
-     <Compile Include="Assets\Script\class\AnimationSuper.cs" />
-     <Compile Include="Assets\Script\class\BulletSuper.cs" />
-     <Compile Include="Assets\Script\class\CharacterSuper.cs" />
-     <Compile Include="Assets\Script\class\ConfigClass.cs" />
-     <Compile Include="Assets\Script\class\CoroutinClass.cs" />
-     <Compile Include="Assets\Script\class\UISuper.cs" />
-     <Compile Include="Assets\Script\manager\CharacterMgr.cs" />
-     <Compile Include="Assets\Script\manager\GameMgr.cs" />
-     <Compile Include="Assets\Script\manager\NetworkMgr.cs" />
+     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\Antialiasing.cs" />
+     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\Bloom.cs" />
+     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\BloomAndFlares.cs" />
+     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\BloomOptimized.cs" />
+     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\Blur.cs" />
+     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\BlurOptimized.cs" />
+     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\CameraMotionBlur.cs" />
+     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\ColorCorrectionCurves.cs" />
+     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\ColorCorrectionLookup.cs" />
+     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\ColorCorrectionRamp.cs" />
+     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\ContrastEnhance.cs" />
+     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\ContrastStretch.cs" />
+     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\CreaseShading.cs" />
+     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\DepthOfField.cs" />
+     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\DepthOfFieldDeprecated.cs" />
+     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\EdgeDetection.cs" />
+     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\Fisheye.cs" />
+     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\GlobalFog.cs" />
+     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\Grayscale.cs" />
+     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\ImageEffectBase.cs" />
+     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\ImageEffects.cs" />
+     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\MotionBlur.cs" />
+     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\NoiseAndGrain.cs" />
+     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\NoiseAndScratches.cs" />
+     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\PostEffectsBase.cs" />
+     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\PostEffectsHelper.cs" />
+     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\Quads.cs" />
+     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\ScreenOverlay.cs" />
+     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\ScreenSpaceAmbientObscurance.cs" />
+     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\ScreenSpaceAmbientOcclusion.cs" />
+     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\SepiaTone.cs" />
+     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\SunShafts.cs" />
+     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\TiltShift.cs" />
+     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\Tonemapping.cs" />
+     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\Triangles.cs" />
+     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\Twirl.cs" />
+     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\VignetteAndChromaticAberration.cs" />
+     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\Vortex.cs" />
      <None Include="Assets\Dumy_BG\PostProcessing\PostProcessing\Resources\Shaders\DepthOfField.shader" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
@@ -235,10 +216,6 @@
  <Reference Include="UnityEngine.VR">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
  </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{F965F2F3-7559-90DA-7795-06DC876339C6}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
