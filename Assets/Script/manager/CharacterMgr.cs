@@ -121,10 +121,15 @@ public class CharacterMgr : MonoBehaviour
         thisAnim.SetChar(thisCharacter);
         thisAnim.SetAnimator(gameObject.GetComponent<Animator>());
 
+
         thisCharacter.SetPlayerTr(Player_tr);
         thisCharacter.SetPlayerRb(Player_rb);
         thisCharacter.SetCameraTr(Camera_tr);
         thisCharacter.SetFirePoint(FirePoint);
+
+        thisCharacter.SetAttackSpeed(0.3f);
+        thisCharacter.CreateBullet(100, tempBullet);
+        thisCharacter.SetBulletObject(tempBullet);
         // 나일때 할일
         //if (_networkView.isMine)
         //{
@@ -140,15 +145,12 @@ public class CharacterMgr : MonoBehaviour
         //입력을 받고 저장한다.
         //if (_networkView.isMine)
         //{
-<<<<<<< HEAD
-        InputControll();
+        //InputControll();
         // 키를 적용해준다.
-        thisCharacter.SetCharacterMove(Key_H, Key_V);
-=======
+        //thisCharacter.SetCharacterMove(Key_H, Key_V);
             //InputControll();
             // 키를 적용해준다.
             //thisCharacter.SetCharacterMove(Key_H, Key_V);
->>>>>>> 0d2f1fd6f6e84d40d29f2a4e55bb4b8b33e09e65
         //}
         /*
         else
@@ -168,14 +170,8 @@ public class CharacterMgr : MonoBehaviour
             }
         }*/
         // 상태에 맞춰서 알아서 애니매이션 플레이
-<<<<<<< HEAD
-        thisAnim.PlayAnimation();
-    }
-=======
         //thisAnim.PlayAnimation();
-	}
->>>>>>> 0d2f1fd6f6e84d40d29f2a4e55bb4b8b33e09e65
-
+    }
     void FixedUpdate()
     {
         thisCharacter.CharacterUpdate();
@@ -193,7 +189,6 @@ public class CharacterMgr : MonoBehaviour
         if (Input.GetMouseButton(0)) {
             thisCharacter.Attack();
             // 네트워크 알피씨를 날려야 한다.
-
         }
         Click_Right = Input.GetMouseButton(1);
         Key_Shift = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);

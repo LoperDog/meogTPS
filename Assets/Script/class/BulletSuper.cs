@@ -19,10 +19,16 @@ public class BulletSuper : MonoBehaviour {
 
     public virtual void FireBullet(Vector3 position, Quaternion rotation, float FireSpeed,int code)
     {
+        // 임시코드
+
         SetBullet(position, rotation);
+
+        Bullet_tr = transform;
+
         BulletSpeed = FireSpeed;
         m_CurrentLifeTime = 0.0f;
         PlayerCode = code;
+        transform.GetComponent<Rigidbody>().AddForce(transform.forward * 2000.0f);
         IsLift = true;
     }
 
@@ -86,7 +92,8 @@ public class BulletSuper : MonoBehaviour {
         if (IsLift)
         {
             // 총알이 살아 있는 동안 할행동
-            Bullet_tr.Translate(Bullet_tr.forward * BulletSpeed * Time.deltaTime);
+            //transform.Translate(transform.forward * Time.deltaTime);
+            
         }
     }
 

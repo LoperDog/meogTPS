@@ -23,7 +23,7 @@ public class CharacterSuper : MonoBehaviour{
 
     public int PlayerCode;
 
-    public bool IsAttack = true;
+    public bool IsAttack = false;
     public bool IsReLoad = false;
     protected bool Is_Ground = true;
     protected bool Is_Jump;
@@ -62,12 +62,6 @@ public class CharacterSuper : MonoBehaviour{
     
     public virtual void CharacterUpdate()
     {
-        //공격중이라면
-        if (IsAttack)
-        {
-            //coroutine.StartAttackSetting();
-            IsAttack = false;
-        }
         Check_Ground();
         Move();
         Run();
@@ -86,7 +80,7 @@ public class CharacterSuper : MonoBehaviour{
     public virtual void Attack()
     {
         // 공격중이 아닌데 공격 이 시작된다면 - 공격 가능
-        if(m_CurrentAtrack > m_TimeAttack && !IsAttack && !IsReLoad && m_Current_Bullet >0)
+        if(!IsAttack && !IsReLoad && m_Current_Bullet >0)
         {
             //공격 시작 코드
             m_Current_Bullet--;
@@ -94,7 +88,7 @@ public class CharacterSuper : MonoBehaviour{
             ShotBullet();
         }
         // 공격이 시작될수 있는데 총알이 없다면 - 공격 불가 상태
-        else if (m_CurrentAtrack > m_TimeAttack && !IsAttack && !IsReLoad && m_Current_Bullet == 0)
+        else if (!IsAttack && !IsReLoad && m_Current_Bullet == 0)
         {
             // 리로드 시작.
             IsReLoad = true;
@@ -102,7 +96,7 @@ public class CharacterSuper : MonoBehaviour{
         // 
         else
         {
-            m_CurrentAtrack = 0.0f;
+            //m_CurrentAtrack = 0.0f;
         }
     }
 
@@ -164,10 +158,12 @@ public class CharacterSuper : MonoBehaviour{
     public virtual void ShotBullet()
     {
         Debug.Log("상속전 공격 -> 오브젝트를 생성시킨다.");
-
+        coroutine.StartAttackSetting();
+        ReuseBullet(BaseBullet, FirePoint.transform.position, FirePoint.transform.rotation);
     }
     public virtual void ReuseBullet(GameObject Object,Vector3 position, Quaternion rotation)
     {
+        Debug.Log("총알생성");
         int poolkey = Object.GetInstanceID();
 
         if (BulletPool.ContainsKey(poolkey))
@@ -180,7 +176,7 @@ public class CharacterSuper : MonoBehaviour{
             // 오브젝트 사용하기 위해 세팅을 하자.
             // 발사할 위치를 정하거나 하는 둥의 액션.
             objectToReuse.GetComponent<BulletSuper>().FireBullet(FirePoint.transform.position,
-                FirePoint.transform.rotation,10.0f,PlayerCode);
+                FirePoint.transform.rotation,1.0f,PlayerCode);
 
         }
     }
@@ -207,6 +203,7 @@ public class CharacterSuper : MonoBehaviour{
     public virtual void SetJumpForce(float jump_Force) { m_Jump_Force = jump_Force; }
     public virtual void SetPlayerTr(Transform player) { Player_tr = player; }
     public virtual void SetPlayerOb(GameObject player_ob) { Player_Object = player_ob; }
+    public virtual void SetAttackSpeed(float att_Speed) { m_CurrentAtrack = att_Speed; }
     public virtual void SetCoroutine(CoroutinClass co) {
         coroutine = co;
         coroutine.SetCharacterScript(this);
@@ -226,6 +223,7 @@ public class CharacterSuper : MonoBehaviour{
          * 즉 특수기가 연속 발사이거나 하는 등의 경우를 상정해 두고 작업 하기 위함.
          */
         // 총알 인스턴스의 고유 값을 가져온다.
+        Debug.Log("총알 풀링");
         int poolkey = Object.GetInstanceID();
 
         // 이미 총알 풀에 그값이 있는지 없는지 검사 한다. 없어야 넣는다.
