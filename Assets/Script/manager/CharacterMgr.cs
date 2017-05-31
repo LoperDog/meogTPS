@@ -139,6 +139,7 @@ public class CharacterMgr : MonoBehaviour
 
     void Update()
     {
+        Screen.lockCursor = true;
         //캐릭터 업데이트
         //thisCharacter.CharacterUpdate();
 
@@ -148,9 +149,9 @@ public class CharacterMgr : MonoBehaviour
         //InputControll();
         // 키를 적용해준다.
         //thisCharacter.SetCharacterMove(Key_H, Key_V);
-            //InputControll();
-            // 키를 적용해준다.
-            //thisCharacter.SetCharacterMove(Key_H, Key_V);
+        //InputControll();
+        // 키를 적용해준다.
+        //thisCharacter.SetCharacterMove(Key_H, Key_V);
         //}
         /*
         else

@@ -41,11 +41,11 @@ public class AnimationSuper
     {
         if (m_Char_State.GetIsRun())
         {
-            m_Anim.SetBool("Is_Run", true);
+            m_Anim.SetFloat("Speed", m_Char_State.GetSpeed());
         }
         else
         {
-            m_Anim.SetBool("Is_Run", false);
+            m_Anim.SetFloat("Speed", m_Char_State.GetSpeed());
         }
     }
     // 공격 애니매이션 정의
