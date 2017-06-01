@@ -27,6 +27,7 @@ public class AnimationSuper
         if (m_Char_State.GetIsGroud() && Input.GetKeyDown(KeyCode.Space))//점프
         {
             m_Anim.SetTrigger("Jump_S");
+            m_Anim.SetBool("Landing", false);
         }
         else if(!m_Char_State.GetIsGroud())
         {
@@ -34,7 +35,7 @@ public class AnimationSuper
         }
         else if(m_Char_State.GetIsGroud())
         {
-            m_Anim.SetTrigger("Landing");
+            m_Anim.SetBool("Landing", true);
         }
     }
     public virtual void PlayRun()
