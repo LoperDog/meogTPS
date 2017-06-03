@@ -11,34 +11,19 @@ public class AnimationSuper
     {
 
     }
-    // 애니매이션 플레이
-    public virtual void PlayAnimation()
+    public virtual void PlayAnimation() // 애니매이션 플레이
     {
         PlayMove();
         PlayRun();
+        PlayJump();
         PlayAttack();
     }
-    // 이동 애니매이션 정의
-    public virtual void PlayMove()
+    public virtual void PlayMove() // 이동 애니매이션 정의
     {
         m_Anim.SetFloat("H",m_Char_State.GetMoveH());
         m_Anim.SetFloat("V",m_Char_State.GetMoveV());
-
-        if (m_Char_State.GetIsGroud() && Input.GetKeyDown(KeyCode.Space))//점프
-        {
-            m_Anim.SetTrigger("Jump_S");
-            m_Anim.SetBool("Landing", false);
-        }
-        else if(!m_Char_State.GetIsGroud())
-        {
-            m_Anim.SetTrigger("Jump_ing");
-        }
-        else if(m_Char_State.GetIsGroud())
-        {
-            m_Anim.SetBool("Landing", true);
-        }
     }
-    public virtual void PlayRun()
+    public virtual void PlayRun()//뛰기
     {
         if (m_Char_State.GetIsRun())
         {
@@ -49,8 +34,23 @@ public class AnimationSuper
             m_Anim.SetFloat("Speed", m_Char_State.GetSpeed());
         }
     }
-    // 공격 애니매이션 정의
-    public virtual void PlayAttack()
+    public virtual void PlayJump()
+    {
+        if (m_Char_State.GetIsGroud() && Input.GetKeyDown(KeyCode.Space))//점프
+        {
+            m_Anim.SetTrigger("Jump_S");
+            m_Anim.SetBool("Landing", false);
+        }
+        else if (!m_Char_State.GetIsGroud())
+        {
+            m_Anim.SetTrigger("Jump_ing");
+        }
+        else if (m_Char_State.GetIsGroud())
+        {
+            m_Anim.SetBool("Landing", true);
+        }
+    }
+    public virtual void PlayAttack()// 공격
     {
         if (m_Char_State.GetIsAttack())
         {
@@ -61,8 +61,7 @@ public class AnimationSuper
             m_Anim.SetBool("Is_Attack", false);
         }
     }
-    // 재장전 애니매이션 정의
-    public virtual void PlayReload()
+    public virtual void PlayReload()// 재장전
     {
 
     }
