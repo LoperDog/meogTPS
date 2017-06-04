@@ -6,6 +6,7 @@ public class AnimationSuper
 {
     protected Animator m_Anim;
     protected CharacterSuper m_Char_State;
+    protected ConfigClass m_Config;
         
     public AnimationSuper()
     {
@@ -18,7 +19,7 @@ public class AnimationSuper
         PlayJump();
         PlayAttack();
     }
-    public virtual void PlayMove() // 이동 애니매이션 정의
+    public virtual void PlayMove() // 이동
     {
         m_Anim.SetFloat("H",m_Char_State.GetMoveH());
         m_Anim.SetFloat("V",m_Char_State.GetMoveV());
@@ -34,20 +35,38 @@ public class AnimationSuper
             m_Anim.SetFloat("Speed", m_Char_State.GetSpeed());
         }
     }
-    public virtual void PlayJump()
+    public virtual void PlayJump() //점프
     {
-        if (m_Char_State.GetIsGroud() && Input.GetKeyDown(KeyCode.Space))//점프
+        if (m_Char_State.GetIsGroud() && Input.GetKeyDown(KeyCode.Space))
         {
             m_Anim.SetTrigger("Jump_S");
             m_Anim.SetBool("Landing", false);
         }
-        else if (!m_Char_State.GetIsGroud())
+        else if (!m_Char_State.GetIsGroud() && (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Base.Idle-Move")))//점프상태가 아닐 때 떨어지면
+        {
+            if (!m_Char_State.GetIsGroud() && m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Base.Jump State.Jump_S"))
+            {
+                m_Anim.SetTrigger("Falling");
+                m_Anim.SetBool("Landing", false);
+            }
+        }
+        else if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Base.Jump State.Jump_S"))
         {
             m_Anim.SetTrigger("Jump_ing");
         }
-        else if (m_Char_State.GetIsGroud())
+        else if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Base.Jump State.Jump_ing"))
         {
-            m_Anim.SetBool("Landing", true);
+            if (m_Char_State.GetIsGroud())
+            {
+                m_Anim.SetBool("Landing", true);
+            }
+        }
+        else if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Base.Jump State.Jump_E"))
+        {
+            if (m_Char_State.GetIsGroud())
+            {
+                m_Anim.SetBool("Landing", true);
+            }
         }
     }
     public virtual void PlayAttack()// 공격
