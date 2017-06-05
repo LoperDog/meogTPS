@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: b145fff155a99cb4f94d030a9aed2617
-timeCreated: 1495997224
+guid: 4a5ac72e8075e5249b1063c20dcc1372
+timeCreated: 1496656660
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -136,7 +136,7 @@ ModelImporter:
     13700000: CH_Tofu
     13700002: Tofu
   materials:
-    importMaterials: 0
+    importMaterials: 1
     materialName: 0
     materialSearch: 1
   animations:
@@ -146,12 +146,11 @@ ModelImporter:
     optimizeGameObjects: 0
     motionNodeName: 
     animationImportErrors: 
-    animationImportWarnings: "Copied Avatar Rig Configuration mis-match. Bone length
-      in copied configuration does not match position in animation file\nJump_Ing\nClip
-      'Take 001' has import animation warnings that might lower retargeting quality:\n\t'Bip001
-      Spine2' is inbetween humanoid transforms and has rotation animation that will
-      be discarded.\n\t'Bip001 L Thigh' has translation animation that will be discarded.\n\t'Bip001
-      R Thigh' has translation animation that will be discarded.\n"
+    animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
+      might lower retargeting quality:\n\t'Bip001 Spine2' is inbetween humanoid transforms
+      and has rotation animation that will be discarded.\n\t'Bip001 L Thigh' has translation
+      animation that will be discarded.\n\t'Bip001 R Thigh' has translation animation
+      that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     animationCompression: 3
@@ -164,8 +163,8 @@ ModelImporter:
     - serializedVersion: 16
       name: Jump_ing
       takeName: Take 001
-      firstFrame: 163
-      lastFrame: 169
+      firstFrame: 4
+      lastFrame: 16
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

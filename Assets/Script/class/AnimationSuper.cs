@@ -42,18 +42,6 @@ public class AnimationSuper
             m_Anim.SetTrigger("Jump_S");
             m_Anim.SetBool("Landing", false);
         }
-        else if (!m_Char_State.GetIsGroud() && (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Base.Idle-Move")))//점프상태가 아닐 때 떨어지면
-        {
-            if (!m_Char_State.GetIsGroud() && m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Base.Jump State.Jump_S"))
-            {
-                m_Anim.SetTrigger("Falling");
-                m_Anim.SetBool("Landing", false);
-            }
-        }
-        else if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Base.Jump State.Jump_S"))
-        {
-            m_Anim.SetTrigger("Jump_ing");
-        }
         else if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Base.Jump State.Jump_ing"))
         {
             if (m_Char_State.GetIsGroud())
@@ -61,11 +49,11 @@ public class AnimationSuper
                 m_Anim.SetBool("Landing", true);
             }
         }
-        else if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Base.Jump State.Jump_E"))
+        else if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Base.Jump State.Landing"))
         {
-            if (m_Char_State.GetIsGroud())
+            if(m_Char_State.GetMoveH() !=0 || m_Char_State.GetMoveV() != 0)
             {
-                m_Anim.SetBool("Landing", true);
+                m_Anim.SetTrigger("Jump_E");
             }
         }
     }
