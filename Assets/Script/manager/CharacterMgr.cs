@@ -139,6 +139,7 @@ public class CharacterMgr : MonoBehaviour
 
     void Update()
     {
+        Screen.lockCursor = true;
         //캐릭터 업데이트
         //thisCharacter.CharacterUpdate();
 
