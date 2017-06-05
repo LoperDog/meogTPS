@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 4a5ac72e8075e5249b1063c20dcc1372
-timeCreated: 1496656660
+guid: 008c8a9a05605654bb09386210918164
+timeCreated: 1496663180
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -164,7 +164,7 @@ ModelImporter:
       name: Jump_ing
       takeName: Take 001
       firstFrame: 4
-      lastFrame: 16
+      lastFrame: 17
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
