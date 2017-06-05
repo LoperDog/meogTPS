@@ -149,9 +149,9 @@ public class CharacterMgr : MonoBehaviour
         //InputControll();
         // 키를 적용해준다.
         //thisCharacter.SetCharacterMove(Key_H, Key_V);
-            //InputControll();
-            // 키를 적용해준다.
-            //thisCharacter.SetCharacterMove(Key_H, Key_V);
+        //InputControll();
+        // 키를 적용해준다.
+        //thisCharacter.SetCharacterMove(Key_H, Key_V);
         //}
         /*
         else

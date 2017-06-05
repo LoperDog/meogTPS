@@ -36,8 +36,8 @@ public class CharacterSuper : MonoBehaviour{
     protected float m_Move_H = 0.0f;
     protected float m_Move_V = 0.0f;
     protected float m_Current_Speed;
-    protected float m_Move_Speed = 1.0f;
-    protected float m_Run_Speed = 2.0f;
+    protected float m_Move_Speed = 5.5f;
+    protected float m_Run_Speed = 5.5f;
 
     //회전
     protected float Min_X = -360.0f;
@@ -62,6 +62,7 @@ public class CharacterSuper : MonoBehaviour{
     
     public virtual void CharacterUpdate()
     {
+        Debug.Log(m_Run_Speed);
         Check_Ground();
         Move();
         Run();
@@ -139,8 +140,8 @@ public class CharacterSuper : MonoBehaviour{
     public virtual void Check_Ground()
     {
         RaycastHit hit;
-        Debug.DrawRay(Player_tr.position, Vector3.down * 0.01f, Color.red);
-        if (Physics.Raycast(Player_tr.position, Vector3.down, out hit, 0.01f))
+        Debug.DrawRay(Player_tr.position, Vector3.down * 0.15f, Color.red);
+        if (Physics.Raycast(Player_tr.position, Vector3.down, out hit, 0.15f))
         {
             if (hit.collider.tag == "GROUND")
             {
@@ -276,6 +277,7 @@ public class CharacterSuper : MonoBehaviour{
     public virtual bool GetIsReload() { return IsReLoad; }
     public virtual float GetMoveH() { return m_Move_H; }
     public virtual float GetMoveV() { return m_Move_V; }
+    public virtual float GetSpeed() { return m_Current_Speed; }
     public virtual bool GetIsRun() { return IsRun; }
     public virtual bool GetIsJump() { return Is_Jump; }
     public virtual bool GetIsGroud() { return Is_Ground; }
