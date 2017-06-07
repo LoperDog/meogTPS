@@ -37,35 +37,31 @@ public class AnimationSuper
     }
     public virtual void PlayJump() //점프
     {
-        if (m_Char_State.GetIsGroud() && Input.GetKeyDown(KeyCode.Space))
+        m_Anim.SetBool("Landing", false);
+        m_Anim.SetBool("Landing_Move", false);
+        if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Base.Idle-Move"))
         {
-            m_Anim.SetTrigger("Jump_S");
-            m_Anim.SetBool("Landing", false);
-        }
-        else if (!m_Char_State.GetIsGroud() && (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Base.Idle-Move")))//점프상태가 아닐 때 떨어지면
-        {
-            if (!m_Char_State.GetIsGroud() && m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Base.Jump State.Jump_S"))
+            if (!m_Char_State.GetIsGroud())
             {
-                m_Anim.SetTrigger("Falling");
-                m_Anim.SetBool("Landing", false);
+                m_Anim.SetBool("Falling", true);
             }
         }
-        else if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Base.Jump State.Jump_S"))
+        else if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Base.Landing"))
         {
-            m_Anim.SetTrigger("Jump_ing");
-        }
-        else if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Base.Jump State.Jump_ing"))
-        {
-            if (m_Char_State.GetIsGroud())
+            if (m_Char_State.GetMoveH() == 0 && m_Char_State.GetMoveV() == 0)
             {
                 m_Anim.SetBool("Landing", true);
             }
+            else
+            {
+                m_Anim.SetBool("Landing_Move",true);
+            }
         }
-        else if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Base.Jump State.Jump_E"))
+        else if(m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Base.Falling"))
         {
             if (m_Char_State.GetIsGroud())
             {
-                m_Anim.SetBool("Landing", true);
+                m_Anim.SetBool("Falling", false);
             }
         }
     }

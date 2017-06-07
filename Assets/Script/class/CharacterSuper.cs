@@ -62,7 +62,6 @@ public class CharacterSuper : MonoBehaviour{
     
     public virtual void CharacterUpdate()
     {
-        Debug.Log(m_Run_Speed);
         Check_Ground();
         Move();
         Run();

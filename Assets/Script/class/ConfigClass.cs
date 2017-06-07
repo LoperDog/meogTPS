@@ -7,7 +7,7 @@ public class ConfigClass {
     public int ManduHP = 100;
     public float ManduMoveSpeed = 5.0f;
     public float ManduRunSpeed = 10.0f;
-    public float ManduJumpForce = 500.0f;
+    public float ManduJumpForce = 300.0f;
     public int ManduDamege = 10;
     public float ManduAttackSpeed = 0.5f;
     public int ManduBullet = 100;
@@ -18,7 +18,7 @@ public class ConfigClass {
     public int DubuHP = 150;
     public float DubuMoveSpeed = 5.5f;
     public float DubuRunSpeed = 11.0f;
-    public float DubuJumpForce = 550.0f;
+    public float DubuJumpForce = 850.0f;
     public int DubuDamage = 15;
     public float DubuAttackSpeed = 0.5f;
     public int DubuBullet = 100;
