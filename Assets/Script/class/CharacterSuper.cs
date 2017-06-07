@@ -35,7 +35,7 @@ public class CharacterSuper : MonoBehaviour{
     //이동
     protected float m_Move_H = 0.0f;
     protected float m_Move_V = 0.0f;
-    protected float m_Current_Speed;
+    protected float m_Current_Speed = 0;
     protected float m_Move_Speed = 5.5f;
     protected float m_Run_Speed = 5.5f;
 
@@ -113,13 +113,19 @@ public class CharacterSuper : MonoBehaviour{
     }
     public virtual void Run()
     {
-        if (Input.GetKey(KeyCode.LeftShift) && (m_Move_V > 0.1) && Is_Ground)
+        if (Input.GetKey(KeyCode.LeftShift) && (m_Move_V > 0.1) && Is_Ground && m_Current_Speed <= m_Run_Speed)
         {
-            m_Current_Speed = m_Run_Speed;
+            m_Current_Speed += 20.0f * Time.deltaTime;
         }
-        else
+        else if ((m_Move_H != 0.0f || m_Move_V != 0.0f) && m_Current_Speed <= m_Move_Speed)
         {
-            m_Current_Speed = m_Move_Speed;
+            m_Current_Speed += 20.0f * Time.deltaTime;
+        }
+        else if(m_Current_Speed != 0)
+        {
+            m_Current_Speed += (m_Current_Speed > 0) ? -20.0f * Time.deltaTime :
+                                                        20.0f * Time.deltaTime;
+            m_Current_Speed = (m_Current_Speed >= -0.1f && m_Current_Speed <= 0.1f) ? 0.0f : m_Current_Speed;
         }
     }
     public virtual void Jump()

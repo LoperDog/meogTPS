@@ -18,7 +18,7 @@ public class ConfigClass {
     public int DubuHP = 150;
     public float DubuMoveSpeed = 5.5f;
     public float DubuRunSpeed = 11.0f;
-    public float DubuJumpForce = 850.0f;
+    public float DubuJumpForce = 3500.0f;
     public int DubuDamage = 15;
     public float DubuAttackSpeed = 0.5f;
     public int DubuBullet = 100;
