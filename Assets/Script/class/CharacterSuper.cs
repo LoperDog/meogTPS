@@ -27,7 +27,8 @@ public class CharacterSuper : MonoBehaviour{
     public bool IsReLoad = false;
     protected bool Is_Ground = true;
     protected bool Is_Jump;
-    protected bool IsRun = false;
+    protected bool Is_Run = false;
+    protected bool Is_Rolling;
 
     protected int m_Current_Bullet = 0;
     protected int m_Max_Bullet = 0;
@@ -145,8 +146,8 @@ public class CharacterSuper : MonoBehaviour{
     public virtual void Check_Ground()
     {
         RaycastHit hit;
-        Debug.DrawRay(Player_tr.position, Vector3.down * 0.15f, Color.red);
-        if (Physics.Raycast(Player_tr.position, Vector3.down, out hit, 0.15f))
+        Debug.DrawRay(Player_tr.position, Vector3.down * 0.2f, Color.red);
+        if (Physics.Raycast(Player_tr.position, Vector3.down, out hit, 0.2f))
         {
             if (hit.collider.tag == "GROUND")
             {
@@ -155,6 +156,18 @@ public class CharacterSuper : MonoBehaviour{
             }
         }
         Is_Ground = false;
+    }
+    public virtual void Rolling()
+    {
+        if (Input.GetKeyDown(KeyCode.F) && GetIsGroud())
+        {
+            Is_Rolling = true;
+        }
+        else if (Is_Rolling)
+        {
+            Player_rb.AddForce(Player_tr.forward * 3000);
+            Is_Rolling = false;
+        }
     }
     public virtual void ReLoad()
     {
@@ -271,7 +284,7 @@ public class CharacterSuper : MonoBehaviour{
     }
     #endregion
     #region 키세팅영역
-    public virtual void SetRun(bool KeyShift){ IsRun = KeyShift;}
+    public virtual void SetRun(bool KeyShift){ Is_Run = KeyShift;}
     public virtual void SetMoveH(float KeyH) { m_Move_H = KeyH; }
     public virtual void SetMoveV(float KeyV) { m_Move_V = KeyV; }
     
@@ -283,9 +296,10 @@ public class CharacterSuper : MonoBehaviour{
     public virtual float GetMoveH() { return m_Move_H; }
     public virtual float GetMoveV() { return m_Move_V; }
     public virtual float GetSpeed() { return m_Current_Speed; }
-    public virtual bool GetIsRun() { return IsRun; }
+    public virtual bool GetIsRun() { return Is_Run; }
     public virtual bool GetIsJump() { return Is_Jump; }
     public virtual bool GetIsGroud() { return Is_Ground; }
+    public virtual bool GetIsRolling() { return Is_Rolling; }
     // 0 이라면 트루
     public virtual bool GetEmptyBullet() { return m_Current_Bullet == 0; }
     #endregion
