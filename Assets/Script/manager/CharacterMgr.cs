@@ -133,7 +133,7 @@ public class CharacterMgr : MonoBehaviour
         // 나일때 할일
         //if (_networkView.isMine)
         //{
-
+        Camera.main.GetComponent<Cam>().SetPlayer(transform);
         //}
     }
 

@@ -15,13 +15,40 @@ public class Cam : MonoBehaviour
 
     private int Cam_State = 0;
 
+    public float x = 0.0f;
+    public float y = 0.0f;
+
+
     void Awake()
     {
         tr = GetComponent<Transform>();
+
+        Vector3 angle = tr.eulerAngles;
+        x = angle.x;
+        y = angle.y;
     }
 
     void LateUpdate()
     {
+        if (Player)
+        {
+            // 길이 제기
+            Dist -= .5f * Input.mouseScrollDelta.y;
+            Dist = Dist < 0.5f ? 1.0f : Dist;
+            Dist = Dist >= 10.0f ? 10.0f : Dist;
+
+            x += Input.GetAxis("Mouse X") + mouse_y_speed;
+            y += Input.GetAxis("Mouse Y") + mouse_y_speed;
+
+            y = ClamAngle(y);
+
+            Quaternion rotation = Quaternion.Euler(y, x, 0);
+            Vector3 position = rotation * new Vector3(0.0f, 0.0f, -Dist) + Player.position + new Vector3(0.0f, 0.0f, 0.0f);
+
+            tr.rotation = rotation;
+            tr.position = position; 
+        }
+        /*
         mouse_y = -Input.GetAxis("Mouse Y");
         {
             if (tr.rotation.eulerAngles.x + mouse_y <= Min_y || tr.rotation.eulerAngles.x + mouse_y >= Max_y)
@@ -39,6 +66,25 @@ public class Cam : MonoBehaviour
             {
                 tr.localEulerAngles = new Vector3(Max_y, 0, 0);
             }
-        }
+        }*/
     }
+
+    public float ClamAngle(float angle)
+    {
+        angle += angle < -360 ? 360 : 0.0f;
+        angle -= angle > 360 ? 360 : 0.0f;
+
+        return Mathf.Clamp(angle, Min_y, Max_y);
+    }
+    public void SetPlayer(Transform Pl)
+    {
+        Player = Pl;
+    }
+    /*
+    public float ShootTheFuckingRay()
+    {
+        Vector3 FuckingRayPosition;
+
+        return FuckingRayPosition;
+    }*/
 }
