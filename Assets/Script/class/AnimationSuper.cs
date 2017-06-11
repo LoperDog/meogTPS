@@ -18,6 +18,7 @@ public class AnimationSuper
         PlayRun();
         PlayJump();
         PlayAttack();
+        PlayRolling();
     }
     public virtual void PlayMove() // 이동
     {
@@ -64,6 +65,10 @@ public class AnimationSuper
                 m_Anim.SetBool("Falling", false);
             }
         }
+    }
+    public virtual void PlayRolling()
+    {
+
     }
     public virtual void PlayAttack()// 공격
     {
