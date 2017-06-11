@@ -6,14 +6,12 @@ public class Cam : MonoBehaviour
     private Transform tr;
     public Transform Player;
 
-    public float Height = 2.3f; //높이
+    public float Height = 1.3f; //높이
     public float Dist = 2.8f;//거리
-    private float mouse_y = 0.0f;//마우스 상하값
+    public float ViewRight = 0.5f;
     public float mouse_y_speed = 100.0f;//상하 회전속도
     public float Max_y = 320.0f;//최대각
-    public float Min_y = 30.0f; //최소각
-
-    private int Cam_State = 0;
+    public float Min_y = 50.0f; //최소각
 
     public float x = 0.0f;
     public float y = 0.0f;
@@ -37,16 +35,15 @@ public class Cam : MonoBehaviour
             Dist = Dist < 0.5f ? 1.0f : Dist;
             Dist = Dist >= 10.0f ? 10.0f : Dist;
 
-            x += Input.GetAxis("Mouse X") + mouse_y_speed;
-            y += Input.GetAxis("Mouse Y") + mouse_y_speed;
+            x += Input.GetAxis("Mouse X") * mouse_y_speed * 0.02f;
+            y += Input.GetAxis("Mouse Y") * mouse_y_speed * 0.02f;
 
-            y = ClamAngle(y);
-
+            //y = ClamAngle(y);
             Quaternion rotation = Quaternion.Euler(y, x, 0);
-            Vector3 position = rotation * new Vector3(0.0f, 0.0f, -Dist) + Player.position + new Vector3(0.0f, 0.0f, 0.0f);
+            Vector3 position = rotation * new Vector3(ViewRight, Height, -Dist) + Player.position + new Vector3(0.0f, 0.0f, 0.0f);
 
             tr.rotation = rotation;
-            tr.position = position; 
+            tr.position = position;
         }
         /*
         mouse_y = -Input.GetAxis("Mouse Y");
@@ -69,13 +66,13 @@ public class Cam : MonoBehaviour
         }*/
     }
 
-    public float ClamAngle(float angle)
+    /*public float ClamAngle(float angle)
     {
-        angle += angle < -360 ? 360 : 0.0f;
-        angle -= angle > 360 ? 360 : 0.0f;
+        angle += angle <= -360 ? 360 : 0.0f;
+        angle -= angle >= 360 ? 360 : 0.0f;
 
         return Mathf.Clamp(angle, Min_y, Max_y);
-    }
+    }*/
     public void SetPlayer(Transform Pl)
     {
         Player = Pl;

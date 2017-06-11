@@ -108,8 +108,8 @@ public class CharacterSuper : MonoBehaviour{
         Vector3 right = new Vector3(forward.z, 0, -forward.x);
         Vector3 moveDirection = (m_Move_H * right) + (m_Move_V * forward);
         Player_tr.position = Player_tr.position + moveDirection * m_Current_Speed * Time.deltaTime;
-        Rotation_X += Input.GetAxis("Mouse X") * Sens_X * Time.deltaTime;
-        Player_tr.localEulerAngles = new Vector3(0, Rotation_X, 0);
+        //Rotation_X += Input.GetAxis("Mouse X") * Sens_X * Time.deltaTime;
+        //Player_tr.localEulerAngles = new Vector3(0, Rotation_X, 0);
     }
     public virtual void Run()
     {
