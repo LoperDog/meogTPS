@@ -6,6 +6,9 @@ public class CharacterMgr : MonoBehaviour
 {
     public GameObject tempBullet;
     public GameObject FirePoint;
+
+    public Camera mainCamera;
+
     [SerializeField]
     private ConfigClass config;
 
@@ -42,6 +45,8 @@ public class CharacterMgr : MonoBehaviour
 
     [SerializeField]
     public int PlayerCode = 0;
+
+    public float RAY_MaxDist = 500;
 
     #endregion
     #region 캐릭터 내부 스크립트 혹은 클래스
@@ -134,6 +139,7 @@ public class CharacterMgr : MonoBehaviour
         //if (_networkView.isMine)
         //{
             //Camera.main.GetComponent<Cam>().SetPlayer(Player_tr);
+            mainCamera = Camera.main;
         //}
     }
 
@@ -173,6 +179,21 @@ public class CharacterMgr : MonoBehaviour
         // 상태에 맞춰서 알아서 애니매이션 플레이
         //thisAnim.PlayAnimation();
     }
+    public void ShootTheFuckingRay()
+    {
+        RaycastHit hit;
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
+        if(Physics.Raycast(ray,out hit, RAY_MaxDist))
+        {
+            Debug.DrawLine(ray.origin, hit.point, Color.green);
+            Debug.Log("맞은거 : " + hit.transform.name + " 어디에 맞았을까?" + hit.point);
+        }
+        else
+        {
+            Debug.DrawLine(ray.origin, ray.direction, Color.red);
+        }
+    }
+
     void FixedUpdate()
     {
         thisCharacter.CharacterUpdate();

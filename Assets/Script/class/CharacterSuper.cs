@@ -176,8 +176,9 @@ public class CharacterSuper : MonoBehaviour{
     // 총알을 발사한다.
     public virtual void ShotBullet()
     {
-        Debug.Log("상속전 공격 -> 오브젝트를 생성시킨다.");
         coroutine.StartAttackSetting();
+        // 
+
         ReuseBullet(BaseBullet, FirePoint.transform.position, FirePoint.transform.rotation);
     }
     public virtual void ReuseBullet(GameObject Object,Vector3 position, Quaternion rotation)
