@@ -36,7 +36,7 @@ public class Cam : MonoBehaviour
             Dist = Dist >= 10.0f ? 10.0f : Dist;
 
             x += Input.GetAxis("Mouse X") * mouse_y_speed * 0.02f;
-            y += Input.GetAxis("Mouse Y") * mouse_y_speed * 0.02f;
+            y += -Input.GetAxis("Mouse Y") * mouse_y_speed * 0.02f;
 
             //y = ClamAngle(y);
             Quaternion rotation = Quaternion.Euler(y, x, 0);
