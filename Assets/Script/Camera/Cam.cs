@@ -77,11 +77,4 @@ public class Cam : MonoBehaviour
     {
         Player = Pl;
     }
-    /*
-    public float ShootTheFuckingRay()
-    {
-        Vector3 FuckingRayPosition;
-
-        return FuckingRayPosition;
-    }*/
 }
