@@ -16,6 +16,11 @@ public class CoroutinClass : MonoBehaviour {
     {
         StartCoroutine(SetAttackState());
     }
+
+    public virtual void StartReLoad()
+    {
+        StartCoroutine(SetReLoad());
+    }
     public virtual void StartBuffSetting(float time, CharacterSuper.ItemCode code, float value)
     {
         StartCoroutine(EndBuffItem(time, code, value));
@@ -28,6 +33,14 @@ public class CoroutinClass : MonoBehaviour {
         yield return new WaitForSeconds(thisCharaterScript.m_CurrentAtrack);
 
         thisCharaterScript.IsAttack = false;
+    }
+    // 리로딩
+    public virtual IEnumerator SetReLoad()
+    {
+        yield return new WaitForSeconds(thisCharaterScript.m_TimeReload);
+
+        thisCharaterScript.SetBullet(thisCharaterScript.m_Max_Bullet);
+        thisCharaterScript.IsReLoad = false;
     }
     // 아직은 작업 중.
     public virtual IEnumerator SetWhileBuff(float time)

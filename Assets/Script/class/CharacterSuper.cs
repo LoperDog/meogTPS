@@ -31,7 +31,7 @@ public class CharacterSuper : MonoBehaviour{
     protected bool Is_Rolling;
 
     protected int m_Current_Bullet = 0;
-    protected int m_Max_Bullet = 0;
+    public int m_Max_Bullet = 0;
 
     //이동
     protected float m_Move_H = 0.0f;
@@ -109,8 +109,19 @@ public class CharacterSuper : MonoBehaviour{
         Vector3 right = new Vector3(forward.z, 0, -forward.x);
         Vector3 moveDirection = (m_Move_H * right) + (m_Move_V * forward);
         Player_tr.position = Player_tr.position + moveDirection * m_Current_Speed * Time.deltaTime;
-        //Rotation_X += Input.GetAxis("Mouse X") * Sens_X * Time.deltaTime;
-        //Player_tr.localEulerAngles = new Vector3(0, Rotation_X, 0);
+
+        //Rotation_X += Input.GetAxis("Mouse X") * Sens_X * 0.02f;
+        //Player_tr.localEulerAngles = new Vector3(0, Camera.main.transform.rotation.y, 0);
+        // 귀찮으니 카메라 각을 받아온다.
+        // 웃기니까 냅두자.
+        //Player_tr.rotation = Camera.main.transform.rotation;
+        Player_tr.rotation = Quaternion.Euler(0.0f, Camera.main.transform.rotation.eulerAngles.y, 0.0f);
+        Debug.Log(Camera.main.transform.rotation.eulerAngles.y + "뭔데... 나한테 왜 그러는데..."+ Camera.main.transform.rotation);
+
+        //Player_tr.rotation = new Quaternion(0.0f, Player_tr.rotation.y, 0.0f, 0.0f);
+        //Debug.Log("camera angular" + Camera.main.transform.rotation.y);
+
+        //Debug.Log("뭔데... 뭐냐고!!!" + Camera.main.transform.rotation.y + Quaternion.Euler(0.0f, Camera.main.transform.rotation.y * 180, 0.0f));
     }
     public virtual void Run()
     {

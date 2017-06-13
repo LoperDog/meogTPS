@@ -93,6 +93,8 @@ public class CharacterMgr : MonoBehaviour
         switch (Character_ID)
         {
             case Chacracter_Type.Dubu:
+
+
                 Char_Current_HP = config.DubuHP;
                 Char_Max_HP = config.DubuHP;
                 thisCharacter = new DubuCharacter();
@@ -105,6 +107,8 @@ public class CharacterMgr : MonoBehaviour
                 thisAnim = new AnimationSuper();
                 break;
             case Chacracter_Type.Mandu:
+
+
                 Char_Current_HP = config.ManduHP;
                 Char_Max_HP = config.ManduHP;
                 thisCharacter = new ManduCharacter();
@@ -135,6 +139,8 @@ public class CharacterMgr : MonoBehaviour
         thisCharacter.SetAttackSpeed(0.3f);
         thisCharacter.CreateBullet(100, tempBullet);
         thisCharacter.SetBulletObject(tempBullet);
+
+
         // 나일때 할일
         //if (_networkView.isMine)
         //{
@@ -187,10 +193,13 @@ public class CharacterMgr : MonoBehaviour
         {
             Debug.DrawLine(ray.origin, hit.point, Color.green);
             Debug.Log("맞은거 : " + hit.transform.name + " 어디에 맞았을까?" + hit.point);
+            FirePoint.transform.LookAt(hit.point);
         }
         else
         {
             Debug.DrawLine(ray.origin, ray.direction, Color.red);
+            Debug.Log("아무것도 없음 ");
+            FirePoint.transform.rotation = Camera.main.transform.rotation;
         }
     }
 
@@ -210,6 +219,7 @@ public class CharacterMgr : MonoBehaviour
         //Click_Left = Input.GetMouseButton(0);
         if (Input.GetMouseButton(0)) {
             thisCharacter.Attack();
+            ShootTheFuckingRay();
             // 네트워크 알피씨를 날려야 한다.
         }
         Click_Right = Input.GetMouseButton(1);

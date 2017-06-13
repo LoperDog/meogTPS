@@ -10,12 +10,14 @@ public class DubuCharacter : CharacterSuper {
 
         m_CurrentAtrack = 0.0f;
         m_TimeAttack = 0.5f;
-    }
+    }*/
+
     public override void Attack()
     {
+        base.Attack();
         Debug.Log("두부에서 실행됨");
     }
-
+    /*
     public override void Move()
     {
         Debug.Log("두부에서 실행됨ㅁㄴㅇ");
