@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 06df41cf810a82748966aad19fecf88f
-timeCreated: 1496825561
+guid: 66a9189322ce567449f638d455adb0d6
+timeCreated: 1496825563
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,11 +9,11 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: mandu004
+    4300000: Bowl
     7400000: Take 001
     9500000: //RootNode
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:

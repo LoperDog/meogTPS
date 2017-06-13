@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 43662da9c8f3b7744b3c293a506c3654
-timeCreated: 1496825563
+guid: be3a11a480aca4f4bb32fdd4022c611e
+timeCreated: 1496825565
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,11 +9,11 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Spoon_1
+    4300000: chopsticks_2
     7400000: Take 001
     9500000: //RootNode
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:
