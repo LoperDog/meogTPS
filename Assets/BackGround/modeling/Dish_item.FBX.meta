@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6f602d8aadb0e8647b942b5ad7c57c75
+guid: 97738b497fa32f24994f8ae4d2f663dc
 timeCreated: 1496825563
 licenseType: Free
 ModelImporter:
@@ -9,11 +9,11 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: chopsticks
+    4300000: Dish_item
     7400000: Take 001
     9500000: //RootNode
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:
