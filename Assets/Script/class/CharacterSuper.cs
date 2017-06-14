@@ -189,7 +189,6 @@ public class CharacterSuper : MonoBehaviour{
     {
         coroutine.StartAttackSetting();
         // 
-
         ReuseBullet(BaseBullet, FirePoint.transform.position, FirePoint.transform.rotation);
     }
     public virtual void ReuseBullet(GameObject Object,Vector3 position, Quaternion rotation)
