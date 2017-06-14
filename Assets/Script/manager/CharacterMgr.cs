@@ -194,6 +194,7 @@ public class CharacterMgr : MonoBehaviour
             Debug.DrawLine(ray.origin, hit.point, Color.green);
             Debug.Log("맞은거 : " + hit.transform.name + " 어디에 맞았을까?" + hit.point);
             FirePoint.transform.LookAt(hit.point);
+            
         }
         else
         {

@@ -38,6 +38,8 @@ public class Cam : MonoBehaviour
             x += Input.GetAxis("Mouse X") * mouse_y_speed * 0.02f;
             y += -Input.GetAxis("Mouse Y") * mouse_y_speed * 0.02f;
 
+            y = y < -40 ? -40 : y;
+            y = y > 40 ? 40 : y;
             //y = ClamAngle(y);
             Quaternion rotation = Quaternion.Euler(y, x, 0);
             Vector3 position = rotation * new Vector3(ViewRight, Height, -Dist) + Player.position + new Vector3(0.0f, 0.0f, 0.0f);

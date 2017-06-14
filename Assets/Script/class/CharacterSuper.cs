@@ -116,7 +116,7 @@ public class CharacterSuper : MonoBehaviour{
         // 웃기니까 냅두자.
         //Player_tr.rotation = Camera.main.transform.rotation;
         Player_tr.rotation = Quaternion.Euler(0.0f, Camera.main.transform.rotation.eulerAngles.y, 0.0f);
-        Debug.Log(Camera.main.transform.rotation.eulerAngles.y + "뭔데... 나한테 왜 그러는데..."+ Camera.main.transform.rotation);
+        //Debug.Log(Camera.main.transform.rotation.eulerAngles.y + "뭔데... 나한테 왜 그러는데..."+ Camera.main.transform.rotation);
 
         //Player_tr.rotation = new Quaternion(0.0f, Player_tr.rotation.y, 0.0f, 0.0f);
         //Debug.Log("camera angular" + Camera.main.transform.rotation.y);
