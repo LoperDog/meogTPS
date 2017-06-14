@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 15e1582545125434d87ed70a1e14f67d
-timeCreated: 1495978216
+timeCreated: 1497450044
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -246,7 +246,7 @@ ModelImporter:
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 0
-    - boneName: Bip001 Spine1
+    - boneName: Bip001 Spine2
       humanName: Chest
       limit:
         min: {x: 0, y: 0, z: 0}

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: a2ba74ce0b19d71478ae83ef7d8a1bb9
-timeCreated: 1495979193
+guid: 29207150454b71b42b78a7bd304207e3
+timeCreated: 1497449905
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -136,7 +136,7 @@ ModelImporter:
     13700000: CH_Tofu
     13700002: Tofu
   materials:
-    importMaterials: 0
+    importMaterials: 1
     materialName: 0
     materialSearch: 1
   animations:
@@ -147,11 +147,13 @@ ModelImporter:
     motionNodeName: 
     animationImportErrors: 
     animationImportWarnings: "Copied Avatar Rig Configuration mis-match. Bone length
-      in copied configuration does not match position in animation file\nRun\nClip
+      in copied configuration does not match position in animation file\nrun\nClip
       'Take 001' has import animation warnings that might lower retargeting quality:\n\t'Bip001
       Spine2' is inbetween humanoid transforms and has rotation animation that will
-      be discarded.\n\t'Bip001 L Thigh' has translation animation that will be discarded.\n\t'Bip001
-      R Thigh' has translation animation that will be discarded.\n"
+      be discarded.\n\t'Bip001 L Clavicle' has translation animation that will be
+      discarded.\n\t'Bip001 R Clavicle' has translation animation that will be discarded.\n\t'Bip001
+      L Thigh' has translation animation that will be discarded.\n\t'Bip001 R Thigh'
+      has translation animation that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     animationCompression: 3
@@ -164,8 +166,8 @@ ModelImporter:
     - serializedVersion: 16
       name: Run
       takeName: Take 001
-      firstFrame: 129
-      lastFrame: 146
+      firstFrame: 0
+      lastFrame: 17
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -173,7 +175,7 @@ ModelImporter:
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 1
-      loopBlend: 1
+      loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 1
       loopBlendPositionXZ: 1
