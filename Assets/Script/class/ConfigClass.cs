@@ -16,8 +16,8 @@ public class ConfigClass {
 
     #region 두부콘피그
     public int DubuHP = 150;
-    public float DubuMoveSpeed = 5.5f;
-    public float DubuRunSpeed = 11.0f;
+    public float DubuMoveSpeed = 2.8f;
+    public float DubuRunSpeed = 7.5f;
     public float DubuJumpForce = 3500.0f;
     public int DubuDamage = 15;
     public float DubuAttackSpeed = 0.5f;

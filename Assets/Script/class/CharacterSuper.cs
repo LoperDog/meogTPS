@@ -60,13 +60,35 @@ public class CharacterSuper : MonoBehaviour{
 
     protected Rigidbody Player_rb;
     protected Transform Camera_tr;
-    
+    //테스트
+    protected bool shot = true;
+    protected float shot_float = 0.0f;
+
     public virtual void CharacterUpdate()
     {
         Check_Ground();
         Move();
         Run();
         Jump();
+        //테스트
+        shot = Input.GetMouseButton(0);
+        if (shot && shot_float < 1.0f)
+        {
+            shot_float += Time.deltaTime;
+        }
+        if (shot && shot_float > 1.0f)
+        {
+            shot_float = 1.0f;
+        }
+        else if (!shot && shot_float > 0)
+        {
+            shot_float -= Time.deltaTime;
+        }
+        else if (!shot && shot_float < 0)
+        {
+            shot_float = 0.0f;
+        }
+        Debug.Log(shot_float);
     }
     // 생성자.
     public CharacterSuper()
