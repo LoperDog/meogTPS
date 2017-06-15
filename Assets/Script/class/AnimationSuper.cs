@@ -19,6 +19,7 @@ public class AnimationSuper
         PlayJump();
         PlayAttack();
         PlayRolling();
+        m_Anim.SetFloat("Is_Attack", m_Char_State.GetIsAttackFloat());
     }
     public virtual void PlayMove() // 이동
     {

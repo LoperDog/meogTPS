@@ -333,6 +333,7 @@ public class CharacterSuper : MonoBehaviour{
     public virtual bool GetIsJump() { return Is_Jump; }
     public virtual bool GetIsGroud() { return Is_Ground; }
     public virtual bool GetIsRolling() { return Is_Rolling; }
+    public virtual float GetIsAttackFloat() { return shot_float; }
     // 0 이라면 트루
     public virtual bool GetEmptyBullet() { return m_Current_Bullet == 0; }
     #endregion
