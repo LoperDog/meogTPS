@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 2428c94952a00064b82364173d79d476
-timeCreated: 1497451083
+guid: bddf3070c95c6664f9f0b404d9e99720
+timeCreated: 1497608170
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -149,7 +149,7 @@ ModelImporter:
     animationImportWarnings: "Copied Avatar Rig Configuration mis-match. Bone length
       in copied configuration does not match position in animation file\nRun\nClip
       'Take 001' has import animation warnings that might lower retargeting quality:\n\t'Bip001
-      Spine1' is inbetween humanoid transforms and has rotation animation that will
+      Spine' is inbetween humanoid transforms and has rotation animation that will
       be discarded.\n\t'Bip001 L Clavicle' has translation animation that will be
       discarded.\n\t'Bip001 R Clavicle' has translation animation that will be discarded.\n\t'Bip001
       L Thigh' has translation animation that will be discarded.\n\t'Bip001 R Thigh'
