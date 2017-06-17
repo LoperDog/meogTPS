@@ -89,7 +89,7 @@ public class BulletSuper : MonoBehaviour {
 	}
     void FixedUpdate()
     {
-        Debug.Log("실행자체가 안되냐" + IsLift);
+        //Debug.Log("실행자체가 안되냐" + IsLift);
         if (IsLift)
         {
             // 총알이 살아 있는 동안 할행동
