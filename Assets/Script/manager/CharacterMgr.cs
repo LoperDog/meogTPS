@@ -151,7 +151,7 @@ public class CharacterMgr : MonoBehaviour
 
     void Update()
     {
-        Screen.lockCursor = true;
+        //Screen.lockCursor = true;
         //캐릭터 업데이트
         //thisCharacter.CharacterUpdate();
 
@@ -196,9 +196,12 @@ public class CharacterMgr : MonoBehaviour
             //FirePoint.transform.LookAt(hit.point);
             FirePoint.transform.LookAt(hit.point);
             //FirePoint.transform.rotation = Quaternion.Euler(Camera.main.transform.rotation.eulerAngles.x, FirePoint.transform.rotation.eulerAngles.y, 0.0f);
+<<<<<<< HEAD
 
             //Debug.Log(" 어디에 맞았을까?" + hit.point + "움직이긴 하니??" + FirePoint.transform.rotation
                // + " 카메라 각도는?? " + Camera.main.transform.rotation);
+=======
+>>>>>>> c19e1d3aed8b2e05d42921211b474e0de2abecef
         }
         else
         {

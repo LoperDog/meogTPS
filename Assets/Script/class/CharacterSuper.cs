@@ -60,9 +60,6 @@ public class CharacterSuper : MonoBehaviour{
 
     protected Rigidbody Player_rb;
     protected Transform Camera_tr;
-    //테스트
-    protected bool shot = true;
-    protected float shot_float = 0.0f;
 
     public virtual void CharacterUpdate()
     {
@@ -70,25 +67,6 @@ public class CharacterSuper : MonoBehaviour{
         Move();
         Run();
         Jump();
-        //테스트
-        shot = Input.GetMouseButton(0);
-        if (shot && shot_float < 1.0f)
-        {
-            shot_float += Time.deltaTime;
-        }
-        if (shot && shot_float > 1.0f)
-        {
-            shot_float = 1.0f;
-        }
-        else if (!shot && shot_float > 0)
-        {
-            shot_float -= Time.deltaTime;
-        }
-        else if (!shot && shot_float < 0)
-        {
-            shot_float = 0.0f;
-        }
-        Debug.Log(shot_float);
     }
     // 생성자.
     public CharacterSuper()
@@ -170,7 +148,7 @@ public class CharacterSuper : MonoBehaviour{
             Is_Jump = true;
         }
 
-        if (Is_Jump)
+        else if (Is_Jump)
         {
             Player_rb.AddForce(0, m_Jump_Force, 0);
             Is_Jump = false;
@@ -286,9 +264,9 @@ public class CharacterSuper : MonoBehaviour{
             BulletPool.Add(poolkey, new Queue<GameObject>());
             for(int i = 0; i < size; i++)
             {
-                GameObject newBullet = Instantiate(Object) as GameObject;
+                /*GameObject newBullet = Instantiate(Object) as GameObject;
                 newBullet.SetActive(false);
-                BulletPool[poolkey].Enqueue(newBullet);
+                BulletPool[poolkey].Enqueue(newBullet);*/
             }
         }
     }
@@ -334,7 +312,6 @@ public class CharacterSuper : MonoBehaviour{
     public virtual bool GetIsJump() { return Is_Jump; }
     public virtual bool GetIsGroud() { return Is_Ground; }
     public virtual bool GetIsRolling() { return Is_Rolling; }
-    public virtual float GetIsAttackFloat() { return shot_float; }
     // 0 이라면 트루
     public virtual bool GetEmptyBullet() { return m_Current_Bullet == 0; }
     #endregion
