@@ -20,7 +20,7 @@ public class BulletSuper : MonoBehaviour {
     public virtual void FireBullet(Vector3 position, Quaternion rotation, float FireSpeed,int code)
     {
         // 임시코드
-
+        Debug.Log("시작은 되냐?");
         SetBullet(position, rotation);
 
         Bullet_tr = transform;
@@ -89,11 +89,12 @@ public class BulletSuper : MonoBehaviour {
 	}
     void FixedUpdate()
     {
+        Debug.Log("실행자체가 안되냐" + IsLift);
         if (IsLift)
         {
             // 총알이 살아 있는 동안 할행동
-            //transform.Translate(transform.forward * Time.deltaTime);
-            
+            transform.Translate(transform.forward * Time.deltaTime);
+            Debug.Log("실행은 되는가??");
         }
     }
 
