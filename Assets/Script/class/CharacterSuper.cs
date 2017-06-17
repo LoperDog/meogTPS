@@ -93,6 +93,7 @@ public class CharacterSuper : MonoBehaviour{
         {
             // 리로드 시작.
             IsReLoad = true;
+            coroutine.StartReLoad();
         }
         // 
         else
