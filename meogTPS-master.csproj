@@ -127,6 +127,7 @@
     <Compile Include="Assets\Script\Camera\Practice_cam2.cs" />
     <Compile Include="Assets\Script\CharacterSctipt\DubuCharacter.cs" />
     <Compile Include="Assets\Script\CharacterSctipt\ManduCharacter.cs" />
+    <Compile Include="Assets\Script\EffectScript\DestroyMe.cs" />
     <Compile Include="Assets\Script\TestScript\TestScript.cs" />
     <Compile Include="Assets\Script\TestScript\coroutinTestSuper.cs" />
     <Compile Include="Assets\Script\class\AnimationSuper.cs" />
@@ -176,6 +177,8 @@
     <None Include="Assets\BackGround\PostProcessing\PostProcessing\Resources\Shaders\TAA.shader" />
     <None Include="Assets\BackGround\PostProcessing\PostProcessing\Resources\Shaders\Tonemapping.cginc" />
     <None Include="Assets\BackGround\PostProcessing\PostProcessing\Resources\Shaders\Uber.shader" />
+    <None Include="Assets\Character\Character_Shader.shader" />
+    <None Include="Assets\EF(NEW)\Attack\E_Hit\Rim.shader" />
     <None Include="Assets\Standard Assets\Effects\AmbientOcclusion\Resources\AmbientOcclusion.cginc" />
     <None Include="Assets\Standard Assets\Effects\AmbientOcclusion\Resources\AmbientOcclusion.shader" />
     <None Include="Assets\Standard Assets\Effects\AmbientOcclusion\Resources\Common.cginc" />

@@ -28,7 +28,7 @@ public class CharacterSuper : MonoBehaviour{
     protected bool Is_Ground = true;
     protected bool Is_Jump;
     protected bool Is_Run = false;
-    protected bool Is_Rolling;
+    public bool Is_Rolling;
 
     protected int m_Current_Bullet = 0;
     public int m_Max_Bullet = 0;
@@ -49,7 +49,11 @@ public class CharacterSuper : MonoBehaviour{
     //점프
     protected float m_Jump_Force = 250.0f;
 
-    protected Transform Player_tr;
+    //구르기
+    public float m_Time_Rolling;
+
+    public Transform Player_tr;
+    public Rigidbody Player_rb;
     protected GameObject Player_Object;
     // 조금 알아보고 쓰자.
     protected GameObject BaseBullet;
@@ -58,7 +62,6 @@ public class CharacterSuper : MonoBehaviour{
     protected CoroutinClass coroutine;
     protected GameObject FirePoint;
 
-    protected Rigidbody Player_rb;
     protected Transform Camera_tr;
 
     // 두부에서만 쓰는 공격 이팩트 뜨는 위치.
@@ -73,7 +76,12 @@ public class CharacterSuper : MonoBehaviour{
         Move();
         Run();
         Jump();
+<<<<<<< HEAD
         //ReLoad();
+=======
+        ReLoad();
+        Rolling();
+>>>>>>> 4b15bff202392192718882317d2cae7a47a6217b
     }
     // 생성자.
     public void SetCharacterSuper()
@@ -82,6 +90,7 @@ public class CharacterSuper : MonoBehaviour{
         m_TimeAttack = 0.5f;
         m_CurrentReload = 0.0f;
         m_TimeReload = 1.0f;
+        m_Time_Rolling = 1.0f;
         PlayerCode = 0;
     }
     #region 캐릭터 기능 정의
@@ -174,14 +183,14 @@ public class CharacterSuper : MonoBehaviour{
     }
     public virtual void Rolling()
     {
-        if (Input.GetKeyDown(KeyCode.F) && GetIsGroud())
+        if (GetIsReload() && Input.GetKeyDown(KeyCode.F) && GetIsGroud())
         {
             Is_Rolling = true;
+            coroutine.StartRolling();
         }
         else if (Is_Rolling)
         {
             Player_rb.AddForce(Player_tr.forward * 3000);
-            Is_Rolling = false;
         }
     }
     public virtual void ReLoad()
