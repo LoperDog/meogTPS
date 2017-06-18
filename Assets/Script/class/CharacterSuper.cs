@@ -69,7 +69,7 @@ public class CharacterSuper : MonoBehaviour{
         Jump();
     }
     // 생성자.
-    public CharacterSuper()
+    public void SetCharacterSuper()
     {
         m_CurrentAtrack = 1.0f;
         m_TimeAttack = 0.5f;
@@ -194,7 +194,7 @@ public class CharacterSuper : MonoBehaviour{
     }
     public virtual void ReuseBullet(GameObject Object,Vector3 position, Quaternion rotation)
     {
-        Debug.Log("총알생성");
+        //Debug.Log("총알생성" + BaseBullet.name);
         int poolkey = Object.GetInstanceID();
 
         if (BulletPool.ContainsKey(poolkey))
@@ -264,9 +264,9 @@ public class CharacterSuper : MonoBehaviour{
             BulletPool.Add(poolkey, new Queue<GameObject>());
             for(int i = 0; i < size; i++)
             {
-                /*GameObject newBullet = Instantiate(Object) as GameObject;
+                GameObject newBullet = Instantiate(Object) as GameObject;
                 newBullet.SetActive(false);
-                BulletPool[poolkey].Enqueue(newBullet);*/
+                BulletPool[poolkey].Enqueue(newBullet);
             }
         }
     }

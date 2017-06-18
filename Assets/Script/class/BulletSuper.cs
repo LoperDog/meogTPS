@@ -28,14 +28,15 @@ public class BulletSuper : MonoBehaviour {
         BulletSpeed = FireSpeed;
         m_CurrentLifeTime = 0.0f;
         PlayerCode = code;
-        transform.GetComponent<Rigidbody>().AddForce(transform.forward * 2000.0f);
+        //transform.GetComponent<Rigidbody>().AddForce(transform.forward * 2000.0f);
         IsLift = true;
+        Debug.Log("총알은 발사됬다.");
     }
 
     // 충돌처리
     protected virtual void OnTriggerEnter(Collider col)
     {
-        Debug.Log("In Bullet Trigging Sumthing : " + PlayerCode);
+        //Debug.Log("In Bullet Trigging Sumthing : " + PlayerCode);
         IsLift = false;
         if(col.tag == "PLAYER" && PlayerCode == Mgr.GetPlayerCode())
         {
@@ -43,7 +44,7 @@ public class BulletSuper : MonoBehaviour {
             SetBulletEnalbed();
         }
 
-    }
+    }/*
     // 현제는 두개다 만들어 둔다.
     protected virtual void OnCollisionEnter(Collision col)
     {
@@ -54,7 +55,7 @@ public class BulletSuper : MonoBehaviour {
             Debug.Log("PlayerGetYa!");
             SetBulletEnalbed();
         }
-    }
+    }*/
 
     // 생성 당시에 플레이어 코드를 
     protected void SetCode(int Code) { PlayerCode = Code; }
@@ -64,7 +65,7 @@ public class BulletSuper : MonoBehaviour {
     {
         transform.position = position;
         transform.rotation = rotation;
-        Mgr = GameObject.FindGameObjectWithTag("GAMEMGR").GetComponent<GameMgr>() ;
+        //Mgr = GameObject.FindGameObjectWithTag("GAMEMGR").GetComponent<GameMgr>() ;
     }
     // 총알을 초기화 한다.
     protected void SetBulletEnalbed()
@@ -83,18 +84,18 @@ public class BulletSuper : MonoBehaviour {
             if(m_CurrentLifeTime > m_MaxLifeTime)
             {
                 // 비활성화
+                Debug.Log("총알 비 활성화");
                 SetBulletEnalbed();
             }
         }
 	}
     void FixedUpdate()
     {
-        //Debug.Log("실행자체가 안되냐" + IsLift);
         if (IsLift)
         {
             // 총알이 살아 있는 동안 할행동
             transform.Translate(transform.forward * Time.deltaTime);
-            Debug.Log("실행은 되는가??");
+            //Debug.Log("실행은 되는가??");
         }
     }
 

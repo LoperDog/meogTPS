@@ -191,17 +191,14 @@ public class CharacterMgr : MonoBehaviour
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
         if(Physics.Raycast(ray,out hit, RAY_MaxDist))
         {
-            //Debug.DrawLine(ray.origin, hit.point, Color.green);
+            Debug.DrawLine(ray.origin, hit.point, Color.green);
             //FirePoint.transform.rotation = Camera.main.transform.rotation;
             //FirePoint.transform.LookAt(hit.point);
-            FirePoint.transform.LookAt(hit.point);
+            FirePoint.transform.LookAt(ray.origin);
             //FirePoint.transform.rotation = Quaternion.Euler(Camera.main.transform.rotation.eulerAngles.x, FirePoint.transform.rotation.eulerAngles.y, 0.0f);
-<<<<<<< HEAD
 
             //Debug.Log(" 어디에 맞았을까?" + hit.point + "움직이긴 하니??" + FirePoint.transform.rotation
-               // + " 카메라 각도는?? " + Camera.main.transform.rotation);
-=======
->>>>>>> c19e1d3aed8b2e05d42921211b474e0de2abecef
+                //+ " 카메라 각도는?? " + Camera.main.transform.rotation);
         }
         else
         {
