@@ -178,7 +178,7 @@ public class CharacterSuper : MonoBehaviour{
     }
     public virtual void Rolling()
     {
-        if (Input.GetKeyDown(KeyCode.F) && GetIsGroud())
+        if (GetIsReload() && Input.GetKeyDown(KeyCode.F) && GetIsGroud())
         {
             Is_Rolling = true;
             coroutine.StartRolling();

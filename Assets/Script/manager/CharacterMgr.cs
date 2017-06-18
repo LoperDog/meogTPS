@@ -206,12 +206,8 @@ public class CharacterMgr : MonoBehaviour
 
             //hit.point - FirePoint.transform.position;
             //FirePoint.transform.rotation = Quaternion.Euler(Camera.main.transform.rotation.eulerAngles.x, FirePoint.transform.rotation.eulerAngles.y, 0.0f);
-<<<<<<< HEAD
-=======
-
             //Debug.Log(" 어디에 맞았을까?" + hit.point + "움직이긴 하니??" + FirePoint.transform.rotation
             //+ " 카메라 각도는?? " + Camera.main.transform.rotation);
->>>>>>> bbc6a0748a53479d8bc98c346f8b073a9a400861
         }
         else
         {
