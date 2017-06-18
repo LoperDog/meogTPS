@@ -61,6 +61,12 @@ public class CharacterSuper : MonoBehaviour{
     protected Rigidbody Player_rb;
     protected Transform Camera_tr;
 
+    // 두부에서만 쓰는 공격 이팩트 뜨는 위치.
+    public bool AttackIsLeft = false;
+    // 이팩트 뜰 위치를 정한다.
+    public Transform [] effectPosition;
+    public Transform[] effect;
+
     public virtual void CharacterUpdate()
     {
         Check_Ground();
@@ -190,6 +196,7 @@ public class CharacterSuper : MonoBehaviour{
     {
         coroutine.StartAttackSetting();
         // 
+        Debug.DrawLine(FirePoint.transform.position, FirePoint.transform.position + FirePoint.transform.forward * 15f, Color.yellow);
         ReuseBullet(BaseBullet, FirePoint.transform.position, FirePoint.transform.rotation);
     }
     public virtual void ReuseBullet(GameObject Object,Vector3 position, Quaternion rotation)
@@ -269,6 +276,16 @@ public class CharacterSuper : MonoBehaviour{
                 BulletPool[poolkey].Enqueue(newBullet);
             }
         }
+    }
+    // 이팩트 위치 잡아주기.
+    public virtual void SetEffectPosition(Transform[] ps)
+    {
+        effectPosition = ps;
+
+    }
+    public virtual void SetEffect(Transform[] ef)
+    {
+        effect = ef;
     }
     #endregion
 

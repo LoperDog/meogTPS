@@ -33,6 +33,7 @@ public class CoroutinClass : MonoBehaviour {
         yield return new WaitForSeconds(thisCharaterScript.m_CurrentAtrack);
 
         thisCharaterScript.IsAttack = false;
+        thisCharaterScript.AttackIsLeft = !thisCharaterScript.AttackIsLeft;
     }
     // 리로딩
     public virtual IEnumerator SetReLoad()

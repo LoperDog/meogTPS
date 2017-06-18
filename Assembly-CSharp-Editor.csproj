@@ -133,6 +133,7 @@
      <None Include="Assets\BackGround\PostProcessing\PostProcessing\Resources\Shaders\MotionBlur.shader" />
      <None Include="Assets\BackGround\PostProcessing\PostProcessing\Resources\Shaders\AmbientOcclusion.shader" />
      <None Include="Assets\Standard Assets\Effects\TonemappingColorGrading\Resources\HistogramRender.shader" />
+     <None Include="Assets\EF(NEW)\Attack\E_Hit\Rim.shader" />
      <None Include="Assets\Standard Assets\Effects\TonemappingColorGrading\Resources\TonemappingColorGrading.cginc" />
      <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonBasicOutline.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\DepthOfField34.shader" />
