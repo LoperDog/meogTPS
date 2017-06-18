@@ -72,16 +72,13 @@ public class CharacterSuper : MonoBehaviour{
 
     public virtual void CharacterUpdate()
     {
+        Debug.Log("전체 총알" + m_Max_Bullet + "현재 총알" + m_Current_Bullet);
         Check_Ground();
         Move();
         Run();
         Jump();
-<<<<<<< HEAD
-        //ReLoad();
-=======
         ReLoad();
         Rolling();
->>>>>>> 4b15bff202392192718882317d2cae7a47a6217b
     }
     // 생성자.
     public void SetCharacterSuper()
@@ -89,8 +86,8 @@ public class CharacterSuper : MonoBehaviour{
         m_CurrentAtrack = 1.0f;
         m_TimeAttack = 0.5f;
         m_CurrentReload = 0.0f;
-        m_TimeReload = 1.0f;
-        m_Time_Rolling = 1.0f;
+        m_TimeReload = 0.7f;
+        m_Time_Rolling = 5.0f;
         PlayerCode = 0;
     }
     #region 캐릭터 기능 정의
@@ -99,7 +96,6 @@ public class CharacterSuper : MonoBehaviour{
         // 공격중이 아닌데 공격 이 시작된다면 - 공격 가능
         if(!IsAttack && !IsReLoad && m_Current_Bullet >0)
         {
-            Debug.Log("전체 총알" + m_Max_Bullet + "현재 총알" + m_Current_Bullet);
             //공격 시작 코드
             m_Current_Bullet--;
             IsAttack = true;
@@ -183,19 +179,19 @@ public class CharacterSuper : MonoBehaviour{
     }
     public virtual void Rolling()
     {
-        if (GetIsReload() && Input.GetKeyDown(KeyCode.F) && GetIsGroud())
+        if (!Is_Rolling && !GetIsReload() && Input.GetKeyDown(KeyCode.F) && GetIsGroud())//재장전이 아니고 땅에 있을 때 F키를 누르면
         {
             Is_Rolling = true;
             coroutine.StartRolling();
         }
         else if (Is_Rolling)
         {
-            Player_rb.AddForce(Player_tr.forward * 3000);
+            Player_rb.AddForce(Player_tr.forward * 4000);
         }
     }
     public virtual void ReLoad()
     {
-        if ((!IsReLoad) && (m_Current_Bullet != m_Max_Bullet)) //재장전이 아니고 총알이 최대가 아니며 r키를 누를 때 재장전
+        if ((!IsReLoad) && (m_Current_Bullet != m_Max_Bullet) && Input.GetKeyDown(KeyCode.R)) //재장전이 아니고 총알이 최대가 아니며 R키를 누를 때 재장전
         {
             IsReLoad = true;
             coroutine.StartReLoad();
@@ -338,6 +334,7 @@ public class CharacterSuper : MonoBehaviour{
     public virtual bool GetIsJump() { return Is_Jump; }
     public virtual bool GetIsGroud() { return Is_Ground; }
     public virtual bool GetIsRolling() { return Is_Rolling; }
+    public virtual bool GetIsAttackLeft() { return AttackIsLeft; }
     // 0 이라면 트루
     public virtual bool GetEmptyBullet() { return m_Current_Bullet == 0; }
     #endregion

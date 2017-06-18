@@ -58,6 +58,7 @@ public class AnimationSuper
     public virtual void PlayAttack()// 공격
     {
         m_Anim.SetBool("Is_Attack", m_Char_State.GetIsAttack());
+        m_Anim.SetBool("Left_Attack", m_Char_State.GetIsAttackLeft());
     }
     public virtual void PlayReload()// 재장전
     {
