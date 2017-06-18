@@ -21,7 +21,7 @@ public class ConfigClass {
     public float DubuJumpForce = 3500.0f;
     public int DubuDamage = 15;
     public float DubuAttackSpeed = 0.5f;
-    public int DubuBullet = 100;
+    public int DubuBullet = 40;
     public Vector3 DubuFirePosition = new Vector3(0.0f, 1.15f, 0.8f);
     #endregion
 }

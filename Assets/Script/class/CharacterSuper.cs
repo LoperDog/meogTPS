@@ -67,6 +67,7 @@ public class CharacterSuper : MonoBehaviour{
         Move();
         Run();
         Jump();
+        ReLoad();
     }
     // 생성자.
     public CharacterSuper()
@@ -117,12 +118,7 @@ public class CharacterSuper : MonoBehaviour{
         // 웃기니까 냅두자.
         //Player_tr.rotation = Camera.main.transform.rotation;
         Player_tr.rotation = Quaternion.Euler(0.0f, Camera.main.transform.rotation.eulerAngles.y, 0.0f);
-        //Debug.Log(Camera.main.transform.rotation.eulerAngles.y + "뭔데... 나한테 왜 그러는데..."+ Camera.main.transform.rotation);
-
         //Player_tr.rotation = new Quaternion(0.0f, Player_tr.rotation.y, 0.0f, 0.0f);
-        //Debug.Log("camera angular" + Camera.main.transform.rotation.y);
-
-        //Debug.Log("뭔데... 뭐냐고!!!" + Camera.main.transform.rotation.y + Quaternion.Euler(0.0f, Camera.main.transform.rotation.y * 180, 0.0f));
     }
     public virtual void Run()
     {
@@ -183,7 +179,11 @@ public class CharacterSuper : MonoBehaviour{
     }
     public virtual void ReLoad()
     {
-        Debug.Log("상속전 재장전");
+        if ((!IsReLoad) && (m_Current_Bullet != m_Max_Bullet) && (Input.GetKeyDown(KeyCode.R))) //재장전이 아니고 총알이 최대가 아니며 r키를 누를 때 재장전
+        {
+            IsReLoad = true;
+            coroutine.StartReLoad();
+        }
     }
     // 총알을 발사한다.
     public virtual void ShotBullet()
