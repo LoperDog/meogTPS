@@ -76,12 +76,7 @@ public class CharacterSuper : MonoBehaviour{
         Move();
         Run();
         Jump();
-<<<<<<< HEAD
-        //ReLoad();
-=======
-        ReLoad();
         Rolling();
->>>>>>> 4b15bff202392192718882317d2cae7a47a6217b
     }
     // 생성자.
     public void SetCharacterSuper()
@@ -103,6 +98,15 @@ public class CharacterSuper : MonoBehaviour{
             //공격 시작 코드
             m_Current_Bullet--;
             IsAttack = true;
+            // 왼쪽공격이라면 ----- 이건 나중에 수정하도록 한다.
+            if (AttackIsLeft)
+            {
+                Instantiate(effect[0], effectPosition[0].position, effectPosition[0].rotation * effect[0].rotation);
+            }else
+            {
+                Instantiate(effect[1], effectPosition[1].position, effectPosition[1].rotation * effect[1].rotation);
+
+            }
             ShotBullet();
         }
         // 공격이 시작될수 있는데 총알이 없다면 - 공격 불가 상태

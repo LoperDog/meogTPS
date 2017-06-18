@@ -145,6 +145,9 @@ public class CharacterMgr : MonoBehaviour
         thisCharacter.CreateBullet(config.DubuBullet, tempBullet);
         thisCharacter.SetBulletObject(tempBullet);
 
+        // 임시
+        thisCharacter.SetEffect(Effect);
+        thisCharacter.SetEffectPosition(Effectposition);
 
         // 나일때 할일
         //if (_networkView.isMine)
@@ -199,8 +202,6 @@ public class CharacterMgr : MonoBehaviour
         if(Physics.Raycast(ray,out hit, RAY_MaxDist))
         {
             FirePoint.transform.LookAt(hit.point);
-<<<<<<< HEAD
-=======
             //Debug.DrawLine(FirePoint.transform.position, FirePoint.transform.position + (FirePoint.transform.forward * 10f), Color.red);
             //FirePoint.transform.rotation = Camera.main.transform.rotation;
             //FirePoint.transform.LookAt(hit.point);
@@ -209,7 +210,6 @@ public class CharacterMgr : MonoBehaviour
             //FirePoint.transform.rotation = Quaternion.Euler(Camera.main.transform.rotation.eulerAngles.x, FirePoint.transform.rotation.eulerAngles.y, 0.0f);
             //Debug.Log(" 어디에 맞았을까?" + hit.point + "움직이긴 하니??" + FirePoint.transform.rotation
             //+ " 카메라 각도는?? " + Camera.main.transform.rotation);
->>>>>>> 4b15bff202392192718882317d2cae7a47a6217b
         }
         else
         {

@@ -93,6 +93,7 @@
      <Compile Include="Assets\Script\CharacterSctipt\DubuCharacter.cs" />
      <Compile Include="Assets\Script\CharacterSctipt\ManduCharacter.cs" />
      <Compile Include="Assets\Script\EffectScript\DestroyMe.cs" />
+     <Compile Include="Assets\Script\EffectScript\DestroyMe1.cs" />
      <Compile Include="Assets\Script\TestScript\TestScript.cs" />
      <Compile Include="Assets\Script\TestScript\coroutinTestSuper.cs" />
      <Compile Include="Assets\Script\class\AnimationSuper.cs" />
@@ -186,6 +187,7 @@
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\ColorCorrectionSelective.shader" />
      <None Include="Assets\BackGround\PostProcessing\PostProcessing\Resources\Shaders\TAA.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\Bokeh34.shader" />
+     <None Include="Assets\Character\Character_Shader.shader" />
      <None Include="Assets\BackGround\PostProcessing\PostProcessing\Resources\Shaders\EyeHistogram.compute" />
      <None Include="Assets\BackGround\PostProcessing\PostProcessing\Resources\Shaders\TAA.cginc" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\CameraMotionBlurDX11.shader" />

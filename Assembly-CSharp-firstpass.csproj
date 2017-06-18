@@ -186,6 +186,7 @@
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\ColorCorrectionSelective.shader" />
      <None Include="Assets\BackGround\PostProcessing\PostProcessing\Resources\Shaders\TAA.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\Bokeh34.shader" />
+     <None Include="Assets\Character\Character_Shader.shader" />
      <None Include="Assets\BackGround\PostProcessing\PostProcessing\Resources\Shaders\EyeHistogram.compute" />
      <None Include="Assets\BackGround\PostProcessing\PostProcessing\Resources\Shaders\TAA.cginc" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\CameraMotionBlurDX11.shader" />
