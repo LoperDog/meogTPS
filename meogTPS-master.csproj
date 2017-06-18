@@ -128,6 +128,7 @@
     <Compile Include="Assets\Script\CharacterSctipt\DubuCharacter.cs" />
     <Compile Include="Assets\Script\CharacterSctipt\ManduCharacter.cs" />
     <Compile Include="Assets\Script\EffectScript\DestroyMe.cs" />
+    <Compile Include="Assets\Script\EffectScript\DestroyMe1.cs" />
     <Compile Include="Assets\Script\TestScript\TestScript.cs" />
     <Compile Include="Assets\Script\TestScript\coroutinTestSuper.cs" />
     <Compile Include="Assets\Script\class\AnimationSuper.cs" />
