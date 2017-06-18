@@ -11,6 +11,7 @@ public class ConfigClass {
     public int ManduDamege = 10;
     public float ManduAttackSpeed = 0.5f;
     public int ManduBullet = 100;
+    public float ManduReloadTime = 2.0f;
     public Vector3 ManduFirePosition = new Vector3(0.0f,1.15f,0.8f);
     #endregion
 
@@ -21,7 +22,8 @@ public class ConfigClass {
     public float DubuJumpForce = 3500.0f;
     public int DubuDamage = 15;
     public float DubuAttackSpeed = 0.5f;
-    public int DubuBullet = 40;
+    public int DubuBullet = 10;
+    public float DubuReloadTime = 2.0f;
     public Vector3 DubuFirePosition = new Vector3(0.0f, 1.15f, 0.8f);
     #endregion
 }

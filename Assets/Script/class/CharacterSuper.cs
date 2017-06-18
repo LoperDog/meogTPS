@@ -73,7 +73,7 @@ public class CharacterSuper : MonoBehaviour{
         Move();
         Run();
         Jump();
-        ReLoad();
+        //ReLoad();
     }
     // 생성자.
     public void SetCharacterSuper()
@@ -90,6 +90,7 @@ public class CharacterSuper : MonoBehaviour{
         // 공격중이 아닌데 공격 이 시작된다면 - 공격 가능
         if(!IsAttack && !IsReLoad && m_Current_Bullet >0)
         {
+            Debug.Log("전체 총알" + m_Max_Bullet + "현재 총알" + m_Current_Bullet);
             //공격 시작 코드
             m_Current_Bullet--;
             IsAttack = true;
@@ -185,7 +186,7 @@ public class CharacterSuper : MonoBehaviour{
     }
     public virtual void ReLoad()
     {
-        if ((!IsReLoad) && (m_Current_Bullet != m_Max_Bullet) && (Input.GetKeyDown(KeyCode.R))) //재장전이 아니고 총알이 최대가 아니며 r키를 누를 때 재장전
+        if ((!IsReLoad) && (m_Current_Bullet != m_Max_Bullet)) //재장전이 아니고 총알이 최대가 아니며 r키를 누를 때 재장전
         {
             IsReLoad = true;
             coroutine.StartReLoad();
@@ -194,9 +195,7 @@ public class CharacterSuper : MonoBehaviour{
     // 총알을 발사한다.
     public virtual void ShotBullet()
     {
-        coroutine.StartAttackSetting();
-        // 
-        Debug.DrawLine(FirePoint.transform.position, FirePoint.transform.position + FirePoint.transform.forward * 15f, Color.yellow);
+        coroutine.StartAttackSetting();        
         ReuseBullet(BaseBullet, FirePoint.transform.position, FirePoint.transform.rotation);
     }
     public virtual void ReuseBullet(GameObject Object,Vector3 position, Quaternion rotation)
@@ -231,6 +230,7 @@ public class CharacterSuper : MonoBehaviour{
 
     #region 캐릭터 기본 세팅
     public virtual void SetFirePoint(GameObject point) { FirePoint = point; }
+    public virtual void SetreLoadTime(float time) { m_TimeReload = time; }
     public virtual void SetBullet(int bulletMax)
     {
         m_Max_Bullet = bulletMax;
@@ -261,7 +261,7 @@ public class CharacterSuper : MonoBehaviour{
          * 즉 특수기가 연속 발사이거나 하는 등의 경우를 상정해 두고 작업 하기 위함.
          */
         // 총알 인스턴스의 고유 값을 가져온다.
-        Debug.Log("총알 풀링");
+        //Debug.Log("총알 풀링");
         int poolkey = Object.GetInstanceID();
 
         // 이미 총알 풀에 그값이 있는지 없는지 검사 한다. 없어야 넣는다.

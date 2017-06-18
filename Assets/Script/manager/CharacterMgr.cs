@@ -105,6 +105,7 @@ public class CharacterMgr : MonoBehaviour
                 thisCharacter.SetMoveSpeed(config.DubuMoveSpeed);
                 thisCharacter.SetRunSpeed(config.DubuRunSpeed);
                 thisCharacter.SetJumpForce(config.DubuJumpForce);
+                thisCharacter.SetreLoadTime(config.DubuReloadTime);
                 FirePoint.transform.localPosition = config.DubuFirePosition;
                 // 애니매이션 추후 수정
                 thisAnim = new AnimationSuper();
@@ -119,6 +120,7 @@ public class CharacterMgr : MonoBehaviour
                 thisCharacter.SetMoveSpeed(config.ManduMoveSpeed);
                 thisCharacter.SetRunSpeed(config.ManduRunSpeed);
                 thisCharacter.SetJumpForce(config.ManduJumpForce);
+                thisCharacter.SetreLoadTime(config.ManduReloadTime);
                 FirePoint.transform.localPosition = config.ManduFirePosition;
                 // 애니매이션 추후 수정
                 thisAnim = new AnimationSuper();
@@ -140,7 +142,7 @@ public class CharacterMgr : MonoBehaviour
         thisCharacter.SetFirePoint(FirePoint);
 
         thisCharacter.SetAttackSpeed(0.3f);
-        thisCharacter.CreateBullet(100, tempBullet);
+        thisCharacter.CreateBullet(config.DubuBullet, tempBullet);
         thisCharacter.SetBulletObject(tempBullet);
 
 
@@ -196,28 +198,11 @@ public class CharacterMgr : MonoBehaviour
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
         if(Physics.Raycast(ray,out hit, RAY_MaxDist))
         {
-            //Debug.DrawLine(ray.origin, hit.point, Color.green);
-            //Debug.DrawLine(FirePoint.transform.position, hit.point,Color.blue);
-            //FirePoint.transform.rotation.SetLookRotation(hit.point);
             FirePoint.transform.LookAt(hit.point);
-            //Debug.DrawLine(FirePoint.transform.position, FirePoint.transform.position + (FirePoint.transform.forward * 10f), Color.red);
-            //FirePoint.transform.rotation = Camera.main.transform.rotation;
-            //FirePoint.transform.LookAt(hit.point);
-
-            //hit.point - FirePoint.transform.position;
-            //FirePoint.transform.rotation = Quaternion.Euler(Camera.main.transform.rotation.eulerAngles.x, FirePoint.transform.rotation.eulerAngles.y, 0.0f);
-
-            //Debug.Log(" 어디에 맞았을까?" + hit.point + "움직이긴 하니??" + FirePoint.transform.rotation
-            //+ " 카메라 각도는?? " + Camera.main.transform.rotation);
         }
         else
         {
-            //Debug.DrawLine(ray.origin, ray.origin + (Camera.main.transform.forward * 500f));
-            //Debug.DrawLine(FirePoint.transform.position, ray.origin + (Camera.main.transform.forward * 500f), Color.blue);
             FirePoint.transform.LookAt(ray.origin + (Camera.main.transform.forward * 500f));
-            //Debug.DrawLine(ray.origin, ray.direction, Color.red);
-            //Debug.Log("아무것도 없음 ");
-            //FirePoint.transform.rotation = Camera.main.transform.rotation;
         }
     }
 
@@ -236,14 +221,18 @@ public class CharacterMgr : MonoBehaviour
         Key_V = Input.GetAxis("Vertical");
         //Click_Left = Input.GetMouseButton(0);
         if (Input.GetMouseButton(0)) {
-            thisCharacter.Attack();
             ShootTheFuckingRay();
+            thisCharacter.Attack();
             // 네트워크 알피씨를 날려야 한다.
         }
         Click_Right = Input.GetMouseButton(1);
         Key_Shift = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
         thisCharacter.SetRun(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift));
         Key_R = Input.GetKey(KeyCode.R);
+        if (Key_R)
+        {
+            thisCharacter.ReLoad();
+        }
         Key_Space = Input.GetKey(KeyCode.Space);
     }
     public void PlayAnimation()

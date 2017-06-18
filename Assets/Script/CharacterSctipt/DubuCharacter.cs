@@ -12,11 +12,11 @@ public class DubuCharacter : CharacterSuper {
         m_TimeAttack = 0.5f;
     }*/
 
-    public override void Attack()
-    {
-        base.Attack();
-        Debug.Log("두부에서 실행됨");
-    }
+    //public override void Attack()
+    //{
+        //base.Attack();
+        //Debug.Log("두부에서 실행됨");
+    //}
     /*
     public override void Move()
     {
