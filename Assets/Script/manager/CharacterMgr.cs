@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class CharacterMgr : MonoBehaviour
 {
-    public GameObject tempBullet;
-    public GameObject FirePoint;
-
     public Camera mainCamera;
 
     [SerializeField]
@@ -77,7 +74,13 @@ public class CharacterMgr : MonoBehaviour
     private bool Key_R = false;             // 개별 동기
     private bool Key_Space = false;         // 개별 동기
     #endregion
+    #region 캐릭터가 가지고 있는 자원 이팩트위치나 이팩트 혹은 총알 종류. 추후 수정
+    public Transform[] Effect;
+    public Transform[] Effectposition;
 
+    public GameObject tempBullet;
+    public GameObject FirePoint;
+    #endregion
     // 캐릭터를 만들기 위해 아이디를 받는다.
     void Start()
     {
@@ -184,6 +187,8 @@ public class CharacterMgr : MonoBehaviour
         }*/
         // 상태에 맞춰서 알아서 애니매이션 플레이
         //thisAnim.PlayAnimation();
+        Debug.DrawLine(FirePoint.transform.position, FirePoint.transform.position + (FirePoint.transform.forward * 10f), Color.cyan);
+
     }
     public void ShootTheFuckingRay()
     {
@@ -192,19 +197,27 @@ public class CharacterMgr : MonoBehaviour
         if(Physics.Raycast(ray,out hit, RAY_MaxDist))
         {
             //Debug.DrawLine(ray.origin, hit.point, Color.green);
+            //Debug.DrawLine(FirePoint.transform.position, hit.point,Color.blue);
+            //FirePoint.transform.rotation.SetLookRotation(hit.point);
+            FirePoint.transform.LookAt(hit.point);
+            //Debug.DrawLine(FirePoint.transform.position, FirePoint.transform.position + (FirePoint.transform.forward * 10f), Color.red);
             //FirePoint.transform.rotation = Camera.main.transform.rotation;
             //FirePoint.transform.LookAt(hit.point);
-            FirePoint.transform.LookAt(hit.point);
+
+            //hit.point - FirePoint.transform.position;
             //FirePoint.transform.rotation = Quaternion.Euler(Camera.main.transform.rotation.eulerAngles.x, FirePoint.transform.rotation.eulerAngles.y, 0.0f);
 <<<<<<< HEAD
+=======
 
             //Debug.Log(" 어디에 맞았을까?" + hit.point + "움직이긴 하니??" + FirePoint.transform.rotation
-               // + " 카메라 각도는?? " + Camera.main.transform.rotation);
-=======
->>>>>>> c19e1d3aed8b2e05d42921211b474e0de2abecef
+            //+ " 카메라 각도는?? " + Camera.main.transform.rotation);
+>>>>>>> bbc6a0748a53479d8bc98c346f8b073a9a400861
         }
         else
         {
+            //Debug.DrawLine(ray.origin, ray.origin + (Camera.main.transform.forward * 500f));
+            //Debug.DrawLine(FirePoint.transform.position, ray.origin + (Camera.main.transform.forward * 500f), Color.blue);
+            FirePoint.transform.LookAt(ray.origin + (Camera.main.transform.forward * 500f));
             //Debug.DrawLine(ray.origin, ray.direction, Color.red);
             //Debug.Log("아무것도 없음 ");
             //FirePoint.transform.rotation = Camera.main.transform.rotation;

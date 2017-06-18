@@ -28,7 +28,7 @@ public class CharacterSuper : MonoBehaviour{
     protected bool Is_Ground = true;
     protected bool Is_Jump;
     protected bool Is_Run = false;
-    protected bool Is_Rolling;
+    public bool Is_Rolling;
 
     protected int m_Current_Bullet = 0;
     public int m_Max_Bullet = 0;
@@ -49,7 +49,11 @@ public class CharacterSuper : MonoBehaviour{
     //점프
     protected float m_Jump_Force = 250.0f;
 
-    protected Transform Player_tr;
+    //구르기
+    public float m_Time_Rolling;
+
+    public Transform Player_tr;
+    public Rigidbody Player_rb;
     protected GameObject Player_Object;
     // 조금 알아보고 쓰자.
     protected GameObject BaseBullet;
@@ -58,8 +62,13 @@ public class CharacterSuper : MonoBehaviour{
     protected CoroutinClass coroutine;
     protected GameObject FirePoint;
 
-    protected Rigidbody Player_rb;
     protected Transform Camera_tr;
+
+    // 두부에서만 쓰는 공격 이팩트 뜨는 위치.
+    public bool AttackIsLeft = false;
+    // 이팩트 뜰 위치를 정한다.
+    public Transform [] effectPosition;
+    public Transform[] effect;
 
     public virtual void CharacterUpdate()
     {
@@ -68,14 +77,16 @@ public class CharacterSuper : MonoBehaviour{
         Run();
         Jump();
         ReLoad();
+        Rolling();
     }
     // 생성자.
-    public CharacterSuper()
+    public void SetCharacterSuper()
     {
         m_CurrentAtrack = 1.0f;
         m_TimeAttack = 0.5f;
         m_CurrentReload = 0.0f;
         m_TimeReload = 1.0f;
+        m_Time_Rolling = 1.0f;
         PlayerCode = 0;
     }
     #region 캐릭터 기능 정의
@@ -170,11 +181,11 @@ public class CharacterSuper : MonoBehaviour{
         if (Input.GetKeyDown(KeyCode.F) && GetIsGroud())
         {
             Is_Rolling = true;
+            coroutine.StartRolling();
         }
         else if (Is_Rolling)
         {
             Player_rb.AddForce(Player_tr.forward * 3000);
-            Is_Rolling = false;
         }
     }
     public virtual void ReLoad()
@@ -190,11 +201,12 @@ public class CharacterSuper : MonoBehaviour{
     {
         coroutine.StartAttackSetting();
         // 
+        Debug.DrawLine(FirePoint.transform.position, FirePoint.transform.position + FirePoint.transform.forward * 15f, Color.yellow);
         ReuseBullet(BaseBullet, FirePoint.transform.position, FirePoint.transform.rotation);
     }
     public virtual void ReuseBullet(GameObject Object,Vector3 position, Quaternion rotation)
     {
-        Debug.Log("총알생성");
+        //Debug.Log("총알생성" + BaseBullet.name);
         int poolkey = Object.GetInstanceID();
 
         if (BulletPool.ContainsKey(poolkey))
@@ -264,11 +276,21 @@ public class CharacterSuper : MonoBehaviour{
             BulletPool.Add(poolkey, new Queue<GameObject>());
             for(int i = 0; i < size; i++)
             {
-                /*GameObject newBullet = Instantiate(Object) as GameObject;
+                GameObject newBullet = Instantiate(Object) as GameObject;
                 newBullet.SetActive(false);
-                BulletPool[poolkey].Enqueue(newBullet);*/
+                BulletPool[poolkey].Enqueue(newBullet);
             }
         }
+    }
+    // 이팩트 위치 잡아주기.
+    public virtual void SetEffectPosition(Transform[] ps)
+    {
+        effectPosition = ps;
+
+    }
+    public virtual void SetEffect(Transform[] ef)
+    {
+        effect = ef;
     }
     #endregion
 

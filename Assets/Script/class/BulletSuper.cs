@@ -15,12 +15,12 @@ public class BulletSuper : MonoBehaviour {
 
     protected bool IsLift;
 
+    public Transform Effect;
+
     public GameMgr Mgr;
 
     public virtual void FireBullet(Vector3 position, Quaternion rotation, float FireSpeed,int code)
     {
-        // 임시코드
-        Debug.Log("시작은 되냐?");
         SetBullet(position, rotation);
 
         Bullet_tr = transform;
@@ -28,32 +28,37 @@ public class BulletSuper : MonoBehaviour {
         BulletSpeed = FireSpeed;
         m_CurrentLifeTime = 0.0f;
         PlayerCode = code;
-        transform.GetComponent<Rigidbody>().AddForce(transform.forward * 2000.0f);
+        //transform.GetComponent<Rigidbody>().AddForce(transform.forward * 2000.0f);
         IsLift = true;
     }
-
+    /*
     // 충돌처리
     protected virtual void OnTriggerEnter(Collider col)
     {
-        Debug.Log("In Bullet Trigging Sumthing : " + PlayerCode);
+        //Debug.Log("In Bullet Trigging Sumthing : " + PlayerCode);
+        // 각도 계산 필요.
+        Transform effect = Instantiate(Effect, transform.position, Quaternion.identity);
+        //Destroy(effect, 0.3f);
         IsLift = false;
         if(col.tag == "PLAYER" && PlayerCode == Mgr.GetPlayerCode())
         {
-            Debug.Log("PlayerGetYa!");
+            //Debug.Log("PlayerGetYa!");
             SetBulletEnalbed();
         }
 
-    }
+    }*/
     // 현제는 두개다 만들어 둔다.
     protected virtual void OnCollisionEnter(Collision col)
     {
-        Debug.Log("In Bullet Colling Sumthing : " + PlayerCode);
+        // 각도 계산 필요.
+        Vector3 qu = transform.position - col.transform.position;
+        Transform effect = Instantiate(Effect, transform.position,Quaternion.LookRotation(qu));
+
         IsLift = false;
         if (col.transform.tag == "PLAYER" && PlayerCode == Mgr.GetPlayerCode())
         {
-            Debug.Log("PlayerGetYa!");
-            SetBulletEnalbed();
         }
+        SetBulletEnalbed();
     }
 
     // 생성 당시에 플레이어 코드를 
@@ -64,7 +69,7 @@ public class BulletSuper : MonoBehaviour {
     {
         transform.position = position;
         transform.rotation = rotation;
-        Mgr = GameObject.FindGameObjectWithTag("GAMEMGR").GetComponent<GameMgr>() ;
+        //Mgr = GameObject.FindGameObjectWithTag("GAMEMGR").GetComponent<GameMgr>() ;
     }
     // 총알을 초기화 한다.
     protected void SetBulletEnalbed()
@@ -77,24 +82,23 @@ public class BulletSuper : MonoBehaviour {
 	void Update () {
         if (IsLift)
         {
+            Debug.DrawLine(transform.position,transform.position + transform.forward * 10f, Color.magenta);
             // 총알이 살아 있는 동안 할행동
             m_CurrentLifeTime += Time.deltaTime;
             // 만약 총알이 존재할 시간을 지났다면
             if(m_CurrentLifeTime > m_MaxLifeTime)
             {
                 // 비활성화
+                Debug.Log("총알 비 활성화");
                 SetBulletEnalbed();
             }
         }
 	}
     void FixedUpdate()
     {
-        //Debug.Log("실행자체가 안되냐" + IsLift);
         if (IsLift)
         {
-            // 총알이 살아 있는 동안 할행동
-            transform.Translate(transform.forward * Time.deltaTime);
-            Debug.Log("실행은 되는가??");
+            transform.Translate(new Vector3(0, 0, 1) * Time.deltaTime * 10f);
         }
     }
 
