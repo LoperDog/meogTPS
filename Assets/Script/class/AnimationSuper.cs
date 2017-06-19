@@ -21,6 +21,14 @@ public class AnimationSuper
         PlayAttack();
         PlayReload();
         PlayRolling();
+        Long_Landing();
+    }
+    public virtual void Long_Landing()//시작애니메이션
+    {
+        if (m_Char_State.GetIsGroud())
+        {
+            m_Anim.SetBool("Long_Landing", true);
+        }
     }
     public virtual void PlayMove() // 이동
     {
@@ -37,6 +45,8 @@ public class AnimationSuper
     }
     public virtual void PlayLanding()//착지
     {
+        m_Anim.SetBool("Landing_Move", m_Char_State.GetIsGroud());
+        /*
         m_Anim.SetBool("Landing", false);
         m_Anim.SetBool("Landing_Move", false);
         if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Move.Landing"))
@@ -49,7 +59,7 @@ public class AnimationSuper
              {
                 m_Anim.SetBool("Landing_Move", true);
              }
-        }
+        }*/
     }
     public virtual void PlayRolling()//구르기
     {
