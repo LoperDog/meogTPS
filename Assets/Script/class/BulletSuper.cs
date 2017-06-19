@@ -98,7 +98,7 @@ public class BulletSuper : MonoBehaviour {
     {
         if (IsLift)
         {
-            transform.Translate(new Vector3(0, 0, 1) * Time.deltaTime * 80f);
+            transform.Translate(new Vector3(0, 0, 1) * Time.deltaTime * 50f);
         }
     }
 
