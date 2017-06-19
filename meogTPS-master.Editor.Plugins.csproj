@@ -195,6 +195,7 @@
     <None Include="Assets\BackGround\PostProcessing\PostProcessing\Resources\Shaders\Uber.shader" />
     <None Include="Assets\Character\Character_Shader.shader" />
     <None Include="Assets\EF(NEW)\Attack\E_Hit\Rim.shader" />
+    <None Include="Assets\Mandu.shader" />
     <None Include="Assets\Standard Assets\Effects\AmbientOcclusion\Resources\AmbientOcclusion.cginc" />
     <None Include="Assets\Standard Assets\Effects\AmbientOcclusion\Resources\AmbientOcclusion.shader" />
     <None Include="Assets\Standard Assets\Effects\AmbientOcclusion\Resources\Common.cginc" />
@@ -300,6 +301,9 @@
     <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonBasicOutline.shader" />
     <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonLit.shader" />
     <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonLitOutline.shader" />
+    <None Include="Assets\UI\BitmapFontImporter\BulletFont\Bullet_Font.fnt" />
+    <None Include="Assets\Window.shader" />
+    <None Include="Assets\door.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
