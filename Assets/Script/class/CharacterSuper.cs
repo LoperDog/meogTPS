@@ -77,10 +77,10 @@ public class CharacterSuper : MonoBehaviour{
         Move();
         Run();
         Jump();
-<<<<<<< HEAD
-=======
+//<<<<<<< HEAD
+//=======
         ReLoad();
->>>>>>> a612b701de07469208739d53f9b2431366e46a86
+//>>>>>>> a612b701de07469208739d53f9b2431366e46a86
         Rolling();
     }
     // 생성자.
