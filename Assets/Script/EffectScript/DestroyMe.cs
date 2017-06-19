@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestroyMe : MonoBehaviour {
+public class DestroyMe : MonoBehaviour
+{
     
-	void Start () {
+	void Start ()
+    {
         Destroy(transform.gameObject, 0.5f);
 	}
 }

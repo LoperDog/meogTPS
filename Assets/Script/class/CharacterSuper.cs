@@ -30,7 +30,7 @@ public class CharacterSuper : MonoBehaviour{
     protected bool Is_Run = false;
     public bool Is_Rolling;
 
-    protected int m_Current_Bullet = 0;
+    public int m_Current_Bullet = 0;
     public int m_Max_Bullet = 0;
 
     //이동
@@ -66,18 +66,17 @@ public class CharacterSuper : MonoBehaviour{
 
     // 두부에서만 쓰는 공격 이팩트 뜨는 위치.
     public bool AttackIsLeft = false;
+    // 두부에서만 쓰는 것.
+    public bool IsFirstAttack = true;
     // 이팩트 뜰 위치를 정한다.
     public Transform [] effectPosition;
     public Transform[] effect;
 
     public virtual void CharacterUpdate()
     {
-        Debug.Log("전체 총알" + m_Max_Bullet + "현재 총알" + m_Current_Bullet);
         Check_Ground();
         Move();
         Run();
-        Jump();
-        Rolling();
     }
     // 생성자.
     public void SetCharacterSuper()
@@ -101,11 +100,13 @@ public class CharacterSuper : MonoBehaviour{
             // 왼쪽공격이라면 ----- 이건 나중에 수정하도록 한다.
             if (AttackIsLeft)
             {
-                Instantiate(effect[0], effectPosition[0].position, effectPosition[0].rotation * effect[0].rotation);
-            }else
+                Transform temp = Instantiate(effect[0], effectPosition[0].position, effectPosition[0].rotation * effect[0].rotation);
+                temp.GetComponent<DestroyMe1>().Target = effectPosition[0];
+            }
+            else
             {
-                Instantiate(effect[1], effectPosition[1].position, effectPosition[1].rotation * effect[1].rotation);
-
+                Transform temp = Instantiate(effect[1], effectPosition[1].position, effectPosition[1].rotation * effect[1].rotation);
+                temp.GetComponent<DestroyMe1>().Target = effectPosition[1];
             }
             ShotBullet();
         }
@@ -131,18 +132,14 @@ public class CharacterSuper : MonoBehaviour{
         Vector3 right = new Vector3(forward.z, 0, -forward.x);
         Vector3 moveDirection = (m_Move_H * right) + (m_Move_V * forward);
         Player_tr.position = Player_tr.position + moveDirection * m_Current_Speed * Time.deltaTime;
-
-        //Rotation_X += Input.GetAxis("Mouse X") * Sens_X * 0.02f;
-        //Player_tr.localEulerAngles = new Vector3(0, Camera.main.transform.rotation.y, 0);
-        // 귀찮으니 카메라 각을 받아온다.
-        // 웃기니까 냅두자.
-        //Player_tr.rotation = Camera.main.transform.rotation;
+    }
+    public virtual void Turn()
+    {
         Player_tr.rotation = Quaternion.Euler(0.0f, Camera.main.transform.rotation.eulerAngles.y, 0.0f);
-        //Player_tr.rotation = new Quaternion(0.0f, Player_tr.rotation.y, 0.0f, 0.0f);
     }
     public virtual void Run()
     {
-        if (Input.GetKey(KeyCode.LeftShift) && (m_Move_V > 0.1) && Is_Ground && m_Current_Speed <= m_Run_Speed)
+        if (Is_Run && (m_Move_V > 0.1) && Is_Ground && m_Current_Speed <= m_Run_Speed)
         {
             m_Current_Speed += 20.0f * Time.deltaTime;
         }
@@ -159,22 +156,16 @@ public class CharacterSuper : MonoBehaviour{
     }
     public virtual void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && Is_Ground)
-        {
-            Is_Jump = true;
-        }
-
-        else if (Is_Jump)
+        if (IsReLoad) return;
+        if (Is_Ground)
         {
             Player_rb.AddForce(0, m_Jump_Force, 0);
-            Is_Jump = false;
         }
-
     }
     public virtual void Check_Ground()
     {
         RaycastHit hit;
-        Debug.DrawRay(Player_tr.position, Vector3.down * 0.2f, Color.red);
+        //Debug.DrawRay(Player_tr.position, Vector3.down * 0.2f, Color.red);
         if (Physics.Raycast(Player_tr.position, Vector3.down, out hit, 0.2f))
         {
             if (hit.collider.tag == "GROUND")
@@ -187,19 +178,17 @@ public class CharacterSuper : MonoBehaviour{
     }
     public virtual void Rolling()
     {
-        if (!Is_Rolling && !GetIsReload() && Input.GetKeyDown(KeyCode.F) && GetIsGroud())//재장전이 아니고 땅에 있을 때 F키를 누르면
+        if (IsReLoad) return;
+        if (!Is_Rolling && !GetIsReload() && GetIsGroud())//재장전이 아니고 땅에 있을 때
         {
             Is_Rolling = true;
             coroutine.StartRolling();
-        }
-        else if (Is_Rolling)
-        {
             Player_rb.AddForce(Player_tr.forward * 4000);
         }
     }
     public virtual void ReLoad()
     {
-        if ((!IsReLoad) && (m_Current_Bullet != m_Max_Bullet) && Input.GetKeyDown(KeyCode.R)) //재장전이 아니고 총알이 최대가 아니며 R키를 누를 때 재장전
+        if ((!IsReLoad) && (m_Current_Bullet != m_Max_Bullet)) //재장전이 아니고 총알이 최대가 아니며 R키를 누를 때 재장전
         {
             IsReLoad = true;
             coroutine.StartReLoad();
@@ -286,6 +275,7 @@ public class CharacterSuper : MonoBehaviour{
             {
                 GameObject newBullet = Instantiate(Object) as GameObject;
                 newBullet.SetActive(false);
+                newBullet.GetComponent<BulletSuper>().Player_tr = Player_tr;
                 BulletPool[poolkey].Enqueue(newBullet);
             }
         }

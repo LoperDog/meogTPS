@@ -22,7 +22,7 @@ public class ConfigClass {
     public float DubuJumpForce = 5000.0f;
     public int DubuDamage = 15;
     public float DubuAttackSpeed = 0.4f;
-    public int DubuBullet = 10;
+    public int DubuBullet = 30;
     public float DubuReloadTime = 1.7f;
     public Vector3 DubuFirePosition = new Vector3(0.0f, 1.15f, 0.8f);
     #endregion

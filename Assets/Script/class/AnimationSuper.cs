@@ -46,20 +46,6 @@ public class AnimationSuper
     public virtual void PlayLanding()//착지
     {
         m_Anim.SetBool("Landing_Move", m_Char_State.GetIsGroud());
-        /*
-        m_Anim.SetBool("Landing", false);
-        m_Anim.SetBool("Landing_Move", false);
-        if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Move.Landing"))
-        {
-            if (m_Char_State.GetMoveH() == 0 && m_Char_State.GetMoveV() == 0)
-             {
-                 m_Anim.SetBool("Landing", true);
-             }
-             else
-             {
-                m_Anim.SetBool("Landing_Move", true);
-             }
-        }*/
     }
     public virtual void PlayRolling()//구르기
     {

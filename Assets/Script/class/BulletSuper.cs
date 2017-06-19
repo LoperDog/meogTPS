@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class BulletSuper : MonoBehaviour {
+public class BulletSuper : MonoBehaviour
+{
     // 생존 시간
     public float m_CurrentLifeTime = 0.0f;
-    public float m_MaxLifeTime = 10.0f;
+    public float m_MaxLifeTime = 5.0f;
 
     // 총알을 발사하기 위한 준비
     protected float BulletSpeed;
     protected Transform Bullet_tr;
+    public Transform Player_tr;
     protected int PlayerCode;
 
     protected bool IsLift;
@@ -19,7 +21,7 @@ public class BulletSuper : MonoBehaviour {
 
     public GameMgr Mgr;
 
-    public virtual void FireBullet(Vector3 position, Quaternion rotation, float FireSpeed,int code)
+    public virtual void FireBullet(Vector3 position, Quaternion rotation, float FireSpeed, int code)
     {
         SetBullet(position, rotation);
 
@@ -28,7 +30,6 @@ public class BulletSuper : MonoBehaviour {
         BulletSpeed = FireSpeed;
         m_CurrentLifeTime = 0.0f;
         PlayerCode = code;
-        //transform.GetComponent<Rigidbody>().AddForce(transform.forward * 2000.0f);
         IsLift = true;
     }
     /*
@@ -52,18 +53,19 @@ public class BulletSuper : MonoBehaviour {
     {
         // 각도 계산 필요.
         Vector3 qu = transform.position - col.transform.position;
-        Transform effect = Instantiate(Effect, transform.position,Quaternion.LookRotation(qu));
+        Transform effect = Instantiate(Effect, transform.position, Quaternion.LookRotation(qu));
 
         IsLift = false;
-        if (col.transform.tag == "PLAYER" && PlayerCode == Mgr.GetPlayerCode())
+        if (col.transform.tag == "PLAYER")
         {
+
         }
         SetBulletEnalbed();
     }
 
     // 생성 당시에 플레이어 코드를 
     protected void SetCode(int Code) { PlayerCode = Code; }
-    protected void SetGameMgr( GameMgr gamemgr ) { Mgr = gamemgr; }
+    protected void SetGameMgr(GameMgr gamemgr) { Mgr = gamemgr; }
 
     protected void SetBullet(Vector3 position, Quaternion rotation)
     {
@@ -78,22 +80,21 @@ public class BulletSuper : MonoBehaviour {
         m_CurrentLifeTime = 0.0f;
         gameObject.SetActive(false);
     }
-	
-	void Update () {
+
+    void Update()
+    {
         if (IsLift)
         {
-            Debug.DrawLine(transform.position,transform.position + transform.forward * 10f, Color.magenta);
+            Debug.DrawLine(transform.position, transform.position + transform.forward * 10f, Color.magenta);
             // 총알이 살아 있는 동안 할행동
             m_CurrentLifeTime += Time.deltaTime;
             // 만약 총알이 존재할 시간을 지났다면
-            if(m_CurrentLifeTime > m_MaxLifeTime)
+            if (m_CurrentLifeTime > m_MaxLifeTime)
             {
-                // 비활성화
-                Debug.Log("총알 비 활성화");
                 SetBulletEnalbed();
             }
         }
-	}
+    }
     void FixedUpdate()
     {
         if (IsLift)
@@ -101,5 +102,4 @@ public class BulletSuper : MonoBehaviour {
             transform.Translate(new Vector3(0, 0, 1) * Time.deltaTime * 50f);
         }
     }
-
 }

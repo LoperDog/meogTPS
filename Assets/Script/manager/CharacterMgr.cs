@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterMgr : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class CharacterMgr : MonoBehaviour
     public List<GameObject> LoadBullet;
     [SerializeField]
     public GameMgr MyMgr;
+    public Text Bullet_count;
+    public Image Bullet_image;
 
     public enum Chacracter_Type
     {
@@ -60,6 +63,8 @@ public class CharacterMgr : MonoBehaviour
 
     // 이 캐릭터가 실행할 스크립트
     private CharacterSuper thisCharacter;
+    public float Current_Bullet;
+    public float Max_Bullet;
     #endregion
     #region 캐릭터키값
     // 이동키
@@ -149,12 +154,14 @@ public class CharacterMgr : MonoBehaviour
         thisCharacter.SetEffect(Effect);
         thisCharacter.SetEffectPosition(Effectposition);
 
-        // 나일때 할일
-        //if (_networkView.isMine)
-        //{
-            //Camera.main.GetComponent<Cam>().SetPlayer(Player_tr);
+        if (_networkView.isMine)
+        {
+             Bullet_count = GameObject.Find("Bullet_Count").GetComponent<Text>();
+            Bullet_image = GameObject.Find("Bullet_Image").GetComponent<Image>();
+            Camera.main.GetComponent<Cam>().SetPlayer(Player_tr);
             mainCamera = Camera.main;
-        //}
+
+        }
     }
 
     void Update()
@@ -164,15 +171,16 @@ public class CharacterMgr : MonoBehaviour
         //thisCharacter.CharacterUpdate();
 
         //입력을 받고 저장한다.
-        //if (_networkView.isMine)
-        //{
-        //InputControll();
-        // 키를 적용해준다.
-        //thisCharacter.SetCharacterMove(Key_H, Key_V);
-        //InputControll();
-        // 키를 적용해준다.
-        //thisCharacter.SetCharacterMove(Key_H, Key_V);
-        //}
+        if (_networkView.isMine)
+        {
+            Show_UI();
+            //InputControll();
+            // 키를 적용해준다.
+            //thisCharacter.SetCharacterMove(Key_H, Key_V);
+            //InputControll();
+            // 키를 적용해준다.
+            //thisCharacter.SetCharacterMove(Key_H, Key_V);
+        }
         /*
         else
         {
@@ -192,59 +200,97 @@ public class CharacterMgr : MonoBehaviour
         }*/
         // 상태에 맞춰서 알아서 애니매이션 플레이
         //thisAnim.PlayAnimation();
-        Debug.DrawLine(FirePoint.transform.position, FirePoint.transform.position + (FirePoint.transform.forward * 10f), Color.cyan);
-
+        //Debug.DrawLine(FirePoint.transform.position, FirePoint.transform.position + (FirePoint.transform.forward * 10f), Color.cyan);
     }
-    public void ShootTheFuckingRay()
+    public Vector3 ShootTheFuckingRay()
     {
         RaycastHit hit;
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
-        if(Physics.Raycast(ray,out hit, RAY_MaxDist))
+        if (Physics.Raycast(ray, out hit, RAY_MaxDist))
         {
-            FirePoint.transform.LookAt(hit.point);
-            //Debug.DrawLine(FirePoint.transform.position, FirePoint.transform.position + (FirePoint.transform.forward * 10f), Color.red);
-            //FirePoint.transform.rotation = Camera.main.transform.rotation;
+            return hit.point;
             //FirePoint.transform.LookAt(hit.point);
-
-            //hit.point - FirePoint.transform.position;
-            //FirePoint.transform.rotation = Quaternion.Euler(Camera.main.transform.rotation.eulerAngles.x, FirePoint.transform.rotation.eulerAngles.y, 0.0f);
-            //Debug.Log(" 어디에 맞았을까?" + hit.point + "움직이긴 하니??" + FirePoint.transform.rotation
-            //+ " 카메라 각도는?? " + Camera.main.transform.rotation);
         }
         else
         {
-            FirePoint.transform.LookAt(ray.origin + (Camera.main.transform.forward * 500f));
+            return ray.origin + (Camera.main.transform.forward * 500f);
+            //FirePoint.transform.LookAt(ray.origin + (Camera.main.transform.forward * 500f));
         }
     }
-
+    public void Show_UI()
+    {
+        Current_Bullet = thisCharacter.m_Current_Bullet;
+        Max_Bullet = thisCharacter.m_Max_Bullet;
+        Bullet_count.text = Current_Bullet + "/" + Max_Bullet + ToString();
+        Bullet_image.fillAmount = Current_Bullet / Max_Bullet;
+    }
+    [RPC]
+    public void SetFirePoint(Vector3 viewPoint)
+    {
+        FirePoint.transform.LookAt(viewPoint);
+        thisCharacter.Attack();
+    }
+    [RPC]
+    public void SetCharacterJump()
+    {
+        thisCharacter.Jump();
+    }
+    [RPC]
+    public void SetCharacterReload()
+    {
+        thisCharacter.ReLoad();
+    }
+    [RPC]
+    public void SetCharacterRollong()
+    {
+        thisCharacter.Rolling();
+    }
     void FixedUpdate()
     {
         thisCharacter.CharacterUpdate();
-        InputControll();
+
+        if (_networkView.isMine)
+        {
+            InputControll();
+            thisCharacter.Turn();
+        }
         thisCharacter.SetCharacterMove(Key_H, Key_V);
         thisAnim.PlayAnimation();
     }
 
     public void InputControll()
     {
-        // 여기서 키동기화를 맞추지 않을꺼니 더이상 필요가 없음. 전부 Get,Set함수로 바꿔야 함.
         Key_H = Input.GetAxis("Horizontal");
         Key_V = Input.GetAxis("Vertical");
         //Click_Left = Input.GetMouseButton(0);
-        if (Input.GetMouseButton(0)) {
-            ShootTheFuckingRay();
-            thisCharacter.Attack();
+        if (Input.GetMouseButton(0))
+        {
+            _networkView.RPC("SetFirePoint", RPCMode.AllBuffered, ShootTheFuckingRay());
             // 네트워크 알피씨를 날려야 한다.
         }
         Click_Right = Input.GetMouseButton(1);
         Key_Shift = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
-        thisCharacter.SetRun(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift));
-        Key_R = Input.GetKey(KeyCode.R);
-        if (Key_R)
+        if (Key_Shift)
         {
-            thisCharacter.ReLoad();
+            thisCharacter.SetRun(Key_Shift);
         }
+        thisCharacter.SetRun(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift));
+        if (Input.GetKey(KeyCode.Space))
+        {
+            //_networkView.RPC("SetCharacterJump", RPCMode.AllBuffered, null);
+            thisCharacter.Jump();
+        }
+        if (Input.GetKey(KeyCode.F))
+        {
+            _networkView.RPC("SetCharacterRollong", RPCMode.AllBuffered, null);
+        }
+        if (Input.GetKey(KeyCode.R))
+        {
+            _networkView.RPC("SetCharacterReload", RPCMode.AllBuffered, null);
+        }
+
         Key_Space = Input.GetKey(KeyCode.Space);
+
     }
     public void PlayAnimation()
     {
@@ -275,11 +321,15 @@ public class CharacterMgr : MonoBehaviour
         if (stream.isWriting)
         {
             // 임시 각자의 코드 값 세팅
-            int CharCode = MyMgr.GetPlayerCode();
+            //int CharCode = MyMgr.GetPlayerCode();
 
             // 위치, 각도
             Vector3 pos = Player_tr.position;
             Quaternion rot = Player_tr.rotation;
+
+            float H = Key_H;
+            float V = Key_V;
+            bool Shift = Key_Shift;
 
             // 키 동기화
             Key_Shift = thisCharacter.GetIsRun();
@@ -291,9 +341,9 @@ public class CharacterMgr : MonoBehaviour
             stream.Serialize(ref rot);
 
             // 키동기 -> 움직임등의 연속적인 것들만 동기화 시킨다.
-            stream.Serialize(ref Key_H);
-            stream.Serialize(ref Key_V);
-            stream.Serialize(ref Key_Shift);
+            stream.Serialize(ref H);
+            stream.Serialize(ref V);
+            stream.Serialize(ref Shift);
 
 
 
@@ -311,7 +361,7 @@ public class CharacterMgr : MonoBehaviour
             bool recvshift = false;
 
             // 캐릭터 코드 수신.
-            stream.Serialize(ref CodeTemp);
+            //stream.Serialize(ref CodeTemp);
 
             // 데이터 수신
             stream.Serialize(ref revPos);
@@ -323,7 +373,7 @@ public class CharacterMgr : MonoBehaviour
             stream.Serialize(ref recvshift);
 
             // 플레이어 코드 업데이트
-            thisCharacter.SetPlayerCode(CodeTemp);
+            //thisCharacter.SetPlayerCode(CodeTemp);
 
             Player_tr.position = revPos;
             Player_tr.rotation = revRot;

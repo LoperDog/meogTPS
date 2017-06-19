@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoroutinClass : MonoBehaviour {
-    
+public class CoroutinClass : MonoBehaviour
+{
+
 
     CharacterSuper thisCharaterScript;
 
@@ -38,6 +39,16 @@ public class CoroutinClass : MonoBehaviour {
 
         thisCharaterScript.IsAttack = false;
         thisCharaterScript.AttackIsLeft = !thisCharaterScript.AttackIsLeft;
+        // 두부 캐릭터만 쓰는 부분. 추후 삭제
+        if (thisCharaterScript.IsFirstAttack)
+        {
+            thisCharaterScript.Attack();
+            thisCharaterScript.IsFirstAttack = false;
+        }
+        else
+        {
+            thisCharaterScript.IsFirstAttack = true;
+        }
     }
     // 리로딩
     public virtual IEnumerator SetReLoad()

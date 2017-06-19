@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class DestroyMe1 : MonoBehaviour
 {
-
+    public Transform Target;
     void Start()
     {
-        Destroy(transform.gameObject, 0.2f);
+        Destroy(transform.gameObject, 0.3f);
+    }
+    void Update()
+    {
+        transform.position = Target.transform.position;
     }
 }

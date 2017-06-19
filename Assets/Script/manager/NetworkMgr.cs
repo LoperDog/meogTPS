@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NetworkMgr : MonoBehaviour {
+public class NetworkMgr : MonoBehaviour
+{
 
     //접속 IP
     private const string ip = "127.0.0.1";
@@ -49,7 +50,7 @@ public class NetworkMgr : MonoBehaviour {
 
     void CreatePlayer()
     {
-        Vector3 pos = new Vector3(Random.Range(-20.0f, 20.0f), 0.0f, Random.Range(-20.0f, 20.0f));
+        Vector3 pos = new Vector3(Random.Range(-20.0f, 20.0f), 10.0f, Random.Range(-20.0f, 20.0f));
         // 네트워크 상에 플레이어를 동적 생성
         // 현재 게임에 접속한 모든 사용자에게 프리팹을 생성해주며 내부적으로 Buffered RPC를 호출해 나중에 접속한
         // 사용자도 미리 생성된 프리팹을 볼 수 있다.
@@ -65,5 +66,4 @@ public class NetworkMgr : MonoBehaviour {
         // 네트워크 플레이어의 모든 네트워크 객체를 소멸 처리(게임 서버가 구동되고 있어야 이용 가능)
         Network.DestroyPlayerObjects(netPlayer);
     }
-
 }
