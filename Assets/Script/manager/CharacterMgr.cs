@@ -26,6 +26,7 @@ public class CharacterMgr : MonoBehaviour
     public GameMgr MyMgr;
     public Text Bullet_count;
     public Image Bullet_image;
+    public Image HP_image;
 
     public enum Chacracter_Type
     {
@@ -34,9 +35,9 @@ public class CharacterMgr : MonoBehaviour
     };
     #region 캐릭터 정보
     [SerializeField]
-    private float Char_Max_HP;
+    public float Char_Max_HP;
     [SerializeField]
-    private float Char_Current_HP;
+    public float Char_Current_HP;
 
     [SerializeField]
     private int Player_ID;
@@ -97,6 +98,7 @@ public class CharacterMgr : MonoBehaviour
 
 
         config = new ConfigClass();
+        Screen.lockCursor = true;
         // 캐릭터 생성
         switch (Character_ID)
         {
@@ -156,7 +158,8 @@ public class CharacterMgr : MonoBehaviour
 
         if (_networkView.isMine)
         {
-             Bullet_count = GameObject.Find("Bullet_Count").GetComponent<Text>();
+            HP_image = GameObject.Find("Hp_Image").GetComponent<Image>();
+            Bullet_count = GameObject.Find("Bullet_Count").GetComponent<Text>();
             Bullet_image = GameObject.Find("Bullet_Image").GetComponent<Image>();
             Camera.main.GetComponent<Cam>().SetPlayer(Player_tr);
             mainCamera = Camera.main;
@@ -166,7 +169,6 @@ public class CharacterMgr : MonoBehaviour
 
     void Update()
     {
-        //Screen.lockCursor = true;
         //캐릭터 업데이트
         //thisCharacter.CharacterUpdate();
 
@@ -219,10 +221,13 @@ public class CharacterMgr : MonoBehaviour
     }
     public void Show_UI()
     {
+        //총알
         Current_Bullet = thisCharacter.m_Current_Bullet;
         Max_Bullet = thisCharacter.m_Max_Bullet;
         Bullet_count.text = Current_Bullet + "/" + Max_Bullet + ToString();
         Bullet_image.fillAmount = Current_Bullet / Max_Bullet;
+        //체력
+        HP_image.fillAmount = Char_Current_HP/Char_Max_HP;
     }
     [RPC]
     public void SetFirePoint(Vector3 viewPoint)
@@ -245,8 +250,24 @@ public class CharacterMgr : MonoBehaviour
     {
         thisCharacter.Rolling();
     }
+    [RPC]
+    public void GetDamage(float de)
+    {
+        Debug.Log("맞은 아이디 : " + _networkView.viewID + " 남은 채력 : " + Char_Current_HP);
+        Char_Current_HP -= de;
+    }
+    public void ShotPlayer(NetworkView Player)
+    {
+        Player.RPC("GetDamage", RPCMode.AllBuffered, (float)config.DubuDamage);
+    }
     void FixedUpdate()
     {
+        if (Char_Current_HP <= 0)
+        {
+            thisCharacter.Is_Dead = true;
+            thisAnim.PlayAnimation();
+            return;
+        }
         thisCharacter.CharacterUpdate();
 
         if (_networkView.isMine)

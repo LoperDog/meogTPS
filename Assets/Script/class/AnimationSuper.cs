@@ -22,6 +22,7 @@ public class AnimationSuper
         PlayReload();
         PlayRolling();
         Long_Landing();
+        PlayDie();
     }
     public virtual void Long_Landing()//시작애니메이션
     {
@@ -54,11 +55,21 @@ public class AnimationSuper
     public virtual void PlayAttack()// 공격
     {
         m_Anim.SetBool("Is_Attack", m_Char_State.GetIsAttack());
-        m_Anim.SetBool("Left_Attack", m_Char_State.GetIsAttackLeft());
     }
     public virtual void PlayReload()// 재장전
     {
         m_Anim.SetBool("Is_Reload", m_Char_State.GetIsReload());
+    }
+    public virtual void PlayDie()
+    {
+        if (m_Char_State.GetIsDead())
+        {
+            m_Anim.SetTrigger("Dead");
+            if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Move.Die") && m_Anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.88f)
+            {
+                m_Anim.Stop();
+            }
+        }
     }
     public virtual void SetChar(CharacterSuper CharScript) { m_Char_State = CharScript; }
 

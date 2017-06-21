@@ -6,7 +6,7 @@ public class NetworkMgr : MonoBehaviour
 {
 
     //접속 IP
-    private const string ip = "127.0.0.1";
+    private const string ip = "192.168.30.43";
     //접속 Port
     private const int port = 30000;
     //NAT 기능의 사용 여부

@@ -58,7 +58,8 @@ public class BulletSuper : MonoBehaviour
         IsLift = false;
         if (col.transform.tag == "PLAYER")
         {
-
+            Player_tr.GetComponent<CharacterMgr>().ShotPlayer(col.transform.GetComponent<NetworkView>());
+            Debug.Log("맞은 친구" + col.transform.name + " 뷰 아이디 : " + col.transform.GetComponent<NetworkView>().viewID);
         }
         SetBulletEnalbed();
     }

@@ -29,6 +29,7 @@ public class CharacterSuper : MonoBehaviour{
     protected bool Is_Jump;
     protected bool Is_Run = false;
     public bool Is_Rolling;
+    public bool Is_Dead = false;
 
     public int m_Current_Bullet = 0;
     public int m_Max_Bullet = 0;
@@ -333,6 +334,7 @@ public class CharacterSuper : MonoBehaviour{
     public virtual bool GetIsGroud() { return Is_Ground; }
     public virtual bool GetIsRolling() { return Is_Rolling; }
     public virtual bool GetIsAttackLeft() { return AttackIsLeft; }
+    public virtual bool GetIsDead() { return Is_Dead; }
     // 0 이라면 트루
     public virtual bool GetEmptyBullet() { return m_Current_Bullet == 0; }
     #endregion
