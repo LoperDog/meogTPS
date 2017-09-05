@@ -112,7 +112,7 @@ public class CharacterMgr : MonoBehaviour
                 thisCharacter.SetMoveSpeed(config.DubuMoveSpeed);
                 thisCharacter.SetRunSpeed(config.DubuRunSpeed);
                 thisCharacter.SetJumpForce(config.DubuJumpForce);
-                thisCharacter.SetreLoadTime(config.DubuReloadTime);
+                thisCharacter.SetReLoadTime(config.DubuReloadTime);
                 FirePoint.transform.localPosition = config.DubuFirePosition;
                 // 애니매이션 추후 수정
                 thisAnim = new AnimationSuper();
@@ -127,7 +127,7 @@ public class CharacterMgr : MonoBehaviour
                 thisCharacter.SetMoveSpeed(config.ManduMoveSpeed);
                 thisCharacter.SetRunSpeed(config.ManduRunSpeed);
                 thisCharacter.SetJumpForce(config.ManduJumpForce);
-                thisCharacter.SetreLoadTime(config.ManduReloadTime);
+                thisCharacter.SetReLoadTime(config.ManduReloadTime);
                 FirePoint.transform.localPosition = config.ManduFirePosition;
                 // 애니매이션 추후 수정
                 thisAnim = new AnimationSuper();

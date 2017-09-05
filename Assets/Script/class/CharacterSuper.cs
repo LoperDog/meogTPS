@@ -16,7 +16,7 @@ public class CharacterSuper : MonoBehaviour{
     };
 
     // 공격 시작시간과 공격 
-    public float m_CurrentAtrack;
+    public float m_CurrentAttack;
     public float m_TimeAttack;
     public float m_CurrentReload;
     public float m_TimeReload;
@@ -25,11 +25,11 @@ public class CharacterSuper : MonoBehaviour{
 
     public bool IsAttack = false;
     public bool IsReLoad = false;
+    public bool Is_Rolling;
+    public bool Is_Dead = false;
     protected bool Is_Ground = true;
     protected bool Is_Jump;
     protected bool Is_Run = false;
-    public bool Is_Rolling;
-    public bool Is_Dead = false;
 
     public int m_Current_Bullet = 0;
     public int m_Max_Bullet = 0;
@@ -48,7 +48,7 @@ public class CharacterSuper : MonoBehaviour{
     protected float Rotation_X = 0.0f;
 
     //점프
-    protected float m_Jump_Force = 250.0f;
+    protected float m_Jump_Force;
 
     //구르기
     public float m_Time_Rolling;
@@ -82,7 +82,7 @@ public class CharacterSuper : MonoBehaviour{
     // 생성자.
     public void SetCharacterSuper()
     {
-        m_CurrentAtrack = 1.0f;
+        m_CurrentAttack = 1.0f;
         m_TimeAttack = 0.5f;
         m_CurrentReload = 0.0f;
         m_TimeReload = 0.7f;
@@ -90,41 +90,6 @@ public class CharacterSuper : MonoBehaviour{
         PlayerCode = 0;
     }
     #region 캐릭터 기능 정의
-    public virtual void Attack()
-    {
-        // 공격중이 아닌데 공격 이 시작된다면 - 공격 가능
-        if(!IsAttack && !IsReLoad && m_Current_Bullet >0)
-        {
-            //공격 시작 코드
-            m_Current_Bullet--;
-            IsAttack = true;
-            // 왼쪽공격이라면 ----- 이건 나중에 수정하도록 한다.
-            if (AttackIsLeft)
-            {
-                Transform temp = Instantiate(effect[0], effectPosition[0].position, effectPosition[0].rotation * effect[0].rotation);
-                temp.GetComponent<DestroyMe1>().Target = effectPosition[0];
-            }
-            else
-            {
-                Transform temp = Instantiate(effect[1], effectPosition[1].position, effectPosition[1].rotation * effect[1].rotation);
-                temp.GetComponent<DestroyMe1>().Target = effectPosition[1];
-            }
-            ShotBullet();
-        }
-        // 공격이 시작될수 있는데 총알이 없다면 - 공격 불가 상태
-        else if (!IsAttack && !IsReLoad && m_Current_Bullet == 0)
-        {
-            // 리로드 시작.
-            IsReLoad = true;
-            coroutine.StartReLoad();
-        }
-        // 
-        else
-        {
-            //m_CurrentAtrack = 0.0f;
-        }
-    }
-
     public virtual void Move()
     {
         Vector3 forward = Player_tr.TransformDirection(Vector3.forward);
@@ -180,11 +145,45 @@ public class CharacterSuper : MonoBehaviour{
     public virtual void Rolling()
     {
         if (IsReLoad) return;
-        if (!Is_Rolling && !GetIsReload() && GetIsGroud())//재장전이 아니고 땅에 있을 때
+        if (!Is_Rolling && !GetIsReload() && GetIsGroud())//구르기가 아니고 재장전이 아니며 땅에 있을 때
         {
             Is_Rolling = true;
             coroutine.StartRolling();
             Player_rb.AddForce(Player_tr.forward * 4000);
+        }
+    }
+    public virtual void Attack()
+    {
+        // 공격중이 아닌데 공격 이 시작된다면 - 공격 가능
+        if (!IsAttack && !IsReLoad && m_Current_Bullet > 0)
+        {
+            //공격 시작 코드
+            m_Current_Bullet--;
+            IsAttack = true;
+            // 왼쪽공격이라면 ----- 이건 나중에 수정하도록 한다.
+            if (AttackIsLeft)
+            {
+                Transform temp = Instantiate(effect[0], effectPosition[0].position, effectPosition[0].rotation * effect[0].rotation);
+                temp.GetComponent<DestroyMe1>().Target = effectPosition[0];
+            }
+            else
+            {
+                Transform temp = Instantiate(effect[1], effectPosition[1].position, effectPosition[1].rotation * effect[1].rotation);
+                temp.GetComponent<DestroyMe1>().Target = effectPosition[1];
+            }
+            ShotBullet();
+        }
+        // 공격이 시작될수 있는데 총알이 없다면 - 공격 불가 상태
+        else if (!IsAttack && !IsReLoad && m_Current_Bullet == 0)
+        {
+            // 리로드 시작.
+            IsReLoad = true;
+            coroutine.StartReLoad();
+        }
+        // 
+        else
+        {
+            //m_CurrentAttack = 0.0f;
         }
     }
     public virtual void ReLoad()
@@ -203,7 +202,6 @@ public class CharacterSuper : MonoBehaviour{
     }
     public virtual void ReuseBullet(GameObject Object,Vector3 position, Quaternion rotation)
     {
-        //Debug.Log("총알생성" + BaseBullet.name);
         int poolkey = Object.GetInstanceID();
 
         if (BulletPool.ContainsKey(poolkey))
@@ -233,7 +231,8 @@ public class CharacterSuper : MonoBehaviour{
 
     #region 캐릭터 기본 세팅
     public virtual void SetFirePoint(GameObject point) { FirePoint = point; }
-    public virtual void SetreLoadTime(float time) { m_TimeReload = time; }
+    public virtual void SetReLoadTime(float time) { m_TimeReload = time; }
+    public virtual void SetRollingTime(float rolling_time) { m_Time_Rolling = rolling_time; }
     public virtual void SetBullet(int bulletMax)
     {
         m_Max_Bullet = bulletMax;
@@ -244,7 +243,7 @@ public class CharacterSuper : MonoBehaviour{
     public virtual void SetJumpForce(float jump_Force) { m_Jump_Force = jump_Force; }
     public virtual void SetPlayerTr(Transform player) { Player_tr = player; }
     public virtual void SetPlayerOb(GameObject player_ob) { Player_Object = player_ob; }
-    public virtual void SetAttackSpeed(float att_Speed) { m_CurrentAtrack = att_Speed; }
+    public virtual void SetAttackSpeed(float att_Speed) { m_CurrentAttack = att_Speed; }
     public virtual void SetCoroutine(CoroutinClass co) {
         coroutine = co;
         coroutine.SetCharacterScript(this);

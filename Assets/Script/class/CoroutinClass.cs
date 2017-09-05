@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class CoroutinClass : MonoBehaviour
 {
-
-
     CharacterSuper thisCharaterScript;
 
     // 코루틴으로 사용할 컴포넌트에 스크립트를 설정한다.
@@ -17,12 +15,11 @@ public class CoroutinClass : MonoBehaviour
     {
         StartCoroutine(SetAttackState());
     }
-
     public virtual void StartReLoad()
     {
         StartCoroutine(SetReLoad());
     }
-    public virtual void StartRolling()//구르기
+    public virtual void StartRolling()
     {
         StartCoroutine(SetRolling());
     }
@@ -35,7 +32,7 @@ public class CoroutinClass : MonoBehaviour
     // 시간초 후에 캐릭터를 확인한다.
     public virtual IEnumerator SetAttackState()
     {
-        yield return new WaitForSeconds(thisCharaterScript.m_CurrentAtrack);
+        yield return new WaitForSeconds(thisCharaterScript.m_CurrentAttack);
 
         thisCharaterScript.IsAttack = false;
         thisCharaterScript.AttackIsLeft = !thisCharaterScript.AttackIsLeft;
