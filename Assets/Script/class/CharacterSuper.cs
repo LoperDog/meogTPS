@@ -78,6 +78,7 @@ public class CharacterSuper : MonoBehaviour{
         Check_Ground();
         Move();
         Run();
+        Debug.Log(Is_Rolling);
     }
     // 생성자.
     public void SetCharacterSuper()
@@ -86,7 +87,7 @@ public class CharacterSuper : MonoBehaviour{
         m_TimeAttack = 0.5f;
         m_CurrentReload = 0.0f;
         m_TimeReload = 0.7f;
-        m_Time_Rolling = 5.0f;
+        m_Time_Rolling = 1.0f;
         PlayerCode = 0;
     }
     #region 캐릭터 기능 정의
@@ -149,7 +150,6 @@ public class CharacterSuper : MonoBehaviour{
         {
             Is_Rolling = true;
             coroutine.StartRolling();
-            Player_rb.AddForce(Player_tr.forward * 4000);
         }
     }
     public virtual void Attack()
@@ -176,7 +176,6 @@ public class CharacterSuper : MonoBehaviour{
         // 공격이 시작될수 있는데 총알이 없다면 - 공격 불가 상태
         else if (!IsAttack && !IsReLoad && m_Current_Bullet == 0)
         {
-            // 리로드 시작.
             IsReLoad = true;
             coroutine.StartReLoad();
         }

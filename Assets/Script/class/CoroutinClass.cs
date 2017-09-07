@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class CoroutinClass : MonoBehaviour
 {
-    CharacterSuper thisCharaterScript;
+    CharacterSuper thisCharacterScript;
 
     // 코루틴으로 사용할 컴포넌트에 스크립트를 설정한다.
     public virtual void SetCharacterScript(CharacterSuper CharacterClass)
     {
-        thisCharaterScript = CharacterClass;
+        thisCharacterScript = CharacterClass;
     }
     public virtual void StartAttackSetting()
     {
@@ -32,33 +32,39 @@ public class CoroutinClass : MonoBehaviour
     // 시간초 후에 캐릭터를 확인한다.
     public virtual IEnumerator SetAttackState()
     {
-        yield return new WaitForSeconds(thisCharaterScript.m_CurrentAttack);
-
-        thisCharaterScript.IsAttack = false;
-        thisCharaterScript.AttackIsLeft = !thisCharaterScript.AttackIsLeft;
+        yield return new WaitForSeconds(thisCharacterScript.m_CurrentAttack);
+        thisCharacterScript.IsAttack = false;
+        thisCharacterScript.AttackIsLeft = !thisCharacterScript.AttackIsLeft;
         // 두부 캐릭터만 쓰는 부분. 추후 삭제
-        if (thisCharaterScript.IsFirstAttack)
+        if (thisCharacterScript.IsFirstAttack)
         {
-            thisCharaterScript.Attack();
-            thisCharaterScript.IsFirstAttack = false;
+            thisCharacterScript.Attack();
+            thisCharacterScript.IsFirstAttack = false;
         }
         else
         {
-            thisCharaterScript.IsFirstAttack = true;
+            thisCharacterScript.IsFirstAttack = true;
         }
     }
     // 리로딩
     public virtual IEnumerator SetReLoad()
     {
-        yield return new WaitForSeconds(thisCharaterScript.m_TimeReload);
-
-        thisCharaterScript.SetBullet(thisCharaterScript.m_Max_Bullet);
-        thisCharaterScript.IsReLoad = false;
+        yield return new WaitForSeconds(thisCharacterScript.m_TimeReload);
+        thisCharacterScript.SetBullet(thisCharacterScript.m_Max_Bullet);
+        thisCharacterScript.IsReLoad = false;
     }
     public virtual IEnumerator SetRolling()//구르기
     {
-        yield return new WaitForSeconds(thisCharaterScript.m_Time_Rolling);
-        thisCharaterScript.Is_Rolling = false;
+        if (thisCharacterScript.Is_Rolling == true)
+        {
+            thisCharacterScript.Player_rb.AddForce(thisCharacterScript.Player_tr.forward * 4000);
+            yield return new WaitForSeconds(thisCharacterScript.m_Time_Rolling);
+            thisCharacterScript.Is_Rolling = false;
+        }
+        else
+        {
+
+        }
     }
     // 아직은 작업 중.
     public virtual IEnumerator SetWhileBuff(float time)
