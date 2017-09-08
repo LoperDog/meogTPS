@@ -3,16 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UISuper : MonoBehaviour
-{
+public class UISuper {
+    Canvas BaseUICanvas;
 
-	void Start ()
-    {
-        	
-	}
-	
-	void Update ()
-    {
-
-    }
+    public virtual void ShotBullet() { }
 }

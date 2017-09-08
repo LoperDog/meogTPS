@@ -26,5 +26,9 @@ public class DubuCharacter : CharacterSuper {
     {
 
     }*/
-
+    override public void Attack()
+    {
+        base.Attack();
+        Debug.Log("기능정상작동.");
+    }
 }
