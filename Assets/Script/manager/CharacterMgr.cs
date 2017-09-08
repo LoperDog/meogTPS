@@ -61,7 +61,6 @@ public class CharacterMgr : MonoBehaviour
     [SerializeField]
     private AnimationSuper thisAnim;
 
-
     // 이 캐릭터가 실행할 스크립트
     private CharacterSuper thisCharacter;
     public float Current_Bullet;
@@ -98,7 +97,7 @@ public class CharacterMgr : MonoBehaviour
 
 
         config = new ConfigClass();
-        Screen.lockCursor = true;
+        //Screen.lockCursor = true;
         // 캐릭터 생성
         switch (Character_ID)
         {

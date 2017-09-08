@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ManduCharacter : CharacterSuper {
+public class ManduCharacter : CharacterSuper
+{
     /*
     public ManduCharacter()
     {
