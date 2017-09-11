@@ -256,6 +256,18 @@ public class CharacterMgr : MonoBehaviour
         Debug.Log("맞은 아이디 : " + _networkView.viewID + " 남은 채력 : " + Char_Current_HP);
         Char_Current_HP -= de;
     }
+    // 강공격
+    [RPC]
+    public void SetCharacterStAttack()
+    {
+        thisCharacter.StrongAttack();
+    }
+    // 특수기
+    [RPC]
+    public void SetCharacterSPAttack()
+    {
+        thisCharacter.SpecialAttack();
+    }
     public void ShotPlayer(NetworkView Player)
     {
         Player.RPC("GetDamage", RPCMode.AllBuffered, (float)config.DubuDamage);
@@ -288,6 +300,14 @@ public class CharacterMgr : MonoBehaviour
         {
             _networkView.RPC("SetFirePoint", RPCMode.AllBuffered, ShootTheFuckingRay());
             // 네트워크 알피씨를 날려야 한다.
+        }
+        if (Input.GetMouseButton(1))
+        {
+
+        }
+        if (Input.GetKey(KeyCode.Q))
+        {
+
         }
         Click_Right = Input.GetMouseButton(1);
         Key_Shift = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);

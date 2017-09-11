@@ -7,7 +7,7 @@ public class ConfigClass {
     public enum GameState
     {
         NoSession,
-        Menu,
+        Matching,
         InRoom,
         InGame,
         NotStart,

@@ -27,6 +27,8 @@ public class CharacterSuper : MonoBehaviour{
     public bool IsReLoad = false;
     public bool Is_Rolling;
     public bool Is_Dead = false;
+    public bool IsStrongAttack = false;
+    public bool IsSpecialAttack = false;
     protected bool Is_Ground = true;
     protected bool Is_Jump;
     protected bool Is_Run = false;
@@ -152,6 +154,7 @@ public class CharacterSuper : MonoBehaviour{
             coroutine.StartRolling();
         }
     }
+    // 기본공격
     public virtual void Attack()
     {
         // 공격중이 아닌데 공격 이 시작된다면 - 공격 가능
@@ -184,6 +187,15 @@ public class CharacterSuper : MonoBehaviour{
         {
             //m_CurrentAttack = 0.0f;
         }
+    }
+    // 세미 특수공격
+    public virtual void StrongAttack()
+    {
+
+    }
+    public virtual void SpecialAttack()
+    {
+
     }
     public virtual void ReLoad()
     {

@@ -28,7 +28,43 @@ public class DubuCharacter : CharacterSuper {
     }*/
     override public void Attack()
     {
-        base.Attack();
-        Debug.Log("기능정상작동.");
+        // 공격중이 아닌데 공격 이 시작된다면 - 공격 가능
+        if (!IsAttack && !IsReLoad && m_Current_Bullet > 0)
+        {
+            //공격 시작 코드
+            m_Current_Bullet--;
+            IsAttack = true;
+            // 왼쪽공격이라면 ----- 이건 나중에 수정하도록 한다.
+            if (AttackIsLeft)
+            {
+                Transform temp = Instantiate(effect[0], effectPosition[0].position, effectPosition[0].rotation * effect[0].rotation);
+                temp.GetComponent<DestroyMe1>().Target = effectPosition[0];
+            }
+            else
+            {
+                Transform temp = Instantiate(effect[1], effectPosition[1].position, effectPosition[1].rotation * effect[1].rotation);
+                temp.GetComponent<DestroyMe1>().Target = effectPosition[1];
+            }
+            ShotBullet();
+        }
+        // 공격이 시작될수 있는데 총알이 없다면 - 공격 불가 상태
+        else if (!IsAttack && !IsReLoad && m_Current_Bullet == 0)
+        {
+            IsReLoad = true;
+            coroutine.StartReLoad();
+        }
+        // 
+        else
+        {
+            //m_CurrentAttack = 0.0f;
+        }
+    }
+    public override void StrongAttack()
+    {
+
+    }
+    public override void SpecialAttack()
+    {
+
     }
 }

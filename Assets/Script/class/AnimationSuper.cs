@@ -56,6 +56,14 @@ public class AnimationSuper
     {
         m_Anim.SetBool("Is_Attack", m_Char_State.GetIsAttack());
     }
+    public virtual void PlayStrongAttack()
+    {
+        m_Anim.SetBool("StringAttack",m_Char_State.GetIsStrongAttack());
+    }
+    public virtual void PlaySpecialAttack()
+    {
+
+    }
     public virtual void PlayReload()// 재장전
     {
         m_Anim.SetBool("Is_Reload", m_Char_State.GetIsReload());
