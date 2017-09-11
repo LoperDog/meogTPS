@@ -30,6 +30,7 @@ public class DubuCharacter : CharacterSuper
     override public void Attack()
     {
         
+>>>>>>> 9eec596b8a07976af38e06e75b7bb10687f0bdcc
         // 공격중이 아닌데 공격 이 시작된다면 - 공격 가능
         if (!IsAttack && !IsReLoad && m_Current_Bullet > 0)
         {
@@ -69,5 +70,9 @@ public class DubuCharacter : CharacterSuper
     public override void SpecialAttack()
     {
 
+<<<<<<< HEAD
+=======
+        base.Attack();
+>>>>>>> 9eec596b8a07976af38e06e75b7bb10687f0bdcc
     }
 }
