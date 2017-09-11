@@ -109,6 +109,7 @@ public class CharacterMgr : MonoBehaviour
                 thisCharacter.SetRunSpeed(config.DubuRunSpeed);
                 thisCharacter.SetJumpForce(config.DubuJumpForce);
                 thisCharacter.SetReLoadTime(config.DubuReloadTime);
+                thisCharacter.SetAttackSpeed(config.DubuAttackSpeed);
                 FirePoint.transform.localPosition = config.DubuFirePosition;
                 // 애니매이션 추후 수정
                 thisAnim = new AnimationSuper();
@@ -144,7 +145,6 @@ public class CharacterMgr : MonoBehaviour
         thisCharacter.SetCameraTr(Camera_tr);
         thisCharacter.SetFirePoint(FirePoint);
 
-        thisCharacter.SetAttackSpeed(5f);
         thisCharacter.CreateBullet(config.DubuBullet, tempBullet);
         thisCharacter.SetBulletObject(tempBullet);
 
