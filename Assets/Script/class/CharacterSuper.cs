@@ -80,7 +80,6 @@ public class CharacterSuper : MonoBehaviour{
         Check_Ground();
         Move();
         Run();
-        Debug.Log(Is_Rolling);
     }
     // 생성자.
     public void SetCharacterSuper()
@@ -239,7 +238,6 @@ public class CharacterSuper : MonoBehaviour{
         Debug.Log("상속전 캐릭터 재장전 끝");
     }
     #endregion
-
     #region 캐릭터 기본 세팅
     public virtual void SetFirePoint(GameObject point) { FirePoint = point; }
     public virtual void SetReLoadTime(float time) { m_TimeReload = time; }
@@ -302,7 +300,6 @@ public class CharacterSuper : MonoBehaviour{
         effect = ef;
     }
     #endregion
-
     #region 아이템 영역
     protected virtual void SetItem(float time,ItemCode code,float val)
     {

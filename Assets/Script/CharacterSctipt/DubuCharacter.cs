@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DubuCharacter : CharacterSuper {
+public class DubuCharacter : CharacterSuper
+{
     /*
     // 생성자 관리
     public DubuCharacter()
@@ -28,6 +29,7 @@ public class DubuCharacter : CharacterSuper {
     }*/
     override public void Attack()
     {
+<<<<<<< HEAD
         // 공격중이 아닌데 공격 이 시작된다면 - 공격 가능
         if (!IsAttack && !IsReLoad && m_Current_Bullet > 0)
         {
@@ -66,5 +68,8 @@ public class DubuCharacter : CharacterSuper {
     public override void SpecialAttack()
     {
 
+=======
+        base.Attack();
+>>>>>>> af543e8429a3761b181e20cee71180dbd4b4e46c
     }
 }

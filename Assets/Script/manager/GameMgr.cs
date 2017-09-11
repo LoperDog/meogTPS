@@ -2,19 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameMgr : MonoBehaviour {
-    
+public class GameMgr : MonoBehaviour
+{
     public int PlayerCode;
     public ConfigClass.GameState ThisGameState;
     public ConfigClass.GameState BeforeGameStete;
 
-	void Start () {
+	void Start ()
+    {
         ThisGameState = ConfigClass.GameState.NoSession;
         BeforeGameStete = ConfigClass.GameState.NotStart;
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
 		if(this.ThisGameState != this.BeforeGameStete)
         {
 
@@ -32,8 +34,8 @@ public class GameMgr : MonoBehaviour {
                 case ConfigClass.GameState.InGame:
                     break;
 
-                case ConfigClass.GameState.Matching:
-                    break;
+                /*case ConfigClass.GameState.Matching:
+                    break;*/
 
             }
         }
@@ -48,8 +50,8 @@ public class GameMgr : MonoBehaviour {
             case ConfigClass.GameState.InGame:
                 break;
 
-            case ConfigClass.GameState.Matching:
-                break;
+            /*case ConfigClass.GameState.Matching:
+                break;*/
 
         }
     }
