@@ -27,5 +27,8 @@ public class DubuCharacter : CharacterSuper
     {
 
     }*/
-
+    override public void Attack()
+    {
+        base.Attack();
+    }
 }

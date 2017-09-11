@@ -56,9 +56,6 @@ public class CharacterMgr : MonoBehaviour
     private Chacracter_Type Character_ID;
 
     [SerializeField]
-    private UISuper thisUI;
-
-    [SerializeField]
     private AnimationSuper thisAnim;
 
     // 이 캐릭터가 실행할 스크립트

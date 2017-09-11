@@ -3,6 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ConfigClass {
+    #region 게임전체에 쓰일 부분
+    public enum GameState
+    {
+        NoSession,
+        Menu,
+        InRoom,
+        InGame,
+        NotStart,
+    };
+
+    #endregion
     #region 만두콘피그
     public int ManduHP = 100;
     public float ManduMoveSpeed = 5.0f;
