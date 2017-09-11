@@ -62,7 +62,7 @@ public class AnimationSuper
     }
     public virtual void PlaySpecialAttack()
     {
-
+        m_Anim.SetBool("StringAttack", m_Char_State.GetIsSpecialAttack());
     }
     public virtual void PlayReload()// 재장전
     {

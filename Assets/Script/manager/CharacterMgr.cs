@@ -144,7 +144,7 @@ public class CharacterMgr : MonoBehaviour
         thisCharacter.SetCameraTr(Camera_tr);
         thisCharacter.SetFirePoint(FirePoint);
 
-        thisCharacter.SetAttackSpeed(0.3f);
+        thisCharacter.SetAttackSpeed(5f);
         thisCharacter.CreateBullet(config.DubuBullet, tempBullet);
         thisCharacter.SetBulletObject(tempBullet);
 
@@ -289,6 +289,8 @@ public class CharacterMgr : MonoBehaviour
 
     public void InputControll()
     {
+        if (!thisCharacter.CanControll) return;
+        
         Key_H = Input.GetAxis("Horizontal");
         Key_V = Input.GetAxis("Vertical");
         //Click_Left = Input.GetMouseButton(0);

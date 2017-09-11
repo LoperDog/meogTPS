@@ -54,6 +54,19 @@ public class CharacterSuper : MonoBehaviour{
 
     //구르기
     public float m_Time_Rolling;
+    // 캐릭터 제어가능 여부
+    protected bool cancontroll = true;
+    public bool CanControll
+    {
+        get
+        {
+            return cancontroll;
+        }
+        set
+        {
+            cancontroll = value;
+        }
+    }
 
     public Transform Player_tr;
     public Rigidbody Player_rb;
@@ -342,6 +355,8 @@ public class CharacterSuper : MonoBehaviour{
     public virtual bool GetIsRolling() { return Is_Rolling; }
     public virtual bool GetIsAttackLeft() { return AttackIsLeft; }
     public virtual bool GetIsDead() { return Is_Dead; }
+    public virtual bool GetIsStrongAttack() { return IsStrongAttack; }
+    public virtual bool GetIsSpecialAttack() { return IsSpecialAttack; }
     // 0 이라면 트루
     public virtual bool GetEmptyBullet() { return m_Current_Bullet == 0; }
     #endregion

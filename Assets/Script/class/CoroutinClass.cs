@@ -45,6 +45,7 @@ public class CoroutinClass : MonoBehaviour
         {
             thisCharacterScript.IsFirstAttack = true;
         }
+        thisCharacterScript.CanControll = true;
     }
     // 리로딩
     public virtual IEnumerator SetReLoad()
