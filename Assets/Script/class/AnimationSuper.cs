@@ -58,7 +58,7 @@ public class AnimationSuper
     }
     public virtual void PlayStrongAttack()
     {
-        //m_Anim.SetBool("StringAttack",m_Char_State.GetIsStrongAttack());
+        m_Anim.SetBool("StringAttack",m_Char_State.GetIsStrongAttack());
     }
     public virtual void PlaySpecialAttack()
     {
