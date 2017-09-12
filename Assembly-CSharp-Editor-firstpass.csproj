@@ -84,6 +84,7 @@
      <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonBasic.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\SeparableWeightedBlurDof34.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\ShowAlphaChannel.shader" />
+     <None Include="Assets\UI\Font\Score_Red\Score_Red.fnt" />
      <None Include="Assets\BackGround\PostProcessing\PostProcessing\Resources\Shaders\MotionBlur.cginc" />
      <None Include="Assets\Standard Assets\Effects\AntiAliasing\FXAA\Resources\FXAA3.cginc" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\SunShaftsComposite.shader" />
@@ -132,8 +133,9 @@
      <None Include="Assets\Standard Assets\Effects\MotionBlur\Resources\Common.cginc" />
      <None Include="Assets\Standard Assets\Effects\AmbientOcclusion\Resources\AmbientOcclusion.shader" />
      <None Include="Assets\BackGround\PostProcessing\PostProcessing\Editor Resources\Monitors\VectorscopeCompute.compute" />
+     <None Include="Assets\UI\Font\Time\Time.fnt" />
      <None Include="Assets\Standard Assets\Effects\AntiAliasing\FXAA\Resources\FXAA.shader" />
-     <None Include="Assets\UI\BitmapFontImporter\BulletFont\Bullet_Font.fnt" />
+     <None Include="Assets\UI\Font\BulletFont\Bullet_Font.fnt" />
      <None Include="Assets\BackGround\PostProcessing\PostProcessing\Resources\Shaders\FXAA3.cginc" />
      <None Include="Assets\BackGround\PostProcessing\PostProcessing\Resources\Shaders\MotionBlur.shader" />
      <None Include="Assets\BackGround\PostProcessing\PostProcessing\Resources\Shaders\AmbientOcclusion.shader" />
@@ -192,6 +194,7 @@
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\TwirlEffect.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\VortexEffect.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\Contrast Stretch\Adaptation.shader" />
+     <None Include="Assets\UI\Font\Score_Blue\Score_Blue.fnt" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\NoiseAndGrain.shader" />
      <None Include="Assets\Standard Assets\Effects\AmbientOcclusion\Resources\SeparableBlur.cginc" />
      <None Include="Assets\BackGround\PostProcessing\PostProcessing\Resources\Shaders\Bloom.shader" />

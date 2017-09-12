@@ -16,7 +16,7 @@ public class AnimationSuper
     {
         PlayMove();
         PlayRun();
-        PlayJump();
+        PlayJump(); 
         PlayLanding();
         PlayAttack();
         PlayReload();
