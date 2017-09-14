@@ -25,7 +25,7 @@ public class CharacterMgr : MonoBehaviour
     [SerializeField]
     public GameMgr MyMgr;
     public Text Bullet_count;
-    public Image Bullet_image;
+    public Image Special;
     public Image HP_image;
 
     public enum Chacracter_Type
@@ -156,7 +156,7 @@ public class CharacterMgr : MonoBehaviour
         {
             HP_image = GameObject.Find("Hp_Image").GetComponent<Image>();
             Bullet_count = GameObject.Find("Bullet_Count").GetComponent<Text>();
-            Bullet_image = GameObject.Find("Bullet_Image").GetComponent<Image>();
+            Special = GameObject.Find("Special").GetComponent<Image>();
             Camera.main.GetComponent<Cam>().SetPlayer(Player_tr);
             mainCamera = Camera.main;
 
@@ -221,7 +221,7 @@ public class CharacterMgr : MonoBehaviour
         Current_Bullet = thisCharacter.m_Current_Bullet;
         Max_Bullet = thisCharacter.m_Max_Bullet;
         Bullet_count.text = Current_Bullet + "/" + Max_Bullet + ToString();
-        Bullet_image.fillAmount = Current_Bullet / Max_Bullet;
+        Special.fillAmount = Current_Bullet / Max_Bullet;
         //체력
         HP_image.fillAmount = Char_Current_HP/Char_Max_HP;
     }

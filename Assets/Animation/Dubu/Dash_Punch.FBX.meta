@@ -131,7 +131,7 @@ ModelImporter:
     400122: Tofu
     4300000: CH_Tofu
     4300002: Tofu
-    7400000: Das_Punch
+    7400000: Dash_Punch
     9500000: //RootNode
     13700000: CH_Tofu
     13700002: Tofu
@@ -160,7 +160,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: Das_Punch
+      name: Dash_Punch
       takeName: AtomicPunch
       firstFrame: 0
       lastFrame: 47
