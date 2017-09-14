@@ -8,7 +8,7 @@ public class CharacterMgr : MonoBehaviour
     public Camera mainCamera;
 
     [SerializeField]
-    private ConfigClass config;
+    static ConfigClass config;
 
     private Transform Player_tr;
     private Rigidbody Player_rb;
@@ -18,6 +18,10 @@ public class CharacterMgr : MonoBehaviour
     private Vector3 Char_Pos;
     private Quaternion Char_Rot;
 
+
+    string CharType = "";
+    [SerializeField]
+    Dictionary<string, GameObject> TempBulletPool;
     [SerializeField]
     List<GameObject> LoadChar;
     [SerializeField]
@@ -93,48 +97,22 @@ public class CharacterMgr : MonoBehaviour
         Camera_tr = Camera.main.GetComponent<Transform>();
         _networkView = GetComponent<NetworkView>();
 
+        if (config == null)
+        {
+            config = new ConfigClass();
+        }
 
-        config = new ConfigClass();
-        string CharType = "";
         //Screen.lockCursor = true;
         // 캐릭터 생성
         switch (Character_ID)
         {
             case Chacracter_Type.Dubu:
-
-
-                Char_Current_HP = config.DubuHP;
-                Char_Max_HP = config.DubuHP;
+                
                 thisCharacter = new DubuCharacter();
-                thisCharacter.SetBullet(config.DubuBullet);
-                thisCharacter.SetMoveSpeed(config.DubuMoveSpeed);
-                thisCharacter.SetRunSpeed(config.DubuRunSpeed);
-                thisCharacter.SetJumpForce(config.DubuJumpForce);
-                thisCharacter.SetReLoadTime(config.DubuReloadTime);
-                thisCharacter.SetAttackSpeed(config.DubuAttackSpeed);
-                FirePoint.transform.localPosition = config.DubuFirePosition;
-                // 애니매이션 추후 수정
-                thisAnim = new AnimationSuper();
-
-                // 이게 진짜.
                 CharType = config.DubuString;
                 break;
             case Chacracter_Type.Mandu:
-
-
-                Char_Current_HP = config.ManduHP;
-                Char_Max_HP = config.ManduHP;
                 thisCharacter = new ManduCharacter();
-                thisCharacter.SetBullet(config.ManduBullet);
-                thisCharacter.SetMoveSpeed(config.ManduMoveSpeed);
-                thisCharacter.SetRunSpeed(config.ManduRunSpeed);
-                thisCharacter.SetJumpForce(config.ManduJumpForce);
-                thisCharacter.SetReLoadTime(config.ManduReloadTime);
-                FirePoint.transform.localPosition = config.ManduFirePosition;
-                // 애니매이션 추후 수정
-                thisAnim = new AnimationSuper();
-
-                // 적용부
                 CharType = config.ManduString;
                 break;
             default:
@@ -146,19 +124,26 @@ public class CharacterMgr : MonoBehaviour
         thisCharacter.SetCoroutine(gameObject.AddComponent<CoroutinClass>());
         thisAnim.SetChar(thisCharacter);
         thisAnim.SetAnimator(gameObject.GetComponent<Animator>());
-
-
         thisCharacter.SetPlayerTr(Player_tr);
         thisCharacter.SetPlayerRb(Player_rb);
         thisCharacter.SetCameraTr(Camera_tr);
-        thisCharacter.SetFirePoint(FirePoint);
 
-        thisCharacter.CreateBullet(config.DubuBullet, tempBullet);
+        thisCharacter.CreateBullet(config.StatusConfigs[CharType]["Cartridge"], tempBullet);
         thisCharacter.SetBulletObject(tempBullet);
 
         // 임시
         thisCharacter.SetEffect(Effect);
         thisCharacter.SetEffectPosition(Effectposition);
+        // 진짜 컨피그
+        Char_Current_HP = config.StatusConfigs[CharType]["HP"];
+        Char_Max_HP = config.StatusConfigs[CharType]["HP"];
+        // 총구 설정
+        FirePoint.transform.localPosition = config.PositionConfig[CharType]["FirePosition"];
+        thisCharacter.SetFirePoint(FirePoint);
+        // 애니매이션 추후 수정
+        thisAnim = new AnimationSuper();
+        // 강공격 객체 설정.
+        // 특수기 객체 설정.
 
         if (_networkView.isMine)
         {
@@ -274,7 +259,7 @@ public class CharacterMgr : MonoBehaviour
     }
     public void ShotPlayer(NetworkView Player)
     {
-        Player.RPC("GetDamage", RPCMode.AllBuffered, (float)config.DubuDamage);
+        Player.RPC("GetDamage", RPCMode.AllBuffered, (float)config.StatusConfigs[CharType]["Attack"]);
     }
     void FixedUpdate()
     {

@@ -17,11 +17,8 @@ public class CharacterSuper : MonoBehaviour{
 
     // 공격 시작시간과 공격 
     public float m_CurrentAttack;
-    public float m_TimeAttack;
     public float m_CurrentStrongAttack;
-    public float m_TimeStrongAttack;
     public float m_CurrentSpecialAttack;
-    public float m_TimeSpecialAttack;
     public float m_CurrentReload;
     public float m_TimeReload;
 
@@ -40,7 +37,6 @@ public class CharacterSuper : MonoBehaviour{
         get { return m_CurrentSpecialAttack; }
         set { m_CurrentSpecialAttack = value; }
     }
-
 
     public int PlayerCode;
 
@@ -94,6 +90,8 @@ public class CharacterSuper : MonoBehaviour{
     protected GameObject Player_Object;
     // 조금 알아보고 쓰자.
     protected GameObject BaseBullet;
+    protected GameObject StrongBullet;
+    protected GameObject SpecialBullet;
     protected Dictionary<int, Queue<GameObject>> BulletPool = new Dictionary<int, Queue<GameObject>>();
 
     protected CoroutinClass coroutine;
@@ -119,7 +117,6 @@ public class CharacterSuper : MonoBehaviour{
     public void SetCharacterSuper()
     {
         m_CurrentAttack = 1.0f;
-        m_TimeAttack = 0.5f;
         m_CurrentReload = 0.0f;
         m_TimeReload = 0.7f;
         m_Time_Rolling = 1.0f;
@@ -190,36 +187,7 @@ public class CharacterSuper : MonoBehaviour{
     // 기본공격
     public virtual void Attack()
     {
-        // 공격중이 아닌데 공격 이 시작된다면 - 공격 가능
-        if (!IsAttack && !IsReLoad && m_Current_Bullet > 0)
-        {
-            //공격 시작 코드
-            m_Current_Bullet--;
-            IsAttack = true;
-            // 왼쪽공격이라면 ----- 이건 나중에 수정하도록 한다.
-            if (AttackIsLeft)
-            {
-                Transform temp = Instantiate(effect[0], effectPosition[0].position, effectPosition[0].rotation * effect[0].rotation);
-                temp.GetComponent<DestroyMe1>().Target = effectPosition[0];
-            }
-            else
-            {
-                Transform temp = Instantiate(effect[1], effectPosition[1].position, effectPosition[1].rotation * effect[1].rotation);
-                temp.GetComponent<DestroyMe1>().Target = effectPosition[1];
-            }
-            ShotBullet();
-        }
-        // 공격이 시작될수 있는데 총알이 없다면 - 공격 불가 상태
-        else if (!IsAttack && !IsReLoad && m_Current_Bullet == 0)
-        {
-            IsReLoad = true;
-            coroutine.StartReLoad();
-        }
-        // 
-        else
-        {
-            //m_CurrentAttack = 0.0f;
-        }
+
     }
     // 세미 특수공격
     public virtual void StrongAttack()
@@ -286,9 +254,6 @@ public class CharacterSuper : MonoBehaviour{
         CurrentAttack = data["AttackSpeed"];
         CurrentStrongAttack = data["AttackStrongSpeed"];
         CurrentSpecialAttack = data["AttackSpecialSpeed"];
-        //SetAttackSpeed(data[""]);
-
-
     }
 
     public virtual void SetFirePoint(GameObject point) { FirePoint = point; }
@@ -304,7 +269,6 @@ public class CharacterSuper : MonoBehaviour{
     public virtual void SetJumpForce(float jump_Force) { m_Jump_Force = jump_Force; }
     public virtual void SetPlayerTr(Transform player) { Player_tr = player; }
     public virtual void SetPlayerOb(GameObject player_ob) { Player_Object = player_ob; }
-    //public virtual void SetAttackSpeed(float att_Speed) { m_CurrentAttack = att_Speed; }
     public virtual void SetCoroutine(CoroutinClass co) {
         coroutine = co;
         coroutine.SetCharacterScript(this);
@@ -312,11 +276,12 @@ public class CharacterSuper : MonoBehaviour{
     public virtual void SetCameraTr(Transform camera) { Camera_tr = camera; }
     public virtual void SetPlayerRb(Rigidbody rigidbody) { Player_rb = rigidbody; }
     public virtual void SetCharacterMove(float H, float V) {m_Move_H = H; m_Move_V = V;}
+    // 기본 총알 생성자.
     public virtual void SetBulletObject(GameObject bullet) { BaseBullet = bullet; }
 
     public virtual void SetPlayerCode(int Code) { PlayerCode = Code; }
 
-    public virtual void CreateBullet(int size, GameObject Object)
+    public virtual void CreateBullet(float size, GameObject Object)
     {
         /*
          * 오브젝트 풀에 여러 가지 총알을 만들수 있는 여부를 둔 이유는
@@ -345,7 +310,6 @@ public class CharacterSuper : MonoBehaviour{
     public virtual void SetEffectPosition(Transform[] ps)
     {
         effectPosition = ps;
-
     }
     public virtual void SetEffect(Transform[] ef)
     {
