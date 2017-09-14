@@ -18,8 +18,29 @@ public class CharacterSuper : MonoBehaviour{
     // 공격 시작시간과 공격 
     public float m_CurrentAttack;
     public float m_TimeAttack;
+    public float m_CurrentStrongAttack;
+    public float m_TimeStrongAttack;
+    public float m_CurrentSpecialAttack;
+    public float m_TimeSpecialAttack;
     public float m_CurrentReload;
     public float m_TimeReload;
+
+    public float CurrentAttack
+    {
+        get { return m_CurrentAttack; }
+        set { m_CurrentAttack = value; }
+    }
+    public float CurrentStrongAttack
+    {
+        get { return m_CurrentStrongAttack; }
+        set { m_CurrentStrongAttack = value; }
+    }
+    public float CurrentSpecialAttack
+    {
+        get { return m_CurrentSpecialAttack; }
+        set { m_CurrentSpecialAttack = value; }
+    }
+
 
     public int PlayerCode;
 
@@ -33,8 +54,8 @@ public class CharacterSuper : MonoBehaviour{
     protected bool Is_Jump;
     protected bool Is_Run = false;
 
-    public int m_Current_Bullet = 0;
-    public int m_Max_Bullet = 0;
+    public float m_Current_Bullet = 0f;
+    public float m_Max_Bullet = 0f;
 
     //이동
     protected float m_Move_H = 0.0f;
@@ -252,10 +273,28 @@ public class CharacterSuper : MonoBehaviour{
     }
     #endregion
     #region 캐릭터 기본 세팅
+
+    // 마스터 세팅
+    public virtual void SetCharacterStatus(Dictionary<string, float> data)
+    {
+        SetBullet(data["Cartridge"]);
+        SetMoveSpeed(data["MoveSpeed"]);
+        SetRunSpeed(data["RunSpeed"]);
+        SetJumpForce(data["JumpSpeed"]);
+        SetReLoadTime(data["ReLoadTime"]);
+
+        CurrentAttack = data["AttackSpeed"];
+        CurrentStrongAttack = data["AttackStrongSpeed"];
+        CurrentSpecialAttack = data["AttackSpecialSpeed"];
+        //SetAttackSpeed(data[""]);
+
+
+    }
+
     public virtual void SetFirePoint(GameObject point) { FirePoint = point; }
     public virtual void SetReLoadTime(float time) { m_TimeReload = time; }
     public virtual void SetRollingTime(float rolling_time) { m_Time_Rolling = rolling_time; }
-    public virtual void SetBullet(int bulletMax)
+    public virtual void SetBullet(float bulletMax)
     {
         m_Max_Bullet = bulletMax;
         m_Current_Bullet = bulletMax;
@@ -265,7 +304,7 @@ public class CharacterSuper : MonoBehaviour{
     public virtual void SetJumpForce(float jump_Force) { m_Jump_Force = jump_Force; }
     public virtual void SetPlayerTr(Transform player) { Player_tr = player; }
     public virtual void SetPlayerOb(GameObject player_ob) { Player_Object = player_ob; }
-    public virtual void SetAttackSpeed(float att_Speed) { m_CurrentAttack = att_Speed; }
+    //public virtual void SetAttackSpeed(float att_Speed) { m_CurrentAttack = att_Speed; }
     public virtual void SetCoroutine(CoroutinClass co) {
         coroutine = co;
         coroutine.SetCharacterScript(this);

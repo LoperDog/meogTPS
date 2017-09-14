@@ -75,6 +75,7 @@ public class CharacterMgr : MonoBehaviour
     // 재장전
     private bool Key_R = false;             // 개별 동기
     private bool Key_Space = false;         // 개별 동기
+    private bool Key_Special = false;             // 특수공격기
     #endregion
     #region 캐릭터가 가지고 있는 자원 이팩트위치나 이팩트 혹은 총알 종류. 추후 수정
     public Transform[] Effect;
@@ -94,6 +95,7 @@ public class CharacterMgr : MonoBehaviour
 
 
         config = new ConfigClass();
+        string CharType = "";
         //Screen.lockCursor = true;
         // 캐릭터 생성
         switch (Character_ID)
@@ -113,6 +115,9 @@ public class CharacterMgr : MonoBehaviour
                 FirePoint.transform.localPosition = config.DubuFirePosition;
                 // 애니매이션 추후 수정
                 thisAnim = new AnimationSuper();
+
+                // 이게 진짜.
+                CharType = config.DubuString;
                 break;
             case Chacracter_Type.Mandu:
 
@@ -128,6 +133,9 @@ public class CharacterMgr : MonoBehaviour
                 FirePoint.transform.localPosition = config.ManduFirePosition;
                 // 애니매이션 추후 수정
                 thisAnim = new AnimationSuper();
+
+                // 적용부
+                CharType = config.ManduString;
                 break;
             default:
 
@@ -293,21 +301,22 @@ public class CharacterMgr : MonoBehaviour
         
         Key_H = Input.GetAxis("Horizontal");
         Key_V = Input.GetAxis("Vertical");
-        //Click_Left = Input.GetMouseButton(0);
+        Click_Left = Input.GetMouseButton(0);
         if (Input.GetMouseButton(0))
         {
             _networkView.RPC("SetFirePoint", RPCMode.AllBuffered, ShootTheFuckingRay());
             // 네트워크 알피씨를 날려야 한다.
         }
+        Click_Right = Input.GetMouseButton(1);
         if (Input.GetMouseButton(1))
         {
 
         }
+        Key_Special = Input.GetKey(KeyCode.Q);
         if (Input.GetKey(KeyCode.Q))
         {
 
         }
-        Click_Right = Input.GetMouseButton(1);
         Key_Shift = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
         if (Key_Shift)
         {
