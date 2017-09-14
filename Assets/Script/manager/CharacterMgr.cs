@@ -164,7 +164,7 @@ public class CharacterMgr : MonoBehaviour
         {
             HP_image = GameObject.Find("Hp_Image").GetComponent<Image>();
             Bullet_count = GameObject.Find("Bullet_Count").GetComponent<Text>();
-            Special = GameObject.Find("Special").GetComponent<Image>();
+            Special = GameObject.Find("Special_Color").GetComponent<Image>();
             Camera.main.GetComponent<Cam>().SetPlayer(Player_tr);
             mainCamera = Camera.main;
 
