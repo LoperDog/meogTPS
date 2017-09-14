@@ -1,15 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameMgr : MonoBehaviour
 {
+    public Text Game_Time;
+
     public int PlayerCode;
     public ConfigClass.GameState ThisGameState;
     public ConfigClass.GameState BeforeGameStete;
 
 	void Start ()
     {
+        Game_Time = GameObject.Find("Time").GetComponent<Text>();
         ThisGameState = ConfigClass.GameState.NoSession;
         BeforeGameStete = ConfigClass.GameState.NotStart;
 	}
