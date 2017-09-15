@@ -8,7 +8,7 @@ public class CharacterMgr : MonoBehaviour
     public Camera mainCamera;
 
     [SerializeField]
-    static ConfigClass config;
+    public ConfigClass config;
 
     private Transform Player_tr;
     private Rigidbody Player_rb;
@@ -107,11 +107,11 @@ public class CharacterMgr : MonoBehaviour
         switch (Character_ID)
         {
             case Chacracter_Type.Dubu:
-                
                 thisCharacter = new DubuCharacter();
                 CharType = config.DubuString;
                 break;
             case Chacracter_Type.Mandu:
+                Debug.Log("만두 캐릭터 생성 시작");
                 thisCharacter = new ManduCharacter();
                 CharType = config.ManduString;
                 break;
@@ -122,8 +122,6 @@ public class CharacterMgr : MonoBehaviour
         // 세팅
         thisCharacter.SetPlayerOb(gameObject);
         thisCharacter.SetCoroutine(gameObject.AddComponent<CoroutinClass>());
-        thisAnim.SetChar(thisCharacter);
-        thisAnim.SetAnimator(gameObject.GetComponent<Animator>());
         thisCharacter.SetPlayerTr(Player_tr);
         thisCharacter.SetPlayerRb(Player_rb);
         thisCharacter.SetCameraTr(Camera_tr);
@@ -142,6 +140,9 @@ public class CharacterMgr : MonoBehaviour
         thisCharacter.SetFirePoint(FirePoint);
         // 애니매이션 추후 수정
         thisAnim = new AnimationSuper();
+
+        thisAnim.SetChar(thisCharacter);
+        thisAnim.SetAnimator(gameObject.GetComponent<Animator>());
         // 강공격 객체 설정.
         // 특수기 객체 설정.
 
@@ -211,12 +212,12 @@ public class CharacterMgr : MonoBehaviour
     public void Show_UI()
     {
         //총알
-        Current_Bullet = thisCharacter.m_Current_Bullet;
-        Max_Bullet = thisCharacter.m_Max_Bullet;
-        Bullet_count.text = Current_Bullet + "/" + Max_Bullet + ToString();
-        Special.fillAmount = Current_Bullet / Max_Bullet;
+        //Current_Bullet = thisCharacter.m_Current_Bullet;
+        //Max_Bullet = thisCharacter.m_Max_Bullet;
+//Bullet_count.text = Current_Bullet + "/" + Max_Bullet + ToString();
+        //Special.fillAmount = Current_Bullet / Max_Bullet;
         //체력
-        HP_image.fillAmount = Char_Current_HP/Char_Max_HP;
+        //HP_image.fillAmount = Char_Current_HP/Char_Max_HP;
     }
     [RPC]
     public void SetFirePoint(Vector3 viewPoint)
