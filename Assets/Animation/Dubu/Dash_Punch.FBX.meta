@@ -374,7 +374,7 @@ ModelImporter:
       name: StrongAttackReady
       takeName: AtomicPunch
       firstFrame: 0
-      lastFrame: 7
+      lastFrame: 6
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -581,7 +581,7 @@ ModelImporter:
     - serializedVersion: 16
       name: StrongAttackBoom
       takeName: AtomicPunch
-      firstFrame: 8
+      firstFrame: 7
       lastFrame: 20
       wrapMode: 0
       orientationOffsetY: 0

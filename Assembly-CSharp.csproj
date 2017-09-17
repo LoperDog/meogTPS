@@ -88,7 +88,9 @@
      <Compile Include="Assets\BackGround\PostProcessing\PostProcessing\Runtime\Utils\ReflectionUtils.cs" />
      <Compile Include="Assets\BackGround\PostProcessing\PostProcessing\Runtime\Utils\RenderTextureFactory.cs" />
      <Compile Include="Assets\Script\Camera\Cam.cs" />
+     <Compile Include="Assets\Script\CharacterSctipt\DubuAnimation.cs" />
      <Compile Include="Assets\Script\CharacterSctipt\DubuCharacter.cs" />
+     <Compile Include="Assets\Script\CharacterSctipt\ManduAnimation.cs" />
      <Compile Include="Assets\Script\CharacterSctipt\ManduCharacter.cs" />
      <Compile Include="Assets\Script\EffectScript\DestroyMe.cs" />
      <Compile Include="Assets\Script\EffectScript\DestroyMe1.cs" />
