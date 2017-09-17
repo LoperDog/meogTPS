@@ -26,13 +26,31 @@ public class CoroutinClass : MonoBehaviour
     }
     public virtual void StartBuffSetting(float time, CharacterSuper.ItemCode code, float value)
     {
+        switch (code)
+        {
+            case CharacterSuper.ItemCode.Buff_Attack:
+                break;
+            case CharacterSuper.ItemCode.Buff_Speed:
+
+                break;
+            case CharacterSuper.ItemCode.Buff_DotHill:
+
+                break;
+            case CharacterSuper.ItemCode.Nuff_Attack:
+
+                break;
+            case CharacterSuper.ItemCode.Nuff_Speed:
+
+                break;
+            case CharacterSuper.ItemCode.Nuff_DotDemage:
+
+                break;
+            default:
+                break;
+        }
         StartCoroutine(EndBuffItem(time, code, value));
     }
-
-    public virtual void StartCooltime()
-    {
-        StartCoroutine(CoolTime());
-    }
+    
 
     // 시간초 후에 캐릭터를 확인한다.
     public virtual IEnumerator SetAttackState()
@@ -70,10 +88,6 @@ public class CoroutinClass : MonoBehaviour
 
         }
     }
-    public virtual IEnumerator CoolTime()
-    {
-        yield return null;
-    }
     // 아직은 작업 중.
     public virtual IEnumerator SetWhileBuff(float time)
     {
@@ -87,7 +101,6 @@ public class CoroutinClass : MonoBehaviour
         switch (Code)
         {
             case CharacterSuper.ItemCode.Buff_Attack:
-
                 break;
             case CharacterSuper.ItemCode.Buff_Speed:
 

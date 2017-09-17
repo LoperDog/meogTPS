@@ -313,8 +313,16 @@ public class CharacterMgr : MonoBehaviour
 
     public void InputControll()
     {
-        if (!thisCharacter.CanControll) return;
-        
+        if (!thisCharacter.CanControll)
+        {
+            Key_H = 0;
+            Key_V = 0;
+            Click_Left = false;
+            Click_Right = false;
+            Key_Special = false;
+            Key_Shift = false ;
+            return;
+        }
         Key_H = Input.GetAxis("Horizontal");
         Key_V = Input.GetAxis("Vertical");
         Click_Left = Input.GetMouseButton(0);
@@ -338,7 +346,7 @@ public class CharacterMgr : MonoBehaviour
 
         }
         Key_Shift = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
-        if (Key_Shift)
+        if (Key_Shift && !Click_Left && !Click_Right && !thisCharacter.GetIsReload())
         {
             thisCharacter.SetRun(Key_Shift);
         }
