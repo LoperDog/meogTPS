@@ -31,7 +31,7 @@ public class ConfigClass {
 
         ManduStatus.Add("MoveSpeed", 2.0f);
         ManduStatus.Add("RunSpeed" , 6.8f);
-        ManduStatus.Add("JumpForce" , 4000f);
+        ManduStatus.Add("JumpForce" , 5000f);
 
         ManduStatus.Add("Cartridge" , 10f);
         ManduStatus.Add("ReLoadTime" , 2.0f);
@@ -54,7 +54,7 @@ public class ConfigClass {
         // 이동속도
         DubuStatus["MoveSpeed"] = 2.8f;
         DubuStatus["RunSpeed"] = 7.5f;
-        DubuStatus["JumpForce"] = 5000f;
+        DubuStatus["JumpForce"] = 1500;
         // 장탄수 및 리로드 시간
         DubuStatus["Cartridge"] = 50f;
         DubuStatus["ReLoadTime"] = 1.7f;
