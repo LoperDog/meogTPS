@@ -141,7 +141,8 @@ public class CharacterMgr : MonoBehaviour
         }
         // 세팅
         thisCharacter.SetPlayerOb(gameObject);
-        thisCharacter.SetCoroutine(gameObject.AddComponent<CoroutinClass>());
+        //thisCharacter.SetCoroutine(gameObject.AddComponent<CoroutinClass>());
+        thisCharacter.SetCoroutine(gameObject.AddComponent<DubuCoroutin>());
         thisCharacter.SetPlayerTr(Player_tr);
         thisCharacter.SetPlayerRb(Player_rb);
         thisCharacter.SetCameraTr(Camera_tr);
@@ -158,9 +159,7 @@ public class CharacterMgr : MonoBehaviour
         // 총구 설정
         FirePoint.transform.localPosition = config.PositionConfig[CharType]["FirePosition"];
         thisCharacter.SetFirePoint(FirePoint);
-        // 애니매이션 추후 수정
-        //thisAnim = new AnimationSuper();
-
+        thisCharacter.SetAnimator(thisAnim);
         thisAnim.SetChar(thisCharacter);
         thisAnim.SetAnimator(gameObject.GetComponent<Animator>());
         // 캐릭터 마스터 스테이터스,
@@ -280,6 +279,7 @@ public class CharacterMgr : MonoBehaviour
     [RPC]
     public void SetCharacterSPAttack()
     {
+        Debug.Log("캐릭터 강공격 중");
         thisCharacter.SpecialAttack();
     }
     // 마우스 올림
@@ -288,9 +288,12 @@ public class CharacterMgr : MonoBehaviour
     {
         thisCharacter.UpAttack();
     }
-    public void ShotPlayer(NetworkView Player)
+    // 데미지를 전해준다.
+    public void ShotPlayer(NetworkView Player,float de)
     {
-        Player.RPC("GetDamage", RPCMode.AllBuffered, (float)config.StatusConfigs[CharType]["Attack"]);
+        if (_networkView.isMine) {
+            Player.RPC("GetDamage", RPCMode.AllBuffered, (float)de);
+        }
     }
     void FixedUpdate()
     {
@@ -338,7 +341,8 @@ public class CharacterMgr : MonoBehaviour
         Click_Right = Input.GetMouseButton(1);
         if (Input.GetMouseButton(1))
         {
-
+            Debug.Log("마우스 오른쪽 버튼이 눌렸다.");
+            _networkView.RPC("SetCharacterStAttack", RPCMode.AllBuffered, null);
         }
         Key_Special = Input.GetKey(KeyCode.Q);
         if (Input.GetKey(KeyCode.Q))

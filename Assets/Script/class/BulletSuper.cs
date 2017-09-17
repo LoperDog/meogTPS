@@ -20,6 +20,7 @@ public class BulletSuper : MonoBehaviour
     public Transform Effect;
 
     public GameMgr Mgr;
+    static ConfigClass config;
 
     public virtual void FireBullet(Vector3 position, Quaternion rotation, float FireSpeed, int code)
     {
@@ -58,7 +59,11 @@ public class BulletSuper : MonoBehaviour
         IsLift = false;
         if (col.transform.tag == "PLAYER")
         {
-            Player_tr.GetComponent<CharacterMgr>().ShotPlayer(col.transform.GetComponent<NetworkView>());
+            if(config == null)
+            {
+                config = new ConfigClass();
+            }
+            Player_tr.GetComponent<CharacterMgr>().ShotPlayer(col.transform.GetComponent<NetworkView>(),config.StatusConfigs["Dubu"]["Attack"]);
             Debug.Log("맞은 친구" + col.transform.name + " 뷰 아이디 : " + col.transform.GetComponent<NetworkView>().viewID);
         }
         SetBulletEnalbed();

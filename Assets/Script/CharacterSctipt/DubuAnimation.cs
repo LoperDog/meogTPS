@@ -19,5 +19,19 @@ public class DubuAnimation : AnimationSuper
         base.SetChar(CharScript);
         CharacterScript = (DubuCharacter)CharScript;
     }
+    public void SetStrongAttackReady()
+    {
+        m_Anim.SetBool("Is_StrongAttackReady", true);
+    }
+    public void SetStrongAttackDash()
+    {
+        m_Anim.SetBool("Is_StrongAttackReady", false);
+
+        m_Anim.SetBool("Is_StrongAttackDash", true);
+    }
+    public void SetStrongAttackEnd()
+    {
+
+    }
 }
 
