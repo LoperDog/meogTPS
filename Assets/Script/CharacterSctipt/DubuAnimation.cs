@@ -7,10 +7,7 @@ public class DubuAnimation : AnimationSuper
     DubuCharacter CharacterScript;
     public override void PlayAttack()
     {
-        //Debug.Log("캐릭터가 공격중인가??" + m_Char_State.GetIsAttack());
-        //Debug.Log("두부가 왼쪽 공격중인가??" + CharacterScript.AttackIsLeft);
         m_Anim.SetBool("Is_Attack", m_Char_State.GetIsAttack());
-
         m_Anim.SetBool("LeftAttack", CharacterScript.AttackIsLeft);
         m_Anim.SetBool("RightAttack", !CharacterScript.AttackIsLeft);
     }
@@ -22,16 +19,18 @@ public class DubuAnimation : AnimationSuper
     public void SetStrongAttackReady()
     {
         m_Anim.SetBool("Is_StrongAttackReady", true);
+        m_Anim.SetBool("Is_StrongAttackEnd", false);
+        m_Anim.SetBool("S_A_End", false);
     }
     public void SetStrongAttackDash()
     {
         m_Anim.SetBool("Is_StrongAttackReady", false);
-
         m_Anim.SetBool("Is_StrongAttackDash", true);
     }
     public void SetStrongAttackEnd()
     {
-
+        m_Anim.SetBool("Is_StrongAttackEnd", true);
+        m_Anim.SetBool("S_A_End", true);
     }
 }
 

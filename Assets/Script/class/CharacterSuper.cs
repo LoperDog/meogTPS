@@ -89,7 +89,7 @@ public class CharacterSuper : MonoBehaviour{
     public Transform Player_tr;
     public Rigidbody Player_rb;
     protected GameObject Player_Object;
-    // 조금 알아보고 쓰자.
+
     protected GameObject BaseBullet;
     protected GameObject StrongBullet;
     protected GameObject SpecialBullet;
@@ -136,7 +136,7 @@ public class CharacterSuper : MonoBehaviour{
     }
     public virtual void Run()
     {
-        if (Is_Run && (m_Move_V > 0.1) && Is_Ground && m_Current_Speed <= m_Run_Speed)
+        if (Is_Run && (m_Move_V > 0.1) && Is_Ground && m_Current_Speed <= m_Run_Speed && !GetIsReload() && !IsAttack && (m_Move_H == 0))
         {
             m_Current_Speed += 20.0f * Time.deltaTime;
         }
@@ -203,7 +203,7 @@ public class CharacterSuper : MonoBehaviour{
     }
     public virtual void ReLoad()
     {
-        if ((!IsReLoad) && (m_Current_Bullet != m_Max_Bullet)) //재장전이 아니고 총알이 최대가 아니며 R키를 누를 때 재장전
+        if ((!IsReLoad) && (m_Current_Bullet != m_Max_Bullet))  //재장전이 아니고 총알이 최대가 아니며 R키를 누를 때 재장전
         {
             IsReLoad = true;
             coroutine.StartReLoad();
