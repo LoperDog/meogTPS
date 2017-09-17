@@ -108,11 +108,12 @@ public class CharacterMgr : MonoBehaviour
         {
             case Chacracter_Type.Dubu:
                 thisCharacter = new DubuCharacter();
+                thisAnim = new DubuAnimation();
                 CharType = config.DubuString;
                 break;
             case Chacracter_Type.Mandu:
-                Debug.Log("만두 캐릭터 생성 시작");
                 thisCharacter = new ManduCharacter();
+                thisAnim = new ManduAnimation();
                 CharType = config.ManduString;
                 break;
             default:
@@ -139,7 +140,7 @@ public class CharacterMgr : MonoBehaviour
         FirePoint.transform.localPosition = config.PositionConfig[CharType]["FirePosition"];
         thisCharacter.SetFirePoint(FirePoint);
         // 애니매이션 추후 수정
-        thisAnim = new AnimationSuper();
+        //thisAnim = new AnimationSuper();
 
         thisAnim.SetChar(thisCharacter);
         thisAnim.SetAnimator(gameObject.GetComponent<Animator>());
@@ -261,6 +262,12 @@ public class CharacterMgr : MonoBehaviour
     {
         thisCharacter.SpecialAttack();
     }
+    // 마우스 올림
+    [RPC]
+    public void SetMouseUp()
+    {
+        thisCharacter.UpAttack();
+    }
     public void ShotPlayer(NetworkView Player)
     {
         Player.RPC("GetDamage", RPCMode.AllBuffered, (float)config.StatusConfigs[CharType]["Attack"]);
@@ -295,6 +302,10 @@ public class CharacterMgr : MonoBehaviour
         {
             _networkView.RPC("SetFirePoint", RPCMode.AllBuffered, ShootTheFuckingRay());
             // 네트워크 알피씨를 날려야 한다.
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            _networkView.RPC("SetMouseUp", RPCMode.AllBuffered, null);
         }
         Click_Right = Input.GetMouseButton(1);
         if (Input.GetMouseButton(1))
@@ -370,8 +381,7 @@ public class CharacterMgr : MonoBehaviour
 
             // 키 동기화
             Key_Shift = thisCharacter.GetIsRun();
-
-            // 임시로 캐릭터 번호 맞추기
+            
 
             // 위치 전송
             stream.Serialize(ref pos);
