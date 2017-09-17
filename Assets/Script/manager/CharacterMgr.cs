@@ -143,6 +143,9 @@ public class CharacterMgr : MonoBehaviour
 
         thisAnim.SetChar(thisCharacter);
         thisAnim.SetAnimator(gameObject.GetComponent<Animator>());
+        // 캐릭터 마스터 스테이터스,
+
+        thisCharacter.SetCharacterStatus(config.StatusConfigs[CharType]);
         // 강공격 객체 설정.
         // 특수기 객체 설정.
 

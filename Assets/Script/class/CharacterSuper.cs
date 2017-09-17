@@ -245,15 +245,16 @@ public class CharacterSuper : MonoBehaviour{
     // 마스터 세팅
     public virtual void SetCharacterStatus(Dictionary<string, float> data)
     {
+        Debug.Log(data["Cartridge"]);
         SetBullet(data["Cartridge"]);
         SetMoveSpeed(data["MoveSpeed"]);
         SetRunSpeed(data["RunSpeed"]);
-        SetJumpForce(data["JumpSpeed"]);
+        SetJumpForce(data["JumpForce"]);
         SetReLoadTime(data["ReLoadTime"]);
 
-        CurrentAttack = data["AttackSpeed"];
-        CurrentStrongAttack = data["AttackStrongSpeed"];
-        CurrentSpecialAttack = data["AttackSpecialSpeed"];
+        CurrentAttack = data["AtttackSpeed"];
+        CurrentStrongAttack = data["StrongAttackSpeed"];
+        CurrentSpecialAttack = data["SpecialAttackSpeed"];
     }
 
     public virtual void SetFirePoint(GameObject point) { FirePoint = point; }
