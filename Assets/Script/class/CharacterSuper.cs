@@ -22,6 +22,7 @@ public class CharacterSuper : MonoBehaviour{
     public float m_CurrentReload;
     public float m_TimeReload;
 
+    static public ConfigClass config;
     public float CurrentAttack
     {
         get { return m_CurrentAttack; }
@@ -98,11 +99,7 @@ public class CharacterSuper : MonoBehaviour{
     protected GameObject FirePoint;
 
     protected Transform Camera_tr;
-
-    // 두부에서만 쓰는 공격 이팩트 뜨는 위치.
-    public bool AttackIsLeft = false;
-    // 두부에서만 쓰는 것.
-    public bool IsFirstAttack = true;
+    
     // 이팩트 뜰 위치를 정한다.
     public Transform [] effectPosition;
     public Transform[] effect;
@@ -198,6 +195,10 @@ public class CharacterSuper : MonoBehaviour{
     {
 
     }
+    public virtual void UpAttack()
+    {
+
+    }
     public virtual void ReLoad()
     {
         if ((!IsReLoad) && (m_Current_Bullet != m_Max_Bullet)) //재장전이 아니고 총알이 최대가 아니며 R키를 누를 때 재장전
@@ -206,7 +207,7 @@ public class CharacterSuper : MonoBehaviour{
             coroutine.StartReLoad();
         }
     }
-    // 총알을 발사한다.
+    // 기본 총알을 발사한다.
     public virtual void ShotBullet()
     {
         coroutine.StartAttackSetting();        
@@ -356,7 +357,6 @@ public class CharacterSuper : MonoBehaviour{
     public virtual bool GetIsJump() { return Is_Jump; }
     public virtual bool GetIsGroud() { return Is_Ground; }
     public virtual bool GetIsRolling() { return Is_Rolling; }
-    public virtual bool GetIsAttackLeft() { return AttackIsLeft; }
     public virtual bool GetIsDead() { return Is_Dead; }
     public virtual bool GetIsStrongAttack() { return IsStrongAttack; }
     public virtual bool GetIsSpecialAttack() { return IsSpecialAttack; }

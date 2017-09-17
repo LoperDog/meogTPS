@@ -5,6 +5,7 @@ using UnityEngine;
 public class CoroutinClass : MonoBehaviour
 {
     CharacterSuper thisCharacterScript;
+    static ConfigClass config;
 
     // 코루틴으로 사용할 컴포넌트에 스크립트를 설정한다.
     public virtual void SetCharacterScript(CharacterSuper CharacterClass)
@@ -36,20 +37,18 @@ public class CoroutinClass : MonoBehaviour
     // 시간초 후에 캐릭터를 확인한다.
     public virtual IEnumerator SetAttackState()
     {
-        yield return new WaitForSeconds(thisCharacterScript.m_CurrentAttack);
+        yield return new WaitForSeconds(thisCharacterScript.CurrentAttack);
         thisCharacterScript.IsAttack = false;
-        thisCharacterScript.AttackIsLeft = !thisCharacterScript.AttackIsLeft;
-        // 두부 캐릭터만 쓰는 부분. 추후 삭제
-        if (thisCharacterScript.IsFirstAttack)
-        {
-            thisCharacterScript.Attack();
-            thisCharacterScript.IsFirstAttack = false;
-        }
-        else
-        {
-            thisCharacterScript.IsFirstAttack = true;
-        }
-        thisCharacterScript.CanControll = true;
+    }
+    public virtual IEnumerator SetStrongAttack()
+    {
+        yield return new WaitForSeconds(thisCharacterScript.CurrentStrongAttack);
+        thisCharacterScript.IsStrongAttack = false;
+    }
+    public virtual IEnumerator SetSpecialAttack()
+    {
+        yield return new WaitForSeconds(thisCharacterScript.CurrentSpecialAttack);
+        thisCharacterScript.IsSpecialAttack = false;
     }
     // 리로딩
     public virtual IEnumerator SetReLoad()
