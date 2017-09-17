@@ -28,9 +28,17 @@ public class CharacterMgr : MonoBehaviour
     public List<GameObject> LoadBullet;
     [SerializeField]
     public GameMgr MyMgr;
+
+    //UI
     public Text Bullet_count;
     public Image Special;
     public Image HP_image;
+
+    //캐릭터별 UI
+    public Image Dubu;
+    public Image Mandu;
+    public Image Special_Dubu;
+    public Image Special_Mandu;
 
     public enum Chacracter_Type
     {
@@ -97,6 +105,13 @@ public class CharacterMgr : MonoBehaviour
         Camera_tr = Camera.main.GetComponent<Transform>();
         _networkView = GetComponent<NetworkView>();
 
+        //캐릭터별 UI 세팅
+        Dubu = GameObject.Find("Dubu").GetComponent<Image>();
+        Special_Dubu = GameObject.Find("Special_Dubu").GetComponent<Image>();
+
+        Mandu = GameObject.Find("Mandu").GetComponent<Image>();
+        Special_Mandu = GameObject.Find("Special_Mandu").GetComponent<Image>();
+
         if (config == null)
         {
             config = new ConfigClass();
@@ -110,11 +125,15 @@ public class CharacterMgr : MonoBehaviour
                 thisCharacter = new DubuCharacter();
                 thisAnim = new DubuAnimation();
                 CharType = config.DubuString;
+                Dubu.enabled = true;
+                Special_Dubu.enabled = true;
                 break;
             case Chacracter_Type.Mandu:
                 thisCharacter = new ManduCharacter();
                 thisAnim = new ManduAnimation();
                 CharType = config.ManduString;
+                Mandu.enabled = true;
+                Special_Mandu.enabled = true;
                 break;
             default:
 
@@ -154,7 +173,7 @@ public class CharacterMgr : MonoBehaviour
         {
             HP_image = GameObject.Find("Hp_Image").GetComponent<Image>();
             Bullet_count = GameObject.Find("Bullet_Count").GetComponent<Text>();
-            Special = GameObject.Find("Special_Color").GetComponent<Image>();
+            Special = GameObject.Find("Special_Black").GetComponent<Image>();
             Camera.main.GetComponent<Cam>().SetPlayer(Player_tr);
             mainCamera = Camera.main;
 
@@ -215,10 +234,11 @@ public class CharacterMgr : MonoBehaviour
     }
     public void Show_UI()
     {
-        //총알
+        //공격
         Current_Bullet = thisCharacter.m_Current_Bullet;
         Max_Bullet = thisCharacter.m_Max_Bullet;
         Bullet_count.text = Current_Bullet + "/" + Max_Bullet + ToString();
+        //특수기
         Special.fillAmount = Current_Bullet / Max_Bullet;
         //체력
         HP_image.fillAmount = Char_Current_HP/Char_Max_HP;
