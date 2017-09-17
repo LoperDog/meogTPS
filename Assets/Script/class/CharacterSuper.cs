@@ -245,7 +245,6 @@ public class CharacterSuper : MonoBehaviour{
     // 마스터 세팅
     public virtual void SetCharacterStatus(Dictionary<string, float> data)
     {
-        Debug.Log(data["Cartridge"]);
         SetBullet(data["Cartridge"]);
         SetMoveSpeed(data["MoveSpeed"]);
         SetRunSpeed(data["RunSpeed"]);

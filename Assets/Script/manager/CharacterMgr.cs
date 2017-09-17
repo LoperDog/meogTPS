@@ -215,12 +215,12 @@ public class CharacterMgr : MonoBehaviour
     public void Show_UI()
     {
         //총알
-        //Current_Bullet = thisCharacter.m_Current_Bullet;
-        //Max_Bullet = thisCharacter.m_Max_Bullet;
-//Bullet_count.text = Current_Bullet + "/" + Max_Bullet + ToString();
-        //Special.fillAmount = Current_Bullet / Max_Bullet;
+        Current_Bullet = thisCharacter.m_Current_Bullet;
+        Max_Bullet = thisCharacter.m_Max_Bullet;
+        Bullet_count.text = Current_Bullet + "/" + Max_Bullet + ToString();
+        Special.fillAmount = Current_Bullet / Max_Bullet;
         //체력
-        //HP_image.fillAmount = Char_Current_HP/Char_Max_HP;
+        HP_image.fillAmount = Char_Current_HP/Char_Max_HP;
     }
     [RPC]
     public void SetFirePoint(Vector3 viewPoint)
