@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CoroutinClass : MonoBehaviour
 {
-    CharacterSuper thisCharacterScript;
-    static ConfigClass config;
+    public CharacterSuper thisCharacterScript;
+    static public ConfigClass config;
 
     // 코루틴으로 사용할 컴포넌트에 스크립트를 설정한다.
     public virtual void SetCharacterScript(CharacterSuper CharacterClass)
@@ -15,6 +15,14 @@ public class CoroutinClass : MonoBehaviour
     public virtual void StartAttackSetting()
     {
         StartCoroutine(SetAttackState());
+    }
+    public virtual void StartStrongAttckSetting()
+    {
+        StartCoroutine(SetStrongAttack());
+    }
+    public virtual void StartSpecialAttack()
+    {
+        StartCoroutine(SetSpecialAttack());
     }
     public virtual void StartReLoad()
     {

@@ -4,31 +4,10 @@ using UnityEngine;
 
 public class DubuCharacter : CharacterSuper
 {
-    /*
-    // 생성자 관리
-    public DubuCharacter()
-    {
-
-        m_CurrentAttack = 0.0f;
-        m_TimeAttack = 0.5f;
-    }*/
-
-    //public override void Attack()
-    //{
-    //base.Attack();
-    //Debug.Log("두부에서 실행됨");
-    //}
-    /*
-    public override void Move()
-    {
-        Debug.Log("두부에서 실행됨ㅁㄴㅇ");
-    }
-    ~DubuCharacter()
-    {
-
-    }*/
     // 이팩트 시작 위치나 등등을 잡아줘야 한다.
     public bool AttackIsLeft = false;
+    
+    public DubuAnimation  CharAnim;
 
     override public void Attack()
     {
@@ -60,8 +39,7 @@ public class DubuCharacter : CharacterSuper
         // 공격이 시작될수 있는데 총알이 없다면 - 공격 불가 상태
         else if (!IsAttack && !IsReLoad && m_Current_Bullet == 0)
         {
-            IsReLoad = true;
-            coroutine.StartReLoad();
+            ReLoad();
         }
         // 
         else
@@ -69,9 +47,32 @@ public class DubuCharacter : CharacterSuper
             //m_CurrentAttack = 0.0f;
         }
     }
+    // 마우스 오른쪽 버튼이 눌리는 순간 실행되는 함수.
+    // 강공격을 시작한다.
     public override void StrongAttack()
     {
-
+        // 특수 공격 사용가능하다면.
+        if (!IsStrongAttack)
+        {
+            coroutine.StartStrongAttckSetting();
+        }
+    }
+    // 강공격 준비사항.
+    // 준비의 이팩트를 생성시키고 준비 애니매이션을 재생한다.
+    public void StrongAttackReady()
+    {
+        CharAnim.SetStrongAttackReady();
+    }
+    // 강공격 대미지가 들어가는 부분.
+    // 이팩트 생성, 애니매이션 재생. 
+    public void StrongAttackDash()
+    {
+        CharAnim.SetStrongAttackDash();
+    }
+    // 강공격이 끝나는 부분.
+    public void StrongAttackEnd()
+    {
+        CharAnim.SetStrongAttackEnd();
     }
     public override void SpecialAttack()
     {
@@ -83,5 +84,19 @@ public class DubuCharacter : CharacterSuper
             config = new ConfigClass();
         }
         CurrentAttack = config.StatusConfigs["Dubu"]["AtttackSpeed"];
+    }
+    public override void ReLoad()
+    {
+        base.ReLoad();
+        if(config == null)
+        {
+            config = new ConfigClass();
+        }
+        CurrentAttack = config.StatusConfigs["Dubu"]["AtttackSpeed"];
+    }
+    public override void SetAnimator(AnimationSuper anim)
+    {
+        base.SetAnimator(anim);
+        CharAnim = (DubuAnimation)anim;
     }
 }

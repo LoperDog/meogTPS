@@ -99,7 +99,8 @@ public class CharacterSuper : MonoBehaviour{
     protected GameObject FirePoint;
 
     protected Transform Camera_tr;
-    
+
+    protected AnimationSuper Anim;
     // 이팩트 뜰 위치를 정한다.
     public Transform [] effectPosition;
     public Transform[] effect;
@@ -191,6 +192,7 @@ public class CharacterSuper : MonoBehaviour{
     {
 
     }
+    // 특수 공격
     public virtual void SpecialAttack()
     {
 
@@ -256,7 +258,10 @@ public class CharacterSuper : MonoBehaviour{
         CurrentStrongAttack = data["StrongAttackSpeed"];
         CurrentSpecialAttack = data["SpecialAttackSpeed"];
     }
-
+    public virtual void SetAnimator(AnimationSuper anim)
+    {
+        Anim = anim;
+    }
     public virtual void SetFirePoint(GameObject point) { FirePoint = point; }
     public virtual void SetReLoadTime(float time) { m_TimeReload = time; }
     public virtual void SetRollingTime(float rolling_time) { m_Time_Rolling = rolling_time; }

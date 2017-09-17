@@ -64,6 +64,10 @@ public class ConfigClass {
         // 강공격
         DubuStatus["StrongAttack"] = 30f;
         DubuStatus["StrongAttackSpeed"] = 5.0f;
+        DubuStatus.Add("StongAttackReady", 0.2f);
+        DubuStatus.Add("StongAttackTime", 0.2f);
+        DubuStatus.Add("StongAttackEnd", 0.2f);
+
         // 특수기
         DubuStatus["SpecialAttack"] = 100.0f;
         DubuStatus["SpecialAttackSpeed"] =  25.0f;
