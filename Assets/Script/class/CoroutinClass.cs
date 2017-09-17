@@ -28,6 +28,10 @@ public class CoroutinClass : MonoBehaviour
         StartCoroutine(EndBuffItem(time, code, value));
     }
 
+    public virtual void StartCooltime()
+    {
+        StartCoroutine(CoolTime());
+    }
 
     // 시간초 후에 캐릭터를 확인한다.
     public virtual IEnumerator SetAttackState()
@@ -66,6 +70,10 @@ public class CoroutinClass : MonoBehaviour
         {
 
         }
+    }
+    public virtual IEnumerator CoolTime()
+    {
+        yield return null;
     }
     // 아직은 작업 중.
     public virtual IEnumerator SetWhileBuff(float time)
