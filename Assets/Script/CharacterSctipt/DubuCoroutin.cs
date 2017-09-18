@@ -11,6 +11,16 @@ public class DubuCoroutin : CoroutinClass
         DubuChar = (DubuCharacter)CharacterClass;
     }
 
+    public override void StartStrongAttckSetting()
+    {
+        if(config == null)
+        {
+            config = new ConfigClass();
+        }
+        thisMgr.StrongAttackCoolTime = config.StatusConfigs["Dubu"]["StrongSttackSpeed"];
+        base.StartStrongAttckSetting();
+    }
+
     // 강공격을 시작한다.
     // 제어불가 상태가 되며 쿨타임이 시작되고
     public override IEnumerator SetStrongAttack()

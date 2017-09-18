@@ -62,6 +62,10 @@ public class CharacterMgr : MonoBehaviour
     public float RAY_MaxDist = 500;
 
     #endregion
+    #region UI표현에 필요한 변수
+    public float StrongAttackCoolTime = 0.0f;
+    public float SpecialAttackCoolTime = 0.0f;
+    #endregion
     #region 캐릭터 내부 스크립트 혹은 클래스
     // 필요한 기능등 붙이기
     [SerializeField]

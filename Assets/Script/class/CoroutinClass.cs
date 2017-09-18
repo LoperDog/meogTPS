@@ -5,6 +5,7 @@ using UnityEngine;
 public class CoroutinClass : MonoBehaviour
 {
     public CharacterSuper thisCharacterScript;
+    public CharacterMgr thisMgr;
     static public ConfigClass config;
 
     // 코루틴으로 사용할 컴포넌트에 스크립트를 설정한다.
@@ -12,26 +13,35 @@ public class CoroutinClass : MonoBehaviour
     {
         thisCharacterScript = CharacterClass;
     }
+    public virtual void SetMgr(CharacterMgr mg) { thisMgr = mg; }
+
+    // 외부에서 실행시키는 기본공격
     public virtual void StartAttackSetting()
     {
         StartCoroutine(SetAttackState());
     }
+    // 외부에서 실행시키는 강공격
     public virtual void StartStrongAttckSetting()
     {
         StartCoroutine(SetStrongAttack());
+        StartCoroutine(StartStrongCoolTime());
     }
+    // 외부에서 실행시키는 특수기
     public virtual void StartSpecialAttack()
     {
         StartCoroutine(SetSpecialAttack());
     }
+    // 외부에서 실행시키는 재장전
     public virtual void StartReLoad()
     {
         StartCoroutine(SetReLoad());
     }
+    // 지운다.
     public virtual void StartRolling()
     {
         StartCoroutine(SetRolling());
     }
+
     public virtual void StartBuffSetting(float time, CharacterSuper.ItemCode code, float value)
     {
         switch (code)
@@ -59,7 +69,6 @@ public class CoroutinClass : MonoBehaviour
         StartCoroutine(EndBuffItem(time, code, value));
     }
     
-
     // 시간초 후에 캐릭터를 확인한다.
     public virtual IEnumerator SetAttackState()
     {
@@ -128,5 +137,16 @@ public class CoroutinClass : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public virtual IEnumerator StartStrongCoolTime()
+    {
+        while (thisMgr.StrongAttackCoolTime >= 0.0)
+        {
+            yield return new WaitForSeconds(0.05f);
+            thisMgr.StrongAttackCoolTime -= 0.05f;
+            Debug.Log("StrongAttackCoolTime" + thisMgr.StrongAttackCoolTime);
+        }
+        thisMgr.StrongAttackCoolTime = 0.0f;
     }
 }
