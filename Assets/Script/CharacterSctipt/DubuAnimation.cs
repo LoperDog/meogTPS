@@ -33,6 +33,8 @@ public class DubuAnimation : AnimationSuper
         m_Anim.SetBool("Is_StrongAttackDash", false);
         m_Anim.SetBool("Is_StrongAttackEnd", true);
     }
+<<<<<<< HEAD
+=======
     public void SetSpecialAttackReady()
     {
 
@@ -45,5 +47,6 @@ public class DubuAnimation : AnimationSuper
     {
 
     }
+>>>>>>> 037a26b9c7a35f9d34f14e58e45eb02a770518b9
 }
 
