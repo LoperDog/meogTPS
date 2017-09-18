@@ -262,11 +262,6 @@ public class CharacterMgr : MonoBehaviour
         thisCharacter.ReLoad();
     }
     [RPC]
-    public void SetCharacterRollong()
-    {
-        thisCharacter.Rolling();
-    }
-    [RPC]
     public void GetDamage(float de)
     {
         Debug.Log("맞은 아이디 : " + _networkView.viewID + " 남은 채력 : " + Char_Current_HP);
@@ -360,10 +355,6 @@ public class CharacterMgr : MonoBehaviour
         {
             //_networkView.RPC("SetCharacterJump", RPCMode.AllBuffered, null);
             thisCharacter.Jump();
-        }
-        if (Input.GetKey(KeyCode.F))
-        {
-            _networkView.RPC("SetCharacterRollong", RPCMode.AllBuffered, null);
         }
         if (Input.GetKey(KeyCode.R))
         {

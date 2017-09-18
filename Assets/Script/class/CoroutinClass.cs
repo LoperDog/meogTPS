@@ -36,11 +36,6 @@ public class CoroutinClass : MonoBehaviour
     {
         StartCoroutine(SetReLoad());
     }
-    // 지운다.
-    public virtual void StartRolling()
-    {
-        StartCoroutine(SetRolling());
-    }
 
     public virtual void StartBuffSetting(float time, CharacterSuper.ItemCode code, float value)
     {
@@ -91,19 +86,6 @@ public class CoroutinClass : MonoBehaviour
         yield return new WaitForSeconds(thisCharacterScript.m_TimeReload);
         thisCharacterScript.SetBullet(thisCharacterScript.m_Max_Bullet);
         thisCharacterScript.IsReLoad = false;
-    }
-    public virtual IEnumerator SetRolling()//구르기
-    {
-        if (thisCharacterScript.Is_Rolling == true)
-        {
-            thisCharacterScript.Player_rb.AddForce(thisCharacterScript.Player_tr.forward * 4000);
-            yield return new WaitForSeconds(thisCharacterScript.m_Time_Rolling);
-            thisCharacterScript.Is_Rolling = false;
-        }
-        else
-        {
-
-        }
     }
     // 아직은 작업 중.
     public virtual IEnumerator SetWhileBuff(float time)

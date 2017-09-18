@@ -20,7 +20,6 @@ public class AnimationSuper
         PlayLanding();
         PlayAttack();
         PlayReload();
-        PlayRolling();
         Long_Landing();
         PlayDie();
     }
@@ -47,10 +46,6 @@ public class AnimationSuper
     public virtual void PlayLanding()//착지
     {
         m_Anim.SetBool("Landing_Move", m_Char_State.GetIsGroud());
-    }
-    public virtual void PlayRolling()//구르기
-    {
-        m_Anim.SetBool("Rolling", m_Char_State.GetIsRolling());
     }
     public virtual void PlayAttack()// 공격
     {

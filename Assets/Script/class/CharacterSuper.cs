@@ -43,7 +43,6 @@ public class CharacterSuper : MonoBehaviour{
 
     public bool IsAttack = false;
     public bool IsReLoad = false;
-    public bool Is_Rolling;
     public bool Is_Dead = false;
     public bool IsStrongAttack = false;
     public bool IsSpecialAttack = false;
@@ -70,8 +69,6 @@ public class CharacterSuper : MonoBehaviour{
     //점프
     protected float m_Jump_Force;
 
-    //구르기
-    public float m_Time_Rolling;
     // 캐릭터 제어가능 여부
     protected bool cancontroll = true;
     public bool CanControll
@@ -117,7 +114,6 @@ public class CharacterSuper : MonoBehaviour{
         m_CurrentAttack = 1.0f;
         m_CurrentReload = 0.0f;
         m_TimeReload = 0.7f;
-        m_Time_Rolling = 1.0f;
         PlayerCode = 0;
     }
     #region 캐릭터 기능 정의
@@ -172,15 +168,6 @@ public class CharacterSuper : MonoBehaviour{
             }
         }
         Is_Ground = false;
-    }
-    public virtual void Rolling()
-    {
-        if (IsReLoad) return;
-        if (!Is_Rolling && !GetIsReload() && GetIsGroud())//구르기가 아니고 재장전이 아니며 땅에 있을 때
-        {
-            Is_Rolling = true;
-            coroutine.StartRolling();
-        }
     }
     // 기본공격
     public virtual void Attack()
@@ -264,7 +251,6 @@ public class CharacterSuper : MonoBehaviour{
     }
     public virtual void SetFirePoint(GameObject point) { FirePoint = point; }
     public virtual void SetReLoadTime(float time) { m_TimeReload = time; }
-    public virtual void SetRollingTime(float rolling_time) { m_Time_Rolling = rolling_time; }
     public virtual void SetBullet(float bulletMax)
     {
         m_Max_Bullet = bulletMax;
@@ -360,7 +346,6 @@ public class CharacterSuper : MonoBehaviour{
     public virtual bool GetIsRun() { return Is_Run; }
     public virtual bool GetIsJump() { return Is_Jump; }
     public virtual bool GetIsGroud() { return Is_Ground; }
-    public virtual bool GetIsRolling() { return Is_Rolling; }
     public virtual bool GetIsDead() { return Is_Dead; }
     public virtual bool GetIsStrongAttack() { return IsStrongAttack; }
     public virtual bool GetIsSpecialAttack() { return IsSpecialAttack; }
