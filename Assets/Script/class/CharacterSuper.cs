@@ -295,7 +295,6 @@ public class CharacterSuper : MonoBehaviour{
          * 즉 특수기가 연속 발사이거나 하는 등의 경우를 상정해 두고 작업 하기 위함.
          */
         // 총알 인스턴스의 고유 값을 가져온다.
-        //Debug.Log("총알 풀링");
         int poolkey = Object.GetInstanceID();
 
         // 이미 총알 풀에 그값이 있는지 없는지 검사 한다. 없어야 넣는다.

@@ -29,8 +29,9 @@ public class DubuAnimation : AnimationSuper
     }
     public void SetStrongAttackEnd()
     {
-        m_Anim.SetBool("Is_StrongAttackEnd", true);
         m_Anim.SetBool("S_A_End", true);
+        m_Anim.SetBool("Is_StrongAttackDash", false);
+        m_Anim.SetBool("Is_StrongAttackEnd", true);
     }
 }
 

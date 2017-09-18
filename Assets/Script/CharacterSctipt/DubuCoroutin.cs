@@ -53,6 +53,5 @@ public class DubuCoroutin : CoroutinClass
         DubuChar.StrongAttackEnd();
         yield return new WaitForSeconds(config.StatusConfigs["Dubu"]["StongAttackEnd"]);
         thisCharacterScript.CanControll = true;
-
     }
 }
