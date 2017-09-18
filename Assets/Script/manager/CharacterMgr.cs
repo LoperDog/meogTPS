@@ -149,6 +149,7 @@ public class CharacterMgr : MonoBehaviour
         thisCharacter.SetPlayerOb(gameObject);
         //thisCharacter.SetCoroutine(gameObject.AddComponent<CoroutinClass>());
         thisCharacter.SetCoroutine(gameObject.AddComponent<DubuCoroutin>());
+        thisCharacter.coroutine.SetMgr(this);
         thisCharacter.SetPlayerTr(Player_tr);
         thisCharacter.SetPlayerRb(Player_rb);
         thisCharacter.SetCameraTr(Camera_tr);

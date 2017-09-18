@@ -92,7 +92,7 @@ public class CharacterSuper : MonoBehaviour{
     protected GameObject SpecialBullet;
     protected Dictionary<int, Queue<GameObject>> BulletPool = new Dictionary<int, Queue<GameObject>>();
 
-    protected CoroutinClass coroutine;
+    public CoroutinClass coroutine;
     protected GameObject FirePoint;
 
     protected Transform Camera_tr;

@@ -17,7 +17,7 @@ public class DubuCoroutin : CoroutinClass
         {
             config = new ConfigClass();
         }
-        thisMgr.StrongAttackCoolTime = config.StatusConfigs["Dubu"]["StrongSttackSpeed"];
+        thisMgr.StrongAttackCoolTime = config.StatusConfigs["Dubu"]["StrongAttackSpeed"];
         base.StartStrongAttckSetting();
     }
 
