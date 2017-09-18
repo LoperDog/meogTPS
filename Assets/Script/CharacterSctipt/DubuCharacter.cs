@@ -40,6 +40,7 @@ public class DubuCharacter : CharacterSuper
         else if (!IsAttack && !IsReLoad && m_Current_Bullet == 0)
         {
             ReLoad();
+            
         }
         // 
         else
@@ -52,7 +53,7 @@ public class DubuCharacter : CharacterSuper
     public override void StrongAttack()
     {
         // 특수 공격 사용가능하다면.
-        if (!IsStrongAttack)
+        if (!IsStrongAttack && GetIsGroud())//특수공격이 아니고 땅에 있으며 재장전이 아닐 때 
         {
             coroutine.StartStrongAttckSetting();
         }
@@ -68,6 +69,7 @@ public class DubuCharacter : CharacterSuper
     public void StrongAttackDash()
     {
         CharAnim.SetStrongAttackDash();
+        Player_rb.AddForce(Player_tr.forward * 20000f);
     }
     // 강공격이 끝나는 부분.
     public void StrongAttackEnd()
@@ -76,6 +78,7 @@ public class DubuCharacter : CharacterSuper
     }
     public override void SpecialAttack()
     {
+
     }
     public override void UpAttack()
     {

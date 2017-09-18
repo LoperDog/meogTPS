@@ -125,6 +125,7 @@ public class CharacterMgr : MonoBehaviour
                 thisCharacter = new DubuCharacter();
                 thisAnim = new DubuAnimation();
                 CharType = config.DubuString;
+                //UI
                 Dubu.enabled = true;
                 Special_Dubu.enabled = true;
                 break;
@@ -132,6 +133,7 @@ public class CharacterMgr : MonoBehaviour
                 thisCharacter = new ManduCharacter();
                 thisAnim = new ManduAnimation();
                 CharType = config.ManduString;
+                //UI
                 Mandu.enabled = true;
                 Special_Mandu.enabled = true;
                 break;
@@ -191,9 +193,6 @@ public class CharacterMgr : MonoBehaviour
             //InputControll();
             // 키를 적용해준다.
             //thisCharacter.SetCharacterMove(Key_H, Key_V);
-            //InputControll();
-            // 키를 적용해준다.
-            //thisCharacter.SetCharacterMove(Key_H, Key_V);
         }
         /*
         else
@@ -228,7 +227,7 @@ public class CharacterMgr : MonoBehaviour
         else
         {
             return ray.origin + (Camera.main.transform.forward * 500f);
-            //FirePoint.transform.LookAt(ray.origin + (Camera.main.transform.forward * 500f));
+            //FirePoint.transform.LookAt(ray.origin + (Camera.main.transform.forward * 500f));  
         }
     }
     public void Show_UI()
@@ -332,7 +331,6 @@ public class CharacterMgr : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             _networkView.RPC("SetFirePoint", RPCMode.AllBuffered, ShootTheFuckingRay());
-            // 네트워크 알피씨를 날려야 한다.
         }
         if (Input.GetMouseButtonUp(0))
         {
@@ -341,7 +339,6 @@ public class CharacterMgr : MonoBehaviour
         Click_Right = Input.GetMouseButton(1);
         if (Input.GetMouseButton(1))
         {
-            Debug.Log("마우스 오른쪽 버튼이 눌렸다.");
             _networkView.RPC("SetCharacterStAttack", RPCMode.AllBuffered, null);
         }
         Key_Special = Input.GetKey(KeyCode.Q);

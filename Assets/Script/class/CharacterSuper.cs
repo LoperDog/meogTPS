@@ -89,7 +89,7 @@ public class CharacterSuper : MonoBehaviour{
     public Transform Player_tr;
     public Rigidbody Player_rb;
     protected GameObject Player_Object;
-    // 조금 알아보고 쓰자.
+
     protected GameObject BaseBullet;
     protected GameObject StrongBullet;
     protected GameObject SpecialBullet;
@@ -136,7 +136,7 @@ public class CharacterSuper : MonoBehaviour{
     }
     public virtual void Run()
     {
-        if (Is_Run && (m_Move_V > 0.1) && Is_Ground && m_Current_Speed <= m_Run_Speed)
+        if (Is_Run && (m_Move_V > 0.1) && Is_Ground && m_Current_Speed <= m_Run_Speed && !GetIsReload() && !IsAttack && (m_Move_H == 0))
         {
             m_Current_Speed += 20.0f * Time.deltaTime;
         }
@@ -203,7 +203,7 @@ public class CharacterSuper : MonoBehaviour{
     }
     public virtual void ReLoad()
     {
-        if ((!IsReLoad) && (m_Current_Bullet != m_Max_Bullet)) //재장전이 아니고 총알이 최대가 아니며 R키를 누를 때 재장전
+        if ((!IsReLoad) && (m_Current_Bullet != m_Max_Bullet))  //재장전이 아니고 총알이 최대가 아니며 R키를 누를 때 재장전
         {
             IsReLoad = true;
             coroutine.StartReLoad();
@@ -295,7 +295,6 @@ public class CharacterSuper : MonoBehaviour{
          * 즉 특수기가 연속 발사이거나 하는 등의 경우를 상정해 두고 작업 하기 위함.
          */
         // 총알 인스턴스의 고유 값을 가져온다.
-        //Debug.Log("총알 풀링");
         int poolkey = Object.GetInstanceID();
 
         // 이미 총알 풀에 그값이 있는지 없는지 검사 한다. 없어야 넣는다.

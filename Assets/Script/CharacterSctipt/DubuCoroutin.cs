@@ -43,7 +43,6 @@ public class DubuCoroutin : CoroutinClass
         DubuChar.StrongAttackDash();
         yield return new WaitForSeconds(config.StatusConfigs["Dubu"]["StongAttackTime"]);
         StartCoroutine(SetStrongAttackEnd());
-        thisCharacterScript.CanControll = true;
     }
     public IEnumerator SetStrongAttackEnd()
     {
@@ -53,5 +52,6 @@ public class DubuCoroutin : CoroutinClass
         }
         DubuChar.StrongAttackEnd();
         yield return new WaitForSeconds(config.StatusConfigs["Dubu"]["StongAttackEnd"]);
+        thisCharacterScript.CanControll = true;
     }
 }
