@@ -127,7 +127,6 @@ public class CoroutinClass : MonoBehaviour
         {
             yield return new WaitForSeconds(0.05f);
             thisMgr.StrongAttackCoolTime -= 0.05f;
-            Debug.Log("StrongAttackCoolTime" + thisMgr.StrongAttackCoolTime);
         }
         thisMgr.StrongAttackCoolTime = 0.0f;
     }

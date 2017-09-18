@@ -33,6 +33,8 @@ public class CharacterMgr : MonoBehaviour
     public Text Bullet_count;
     public Image Special;
     public Image HP_image;
+    public Image Right_Black;
+    public Text Right_Cool;
 
     //캐릭터별 UI
     public Image Dubu;
@@ -180,6 +182,8 @@ public class CharacterMgr : MonoBehaviour
             HP_image = GameObject.Find("Hp_Image").GetComponent<Image>();
             Bullet_count = GameObject.Find("Bullet_Count").GetComponent<Text>();
             Special = GameObject.Find("Special_Black").GetComponent<Image>();
+            Right_Black = GameObject.Find("Right_Black").GetComponent<Image>();
+            Right_Cool = GameObject.Find("Right_Cool").GetComponent<Text>();
             Camera.main.GetComponent<Cam>().SetPlayer(Player_tr);
             mainCamera = Camera.main;
 
@@ -188,6 +192,7 @@ public class CharacterMgr : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(StrongAttackCoolTime);
         //캐릭터 업데이트
         //thisCharacter.CharacterUpdate();
 
@@ -241,6 +246,10 @@ public class CharacterMgr : MonoBehaviour
         Current_Bullet = thisCharacter.m_Current_Bullet;
         Max_Bullet = thisCharacter.m_Max_Bullet;
         Bullet_count.text = Current_Bullet + "/" + Max_Bullet + ToString();
+        //강공격
+        Right_Black.fillAmount = StrongAttackCoolTime / config.DubuStatus["StrongAttackSpeed"];
+        string m = (StrongAttackCoolTime).ToString();
+        Right_Cool.text = m;
         //특수기
         Special.fillAmount = Current_Bullet / Max_Bullet;
         //체력
