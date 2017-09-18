@@ -33,5 +33,6 @@ public class DubuAnimation : AnimationSuper
     {
 
     }
+    public void Set
 }
 
