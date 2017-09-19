@@ -248,9 +248,18 @@ public class CharacterMgr : MonoBehaviour
         Max_Bullet = thisCharacter.m_Max_Bullet;
         Bullet_count.text = Current_Bullet + "/" + Max_Bullet + ToString();
         //강공격
+        StrongAttackCoolTime = Mathf.Floor(StrongAttackCoolTime*10)/10;
         Right_Black.fillAmount = StrongAttackCoolTime / config.DubuStatus["StrongAttackSpeed"];
-        string m = (StrongAttackCoolTime).ToString();
-        Right_Cool.text = m;
+        string a = StrongAttackCoolTime.ToString();
+        Right_Cool.text = a;
+        if (StrongAttackCoolTime == 0)
+        {
+            Right_Cool.enabled = false;
+        }
+        else
+        {
+            Right_Cool.enabled = true;
+        }
         //특수기
         Special.fillAmount = Current_Bullet / Max_Bullet;
         //체력
