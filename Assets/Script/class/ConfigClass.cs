@@ -43,7 +43,7 @@ public class ConfigClass {
         ManduStatus.Add("StrongAttackSpeed" , 2.0f);
 
         ManduStatus.Add("SpecialAttack" , 0.0f);
-        ManduStatus.Add("SpecialAttackSpeed" , 0.0f);
+        ManduStatus.Add("SpecialAttackSpeed" , 3.0f);
 
         ManduPosition.Add("FirePosition", new Vector3(0.0f, 1.15f, 0.8f));
         #endregion

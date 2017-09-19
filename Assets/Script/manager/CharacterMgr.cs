@@ -201,6 +201,7 @@ public class CharacterMgr : MonoBehaviour
         if (_networkView.isMine)
         {
             Show_UI();
+            Debug.Log(SpecialAttackCoolTime);
             //InputControll();
             // 키를 적용해준다.
             //thisCharacter.SetCharacterMove(Key_H, Key_V);
@@ -249,9 +250,10 @@ public class CharacterMgr : MonoBehaviour
         Bullet_count.text = Current_Bullet + "/" + Max_Bullet + ToString();
         //강공격
         StrongAttackCoolTime = Mathf.Floor(StrongAttackCoolTime*10)/10;
-        Right_Black.fillAmount = StrongAttackCoolTime / config.DubuStatus["StrongAttackSpeed"];
+        Right_Black.fillAmount = StrongAttackCoolTime / config.StatusConfigs[CharType]["StrongAttackSpeed"];
         string a = StrongAttackCoolTime.ToString();
         Right_Cool.text = a;
+        //특수기
         if (StrongAttackCoolTime == 0)
         {
             Right_Cool.enabled = false;
