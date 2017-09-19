@@ -306,6 +306,16 @@ public class CharacterMgr : MonoBehaviour
 
         if (_networkView.isMine)
         {
+            if (!thisCharacter.CanControll)
+            {
+                Key_H = 0;
+                Key_V = 0;
+                Click_Left = false;
+                Click_Right = false;
+                Key_Special = false;
+                Key_Shift = false;
+                return;
+            }
             InputControll();
             thisCharacter.Turn();
         }
@@ -315,16 +325,6 @@ public class CharacterMgr : MonoBehaviour
 
     public void InputControll()
     {
-        if (!thisCharacter.CanControll)
-        {
-            Key_H = 0;
-            Key_V = 0;
-            Click_Left = false;
-            Click_Right = false;
-            Key_Special = false;
-            Key_Shift = false ;
-            return;
-        }
         Key_H = Input.GetAxis("Horizontal");
         Key_V = Input.GetAxis("Vertical");
         Click_Left = Input.GetMouseButton(0);

@@ -13,7 +13,9 @@ public class CoroutinClass : MonoBehaviour
     {
         thisCharacterScript = CharacterClass;
     }
-    public virtual void SetMgr(CharacterMgr mg) { thisMgr = mg; }
+    public virtual void SetMgr(CharacterMgr mg) {
+        thisMgr = mg;
+    }
 
     // 외부에서 실행시키는 기본공격
     public virtual void StartAttackSetting()
@@ -127,7 +129,7 @@ public class CoroutinClass : MonoBehaviour
         {
             yield return new WaitForSeconds(0.05f);
             thisMgr.StrongAttackCoolTime -= 0.05f;
-            Debug.Log("StrongAttackCoolTime" + thisMgr.StrongAttackCoolTime);
+            //Debug.Log("StrongAttackCoolTime" + thisMgr.StrongAttackCoolTime);
         }
         thisMgr.StrongAttackCoolTime = 0.0f;
     }

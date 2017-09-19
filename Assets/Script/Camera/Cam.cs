@@ -47,34 +47,7 @@ public class Cam : MonoBehaviour
             tr.rotation = rotation;
             tr.position = position;
         }
-        /*
-        mouse_y = -Input.GetAxis("Mouse Y");
-        {
-            if (tr.rotation.eulerAngles.x + mouse_y <= Min_y || tr.rotation.eulerAngles.x + mouse_y >= Max_y)
-            {
-                tr.Rotate(Vector3.right * mouse_y_speed * mouse_y * Time.deltaTime);
-                tr.position += new Vector3(0 , mouse_y, 0);
-            }
-
-            else if (tr.rotation.eulerAngles.x + mouse_y >= Min_y && tr.rotation.eulerAngles.x + mouse_y <= 180)
-            {
-                tr.localEulerAngles = new Vector3(Min_y, 0, 0);
-            }
-
-            else
-            {
-                tr.localEulerAngles = new Vector3(Max_y, 0, 0);
-            }
-        }*/
     }
-
-    /*public float ClamAngle(float angle)
-    {
-        angle += angle <= -360 ? 360 : 0.0f;
-        angle -= angle >= 360 ? 360 : 0.0f;
-
-        return Mathf.Clamp(angle, Min_y, Max_y);
-    }*/
     public void SetPlayer(Transform Pl)
     {
         Player = Pl;
