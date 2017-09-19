@@ -59,7 +59,6 @@ public class DubuCharacter : CharacterSuper
         }
     }
     // 강공격 준비사항.
-    // 준비의 이팩트를 생성시키고 준비 애니매이션을 재생한다.
     public void StrongAttackReady()
     {
         CharAnim.SetStrongAttackReady();
@@ -76,10 +75,19 @@ public class DubuCharacter : CharacterSuper
     {
         CharAnim.SetStrongAttackEnd();
     }
+    //특수기 시작
     public override void SpecialAttack()
     {
-
+        if (!IsSpecialAttack && GetIsGroud())
+        {
+            coroutine.StartSpecialAttack();
+        }
     }
+    public void SpecialAttackReady()
+    {
+        CharAnim.SetSpecialAttackReady();
+    }
+
     public override void UpAttack()
     {
         if (config == null)

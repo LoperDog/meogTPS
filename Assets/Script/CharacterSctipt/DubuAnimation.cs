@@ -35,7 +35,7 @@ public class DubuAnimation : AnimationSuper
     }
     public void SetSpecialAttackReady()
     {
-
+        m_Anim.SetBool("Is_SpecialAttack", true);
     }
     public void SetSpecialAttackDash()
     {

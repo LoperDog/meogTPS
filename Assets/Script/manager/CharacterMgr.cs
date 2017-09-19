@@ -65,7 +65,9 @@ public class CharacterMgr : MonoBehaviour
 
     #endregion
     #region UI표현에 필요한 변수
+    //강공격
     public float StrongAttackCoolTime = 0.0f;
+    //특수기
     public float SpecialAttackCoolTime = 0.0f;
     #endregion
     #region 캐릭터 내부 스크립트 혹은 클래스
@@ -192,7 +194,6 @@ public class CharacterMgr : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(StrongAttackCoolTime);
         //캐릭터 업데이트
         //thisCharacter.CharacterUpdate();
 
@@ -285,9 +286,8 @@ public class CharacterMgr : MonoBehaviour
     }
     // 특수기
     [RPC]
-    public void SetCharacterSPAttack()
+    public void SetCharacterSpecialAttack()
     {
-        Debug.Log("캐릭터 강공격 중");
         thisCharacter.SpecialAttack();
     }
     // 마우스 올림
@@ -353,7 +353,7 @@ public class CharacterMgr : MonoBehaviour
         Key_Special = Input.GetKey(KeyCode.Q);
         if (Input.GetKey(KeyCode.Q))
         {
-
+            _networkView.RPC("SetCharacterSpecialAttack", RPCMode.AllBuffered, null);
         }
         Key_Shift = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
         if (Key_Shift && !Click_Left && !Click_Right && !thisCharacter.GetIsReload())

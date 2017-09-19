@@ -29,7 +29,8 @@ public class CoroutinClass : MonoBehaviour
     // 외부에서 실행시키는 특수기
     public virtual void StartSpecialAttack()
     {
-        StartCoroutine(SetSpecialAttack());
+        //StartCoroutine(SetSpecialAttack());
+        StartCoroutine(StartSpecialCoolTime());
     }
     // 외부에서 실행시키는 재장전
     public virtual void StartReLoad()
@@ -70,11 +71,13 @@ public class CoroutinClass : MonoBehaviour
         yield return new WaitForSeconds(thisCharacterScript.CurrentAttack);
         thisCharacterScript.IsAttack = false;
     }
+    //강공격
     public virtual IEnumerator SetStrongAttack()
     {
         yield return new WaitForSeconds(thisCharacterScript.CurrentStrongAttack);
         thisCharacterScript.IsStrongAttack = false;
     }
+    //특수기
     public virtual IEnumerator SetSpecialAttack()
     {
         yield return new WaitForSeconds(thisCharacterScript.CurrentSpecialAttack);
@@ -129,5 +132,14 @@ public class CoroutinClass : MonoBehaviour
             thisMgr.StrongAttackCoolTime -= 0.05f;
         }
         thisMgr.StrongAttackCoolTime = 0.0f;
+    }
+    public virtual IEnumerator StartSpecialCoolTime()
+    {
+        while (thisMgr.SpecialAttackCoolTime >= 0.0)
+        {
+            yield return new WaitForSeconds(0.05f);
+            thisMgr.SpecialAttackCoolTime -= 0.05f;
+        }
+        thisMgr.SpecialAttackCoolTime = 0.0f;
     }
 }
