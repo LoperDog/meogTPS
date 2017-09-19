@@ -130,7 +130,6 @@
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\DepthOfFieldScatter.shader" />
      <None Include="Assets\Standard Assets\Effects\TessellationShaders\Shaders\BumpedSpecularSmooth.shader" />
      <None Include="Assets\Standard Assets\Effects\Projectors\Guidelines.txt" />
-     <None Include="Assets\Window.shader" />
      <None Include="Assets\BackGround\PostProcessing\PostProcessing\Resources\Shaders\ScreenSpaceReflection.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\MotionBlur.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\MobileBloom.shader" />
@@ -155,7 +154,6 @@
      <None Include="Assets\BackGround\PostProcessing\PostProcessing\Resources\Shaders\Blit.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\frag_ao.cginc" />
      <None Include="Assets\BackGround\PostProcessing\PostProcessing\Editor Resources\Monitors\WaveformRender.shader" />
-     <None Include="Assets\door.shader" />
      <None Include="Assets\Standard Assets\Effects\MotionBlur\Resources\Common.cginc" />
      <None Include="Assets\Standard Assets\Effects\AmbientOcclusion\Resources\AmbientOcclusion.shader" />
      <None Include="Assets\BackGround\PostProcessing\PostProcessing\Editor Resources\Monitors\VectorscopeCompute.compute" />
