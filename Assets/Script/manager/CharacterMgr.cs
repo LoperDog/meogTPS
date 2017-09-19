@@ -35,6 +35,7 @@ public class CharacterMgr : MonoBehaviour
     public Image HP_image;
     public Image Right_Black;
     public Text Right_Cool;
+    public Text Special_Cool;
 
     //캐릭터별 UI
     public Image Dubu;
@@ -174,10 +175,7 @@ public class CharacterMgr : MonoBehaviour
         thisAnim.SetChar(thisCharacter);
         thisAnim.SetAnimator(gameObject.GetComponent<Animator>());
         // 캐릭터 마스터 스테이터스,
-
         thisCharacter.SetCharacterStatus(config.StatusConfigs[CharType]);
-        // 강공격 객체 설정.
-        // 특수기 객체 설정.
 
         if (_networkView.isMine)
         {
@@ -186,6 +184,7 @@ public class CharacterMgr : MonoBehaviour
             Special = GameObject.Find("Special_Black").GetComponent<Image>();
             Right_Black = GameObject.Find("Right_Black").GetComponent<Image>();
             Right_Cool = GameObject.Find("Right_Cool").GetComponent<Text>();
+            Special_Cool = GameObject.Find("Special_Cool").GetComponent<Text>();
             Camera.main.GetComponent<Cam>().SetPlayer(Player_tr);
             mainCamera = Camera.main;
 
@@ -201,7 +200,6 @@ public class CharacterMgr : MonoBehaviour
         if (_networkView.isMine)
         {
             Show_UI();
-            Debug.Log(SpecialAttackCoolTime);
             //InputControll();
             // 키를 적용해준다.
             //thisCharacter.SetCharacterMove(Key_H, Key_V);
@@ -244,16 +242,17 @@ public class CharacterMgr : MonoBehaviour
     }
     public void Show_UI()
     {
+        //체력
+        HP_image.fillAmount = Char_Current_HP / Char_Max_HP;
         //공격
         Current_Bullet = thisCharacter.m_Current_Bullet;
         Max_Bullet = thisCharacter.m_Max_Bullet;
         Bullet_count.text = Current_Bullet + "/" + Max_Bullet + ToString();
         //강공격
-        StrongAttackCoolTime = Mathf.Floor(StrongAttackCoolTime*10)/10;
+        StrongAttackCoolTime = Mathf.Floor(StrongAttackCoolTime * 10) / 10;
         Right_Black.fillAmount = StrongAttackCoolTime / config.StatusConfigs[CharType]["StrongAttackSpeed"];
-        string a = StrongAttackCoolTime.ToString();
-        Right_Cool.text = a;
-        //특수기
+        string Strong_Attack = StrongAttackCoolTime.ToString();
+        Right_Cool.text = Strong_Attack;
         if (StrongAttackCoolTime == 0)
         {
             Right_Cool.enabled = false;
@@ -263,9 +262,18 @@ public class CharacterMgr : MonoBehaviour
             Right_Cool.enabled = true;
         }
         //특수기
-        Special.fillAmount = Current_Bullet / Max_Bullet;
-        //체력
-        HP_image.fillAmount = Char_Current_HP/Char_Max_HP;
+        SpecialAttackCoolTime = Mathf.Floor(SpecialAttackCoolTime * 10) / 10;
+        Special.fillAmount = SpecialAttackCoolTime / config.StatusConfigs[CharType]["SpecialAttackSpeed"];
+        string Special_Attack = SpecialAttackCoolTime.ToString();
+        Special_Cool.text = SpecialAttackCoolTime.ToString();
+        if (SpecialAttackCoolTime == 0)
+        {
+            Special_Cool.enabled = false;
+        }
+        else
+        {
+            Special_Cool.enabled = true;
+        }
     }
     [RPC]
     public void SetFirePoint(Vector3 viewPoint)

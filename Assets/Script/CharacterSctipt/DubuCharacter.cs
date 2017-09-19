@@ -40,9 +40,7 @@ public class DubuCharacter : CharacterSuper
         else if (!IsAttack && !IsReLoad && m_Current_Bullet == 0)
         {
             ReLoad();
-            
         }
-        // 
         else
         {
             //m_CurrentAttack = 0.0f;
@@ -53,7 +51,7 @@ public class DubuCharacter : CharacterSuper
     public override void StrongAttack()
     {
         // 특수 공격 사용가능하다면.
-        if (!IsStrongAttack && GetIsGroud())//특수공격이 아니고 땅에 있으며 재장전이 아닐 때 
+        if (!IsStrongAttack && GetIsGroud())//특수공격이 아니고 땅에 있을 때
         {
             coroutine.StartStrongAttckSetting();
         }
