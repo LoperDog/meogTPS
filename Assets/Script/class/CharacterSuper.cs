@@ -40,6 +40,17 @@ public class CharacterSuper : MonoBehaviour{
     }
 
     public int PlayerCode;
+    public CharacterMgr CharMgr;
+    public CharacterMgr mgr
+    {
+        get {
+            return CharMgr;
+        }
+        set {
+            CharMgr = value;
+            coroutine.SetMgr(CharMgr);
+        }
+    }
 
     public bool IsAttack = false;
     public bool IsReLoad = false;
@@ -90,6 +101,7 @@ public class CharacterSuper : MonoBehaviour{
     protected GameObject BaseBullet;
     protected GameObject StrongBullet;
     protected GameObject SpecialBullet;
+    
     protected Dictionary<int, Queue<GameObject>> BulletPool = new Dictionary<int, Queue<GameObject>>();
 
     public CoroutinClass coroutine;

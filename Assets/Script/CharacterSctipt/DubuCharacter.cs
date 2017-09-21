@@ -8,9 +8,8 @@ public class DubuCharacter : CharacterSuper
     public bool AttackIsLeft = false;
     
     public DubuAnimation  CharAnim;
-    public CharacterMgr CharMgr;
     override public void Attack()
-    {
+    { 
         // 공격중이 아닌데 공격 이 시작된다면 - 공격 가능
         if (!IsAttack && !IsReLoad && m_Current_Bullet > 0)
         {
