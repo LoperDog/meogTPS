@@ -31,7 +31,7 @@ public class CoroutinClass : MonoBehaviour
     // 외부에서 실행시키는 특수기
     public virtual void StartSpecialAttack()
     {
-        //StartCoroutine(SetSpecialAttack());
+        StartCoroutine(SetSpecialAttack());
         StartCoroutine(StartSpecialCoolTime());
     }
     // 외부에서 실행시키는 재장전

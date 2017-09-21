@@ -311,14 +311,16 @@ public class CharacterMgr : MonoBehaviour
             thisAnim.PlayAnimation();
             return;
         }
-        thisCharacter.CharacterUpdate();
 
+        thisCharacter.CharacterUpdate();
+        thisCharacter.SetCharacterMove(Key_H, Key_V);
+        thisAnim.PlayAnimation();
         if (_networkView.isMine)
         {
             if (!thisCharacter.CanControll)
             {
-                Key_H = 0;
-                Key_V = 0;
+                Key_H = 0f;
+                Key_V = 0f;
                 Click_Left = false;
                 Click_Right = false;
                 Key_Special = false;
@@ -328,8 +330,6 @@ public class CharacterMgr : MonoBehaviour
             InputControll();
             thisCharacter.Turn();
         }
-        thisCharacter.SetCharacterMove(Key_H, Key_V);
-        thisAnim.PlayAnimation();
     }
 
     public void InputControll()
