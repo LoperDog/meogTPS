@@ -187,7 +187,6 @@ public class CharacterMgr : MonoBehaviour
             Special_Cool = GameObject.Find("Special_Cool").GetComponent<Text>();
             Camera.main.GetComponent<Cam>().SetPlayer(Player_tr);
             mainCamera = Camera.main;
-
         }
     }
 
@@ -218,7 +217,6 @@ public class CharacterMgr : MonoBehaviour
                 Player_tr.position = Vector3.Lerp(Player_tr.position, Char_Pos, Time.deltaTime * 10.0f);
                 // 전송받아온 변경된 각도로 부드럽게 회전
                 Player_tr.rotation = Quaternion.Slerp(Player_tr.rotation, Char_Rot, Time.deltaTime * 10.0f);
-
             }
         }*/
         // 상태에 맞춰서 알아서 애니매이션 플레이
@@ -251,8 +249,7 @@ public class CharacterMgr : MonoBehaviour
         //강공격
         StrongAttackCoolTime = Mathf.Floor(StrongAttackCoolTime * 10) / 10;
         Right_Black.fillAmount = StrongAttackCoolTime / config.StatusConfigs[CharType]["StrongAttackSpeed"];
-        string Strong_Attack = StrongAttackCoolTime.ToString();
-        Right_Cool.text = Strong_Attack;
+        Right_Cool.text = StrongAttackCoolTime.ToString();
         if (StrongAttackCoolTime == 0)
         {
             Right_Cool.enabled = false;
@@ -264,7 +261,6 @@ public class CharacterMgr : MonoBehaviour
         //특수기
         SpecialAttackCoolTime = Mathf.Floor(SpecialAttackCoolTime * 10) / 10;
         Special.fillAmount = SpecialAttackCoolTime / config.StatusConfigs[CharType]["SpecialAttackSpeed"];
-        string Special_Attack = SpecialAttackCoolTime.ToString();
         Special_Cool.text = SpecialAttackCoolTime.ToString();
         if (SpecialAttackCoolTime == 0)
         {
