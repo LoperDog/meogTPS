@@ -20,7 +20,7 @@ public class DubuCoroutin : CoroutinClass
         thisMgr.StrongAttackCoolTime = config.StatusConfigs["Dubu"]["StrongAttackSpeed"];
         base.StartStrongAttckSetting();
     }
-    public override void StartSpecialAttack()
+    public override void StartSpecialAttackSetting()
     {
 
         if (config == null)
@@ -28,10 +28,9 @@ public class DubuCoroutin : CoroutinClass
             config = new ConfigClass();
         }
         thisMgr.SpecialAttackCoolTime = config.StatusConfigs["Dubu"]["SpecialAttackSpeed"];
-        base.StartSpecialAttack();
+        base.StartSpecialAttackSetting();
     }
-    // 강공격을 시작한다.
-    // 제어불가 상태가 되며 쿨타임이 시작되고
+    //강공격
     public override IEnumerator SetStrongAttack()
     {
         if(config == null)
@@ -81,10 +80,10 @@ public class DubuCoroutin : CoroutinClass
         {
             config = new ConfigClass();
         }
-        Debug.Log("두부 코루틴");
-        //StartCoroutine(SetSpecialSpecialAttakReady());
-        DubuChar.SpecialAttack();
+        StartCoroutine(SetSpecialSpecialAttakReady());
+        thisCharacterScript.CanControll = false;
         yield return new WaitForSeconds(config.StatusConfigs["Dubu"]["SpecialAttackSpeed"]);
+        thisCharacterScript.IsSpecialAttack = false;
     }
     public IEnumerator SetSpecialSpecialAttakReady()
     {
@@ -92,6 +91,29 @@ public class DubuCoroutin : CoroutinClass
         {
             config = new ConfigClass();
         }
-        yield return new WaitForSeconds(config.StatusConfigs["Dubu"]["SpecialAttackSpeed"]);
+        DubuChar.SpecialAttackReady();
+        yield return new WaitForSeconds(config.StatusConfigs["Dubu"]["SpecialAttackReady"]);
+        StartCoroutine(SetSpecialSpecialAttakDash());
+    }
+
+    public IEnumerator SetSpecialSpecialAttakDash()
+    {
+        if (config == null)
+        {
+            config = new ConfigClass();
+        }
+        DubuChar.SpecialAttackDash();
+        yield return new WaitForSeconds(config.StatusConfigs["Dubu"]["SpecialAttackTime"]);
+        StartCoroutine(SetSpecialAttackEnd());
+    }
+    public IEnumerator SetSpecialAttackEnd()
+    {
+        if (config == null)
+        {
+            config = new ConfigClass();
+        }
+        DubuChar.SpecialAttackEnd();
+        yield return new WaitForSeconds(config.StatusConfigs["Dubu"]["SpecialAttackEnd"]);
+        thisCharacterScript.CanControll = true;
     }
 }

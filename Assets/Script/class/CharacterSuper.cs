@@ -209,7 +209,6 @@ public class CharacterSuper : MonoBehaviour{
         {
             GameObject objectToReuse = BulletPool[poolkey].Dequeue();
             BulletPool[poolkey].Enqueue(objectToReuse);
-
             objectToReuse.SetActive(true);
             // 오브젝트 사용하기 위해 세팅을 하자.
             // 발사할 위치를 정하거나 하는 둥의 액션.

@@ -18,7 +18,6 @@ public class CharacterMgr : MonoBehaviour
     private Vector3 Char_Pos;
     private Quaternion Char_Rot;
 
-
     string CharType = "";
     [SerializeField]
     Dictionary<string, GameObject> TempBulletPool;
@@ -40,8 +39,10 @@ public class CharacterMgr : MonoBehaviour
     //캐릭터별 UI
     public Image Dubu;
     public Image Mandu;
-    public Image Special_Dubu;
-    public Image Special_Mandu;
+    public Image Dubu_Special;
+    public Image Mandu_Special;
+    public Image Dubu_Right;
+    public Image Mandu_Right;
 
     public enum Chacracter_Type
     {
@@ -116,10 +117,12 @@ public class CharacterMgr : MonoBehaviour
 
         //캐릭터별 UI 세팅
         Dubu = GameObject.Find("Dubu").GetComponent<Image>();
-        Special_Dubu = GameObject.Find("Special_Dubu").GetComponent<Image>();
+        Dubu_Special = GameObject.Find("Dubu_Special").GetComponent<Image>();
+        Dubu_Right = GameObject.Find("Dubu_Right").GetComponent<Image>();
 
         Mandu = GameObject.Find("Mandu").GetComponent<Image>();
-        Special_Mandu = GameObject.Find("Special_Mandu").GetComponent<Image>();
+        Mandu_Special = GameObject.Find("Mandu_Special").GetComponent<Image>();
+        Mandu_Right = GameObject.Find("Mandu_Right").GetComponent<Image>();
 
         if (config == null)
         {
@@ -136,7 +139,8 @@ public class CharacterMgr : MonoBehaviour
                 CharType = config.DubuString;
                 //UI
                 Dubu.enabled = true;
-                Special_Dubu.enabled = true;
+                Dubu_Special.enabled = true;
+                Dubu_Right.enabled = true;
                 break;
             case Chacracter_Type.Mandu:
                 thisCharacter = new ManduCharacter();
@@ -144,7 +148,8 @@ public class CharacterMgr : MonoBehaviour
                 CharType = config.ManduString;
                 //UI
                 Mandu.enabled = true;
-                Special_Mandu.enabled = true;
+                Mandu_Special.enabled = true;
+                Mandu_Right.enabled = true;
                 break;
             default:
 
@@ -182,7 +187,7 @@ public class CharacterMgr : MonoBehaviour
             HP_image = GameObject.Find("Hp_Image").GetComponent<Image>();
             Bullet_count = GameObject.Find("Bullet_Count").GetComponent<Text>();
             Special = GameObject.Find("Special_Black").GetComponent<Image>();
-            Right_Black = GameObject.Find("Right_Black").GetComponent<Image>();
+            Right_Black = GameObject.Find("Right_Button_Black").GetComponent<Image>();
             Right_Cool = GameObject.Find("Right_Cool").GetComponent<Text>();
             Special_Cool = GameObject.Find("Special_Cool").GetComponent<Text>();
             Camera.main.GetComponent<Cam>().SetPlayer(Player_tr);
@@ -250,7 +255,7 @@ public class CharacterMgr : MonoBehaviour
         StrongAttackCoolTime = Mathf.Floor(StrongAttackCoolTime * 10) / 10;
         Right_Black.fillAmount = StrongAttackCoolTime / config.StatusConfigs[CharType]["StrongAttackSpeed"];
         Right_Cool.text = StrongAttackCoolTime.ToString();
-        if (StrongAttackCoolTime == 0)
+        if (StrongAttackCoolTime <= 0.1)
         {
             Right_Cool.enabled = false;
         }
@@ -431,7 +436,6 @@ public class CharacterMgr : MonoBehaviour
             // 키 동기화
             Key_Shift = thisCharacter.GetIsRun();
             
-
             // 위치 전송
             stream.Serialize(ref pos);
             stream.Serialize(ref rot);
@@ -440,9 +444,6 @@ public class CharacterMgr : MonoBehaviour
             stream.Serialize(ref H);
             stream.Serialize(ref V);
             stream.Serialize(ref Shift);
-
-
-
         }
         else
         {

@@ -67,10 +67,12 @@ public class ConfigClass {
         DubuStatus.Add("StongAttackReady", 0.23f);
         DubuStatus.Add("StongAttackTime", 0.43f);
         DubuStatus.Add("StongAttackEnd", 0.86f);
-
         // 특수기
         DubuStatus["SpecialAttack"] = 100.0f;
-        DubuStatus["SpecialAttackSpeed"] =  25.0f;
+        DubuStatus["SpecialAttackSpeed"] = 25.0f;
+        DubuStatus.Add("SpecialAttackReady", 0.86f);
+        DubuStatus.Add("SpecialAttackTime", 0.56f);
+        DubuStatus.Add("SpecialAttackEnd", 1.43f);
 
         // 필요 포지션
         DubuPosition["FirePosition"] = new Vector3(0.0f, 1.15f, 0.8f);

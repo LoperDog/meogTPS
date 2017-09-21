@@ -29,9 +29,9 @@ public class CoroutinClass : MonoBehaviour
         StartCoroutine(StartStrongCoolTime());
     }
     // 외부에서 실행시키는 특수기
-    public virtual void StartSpecialAttack()
+    public virtual void StartSpecialAttackSetting()
     {
-        //StartCoroutine(SetSpecialAttack());
+        StartCoroutine(SetSpecialAttack());
         StartCoroutine(StartSpecialCoolTime());
     }
     // 외부에서 실행시키는 재장전
@@ -67,7 +67,6 @@ public class CoroutinClass : MonoBehaviour
         StartCoroutine(EndBuffItem(time, code, value));
     }
     
-    // 시간초 후에 캐릭터를 확인한다.
     public virtual IEnumerator SetAttackState()
     {
         yield return new WaitForSeconds(thisCharacterScript.CurrentAttack);
@@ -130,8 +129,8 @@ public class CoroutinClass : MonoBehaviour
     {
         while (thisMgr.StrongAttackCoolTime >= 0.0)
         {
-            yield return new WaitForSeconds(0.05f);
-            thisMgr.StrongAttackCoolTime -= 0.05f;
+            yield return new WaitForSeconds(0.1f);
+            thisMgr.StrongAttackCoolTime -= Time.deltaTime;
         }
         thisMgr.StrongAttackCoolTime = 0.0f;
     }
@@ -139,8 +138,8 @@ public class CoroutinClass : MonoBehaviour
     {
         while (thisMgr.SpecialAttackCoolTime >= 0.0)
         {
-            yield return new WaitForSeconds(0.05f);
-            thisMgr.SpecialAttackCoolTime -= 0.05f;
+            yield return new WaitForSeconds(0.1f);
+            thisMgr.SpecialAttackCoolTime -= Time.deltaTime;
         }
         thisMgr.SpecialAttackCoolTime = 0.0f;
     }
