@@ -43,7 +43,7 @@ public class ConfigClass {
         ManduStatus.Add("StrongAttackSpeed" , 2.0f);
 
         ManduStatus.Add("SpecialAttack" , 0.0f);
-        ManduStatus.Add("SpecialAttackSpeed" , 0.0f);
+        ManduStatus.Add("SpecialAttackSpeed" , 3.0f);
 
         ManduPosition.Add("FirePosition", new Vector3(0.0f, 1.15f, 0.8f));
         #endregion
@@ -64,13 +64,15 @@ public class ConfigClass {
         // 강공격
         DubuStatus["StrongAttack"] = 30f;
         DubuStatus["StrongAttackSpeed"] = 5.0f;
-        DubuStatus.Add("StongAttackReady", 0.2f);
-        DubuStatus.Add("StongAttackTime", 0.4f);
-        DubuStatus.Add("StongAttackEnd", 0.82f);
-
+        DubuStatus.Add("StongAttackReady", 0.23f);
+        DubuStatus.Add("StongAttackTime", 0.43f);
+        DubuStatus.Add("StongAttackEnd", 0.86f);
         // 특수기
         DubuStatus["SpecialAttack"] = 100.0f;
-        DubuStatus["SpecialAttackSpeed"] =  25.0f;
+        DubuStatus["SpecialAttackSpeed"] = 25.0f;
+        DubuStatus.Add("SpecialAttackReady", 0.86f);
+        DubuStatus.Add("SpecialAttackTime", 0.56f);
+        DubuStatus.Add("SpecialAttackEnd", 1.43f);
 
         // 필요 포지션
         DubuPosition["FirePosition"] = new Vector3(0.0f, 1.15f, 0.8f);

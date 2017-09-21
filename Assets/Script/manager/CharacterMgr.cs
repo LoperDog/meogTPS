@@ -18,7 +18,6 @@ public class CharacterMgr : MonoBehaviour
     private Vector3 Char_Pos;
     private Quaternion Char_Rot;
 
-
     string CharType = "";
     [SerializeField]
     Dictionary<string, GameObject> TempBulletPool;
@@ -35,12 +34,15 @@ public class CharacterMgr : MonoBehaviour
     public Image HP_image;
     public Image Right_Black;
     public Text Right_Cool;
+    public Text Special_Cool;
 
     //캐릭터별 UI
     public Image Dubu;
     public Image Mandu;
-    public Image Special_Dubu;
-    public Image Special_Mandu;
+    public Image Dubu_Special;
+    public Image Mandu_Special;
+    public Image Dubu_Right;
+    public Image Mandu_Right;
 
     public enum Chacracter_Type
     {
@@ -115,10 +117,12 @@ public class CharacterMgr : MonoBehaviour
 
         //캐릭터별 UI 세팅
         Dubu = GameObject.Find("Dubu").GetComponent<Image>();
-        Special_Dubu = GameObject.Find("Special_Dubu").GetComponent<Image>();
+        Dubu_Special = GameObject.Find("Dubu_Special").GetComponent<Image>();
+        Dubu_Right = GameObject.Find("Dubu_Right").GetComponent<Image>();
 
         Mandu = GameObject.Find("Mandu").GetComponent<Image>();
-        Special_Mandu = GameObject.Find("Special_Mandu").GetComponent<Image>();
+        Mandu_Special = GameObject.Find("Mandu_Special").GetComponent<Image>();
+        Mandu_Right = GameObject.Find("Mandu_Right").GetComponent<Image>();
 
         if (config == null)
         {
@@ -135,7 +139,8 @@ public class CharacterMgr : MonoBehaviour
                 CharType = config.DubuString;
                 //UI
                 Dubu.enabled = true;
-                Special_Dubu.enabled = true;
+                Dubu_Special.enabled = true;
+                Dubu_Right.enabled = true;
                 break;
             case Chacracter_Type.Mandu:
                 thisCharacter = new ManduCharacter();
@@ -143,7 +148,8 @@ public class CharacterMgr : MonoBehaviour
                 CharType = config.ManduString;
                 //UI
                 Mandu.enabled = true;
-                Special_Mandu.enabled = true;
+                Mandu_Special.enabled = true;
+                Mandu_Right.enabled = true;
                 break;
             default:
 
@@ -174,21 +180,18 @@ public class CharacterMgr : MonoBehaviour
         thisAnim.SetChar(thisCharacter);
         thisAnim.SetAnimator(gameObject.GetComponent<Animator>());
         // 캐릭터 마스터 스테이터스,
-
         thisCharacter.SetCharacterStatus(config.StatusConfigs[CharType]);
-        // 강공격 객체 설정.
-        // 특수기 객체 설정.
 
         if (_networkView.isMine)
         {
             HP_image = GameObject.Find("Hp_Image").GetComponent<Image>();
             Bullet_count = GameObject.Find("Bullet_Count").GetComponent<Text>();
             Special = GameObject.Find("Special_Black").GetComponent<Image>();
-            Right_Black = GameObject.Find("Right_Black").GetComponent<Image>();
+            Right_Black = GameObject.Find("Right_Button_Black").GetComponent<Image>();
             Right_Cool = GameObject.Find("Right_Cool").GetComponent<Text>();
+            Special_Cool = GameObject.Find("Special_Cool").GetComponent<Text>();
             Camera.main.GetComponent<Cam>().SetPlayer(Player_tr);
             mainCamera = Camera.main;
-
         }
     }
 
@@ -219,7 +222,6 @@ public class CharacterMgr : MonoBehaviour
                 Player_tr.position = Vector3.Lerp(Player_tr.position, Char_Pos, Time.deltaTime * 10.0f);
                 // 전송받아온 변경된 각도로 부드럽게 회전
                 Player_tr.rotation = Quaternion.Slerp(Player_tr.rotation, Char_Rot, Time.deltaTime * 10.0f);
-
             }
         }*/
         // 상태에 맞춰서 알아서 애니매이션 플레이
@@ -243,18 +245,36 @@ public class CharacterMgr : MonoBehaviour
     }
     public void Show_UI()
     {
+        //체력
+        HP_image.fillAmount = Char_Current_HP / Char_Max_HP;
         //공격
         Current_Bullet = thisCharacter.m_Current_Bullet;
         Max_Bullet = thisCharacter.m_Max_Bullet;
         Bullet_count.text = Current_Bullet + "/" + Max_Bullet + ToString();
         //강공격
-        Right_Black.fillAmount = StrongAttackCoolTime / config.DubuStatus["StrongAttackSpeed"];
-        string m = (StrongAttackCoolTime).ToString();
-        Right_Cool.text = m;
+        StrongAttackCoolTime = Mathf.Floor(StrongAttackCoolTime * 10) / 10;
+        Right_Black.fillAmount = StrongAttackCoolTime / config.StatusConfigs[CharType]["StrongAttackSpeed"];
+        Right_Cool.text = StrongAttackCoolTime.ToString();
+        if (StrongAttackCoolTime <= 0.1)
+        {
+            Right_Cool.enabled = false;
+        }
+        else
+        {
+            Right_Cool.enabled = true;
+        }
         //특수기
-        Special.fillAmount = Current_Bullet / Max_Bullet;
-        //체력
-        HP_image.fillAmount = Char_Current_HP/Char_Max_HP;
+        SpecialAttackCoolTime = Mathf.Floor(SpecialAttackCoolTime * 10) / 10;
+        Special.fillAmount = SpecialAttackCoolTime / config.StatusConfigs[CharType]["SpecialAttackSpeed"];
+        Special_Cool.text = SpecialAttackCoolTime.ToString();
+        if (SpecialAttackCoolTime == 0)
+        {
+            Special_Cool.enabled = false;
+        }
+        else
+        {
+            Special_Cool.enabled = true;
+        }
     }
     [RPC]
     public void SetFirePoint(Vector3 viewPoint)
@@ -416,7 +436,6 @@ public class CharacterMgr : MonoBehaviour
             // 키 동기화
             Key_Shift = thisCharacter.GetIsRun();
             
-
             // 위치 전송
             stream.Serialize(ref pos);
             stream.Serialize(ref rot);
@@ -425,9 +444,6 @@ public class CharacterMgr : MonoBehaviour
             stream.Serialize(ref H);
             stream.Serialize(ref V);
             stream.Serialize(ref Shift);
-
-
-
         }
         else
         {

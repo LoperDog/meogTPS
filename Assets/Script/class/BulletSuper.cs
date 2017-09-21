@@ -47,7 +47,6 @@ public class BulletSuper : MonoBehaviour
             //Debug.Log("PlayerGetYa!");
             SetBulletEnalbed();
         }
-
     }*/
     // 현제는 두개다 만들어 둔다.
     protected virtual void OnCollisionEnter(Collision col)

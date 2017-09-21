@@ -8,7 +8,7 @@ public class DubuCharacter : CharacterSuper
     public bool AttackIsLeft = false;
     
     public DubuAnimation  CharAnim;
-
+    public CharacterMgr CharMgr;
     override public void Attack()
     {
         // 공격중이 아닌데 공격 이 시작된다면 - 공격 가능
@@ -40,9 +40,7 @@ public class DubuCharacter : CharacterSuper
         else if (!IsAttack && !IsReLoad && m_Current_Bullet == 0)
         {
             ReLoad();
-            
         }
-        // 
         else
         {
             //m_CurrentAttack = 0.0f;
@@ -52,13 +50,11 @@ public class DubuCharacter : CharacterSuper
     // 강공격을 시작한다.
     public override void StrongAttack()
     {
-        // 특수 공격 사용가능하다면.
-        if (!IsStrongAttack && GetIsGroud())//특수공격이 아니고 땅에 있으며 재장전이 아닐 때 
+        if (!IsStrongAttack && GetIsGroud())//강공격이 아니고 땅에 있을 때
         {
             coroutine.StartStrongAttckSetting();
         }
     }
-    // 강공격 준비사항.
     public void StrongAttackReady()
     {
         CharAnim.SetStrongAttackReady();
@@ -80,14 +76,21 @@ public class DubuCharacter : CharacterSuper
     {
         if (!IsSpecialAttack && GetIsGroud())
         {
-            coroutine.StartSpecialAttack();
+            coroutine.StartSpecialAttackSetting();
         }
     }
     public void SpecialAttackReady()
     {
         CharAnim.SetSpecialAttackReady();
     }
-
+    public void SpecialAttackDash()
+    {
+        CharAnim.SetSpecialAttackDash();
+    }
+    public void SpecialAttackEnd()
+    {
+        CharAnim.SetSpecialAttackEnd();
+    }
     public override void UpAttack()
     {
         if (config == null)

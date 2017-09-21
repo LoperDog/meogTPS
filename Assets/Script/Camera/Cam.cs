@@ -8,7 +8,7 @@ public class Cam : MonoBehaviour
 
     public float Height = 1.3f; //높이
     public float Dist = 2.8f;//거리
-    public float ViewRight = 0.5f;
+    public float ViewRight = 1.0f;
     public float mouse_y_speed = 100.0f;//상하 회전속도
     public float Max_y = 320.0f;//최대각
     public float Min_y = 50.0f; //최소각
