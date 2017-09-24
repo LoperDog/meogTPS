@@ -312,7 +312,7 @@ public class CharacterMgr : MonoBehaviour
     [RPC]
     public void GetDamage(float de)
     {
-        Debug.Log("맞은 아이디 : " + _networkView.viewID + " 남은 채력 : " + Char_Current_HP);
+        //Debug.Log("맞은 아이디 : " + _networkView.viewID + " 남은 채력 : " + Char_Current_HP);
         Char_Current_HP -= de;
     }
     // 강공격
@@ -321,7 +321,6 @@ public class CharacterMgr : MonoBehaviour
     {
         if (_networkView.isMine)
         {
-            //m_StrongAttack.GetComponent<GameObject>().SetActive(true);
             RoundAttack[0].SetActive(true);
         }
         thisCharacter.StrongAttack();
