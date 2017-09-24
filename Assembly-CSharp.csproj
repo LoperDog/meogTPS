@@ -53,7 +53,9 @@
      <Compile Include="Assets\Script\CharacterSctipt\DubuCharacter.cs" />
      <Compile Include="Assets\Script\CharacterSctipt\DubuCoroutin.cs" />
      <Compile Include="Assets\Script\CharacterSctipt\ManduAnimation.cs" />
+     <Compile Include="Assets\Script\CharacterSctipt\ManduAttack.cs" />
      <Compile Include="Assets\Script\CharacterSctipt\ManduCharacter.cs" />
+     <Compile Include="Assets\Script\CharacterSctipt\ManduCoroutin.cs" />
      <Compile Include="Assets\Script\EffectScript\DestroyMe.cs" />
      <Compile Include="Assets\Script\EffectScript\DestroyMe1.cs" />
      <Compile Include="Assets\Script\TestScript\TestScript.cs" />

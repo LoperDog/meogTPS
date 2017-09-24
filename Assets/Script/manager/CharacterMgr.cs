@@ -144,6 +144,7 @@ public class CharacterMgr : MonoBehaviour
                 thisCharacter = new DubuCharacter();
                 thisAnim = new DubuAnimation();
                 CharType = config.DubuString;
+                thisCharacter.SetCoroutine(gameObject.AddComponent<DubuCoroutin>());
                 //특수기
                 m_StrongAttack = RoundAttack[0].GetComponent<DubuAttack>();
                 m_SpecialAttack = RoundAttack[1].GetComponent<DubuAttack>();
@@ -156,6 +157,10 @@ public class CharacterMgr : MonoBehaviour
                 thisCharacter = new ManduCharacter();
                 thisAnim = new ManduAnimation();
                 CharType = config.ManduString;
+                thisCharacter.SetCoroutine(gameObject.AddComponent<ManduCoroutin>());
+                //특수기
+                m_StrongAttack = RoundAttack[0].GetComponent<ManduAttack>();
+                m_SpecialAttack = RoundAttack[1].GetComponent<ManduAttack>();
                 //UI
                 Mandu.enabled = true;
                 Mandu_Special.enabled = true;
@@ -174,8 +179,7 @@ public class CharacterMgr : MonoBehaviour
         m_SpecialAttack.Dam = config.StatusConfigs[CharType]["SpecialAttack"];
         m_StrongAttack.ReSetAttack();
         m_SpecialAttack.ReSetAttack();
-        //thisCharacter.SetCoroutine(gameObject.AddComponent<CoroutinClass>());
-        thisCharacter.SetCoroutine(gameObject.AddComponent<DubuCoroutin>());
+        //thisCharacter.SetCoroutine(gameObject.AddComponent<DubuCoroutin>());
         thisCharacter.mgr = this;
         thisCharacter.SetPlayerTr(Player_tr);
         thisCharacter.SetPlayerRb(Player_rb);

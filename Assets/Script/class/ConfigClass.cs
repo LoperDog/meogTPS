@@ -27,11 +27,11 @@ public class ConfigClass {
     public ConfigClass()
     {
         #region 만두콘피그
-        ManduStatus.Add("HP", 150f);
+        ManduStatus["HP"] = 150f;
 
-        ManduStatus.Add("MoveSpeed", 2.0f);
-        ManduStatus.Add("RunSpeed" , 6.8f);
-        ManduStatus.Add("JumpForce" , 5000f);
+        ManduStatus["MoveSpeed"] = 2.0f;
+        ManduStatus["RunSpeed"] = 6.8f;
+        ManduStatus["JumpForce"] = 1500f;
 
         ManduStatus.Add("Cartridge" , 10f);
         ManduStatus.Add("ReLoadTime" , 2.0f);
@@ -49,25 +49,24 @@ public class ConfigClass {
         #endregion
 
         #region 두부콘피그
-        // 채력
         DubuStatus["HP"] = 100f;
-        // 이동속도
+
         DubuStatus["MoveSpeed"] = 2.8f;
         DubuStatus["RunSpeed"] = 7.5f;
         DubuStatus["JumpForce"] = 1500;
-        // 장탄수 및 리로드 시간
+        // 장탄수
         DubuStatus["Cartridge"] = 50f;
         DubuStatus["ReLoadTime"] = 1.7f;
-        // 기본공격
+
         DubuStatus["Attack"] = 15f;
         DubuStatus["AtttackSpeed"] = 0.25f;
-        // 강공격
+
         DubuStatus["StrongAttack"] = 30f;
         DubuStatus["StrongAttackSpeed"] = 5.0f;
         DubuStatus.Add("StongAttackReady", 0.23f);
         DubuStatus.Add("StongAttackTime", 0.43f);
         DubuStatus.Add("StongAttackEnd", 0.86f);
-        // 특수기
+
         DubuStatus["SpecialAttack"] = 100.0f;
         DubuStatus["SpecialAttackSpeed"] = 25.0f;
         DubuStatus.Add("SpecialAttackReady", 0.86f);

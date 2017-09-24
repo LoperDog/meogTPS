@@ -13,7 +13,6 @@ public class DubuCharacter : CharacterSuper
         // 공격중이 아닌데 공격 이 시작된다면 - 공격 가능
         if (!IsAttack && !IsReLoad && m_Current_Bullet > 0)
         {
-            //공격 시작 코드
             m_Current_Bullet--;
             IsAttack = true;
             // 왼쪽공격이라면
