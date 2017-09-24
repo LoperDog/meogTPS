@@ -85,6 +85,7 @@ public class CharacterMgr : MonoBehaviour
     public float Current_Bullet;
     public float Max_Bullet;
     #endregion
+
     #region 캐릭터키값
     // 이동키
     private float Key_H = 0.0f;             //키동기 필요
@@ -105,6 +106,12 @@ public class CharacterMgr : MonoBehaviour
 
     public GameObject tempBullet;
     public GameObject FirePoint;
+    #endregion
+    #region 캐릭터의범위공격 지정.
+    [SerializeField]
+    public GameObject[] RoundAttack;
+    public CloseAttack m_StrongAttack;
+    public CloseAttack m_SpecialAttack;
     #endregion
     // 캐릭터를 만들기 위해 아이디를 받는다.
     void Start()
@@ -137,6 +144,9 @@ public class CharacterMgr : MonoBehaviour
                 thisCharacter = new DubuCharacter();
                 thisAnim = new DubuAnimation();
                 CharType = config.DubuString;
+                //특수기
+                m_StrongAttack = RoundAttack[0].GetComponent<DubuAttack>();
+                m_SpecialAttack = RoundAttack[1].GetComponent<DubuAttack>();
                 //UI
                 Dubu.enabled = true;
                 Dubu_Special.enabled = true;
@@ -157,6 +167,13 @@ public class CharacterMgr : MonoBehaviour
         }
         // 세팅
         thisCharacter.SetPlayerOb(gameObject);
+        // 특수기 세팅 
+        m_StrongAttack.Player = gameObject.GetComponent<Transform>();
+        m_SpecialAttack.Player = gameObject.GetComponent<Transform>();
+        m_StrongAttack.Dam = config.StatusConfigs[CharType]["StrongAttack"];
+        m_SpecialAttack.Dam = config.StatusConfigs[CharType]["SpecialAttack"];
+        m_StrongAttack.ReSetAttack();
+        m_SpecialAttack.ReSetAttack();
         //thisCharacter.SetCoroutine(gameObject.AddComponent<CoroutinClass>());
         thisCharacter.SetCoroutine(gameObject.AddComponent<DubuCoroutin>());
         thisCharacter.mgr = this;
@@ -302,12 +319,22 @@ public class CharacterMgr : MonoBehaviour
     [RPC]
     public void SetCharacterStAttack()
     {
+        if (_networkView.isMine)
+        {
+            //m_StrongAttack.GetComponent<GameObject>().SetActive(true);
+            RoundAttack[0].SetActive(true);
+        }
         thisCharacter.StrongAttack();
     }
     // 특수기
     [RPC]
     public void SetCharacterSpecialAttack()
     {
+        if (_networkView.isMine)
+        {
+            //m_SpecialAttack.GetComponent<GameObject>().SetActive(true);
+            RoundAttack[1].SetActive(true);
+        }
         thisCharacter.SpecialAttack();
     }
     // 마우스 올림
