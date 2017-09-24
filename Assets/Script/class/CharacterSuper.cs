@@ -82,6 +82,8 @@ public class CharacterSuper : MonoBehaviour{
 
     // 캐릭터 제어가능 여부
     protected bool cancontroll = true;
+
+
     public bool CanControll
     {
         get
