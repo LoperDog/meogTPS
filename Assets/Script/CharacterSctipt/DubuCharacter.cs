@@ -82,9 +82,9 @@ public class DubuCharacter : CharacterSuper
     {
         CharAnim.SetSpecialAttackReady();
     }
-    public void SpecialAttackDash()
+    public void SpecialAttack_ing()
     {
-        CharAnim.SetSpecialAttackDash();
+        CharAnim.SetSpecialAttack_ing();
     }
     public void SpecialAttackEnd()
     {

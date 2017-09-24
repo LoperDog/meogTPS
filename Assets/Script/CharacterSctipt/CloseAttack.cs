@@ -32,7 +32,6 @@ public class CloseAttack : MonoBehaviour {
             Damege = value;
         }
     }
-
     //무언가에 닿았다
     protected virtual void OnTriggerEnter(Collider other)
     {

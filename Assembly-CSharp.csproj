@@ -47,11 +47,11 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Script\Camera\Cam.cs" />
+     <Compile Include="Assets\Script\CharacterSctipt\CloseAttack.cs" />
      <Compile Include="Assets\Script\CharacterSctipt\DubuAnimation.cs" />
+     <Compile Include="Assets\Script\CharacterSctipt\DubuAttack.cs" />
      <Compile Include="Assets\Script\CharacterSctipt\DubuCharacter.cs" />
      <Compile Include="Assets\Script\CharacterSctipt\DubuCoroutin.cs" />
-     <Compile Include="Assets\Script\CharacterSctipt\DubuSpecialAtrtack.cs" />
-     <Compile Include="Assets\Script\CharacterSctipt\DubuStrongAttack.cs" />
      <Compile Include="Assets\Script\CharacterSctipt\ManduAnimation.cs" />
      <Compile Include="Assets\Script\CharacterSctipt\ManduCharacter.cs" />
      <Compile Include="Assets\Script\EffectScript\DestroyMe.cs" />

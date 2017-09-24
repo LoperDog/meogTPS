@@ -16,6 +16,7 @@ public class DubuAnimation : AnimationSuper
         base.SetChar(CharScript);
         CharacterScript = (DubuCharacter)CharScript;
     }
+    //강공격
     public void SetStrongAttackReady()
     {
         m_Anim.SetBool("Is_StrongAttackReady", true);
@@ -33,20 +34,19 @@ public class DubuAnimation : AnimationSuper
         m_Anim.SetBool("Is_StrongAttackDash", false);
         m_Anim.SetBool("Is_StrongAttackEnd", true);
     }
+    //특수기
     public void SetSpecialAttackReady()
     {
         m_Anim.SetBool("Is_SpecialAttackReady", true);
+        m_Anim.SetBool("Is_SpecialAttackEnd", false);
     }
-    public void SetSpecialAttackDash()
+    public void SetSpecialAttack_ing()
     {
         m_Anim.SetBool("Is_SpecialAttackReady", false);
-        m_Anim.SetBool("Is_SpecialAttackDash", true);
     }
     public void SetSpecialAttackEnd()
     {
-        m_Anim.SetBool("Is_SpecialAttackDash", false);
         m_Anim.SetBool("Is_SpecialAttackEnd", true);
-        m_Anim.SetBool("Special_A_End", true);
     }
 }
 
