@@ -49,7 +49,7 @@ public class DubuCharacter : CharacterSuper
     // 강공격을 시작한다.
     public override void StrongAttack()
     {
-        if (!IsStrongAttack && GetIsGroud())//강공격이 아니고 땅에 있을 때
+        if (!IsStrongAttack && GetIsGroud() && mgr.StrongAttackCoolTime == 0)//강공격이 아니고 땅에 있을 때
         {
             coroutine.StartStrongAttckSetting();
         }
@@ -82,9 +82,9 @@ public class DubuCharacter : CharacterSuper
     {
         CharAnim.SetSpecialAttackReady();
     }
-    public void SpecialAttackDash()
+    public void SpecialAttack_ing()
     {
-        CharAnim.SetSpecialAttackDash();
+        CharAnim.SetSpecialAttack_ing();
     }
     public void SpecialAttackEnd()
     {

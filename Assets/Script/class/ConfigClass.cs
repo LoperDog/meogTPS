@@ -71,7 +71,7 @@ public class ConfigClass {
         DubuStatus["SpecialAttack"] = 100.0f;
         DubuStatus["SpecialAttackSpeed"] = 25.0f;
         DubuStatus.Add("SpecialAttackReady", 0.86f);
-        DubuStatus.Add("SpecialAttackTime", 0.56f);
+        DubuStatus.Add("SpecialAttackTime", 1.43f);
         DubuStatus.Add("SpecialAttackEnd", 1.43f);
 
         // 필요 포지션
