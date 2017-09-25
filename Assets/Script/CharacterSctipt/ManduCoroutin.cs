@@ -31,4 +31,16 @@ public class ManduCoroutin : CoroutinClass
         thisMgr.SpecialAttackCoolTime = config.StatusConfigs["Mandu"]["SpecialAttackSpeed"];
         base.StartSpecialAttackSetting();
     }
+    //특수기
+    //public override IEnumerator SetSpecialAttack()
+    //{
+    //    if (config == null)
+    //    {
+    //        config = new ConfigClass();
+    //    }
+    //    //thisCharacterScript.CanControll = false; 제어불가는 작업 끝난 후에 적용.
+    //    ManduChar.SpecialAttackReady();
+    //    yield return new WaitForSeconds(config.StatusConfigs["Dubu"]["SpecialAttackSpeed"]);
+    //    thisCharacterScript.IsSpecialAttack = false;
+    //}
 }

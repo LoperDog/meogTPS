@@ -7,7 +7,7 @@ public class ManduAnimation : AnimationSuper
     ManduCharacter CharacterScript;
     public override void PlayAttack()
     {
-        m_Anim.SetBool("Is_Attack", m_Char_State.GetIsAttack());
+        m_Anim.SetBool("Attack", m_Char_State.GetIsAttack());
     }
     public override void SetChar(CharacterSuper CharScript)
     {
@@ -30,7 +30,7 @@ public class ManduAnimation : AnimationSuper
     //특수기
     public void SetSpecialAttackReady()
     {
-
+        m_Anim.SetBool("Is_SpecialAttackReady", true);
     }
     public void SetSpecialAttack_ing()
     {

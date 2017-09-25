@@ -45,7 +45,7 @@ public class AnimationSuper
     }
     public virtual void PlayLanding()//착지
     {
-        m_Anim.SetBool("Landing_Move", m_Char_State.GetIsGroud());
+        m_Anim.SetBool("Landing", m_Char_State.GetIsGroud());
     }
     public virtual void PlayAttack()// 공격
     {
@@ -61,7 +61,7 @@ public class AnimationSuper
     }
     public virtual void PlayReload()// 재장전
     {
-        m_Anim.SetBool("Is_Reload", m_Char_State.GetIsReload());
+        m_Anim.SetBool("Reload", m_Char_State.GetIsReload());
     }
     public virtual void PlayDie()
     {

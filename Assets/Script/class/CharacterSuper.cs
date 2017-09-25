@@ -171,8 +171,8 @@ public class CharacterSuper : MonoBehaviour{
     public virtual void Check_Ground()
     {
         RaycastHit hit;
-        Debug.DrawRay(Player_tr.position, Vector3.down * 0.2f, Color.red);
-        if (Physics.Raycast(Player_tr.position, Vector3.down, out hit, 0.2f))
+        Debug.DrawRay(Player_tr.position, Vector3.down * 0.3f, Color.red);
+        if (Physics.Raycast(Player_tr.position, Vector3.down, out hit, 0.3f))
         {
             if (hit.collider.tag == "GROUND")
             {

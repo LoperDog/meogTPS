@@ -33,6 +33,14 @@ public class ManduCharacter : CharacterSuper
         }
         CurrentAttack = config.StatusConfigs["Mandu"]["AtttackSpeed"];
     }
+    //강공격 시작
+    public override void StrongAttack()
+    {
+        if (!IsStrongAttack && GetIsGroud() && mgr.StrongAttackCoolTime == 0)//강공격이 아니고 땅에 있을 때
+        {
+            coroutine.StartStrongAttckSetting();
+        }
+    }
     //특수기 시작
     public override void SpecialAttack()
     {

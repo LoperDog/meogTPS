@@ -5,6 +5,7 @@ using UnityEngine;
 public class DubuCoroutin : CoroutinClass
 {
     public DubuCharacter DubuChar;
+
     public override void SetCharacterScript(CharacterSuper CharacterClass)
     {
         base.SetCharacterScript(CharacterClass);

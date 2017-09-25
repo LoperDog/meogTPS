@@ -33,7 +33,7 @@ public class ConfigClass {
         ManduStatus["RunSpeed"] = 3.5f;
         ManduStatus["JumpForce"] = 1500f;
 
-        ManduStatus["Cartridge"] = 10f;
+        ManduStatus["Cartridge"] = 7f;
         ManduStatus["ReLoadTime"] = 2.0f;
 
         ManduStatus["Attack"] = 50f;
@@ -51,8 +51,8 @@ public class ConfigClass {
         #region 두부콘피그
         DubuStatus["HP"] = 100f;
 
-        DubuStatus["MoveSpeed"] = 2.8f;
-        DubuStatus["RunSpeed"] = 7.5f;
+        DubuStatus["MoveSpeed"] = 2.0f;
+        DubuStatus["RunSpeed"] = 4.0f;
         DubuStatus["JumpForce"] = 1500;
         // 장탄수
         DubuStatus["Cartridge"] = 50f;
