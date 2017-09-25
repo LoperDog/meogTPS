@@ -61,6 +61,7 @@ public class DubuCharacter : CharacterSuper
     // 이팩트 생성, 애니매이션 재생. 
     public void StrongAttackDash()
     {
+        mgr.RoundAttack[0].SetActive(true);
         CharAnim.SetStrongAttackDash();
         Player_rb.AddForce(Player_tr.forward * 20000f);
     }
@@ -77,14 +78,21 @@ public class DubuCharacter : CharacterSuper
             coroutine.StartSpecialAttackSetting();
         }
     }
+    // 특수기가 시작할때 시간을 재기 시작한다.
     public void SpecialAttackReady()
     {
         CharAnim.SetSpecialAttackReady();
+    }
+    // 특수기가 한창일때
+    public void SpecialAttackDash()
+    {
+        mgr.RoundAttack[0].SetActive(true);
     }
     public void SpecialAttack_ing()
     {
         CharAnim.SetSpecialAttack_ing();
     }
+    // 끝에서 처리할것.
     public void SpecialAttackEnd()
     {
         CharAnim.SetSpecialAttackEnd();

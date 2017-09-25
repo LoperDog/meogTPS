@@ -99,6 +99,14 @@ public class DubuCoroutin : CoroutinClass
         thisMgr.m_SpecialAttack.ReSetAttack();
         StartCoroutine(SetSpecialAttackEnd());
     }
+    public IEnumerator SetSpecialAttackDash()
+    {
+        if(config == null)
+        {
+            config = new ConfigClass();
+        }
+        yield return new WaitForSeconds(config.StatusConfigs["Dubu"]["SpecialAttackTime"]);
+    }
     public IEnumerator SetSpecialAttackEnd()
     {
         if (config == null)

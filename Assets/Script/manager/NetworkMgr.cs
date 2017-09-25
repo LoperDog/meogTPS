@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class NetworkMgr : MonoBehaviour
 {
+    private string MyIP = "";
+    private string OtherIP = "";
 
+    // 플레이어 번호에 맞는 생성위치를 잡아준다.
+    private Vector3[] PlayerCreatePosition = new Vector3[6];
     //접속 IP
     private const string ip = "192.168.30.43";
     //접속 Port
@@ -12,12 +16,21 @@ public class NetworkMgr : MonoBehaviour
     //NAT 기능의 사용 여부
     private bool _useNat = false;
     // 플레이어 프리팹
-    public GameObject player;
+    public GameObject[] player = new GameObject[4];
+    public int MyPlayerNumb = 0;
 
+    // 시작할때 플레이어들의 번호에 맞추어 넣자.
+    private void Start()
+    {
+        PlayerCreatePosition[0] = new Vector3(0, 0, 0);
+        PlayerCreatePosition[1] = new Vector3(0, 0, 0);
+        PlayerCreatePosition[2] = new Vector3(0, 0, 0);
+        PlayerCreatePosition[3] = new Vector3(0, 0, 0);
+        PlayerCreatePosition[4] = new Vector3(0, 0, 0);
+        PlayerCreatePosition[5] = new Vector3(0, 0, 0);
+    }
     void OnGUI()
     {
-        //Debug.Log("OnGUI함수 호출");
-        //현재 사용자의 네트워크에 접속 여부 판단 
         if (Network.peerType == NetworkPeerType.Disconnected)
         {
             // 게임 서버 생성 버튼+
@@ -46,17 +59,18 @@ public class NetworkMgr : MonoBehaviour
     {
         CreatePlayer();
     }
-    // 플레이어를 생성하는 함수
 
+    // 플레이어를 생성하는 함수
     void CreatePlayer()
     {
+
         Vector3 pos = new Vector3(Random.Range(-20.0f, 20.0f), 10.0f, Random.Range(-20.0f, 20.0f));
         // 네트워크 상에 플레이어를 동적 생성
         // 현재 게임에 접속한 모든 사용자에게 프리팹을 생성해주며 내부적으로 Buffered RPC를 호출해 나중에 접속한
         // 사용자도 미리 생성된 프리팹을 볼 수 있다.
         // Network.Instantiate(프리펩, 생성위치, 각도, 그릅) 
         // 그릅을 지정하면 그릅에만 생성되게 할 수 있다.
-        Network.Instantiate(player, pos, Quaternion.identity, 0);
+        Network.Instantiate(player[0], pos, Quaternion.identity, 0);
     }
     // 접속이 종료된 플레이어의 네트워크 객체를 모두 소멸 처리
     void OnPlayerDisconnected(NetworkPlayer netPlayer)

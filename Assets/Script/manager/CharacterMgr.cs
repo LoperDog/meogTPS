@@ -323,21 +323,12 @@ public class CharacterMgr : MonoBehaviour
     [RPC]
     public void SetCharacterStAttack()
     {
-        if (_networkView.isMine)
-        {
-            RoundAttack[0].SetActive(true);
-        }
         thisCharacter.StrongAttack();
     }
     // 특수기
     [RPC]
     public void SetCharacterSpecialAttack()
     {
-        if (_networkView.isMine)
-        {
-            //m_SpecialAttack.GetComponent<GameObject>().SetActive(true);
-            RoundAttack[1].SetActive(true);
-        }
         thisCharacter.SpecialAttack();
     }
     // 마우스 올림
