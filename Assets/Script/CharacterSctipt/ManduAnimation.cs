@@ -7,7 +7,7 @@ public class ManduAnimation : AnimationSuper
     ManduCharacter CharacterScript;
     public override void PlayAttack()
     {
-
+        m_Anim.SetBool("Is_Attack", m_Char_State.GetIsAttack());
     }
     public override void SetChar(CharacterSuper CharScript)
     {

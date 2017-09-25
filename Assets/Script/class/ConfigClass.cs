@@ -33,17 +33,17 @@ public class ConfigClass {
         ManduStatus["RunSpeed"] = 6.8f;
         ManduStatus["JumpForce"] = 1500f;
 
-        ManduStatus.Add("Cartridge" , 10f);
-        ManduStatus.Add("ReLoadTime" , 2.0f);
+        ManduStatus["Cartridge"] = 10f;
+        ManduStatus["ReLoadTime"] = 2.0f;
 
-        ManduStatus.Add("Attack" , 50f);
-        ManduStatus.Add("AtttackSpeed" , 2.0f);
+        ManduStatus["Attack"] = 50f;
+        ManduStatus["AtttackSpeed"] = 2.0f;
 
-        ManduStatus.Add("StrongAttack" , 100f);
-        ManduStatus.Add("StrongAttackSpeed" , 2.0f);
+        ManduStatus["StrongAttack"] = 100f;
+        ManduStatus["StrongAttackSpeed"] = 2.0f;
 
-        ManduStatus.Add("SpecialAttack" , 0.0f);
-        ManduStatus.Add("SpecialAttackSpeed" , 3.0f);
+        ManduStatus["SpecialAttack"] = 0.0f;
+        ManduStatus["SpecialAttackSpeed"] = 3.0f;
 
         ManduPosition.Add("FirePosition", new Vector3(0.0f, 1.15f, 0.8f));
         #endregion
@@ -63,18 +63,17 @@ public class ConfigClass {
 
         DubuStatus["StrongAttack"] = 30f;
         DubuStatus["StrongAttackSpeed"] = 5.0f;
-        DubuStatus.Add("StongAttackReady", 0.23f);
-        DubuStatus.Add("StongAttackTime", 0.43f);
-        DubuStatus.Add("StongAttackEnd", 0.86f);
+        DubuStatus["StongAttackReady"] = 0.23f;
+        DubuStatus["StongAttackTime"] = 0.43f;
+        DubuStatus["StongAttackEnd"] = 0.86f;
 
         DubuStatus["SpecialAttack"] = 100.0f;
         DubuStatus["SpecialAttackSpeed"] = 25.0f;
-        DubuStatus.Add("SpecialAttackReady", 0.86f);
-        DubuStatus.Add("SpecialAttackTime", 1.43f);
-        DubuStatus.Add("SpecialAttackEnd", 1.43f);
+        DubuStatus["SpecialAttackReady"] = 0.86f;
+        DubuStatus["SpecialAttackTime"] = 1.43f;
+        DubuStatus["SpecialAttackEnd"] = 1.43f;
 
-        // 필요 포지션
-        DubuPosition["FirePosition"] = new Vector3(0.0f, 1.15f, 0.8f);
+        DubuPosition.Add("FirePosition", new Vector3(0.0f, 1.15f, 0.8f));
         #endregion
 
         // 콘피그 적용. 

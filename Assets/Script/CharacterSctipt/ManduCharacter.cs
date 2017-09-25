@@ -31,6 +31,6 @@ public class ManduCharacter : CharacterSuper
         {
             config = new ConfigClass();
         }
-        CurrentAttack = config.StatusConfigs["Dubu"]["AtttackSpeed"];
+        CurrentAttack = config.StatusConfigs["Mandu"]["AtttackSpeed"];
     }
 }
