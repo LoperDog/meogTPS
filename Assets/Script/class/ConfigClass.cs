@@ -39,13 +39,13 @@ public class ConfigClass {
         ManduStatus["Attack"] = 50f;
         ManduStatus["AtttackSpeed"] = 2.0f;
 
-        ManduStatus["StrongAttack"] = 100f;
-        ManduStatus["StrongAttackSpeed"] = 2.0f;
+        ManduStatus["StrongAttack"] = 50f;
+        ManduStatus["StrongAttackSpeed"] = 10.0f;
 
-        ManduStatus["SpecialAttack"] = 0.0f;
-        ManduStatus["SpecialAttackSpeed"] = 3.0f;
+        ManduStatus["SpecialAttack"] = 100.0f;
+        ManduStatus["SpecialAttackSpeed"] = 30.0f;
 
-        ManduPosition.Add("FirePosition", new Vector3(0.0f, 1.15f, 0.8f));
+        ManduPosition.Add("FirePosition", new Vector3(0.0f, 0.9f, 0.8f));
         #endregion
 
         #region 두부콘피그

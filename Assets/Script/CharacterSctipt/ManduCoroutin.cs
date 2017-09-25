@@ -11,4 +11,24 @@ public class ManduCoroutin : CoroutinClass
         base.SetCharacterScript(CharacterClass);
         ManduChar = (ManduCharacter)CharacterClass;
     }
+
+    public override void StartStrongAttckSetting()
+    {
+        if (config == null)
+        {
+            config = new ConfigClass();
+        }
+        thisMgr.StrongAttackCoolTime = config.StatusConfigs["Mandu"]["StrongAttackSpeed"];
+        base.StartStrongAttckSetting();
+    }
+    public override void StartSpecialAttackSetting()
+    {
+
+        if (config == null)
+        {
+            config = new ConfigClass();
+        }
+        thisMgr.SpecialAttackCoolTime = config.StatusConfigs["Mandu"]["SpecialAttackSpeed"];
+        base.StartSpecialAttackSetting();
+    }
 }

@@ -21,7 +21,7 @@ public class ManduCharacter : CharacterSuper
         }
         else
         {
-            //m_CurrentAttack = 0.0f;
+
         }
     }
     public override void ReLoad()
@@ -32,5 +32,13 @@ public class ManduCharacter : CharacterSuper
             config = new ConfigClass();
         }
         CurrentAttack = config.StatusConfigs["Mandu"]["AtttackSpeed"];
+    }
+    //특수기 시작
+    public override void SpecialAttack()
+    {
+        if (!IsSpecialAttack && GetIsGroud())
+        {
+            coroutine.StartSpecialAttackSetting();
+        }
     }
 }
