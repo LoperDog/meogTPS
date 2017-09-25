@@ -29,15 +29,15 @@ public class ConfigClass {
         #region 만두콘피그
         ManduStatus["HP"] = 150f;
 
-        ManduStatus["MoveSpeed"] = 2.0f;
-        ManduStatus["RunSpeed"] = 6.8f;
+        ManduStatus["MoveSpeed"] = 1.7f;
+        ManduStatus["RunSpeed"] = 3.5f;
         ManduStatus["JumpForce"] = 1500f;
 
         ManduStatus["Cartridge"] = 10f;
         ManduStatus["ReLoadTime"] = 2.0f;
 
         ManduStatus["Attack"] = 50f;
-        ManduStatus["AtttackSpeed"] = 2.0f;
+        ManduStatus["AtttackSpeed"] = 1.7f;
 
         ManduStatus["StrongAttack"] = 50f;
         ManduStatus["StrongAttackSpeed"] = 10.0f;
