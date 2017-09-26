@@ -7,6 +7,6 @@ public class DestroyMe : MonoBehaviour
     
 	void Start ()
     {
-        Destroy(transform.gameObject, 1.0f);
+        Destroy(transform.gameObject, 5.0f);
 	}
 }

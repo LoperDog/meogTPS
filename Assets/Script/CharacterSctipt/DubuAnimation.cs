@@ -40,12 +40,9 @@ public class DubuAnimation : AnimationSuper
         m_Anim.SetBool("Is_SpecialAttackReady", true);
         m_Anim.SetBool("Is_SpecialAttackEnd", false);
     }
-    public void SetSpecialAttack_ing()
-    {
-        m_Anim.SetBool("Is_SpecialAttackReady", false);
-    }
     public void SetSpecialAttackEnd()
     {
+        m_Anim.SetBool("Is_SpecialAttackReady", false);
         m_Anim.SetBool("Is_SpecialAttackEnd", true);
     }
 }
