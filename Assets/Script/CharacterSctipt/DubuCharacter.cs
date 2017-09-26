@@ -73,7 +73,7 @@ public class DubuCharacter : CharacterSuper
     //특수기 시작
     public override void SpecialAttack()
     {
-        if (!IsSpecialAttack && GetIsGroud())
+        if (!IsSpecialAttack && GetIsGroud() && mgr.SpecialAttackCoolTime == 0)
         {
             coroutine.StartSpecialAttackSetting();
         }
