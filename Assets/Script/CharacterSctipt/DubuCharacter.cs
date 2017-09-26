@@ -94,7 +94,7 @@ public class DubuCharacter : CharacterSuper
             Player_tr.position,
             Player_tr.rotation);
         temp.SetParent(Player_tr);
-        mgr.RoundAttack[0].SetActive(true);
+        mgr.RoundAttack[1].SetActive(true);
     }
     // 끝에서 처리할것.
     public void SpecialAttackEnd()
