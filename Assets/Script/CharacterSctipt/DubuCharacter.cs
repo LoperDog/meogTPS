@@ -82,19 +82,27 @@ public class DubuCharacter : CharacterSuper
     public void SpecialAttackReady()
     {
         CharAnim.SetSpecialAttackReady();
+        Transform temp = Instantiate(effect[2],
+            Player_tr.position,
+            Player_tr.rotation);
+        temp.SetParent(Player_tr);
     }
     // 특수기가 한창일때
     public void SpecialAttackDash()
     {
+        Transform temp = Instantiate(effect[3],
+            Player_tr.position,
+            Player_tr.rotation);
+        temp.SetParent(Player_tr);
         mgr.RoundAttack[0].SetActive(true);
-    }
-    public void SpecialAttack_ing()
-    {
-        CharAnim.SetSpecialAttack_ing();
     }
     // 끝에서 처리할것.
     public void SpecialAttackEnd()
     {
+        Transform temp = Instantiate(effect[4],
+            Player_tr.position,
+            Player_tr.rotation);
+        temp.SetParent(Player_tr);
         CharAnim.SetSpecialAttackEnd();
     }
     public override void UpAttack()

@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Sockets;
 using UnityEngine;
+using ConstValueInfo;
 
 public class NetworkMgr : MonoBehaviour
 {
@@ -18,19 +21,20 @@ public class NetworkMgr : MonoBehaviour
     // 플레이어 프리팹
     public GameObject[] player = new GameObject[4];
     public int MyPlayerNumb = 0;
-
+    
     // 시작할때 플레이어들의 번호에 맞추어 넣자.
     private void Start()
     {
-        PlayerCreatePosition[0] = new Vector3(0, 0, 0);
-        PlayerCreatePosition[1] = new Vector3(0, 0, 0);
-        PlayerCreatePosition[2] = new Vector3(0, 0, 0);
-        PlayerCreatePosition[3] = new Vector3(0, 0, 0);
-        PlayerCreatePosition[4] = new Vector3(0, 0, 0);
-        PlayerCreatePosition[5] = new Vector3(0, 0, 0);
+        PlayerCreatePosition[0] = new Vector3(0, 10f, 0);
+        PlayerCreatePosition[1] = new Vector3(0, 10f, 0);
+        PlayerCreatePosition[2] = new Vector3(0, 10f, 0);
+        PlayerCreatePosition[3] = new Vector3(0, 10f, 0);
+        PlayerCreatePosition[4] = new Vector3(0, 10f, 0);
+        PlayerCreatePosition[5] = new Vector3(0, 10f, 0);
     }
     void OnGUI()
     {
+        
         if (Network.peerType == NetworkPeerType.Disconnected)
         {
             // 게임 서버 생성 버튼+
@@ -46,7 +50,45 @@ public class NetworkMgr : MonoBehaviour
                 Network.Connect(ip, port);
             }
         }
+        /*
+        // 자신의 아이피 확인.
+        if (Network.peerType == NetworkPeerType.Disconnected) {
+            IPHostEntry host = Dns.GetHostByName(Dns.GetHostName());
+            foreach (IPAddress ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    MyIP = ip.ToString();
+                    break;
+                }
+            }
+            Debug.Log(MyIP);
+            // 연결 요청
+            CSender tempSender = CSender.GetInstance();
+            DataPacketInfo tempData = new DataPacketInfo((int)ProtocolInfo.ServerCommend, (int)ProtocolDetail.GetHostIP, 0, null);
+            tempSender.Sendn(ref tempData);
+            // 데이터 대기
+
+            // 연결 혹은 호스트 열기
+        }*/
     }
+    // 호스트 아이피를 찾는다.
+    public void SetHostIP(string hostip)
+    {
+        OtherIP = hostip;
+        StartConnect();
+    }
+    private void StartConnect()
+    {
+        if (OtherIP != MyIP)
+        {
+
+        }else
+        {
+
+        }
+    }
+
 
     // 게임 서버로 구동시키고 서버 초기화가 정상적으로 완료됐을 때 자동 호출됨
     void OnServerInitialized()
@@ -64,13 +106,13 @@ public class NetworkMgr : MonoBehaviour
     void CreatePlayer()
     {
 
-        Vector3 pos = new Vector3(Random.Range(-20.0f, 20.0f), 10.0f, Random.Range(-20.0f, 20.0f));
+        Vector3 pos = PlayerCreatePosition[0];
         // 네트워크 상에 플레이어를 동적 생성
         // 현재 게임에 접속한 모든 사용자에게 프리팹을 생성해주며 내부적으로 Buffered RPC를 호출해 나중에 접속한
         // 사용자도 미리 생성된 프리팹을 볼 수 있다.
         // Network.Instantiate(프리펩, 생성위치, 각도, 그릅) 
         // 그릅을 지정하면 그릅에만 생성되게 할 수 있다.
-        Network.Instantiate(player[0], pos, Quaternion.identity, 0);
+        Network.Instantiate(player[1], pos, Quaternion.identity, 0);
     }
     // 접속이 종료된 플레이어의 네트워크 객체를 모두 소멸 처리
     void OnPlayerDisconnected(NetworkPlayer netPlayer)

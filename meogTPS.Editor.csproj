@@ -125,6 +125,7 @@
     <Compile Include="Assets\UI\BitmapFontImporter\Editor\FntParse.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Character\All_Character_Shader.shader" />
     <None Include="Assets\EF(NEW)\Attack\E_Hit\Rim.shader" />
     <None Include="Assets\UI\Font\BulletFont\Bullet_Font.fnt" />
     <None Include="Assets\UI\Font\Score_Blue\Score_Blue.fnt" />

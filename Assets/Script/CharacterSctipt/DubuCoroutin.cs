@@ -83,7 +83,6 @@ public class DubuCoroutin : CoroutinClass
             config = new ConfigClass();
         }
         thisCharacterScript.CanControll = false;
-        DubuChar.SpecialAttackReady();
         StartCoroutine(SetSpecialSpecialAttakReady());
         yield return new WaitForSeconds(config.StatusConfigs["Dubu"]["SpecialAttackSpeed"]);
         thisCharacterScript.IsSpecialAttack = false;
@@ -94,11 +93,9 @@ public class DubuCoroutin : CoroutinClass
         {
             config = new ConfigClass();
         }
-        yield return null;
-        DubuChar.SpecialAttack_ing();
-        yield return new WaitForSeconds(config.StatusConfigs["Dubu"]["SpecialAttackTime"]);
-        thisMgr.m_SpecialAttack.ReSetAttack();
-        StartCoroutine(SetSpecialAttackEnd());
+        DubuChar.SpecialAttackReady();
+        yield return new WaitForSeconds(config.StatusConfigs["Dubu"]["SpecialAttackReady"]);
+        StartCoroutine(SetSpecialAttackDash());
     }
     public IEnumerator SetSpecialAttackDash()
     {
@@ -106,7 +103,9 @@ public class DubuCoroutin : CoroutinClass
         {
             config = new ConfigClass();
         }
+        DubuChar.SpecialAttackDash();
         yield return new WaitForSeconds(config.StatusConfigs["Dubu"]["SpecialAttackTime"]);
+        StartCoroutine(SetSpecialAttackEnd());
     }
     public IEnumerator SetSpecialAttackEnd()
     {
@@ -114,8 +113,9 @@ public class DubuCoroutin : CoroutinClass
         {
             config = new ConfigClass();
         }
+        thisMgr.m_SpecialAttack.ReSetAttack();
         DubuChar.SpecialAttackEnd();
-        yield return new WaitForSeconds(config.StatusConfigs["Dubu"]["SpecialAttackTime"]);
+        yield return new WaitForSeconds(config.StatusConfigs["Dubu"]["SpecialAttackEnd"]);
         thisCharacterScript.CanControll = true;
     }
 }
