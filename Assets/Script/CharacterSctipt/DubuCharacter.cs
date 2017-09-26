@@ -81,11 +81,11 @@ public class DubuCharacter : CharacterSuper
     // 특수기가 시작할때 시간을 재기 시작한다.
     public void SpecialAttackReady()
     {
+        CharAnim.SetSpecialAttackReady();
         Transform temp = Instantiate(effect[2],
             Player_tr.position,
             Player_tr.rotation);
         temp.SetParent(Player_tr);
-        CharAnim.SetSpecialAttackReady();
     }
     // 특수기가 한창일때
     public void SpecialAttackDash()
@@ -94,7 +94,7 @@ public class DubuCharacter : CharacterSuper
             Player_tr.position,
             Player_tr.rotation);
         temp.SetParent(Player_tr);
-        mgr.RoundAttack[0].SetActive(true);
+        mgr.RoundAttack[1].SetActive(true);
     }
     // 끝에서 처리할것.
     public void SpecialAttackEnd()

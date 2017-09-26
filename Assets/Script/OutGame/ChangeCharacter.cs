@@ -15,11 +15,13 @@ public class ChangeCharacter : MonoBehaviour {
 
     public void SelectTofu()
     {
+        MyInfoClass.GetInstance().MyCharNumb = (int)ProtocolCharacterImageNameIndex.Tofu;
         SelectCharacter(ProtocolCharacterImageNameIndex.Tofu);
     }
 
     public void SelectMandu()
     {
+        MyInfoClass.GetInstance().MyCharNumb = (int)ProtocolCharacterImageNameIndex.Mandu;
         SelectCharacter(ProtocolCharacterImageNameIndex.Mandu);
     }
 

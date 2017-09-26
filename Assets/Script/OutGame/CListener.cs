@@ -130,6 +130,7 @@ public class CListener {
                     case (int)ProtocolDetail.ImageChange:
                     case (int)ProtocolDetail.NameChange:
                         mRecvMatchInfoQueue.Enqueue(new DataMatchInfo((ProtocolDetail)dataPacket.InfoProtocolDetail, (ProtocolCharacterTagIndex)dataPacket.InfoTagNumber, dataPacket.InfoValue));
+                        MyInfoClass.GetInstance().MyGameNumb = dataPacket.InfoTagNumber;
                         break;
                     case (int)ProtocolDetail.MatchingSuccess:
                         CheckState.ChangeSceneState(ProtocolSceneName.RoomScene);

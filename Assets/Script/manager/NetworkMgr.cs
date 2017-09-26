@@ -25,16 +25,15 @@ public class NetworkMgr : MonoBehaviour
     // 시작할때 플레이어들의 번호에 맞추어 넣자.
     private void Start()
     {
-        PlayerCreatePosition[0] = new Vector3(0, 10f, 0);
-        PlayerCreatePosition[1] = new Vector3(0, 10f, 0);
-        PlayerCreatePosition[2] = new Vector3(0, 10f, 0);
-        PlayerCreatePosition[3] = new Vector3(0, 10f, 0);
-        PlayerCreatePosition[4] = new Vector3(0, 10f, 0);
-        PlayerCreatePosition[5] = new Vector3(0, 10f, 0);
+        PlayerCreatePosition[0] = new Vector3(-25f, 10f, 5f);
+        PlayerCreatePosition[1] = new Vector3(-25f, 10f, 0);
+        PlayerCreatePosition[2] = new Vector3(-25f, 10f, -5f);
+        PlayerCreatePosition[3] = new Vector3(25f, 10f, -5f);
+        PlayerCreatePosition[4] = new Vector3(25f, 10f, 0);
+        PlayerCreatePosition[5] = new Vector3(25f, 10f, 5f);
     }
     void OnGUI()
     {
-        
         if (Network.peerType == NetworkPeerType.Disconnected)
         {
             // 게임 서버 생성 버튼+
@@ -75,17 +74,25 @@ public class NetworkMgr : MonoBehaviour
     // 호스트 아이피를 찾는다.
     public void SetHostIP(string hostip)
     {
-        OtherIP = hostip;
+        OtherIP = "1" + hostip;
+        Debug.Log("접속해야 하는 호스트 번호" + OtherIP);
         StartConnect();
     }
     private void StartConnect()
     {
+        // 내가 호스트가 아닐경우
         if (OtherIP != MyIP)
         {
-
-        }else
+            for(int o = 0; o< 10000; o++)
+            {
+                for (int j = 0; j < 10000; j++) ;
+            }
+            Network.Connect(OtherIP, port);
+        }
+        // 내가 호스트인경우
+        else
         {
-
+            Network.InitializeServer(20, port, _useNat);
         }
     }
 
@@ -106,13 +113,13 @@ public class NetworkMgr : MonoBehaviour
     void CreatePlayer()
     {
 
-        Vector3 pos = PlayerCreatePosition[0];
+        Vector3 pos = PlayerCreatePosition[MyInfoClass.GetInstance().MyGameNumb];
         // 네트워크 상에 플레이어를 동적 생성
         // 현재 게임에 접속한 모든 사용자에게 프리팹을 생성해주며 내부적으로 Buffered RPC를 호출해 나중에 접속한
         // 사용자도 미리 생성된 프리팹을 볼 수 있다.
         // Network.Instantiate(프리펩, 생성위치, 각도, 그릅) 
         // 그릅을 지정하면 그릅에만 생성되게 할 수 있다.
-        Network.Instantiate(player[1], pos, Quaternion.identity, 0);
+        Network.Instantiate(player[MyInfoClass.GetInstance().MyCharNumb], pos, Quaternion.identity, 0);
     }
     // 접속이 종료된 플레이어의 네트워크 객체를 모두 소멸 처리
     void OnPlayerDisconnected(NetworkPlayer netPlayer)
