@@ -145,6 +145,7 @@ public class CListener {
                         CheckState.ChangeState(State.ClientGame);// 채널 메뉴
                         break;
                     case (int)ProtocolDetail.GetHostIP:
+                        Debug.Log("GetHostIP 호출");
                         GameObject.FindGameObjectWithTag("MGR").GetComponent<NetworkMgr>().SetHostIP(dataPacket.InfoValue);
                         break;
                     default:

@@ -21,6 +21,7 @@ public class CharacterSuper : MonoBehaviour{
     public float m_CurrentSpecialAttack;
     public float m_CurrentReload;
     public float m_TimeReload;
+    public float m_JumpDelay;
 
     static public ConfigClass config;
     public float CurrentAttack
@@ -55,10 +56,10 @@ public class CharacterSuper : MonoBehaviour{
     public bool IsAttack = false;
     public bool IsReLoad = false;
     public bool Is_Dead = false;
+    public bool Is_Jump = false;
     public bool IsStrongAttack = false;
     public bool IsSpecialAttack = false;
     protected bool Is_Ground = true;
-    protected bool Is_Jump;
     protected bool Is_Run = false;
 
     public float m_Current_Bullet = 0f;
@@ -68,8 +69,8 @@ public class CharacterSuper : MonoBehaviour{
     protected float m_Move_H = 0.0f;
     protected float m_Move_V = 0.0f;
     protected float m_Current_Speed = 0;
-    protected float m_Move_Speed = 5.5f;
-    protected float m_Run_Speed = 5.5f;
+    protected float m_Move_Speed;
+    protected float m_Run_Speed;
 
     //회전
     protected float Min_X = -360.0f;
@@ -78,7 +79,7 @@ public class CharacterSuper : MonoBehaviour{
     protected float Rotation_X = 0.0f;
 
     //점프
-    protected float m_Jump_Force;
+    public float m_Jump_Force;
 
     // 캐릭터 제어가능 여부
     protected bool cancontroll = true;
@@ -121,6 +122,7 @@ public class CharacterSuper : MonoBehaviour{
         Check_Ground();
         Move();
         Run();
+        Debug.Log(m_JumpDelay);
     }
     // 생성자.
     public void SetCharacterSuper()
@@ -163,7 +165,7 @@ public class CharacterSuper : MonoBehaviour{
     }
     public virtual void Jump()
     {
-        if (Is_Ground)
+        if (Is_Ground && !Is_Jump)
         {
             Player_rb.AddForce(0, m_Jump_Force, 0);
         }
@@ -230,7 +232,6 @@ public class CharacterSuper : MonoBehaviour{
                 FirePoint.transform.rotation,1.0f,PlayerCode);
         }
     }
-
     public virtual void StartReload()
     {
         Debug.Log("상속전 캐릭터 재장전 시작");
