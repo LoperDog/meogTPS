@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ManduCharacter : CharacterSuper
 {
-    public DubuAnimation CharAnim;
+    public ManduAnimation CharAnim;
 
     override public void Attack()
     {
@@ -48,5 +48,18 @@ public class ManduCharacter : CharacterSuper
         {
             coroutine.StartSpecialAttackSetting();
         }
+    }
+    public void SpecialAttackReady()
+    {
+        CharAnim.SetSpecialAttackReady();
+    }
+    public void SpecialAttackEnd()
+    {
+        CharAnim.SetSpecialAttackEnd();
+    }
+    public override void SetAnimator(AnimationSuper anim)
+    {
+        base.SetAnimator(anim);
+        CharAnim = (ManduAnimation)anim;
     }
 }

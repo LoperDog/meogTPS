@@ -70,7 +70,7 @@ public class ConfigClass {
         DubuStatus["SpecialAttack"] = 100.0f;
         DubuStatus["SpecialAttackSpeed"] = 25.0f;
         DubuStatus["SpecialAttackReady"] = 0.86f;
-        DubuStatus["SpecialAttackTime"] = 0.52f;
+        DubuStatus["SpecialAttackTime"] = 0.56f;
         DubuStatus["SpecialAttackEnd"] = 1.43f;
 
         DubuPosition.Add("FirePosition", new Vector3(0.0f, 1.15f, 0.8f));

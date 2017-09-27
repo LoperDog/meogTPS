@@ -93,7 +93,6 @@ public class DubuCoroutin : CoroutinClass
         {
             config = new ConfigClass();
         }
-        //yield return null;
         DubuChar.SpecialAttackReady();
         yield return new WaitForSeconds(config.StatusConfigs["Dubu"]["SpecialAttackReady"]);
         StartCoroutine(SetSpecialAttackDash());

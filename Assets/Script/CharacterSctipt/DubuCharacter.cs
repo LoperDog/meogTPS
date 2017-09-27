@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class DubuCharacter : CharacterSuper
 {
-    // 이팩트 시작 위치나 등등을 잡아줘야 한다.
+    public DubuAnimation CharAnim;
+
     public bool AttackIsLeft = false;
-    
-    public DubuAnimation  CharAnim;
+
     override public void Attack()
     { 
         // 공격중이 아닌데 공격 이 시작된다면 - 공격 가능
@@ -73,7 +73,7 @@ public class DubuCharacter : CharacterSuper
     //특수기 시작
     public override void SpecialAttack()
     {
-        if (!IsSpecialAttack && GetIsGroud())
+        if (!IsSpecialAttack && GetIsGroud() && mgr.SpecialAttackCoolTime == 0)
         {
             coroutine.StartSpecialAttackSetting();
         }

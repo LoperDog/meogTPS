@@ -38,6 +38,6 @@ public class ManduAnimation : AnimationSuper
     }
     public void SetSpecialAttackEnd()
     {
-
+        m_Anim.SetBool("Is_SpecialAttackReady", false);
     }
 }
