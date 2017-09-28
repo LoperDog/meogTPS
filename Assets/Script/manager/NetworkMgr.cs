@@ -74,7 +74,7 @@ public class NetworkMgr : MonoBehaviour
     // 호스트 아이피를 찾는다.
     public void SetHostIP(string hostip)
     {
-        OtherIP = "1" + hostip;
+        OtherIP = hostip;
         Debug.Log("접속해야 하는 호스트 번호" + OtherIP);
         StartConnect();
     }
