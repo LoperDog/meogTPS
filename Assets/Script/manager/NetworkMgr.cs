@@ -13,14 +13,15 @@ public class NetworkMgr : MonoBehaviour
     // 플레이어 번호에 맞는 생성위치를 잡아준다.
     private Vector3[] PlayerCreatePosition = new Vector3[6];
     //접속 IP
-    private const string ip = "192.168.30.43";
+    private const string ip = "192.168.30.64";
     //접속 Port
-    private const int port = 30000;
+    private const int port = 9000;
     //NAT 기능의 사용 여부
     private bool _useNat = false;
     // 플레이어 프리팹
     public GameObject[] player = new GameObject[4];
     public int MyPlayerNumb = 0;
+    
     
     // 시작할때 플레이어들의 번호에 맞추어 넣자.
     private void Start()
@@ -31,9 +32,28 @@ public class NetworkMgr : MonoBehaviour
         PlayerCreatePosition[3] = new Vector3(25f, 10f, -5f);
         PlayerCreatePosition[4] = new Vector3(25f, 10f, 0);
         PlayerCreatePosition[5] = new Vector3(25f, 10f, 5f);
+        if (Network.peerType == NetworkPeerType.Disconnected)
+        {
+            /*
+            IPHostEntry host = Dns.GetHostByName(Dns.GetHostName());
+            foreach (IPAddress ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    MyIP = ip.ToString();
+                    break;
+                }
+            }*/
+            MyIP = Network.player.ipAddress;
+            Debug.Log(MyIP);
+            // 연결 요청
+            CSender tempSender = CSender.GetInstance();
+            DataPacketInfo tempData = new DataPacketInfo((int)ProtocolInfo.ServerCommend, (int)ProtocolDetail.GetHostIP, 0, null);
+            tempSender.Sendn(ref tempData);
+        }
     }
     void OnGUI()
-    {
+    {/*
         if (Network.peerType == NetworkPeerType.Disconnected)
         {
             // 게임 서버 생성 버튼+
@@ -48,28 +68,9 @@ public class NetworkMgr : MonoBehaviour
                 // 게임 서버 접속 : Connect(접속IP, 접속포트번호)
                 Network.Connect(ip, port);
             }
-        }
-        /*
-        // 자신의 아이피 확인.
-        if (Network.peerType == NetworkPeerType.Disconnected) {
-            IPHostEntry host = Dns.GetHostByName(Dns.GetHostName());
-            foreach (IPAddress ip in host.AddressList)
-            {
-                if (ip.AddressFamily == AddressFamily.InterNetwork)
-                {
-                    MyIP = ip.ToString();
-                    break;
-                }
-            }
-            Debug.Log(MyIP);
-            // 연결 요청
-            CSender tempSender = CSender.GetInstance();
-            DataPacketInfo tempData = new DataPacketInfo((int)ProtocolInfo.ServerCommend, (int)ProtocolDetail.GetHostIP, 0, null);
-            tempSender.Sendn(ref tempData);
-            // 데이터 대기
-
-            // 연결 혹은 호스트 열기
         }*/
+        // 자신의 아이피 확인.
+        
     }
     // 호스트 아이피를 찾는다.
     public void SetHostIP(string hostip)

@@ -24,9 +24,9 @@ public class Init : MonoBehaviour {
 
     private void OnApplicationQuit()
     {
-        //DataPacketInfo quitInfo = new DataPacketInfo((int)ProtocolInfo.ChattingMessage, (int)ProtocolDetail.Message, (int)ProtocolMessageTag.Text, "으악 나 죽네");
+        DataPacketInfo quitInfo = new DataPacketInfo((int)ProtocolInfo.ChattingMessage, (int)ProtocolDetail.Message, (int)ProtocolMessageTag.Text, "Client 죽음");
         //sender.Sendn(ref quitInfo);
-        //Debug.Log("OnApplicationQuit 호출");
+        Debug.Log("OnApplicationQuit 호출");
         readyNetWork.CloseStream();
         readyNetWork.CloseClient();
         //Debug.Log("readyNetWork null로 초기화 시킴");

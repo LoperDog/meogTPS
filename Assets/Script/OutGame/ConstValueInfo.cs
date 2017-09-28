@@ -34,7 +34,7 @@ namespace ConstValueInfo
         FrontMenu,          // 메뉴(로그인, 회원가입, 게스트 로그인 )
         MatchingSuccess,     // 매칭 성공 방 UI 표시
         LoginSuccess,         // 로그인 성공 채널 입장
-        ChangeCharacter,		// 캐릭터 변경
+        ChangeCharacter,      // 캐릭터 변경
         NotReadyGame,        // 게임 준비 취소
         StartGame,
         GetHostIP
@@ -49,7 +49,7 @@ namespace ConstValueInfo
     // 이후 밑으로는 대상 Tag 인덱스 
     public enum ProtocolCharacterTagIndex   // CharacterImageTag 배열과 CharacterNameTag 배열의 인덱스
     {
-        None, Red01, Red02, Red03, Blue01, Blue02, Blue03
+        NoneCharacter, Red01, Blue01, Red02, Blue02, Red03, Blue03
     }
 
     public enum ProtocolMessageTag
@@ -83,20 +83,17 @@ namespace ConstValueInfo
     static public class ConstValue
     {
         public const int Port = 9000;
-        public const string IP = "127.0.0.1";
+        public const string IP = "192.168.30.64";
         public const int BufSizeRecv = 1024;
         public const int BufSizeSend = 1024;
         //public const int BufSizeTag = 64;  // 오브젝트 Tag값
         public const int BufSizeValue = 128; // 채팅 메세지, 혹은 값
         public const int IntSize = 4;
         public static readonly string[] ProtocolCharacterImageName = { "Tofu", "Mandu", "Tangsuyuk" };
-        public static readonly string[] ProtocolCharacterTagIndexImage = { "RedImage01", "RedImage02", "RedImage03", "BlueImage01", "BlueImage02", "BlueImage03" };
-        public static readonly string[] ProtocolCharacterTagIndexName = { "RedName01", "RedName02", "RedName03", "BlueName01", "BlueName02", "BlueName03" };
+        public static readonly string[] ProtocolCharacterTagIndexImage = { "NoneCharacter", "RedImage01", "BlueImage01", "RedImage02", "BlueImage02", "RedImage03", "BlueImage03" };
+        public static readonly string[] ProtocolCharacterTagIndexName = { "NoneCharacter", "RedName01", "BlueName01", "RedName02", "BlueName02", "RedName03", "BlueName03" };
         public static readonly string[] ProtocolMessageTag = { "TextView" };
-        public static readonly string[] ProtocolSceneName = { "FrontScene", "ChannelScene", "RoomScene" , "Main"};
+        public static readonly string[] ProtocolSceneName = { "FrontScene", "ChannelScene", "RoomScene", "Main" };
         public const int CharacterKind = 3;
     }
 }
-
-
-
