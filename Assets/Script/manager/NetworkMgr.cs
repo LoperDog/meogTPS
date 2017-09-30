@@ -33,6 +33,7 @@ public class NetworkMgr : MonoBehaviour
         PlayerCreatePosition[4] = new Vector3(25f, 10f, 0);
         PlayerCreatePosition[5] = new Vector3(25f, 10f, 5f);
 
+        // 싱글 플레이시에는 여기서 부터 스타트함수를 끝까지 주석한다.
         MyInfoClass.GetInstance().MyNetwork = this;
 
         if (Network.peerType == NetworkPeerType.Disconnected)
@@ -56,23 +57,26 @@ public class NetworkMgr : MonoBehaviour
         }
     }
     void OnGUI()
-    {/*
+    {
+        /*
+        // 싱글플레이시 여길 연다
         if (Network.peerType == NetworkPeerType.Disconnected)
         {
             // 게임 서버 생성 버튼+
-            if (GUI.Button(new Rect(20, 20, 200, 25), "Start Server"))
+            if (GUI.Button(new Rect(20, 20, 200, 25), "만두 캐릭터"))
             {
                 // 게임 서버 생성 : InitializeServer(접속자수, 포트번호, NAT사용여부)
+                MyInfoClass.GetInstance().MyGameNumb = 0;
                 Network.InitializeServer(20, port, _useNat);
             }
             // 게임에 접속하는 버튼
-            if (GUI.Button(new Rect(20, 50, 200, 25), "Connect to Server"))
+            if (GUI.Button(new Rect(20, 50, 200, 25), "두부 캐릭터"))
             {
                 // 게임 서버 접속 : Connect(접속IP, 접속포트번호)
-                Network.Connect(ip, port);
+                MyInfoClass.GetInstance().MyGameNumb = 1;
+                Network.InitializeServer(20, port, _useNat);
             }
         }*/
-        // 자신의 아이피 확인.
         
     }
     // 호스트 아이피를 찾는다.
