@@ -146,7 +146,8 @@ public class CListener {
                         break;
                     case (int)ProtocolDetail.GetHostIP:
                         Debug.Log("GetHostIP 호출");
-                        GameObject.FindGameObjectWithTag("MGR").GetComponent<NetworkMgr>().SetHostIP(dataPacket.InfoValue);
+                        MyInfoClass.GetInstance().MyNetwork.SetHostIP(dataPacket.InfoValue);
+                        //GameObject.FindGameObjectWithTag("MGR").GetComponent<NetworkMgr>().SetHostIP(dataPacket.InfoValue);
                         break;
                     default:
                         Debug.Log("분류 할 수 없는 enum InfoProtocolDetail에 등록 되어 있지 않음");

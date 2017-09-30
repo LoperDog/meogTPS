@@ -32,6 +32,9 @@ public class NetworkMgr : MonoBehaviour
         PlayerCreatePosition[3] = new Vector3(25f, 10f, -5f);
         PlayerCreatePosition[4] = new Vector3(25f, 10f, 0);
         PlayerCreatePosition[5] = new Vector3(25f, 10f, 5f);
+
+        MyInfoClass.GetInstance().MyNetwork = this;
+
         if (Network.peerType == NetworkPeerType.Disconnected)
         {
             /*

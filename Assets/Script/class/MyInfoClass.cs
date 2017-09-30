@@ -7,6 +7,7 @@ public class MyInfoClass{
 
     public int MyCharNumb = 0;
     public int MyGameNumb = 0;
+    public NetworkMgr MyNetwork;
     
     public static MyInfoClass GetInstance()
     {
