@@ -40,10 +40,11 @@ public class ConfigClass {
         ManduStatus["AtttackSpeed"] = 1.7f;
 
         ManduStatus["StrongAttack"] = 50f;
-        ManduStatus["StrongAttackSpeed"] = 10.0f;
+        ManduStatus["StrongAttack_CoolTime"] = 10.0f;
 
         ManduStatus["SpecialAttack"] = 100.0f;
-        ManduStatus["SpecialAttackSpeed"] = 30.0f;
+        ManduStatus["SpecialAttack_CoolTime"] = 30.0f;
+        ManduStatus["SpecialAttackTime"] = 3.4f; 
 
         ManduPosition.Add("FirePosition", new Vector3(0.0f, 0.9f, 0.8f));
         #endregion
@@ -62,13 +63,13 @@ public class ConfigClass {
         DubuStatus["AtttackSpeed"] = 0.25f;
 
         DubuStatus["StrongAttack"] = 30f;
-        DubuStatus["StrongAttackSpeed"] = 5.0f;
+        DubuStatus["StrongAttack_CoolTime"] = 5.0f;
         DubuStatus["StongAttackReady"] = 0.23f;
         DubuStatus["StongAttackTime"] = 0.43f;
         DubuStatus["StongAttackEnd"] = 0.86f;
 
         DubuStatus["SpecialAttack"] = 100.0f;
-        DubuStatus["SpecialAttackSpeed"] = 25.0f;
+        DubuStatus["SpecialAttack_CoolTime"] = 25.0f;
         DubuStatus["SpecialAttackReady"] = 0.86f;
         DubuStatus["SpecialAttackTime"] = 0.56f;
         DubuStatus["SpecialAttackEnd"] = 1.43f;

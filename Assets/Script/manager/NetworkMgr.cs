@@ -87,7 +87,13 @@ public class NetworkMgr : MonoBehaviour
             // 게임 서버 생성 버튼+
             if (GUI.Button(new Rect(20, 20, 200, 50), "두부 캐릭터로 세팅"))
             {
+<<<<<<< HEAD
                 MyInfoClass.GetInstance().MyCharNumb = 0;
+=======
+                // 게임 서버 생성 : InitializeServer(접속자수, 포트번호, NAT사용여부)
+                MyInfoClass.GetInstance().MyCharNumb = 0;
+                Network.InitializeServer(20, port, _useNat);
+>>>>>>> e0c5de54af375ce70507a61e91e1666ad2335016
             }
             // 게임에 접속하는 버튼
             if (GUI.Button(new Rect(20, 100, 200, 50), "만두 캐릭터 세팅"))
@@ -96,6 +102,11 @@ public class NetworkMgr : MonoBehaviour
             }
             if (GUI.Button(new Rect(20, 180, 200, 50), "호스트"))
             {
+<<<<<<< HEAD
+=======
+                // 게임 서버 접속 : Connect(접속IP, 접속포트번호)
+                MyInfoClass.GetInstance().MyCharNumb = 1;
+>>>>>>> e0c5de54af375ce70507a61e91e1666ad2335016
                 Network.InitializeServer(20, port, _useNat);
             }
             if (GUI.Button(new Rect(20, 260, 200, 50), "로컬 접속"))
