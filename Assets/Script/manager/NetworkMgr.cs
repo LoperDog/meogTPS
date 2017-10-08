@@ -66,14 +66,14 @@ public class NetworkMgr : MonoBehaviour
             if (GUI.Button(new Rect(20, 20, 200, 50), "두부 캐릭터"))
             {
                 // 게임 서버 생성 : InitializeServer(접속자수, 포트번호, NAT사용여부)
-                MyInfoClass.GetInstance().MyGameNumb = 0;
+                MyInfoClass.GetInstance().MyCharNumb = 0;
                 Network.InitializeServer(20, port, _useNat);
             }
             // 게임에 접속하는 버튼
             if (GUI.Button(new Rect(20, 100, 200, 50), "만두 캐릭터"))
             {
                 // 게임 서버 접속 : Connect(접속IP, 접속포트번호)
-                MyInfoClass.GetInstance().MyGameNumb = 1;
+                MyInfoClass.GetInstance().MyCharNumb = 1;
                 Network.InitializeServer(20, port, _useNat);
             }
         }

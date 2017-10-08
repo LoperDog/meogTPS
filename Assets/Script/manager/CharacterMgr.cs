@@ -274,7 +274,7 @@ public class CharacterMgr : MonoBehaviour
         Bullet_count.text = Current_Bullet + "/" + Max_Bullet + ToString();
         //강공격
         StrongAttackCoolTime = Mathf.Floor(StrongAttackCoolTime * 10) / 10;
-        Right_Black.fillAmount = StrongAttackCoolTime / config.StatusConfigs[CharType]["StrongAttackSpeed"];
+        Right_Black.fillAmount = StrongAttackCoolTime / config.StatusConfigs[CharType]["StrongAttack_CoolTime"];
         Right_Cool.text = StrongAttackCoolTime.ToString();
         if (StrongAttackCoolTime <= 0.1)
         {
@@ -286,7 +286,7 @@ public class CharacterMgr : MonoBehaviour
         }
         //특수기
         SpecialAttackCoolTime = Mathf.Floor(SpecialAttackCoolTime * 10) / 10;
-        Special.fillAmount = SpecialAttackCoolTime / config.StatusConfigs[CharType]["SpecialAttackSpeed"];
+        Special.fillAmount = SpecialAttackCoolTime / config.StatusConfigs[CharType]["SpecialAttack_CoolTime"];
         Special_Cool.text = SpecialAttackCoolTime.ToString();
         if (SpecialAttackCoolTime == 0)
         {

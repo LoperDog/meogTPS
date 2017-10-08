@@ -151,16 +151,16 @@ public class CharacterSuper : MonoBehaviour{
     {
         if (Is_Run && (m_Move_V > 0.1) && Is_Ground && m_Current_Speed <= m_Run_Speed && !GetIsReload() && !IsAttack && (m_Move_H == 0))
         {
-            m_Current_Speed += 20.0f * Time.deltaTime;
+            m_Current_Speed += 5.0f * Time.deltaTime;
         }
         else if ((m_Move_H != 0.0f || m_Move_V != 0.0f) && m_Current_Speed <= m_Move_Speed)
         {
-            m_Current_Speed += 20.0f * Time.deltaTime;
+            m_Current_Speed += 5.0f * Time.deltaTime;
         }
         else if(m_Current_Speed != 0)
         {
-            m_Current_Speed += (m_Current_Speed > 0) ? -20.0f * Time.deltaTime :
-                                                        20.0f * Time.deltaTime;
+            m_Current_Speed += (m_Current_Speed > 0) ? -5.0f * Time.deltaTime :
+                                                        5.0f * Time.deltaTime;
             m_Current_Speed = (m_Current_Speed >= -0.1f && m_Current_Speed <= 0.1f) ? 0.0f : m_Current_Speed;
         }
     }
@@ -175,8 +175,8 @@ public class CharacterSuper : MonoBehaviour{
     public virtual void Check_Ground()
     {
         RaycastHit hit;
-        Debug.DrawRay(Player_tr.position, Vector3.down * 0.3f, Color.red);
-        if (Physics.Raycast(Player_tr.position, Vector3.down, out hit, 0.3f))
+        Debug.DrawRay(Player_tr.position, Vector3.down * 0.2f, Color.red);
+        if (Physics.Raycast(Player_tr.position, Vector3.down, out hit, 0.2f))
         {
             if (Long_Falling && hit.collider.tag == "GROUND")
             {
@@ -261,8 +261,8 @@ public class CharacterSuper : MonoBehaviour{
         SetReLoadTime(data["ReLoadTime"]);
 
         CurrentAttack = data["AtttackSpeed"];
-        CurrentStrongAttack = data["StrongAttackSpeed"];
-        CurrentSpecialAttack = data["SpecialAttackSpeed"];
+        CurrentStrongAttack = data["StrongAttack_CoolTime"];
+        CurrentSpecialAttack = data["SpecialAttack_CoolTime"];
     }
     public virtual void SetAnimator(AnimationSuper anim)
     {
