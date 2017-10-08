@@ -124,7 +124,6 @@ public class CharacterSuper : MonoBehaviour{
         Check_Ground();
         Move();
         Run();
-        Debug.Log(Is_Jump);
     }
     // 생성자.
     public void SetCharacterSuper()
