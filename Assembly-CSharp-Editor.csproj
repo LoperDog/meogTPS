@@ -106,10 +106,16 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
  </Reference>
  <Reference Include="I18N.CJK">
- <HintPath>C:/Users/400호_28번/Desktop/meogTPS/Assets/Plugins/I18N.CJK.dll</HintPath>
+ <HintPath>C:/Users/com/Desktop/meogTPS/Assets/I18N.CJK.dll</HintPath>
  </Reference>
  <Reference Include="I18N">
- <HintPath>C:/Users/400호_28번/Desktop/meogTPS/Assets/Plugins/I18N.dll</HintPath>
+ <HintPath>C:/Users/com/Desktop/meogTPS/Assets/I18N.dll</HintPath>
+ </Reference>
+ <Reference Include="I18N.CJK">
+ <HintPath>C:/Users/com/Desktop/meogTPS/Assets/Plugins/I18N.CJK.dll</HintPath>
+ </Reference>
+ <Reference Include="I18N">
+ <HintPath>C:/Users/com/Desktop/meogTPS/Assets/Plugins/I18N.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Graphs">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>

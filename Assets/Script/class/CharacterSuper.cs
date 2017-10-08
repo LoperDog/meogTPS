@@ -84,6 +84,8 @@ public class CharacterSuper : MonoBehaviour{
     // 캐릭터 제어가능 여부
     protected bool cancontroll = true;
 
+    //시작 애니메이션
+    public bool Long_Falling = true;
 
     public bool CanControll
     {
@@ -122,7 +124,7 @@ public class CharacterSuper : MonoBehaviour{
         Check_Ground();
         Move();
         Run();
-        Debug.Log(m_JumpDelay);
+        Debug.Log(Is_Jump);
     }
     // 생성자.
     public void SetCharacterSuper()
@@ -168,6 +170,7 @@ public class CharacterSuper : MonoBehaviour{
         if (Is_Ground && !Is_Jump)
         {
             Player_rb.AddForce(0, m_Jump_Force, 0);
+            Is_Jump = true;
         }
     }
     public virtual void Check_Ground()
@@ -176,9 +179,15 @@ public class CharacterSuper : MonoBehaviour{
         Debug.DrawRay(Player_tr.position, Vector3.down * 0.3f, Color.red);
         if (Physics.Raycast(Player_tr.position, Vector3.down, out hit, 0.3f))
         {
+            if (Long_Falling && hit.collider.tag == "GROUND")
+            {
+                Long_Falling = false;
+            }
+
             if (hit.collider.tag == "GROUND")
             {
                 Is_Ground = true;
+                Is_Jump = false;
                 return;
             }
         }
@@ -360,6 +369,7 @@ public class CharacterSuper : MonoBehaviour{
     public virtual bool GetIsDead() { return Is_Dead; }
     public virtual bool GetIsStrongAttack() { return IsStrongAttack; }
     public virtual bool GetIsSpecialAttack() { return IsSpecialAttack; }
+    public virtual bool GetIsLong_Falling() { return Long_Falling; }
     // 0 이라면 트루
     public virtual bool GetEmptyBullet() { return m_Current_Bullet == 0; }
     #endregion
