@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Sockets;
 using UnityEngine;
 using ConstValueInfo;
+using System;
 
 public class NetworkMgr : MonoBehaviour
 {
@@ -21,7 +22,12 @@ public class NetworkMgr : MonoBehaviour
     // 플레이어 프리팹
     public GameObject[] player = new GameObject[4];
     public int MyPlayerNumb = 0;
-    
+
+    // 플레이어의 수를 확인한다.
+    // public int PlayerLimit = MyInfoClass.GetInstance().PlayerLimit;
+    public int PlayerLimit = 2;
+    // 게임이 시작되었는지 확인한다.
+    public bool IsStartGame = false;
     
     // 시작할때 플레이어들의 번호에 맞추어 넣자.
     private void Start()
@@ -32,8 +38,9 @@ public class NetworkMgr : MonoBehaviour
         PlayerCreatePosition[3] = new Vector3(25f, 10f, -5f);
         PlayerCreatePosition[4] = new Vector3(25f, 10f, 0);
         PlayerCreatePosition[5] = new Vector3(25f, 10f, 5f);
-        /*
+        
         // 싱글 플레이시에는 여기서 부터 스타트함수를 끝까지 주석한다.
+        /*
         MyInfoClass.GetInstance().MyNetwork = this;
 
         if (Network.peerType == NetworkPeerType.Disconnected)
@@ -56,6 +63,21 @@ public class NetworkMgr : MonoBehaviour
             tempSender.Sendn(ref tempData);
         }*/
     }
+    private void Update()
+    {
+        // 게임이 시작 되지도 않았고 서버라면
+        if (!IsStartGame) {
+            if (Network.isServer)
+            {
+                if(Network.connections.Length == this.PlayerLimit - 1)
+                {
+                    Debug.Log("Player Is Limit");
+                    this.IsStartGame = true;
+                    GettingStarted();
+                }
+            }
+        }
+    }
     void OnGUI()
     {
         
@@ -63,21 +85,24 @@ public class NetworkMgr : MonoBehaviour
         if (Network.peerType == NetworkPeerType.Disconnected)
         {
             // 게임 서버 생성 버튼+
-            if (GUI.Button(new Rect(20, 20, 200, 50), "두부 캐릭터"))
+            if (GUI.Button(new Rect(20, 20, 200, 50), "두부 캐릭터로 세팅"))
             {
-                // 게임 서버 생성 : InitializeServer(접속자수, 포트번호, NAT사용여부)
-                MyInfoClass.GetInstance().MyGameNumb = 0;
-                Network.InitializeServer(20, port, _useNat);
+                MyInfoClass.GetInstance().MyCharNumb = 0;
             }
             // 게임에 접속하는 버튼
-            if (GUI.Button(new Rect(20, 100, 200, 50), "만두 캐릭터"))
+            if (GUI.Button(new Rect(20, 100, 200, 50), "만두 캐릭터 세팅"))
             {
-                // 게임 서버 접속 : Connect(접속IP, 접속포트번호)
-                MyInfoClass.GetInstance().MyGameNumb = 1;
+                MyInfoClass.GetInstance().MyCharNumb = 1;
+            }
+            if (GUI.Button(new Rect(20, 180, 200, 50), "호스트"))
+            {
                 Network.InitializeServer(20, port, _useNat);
             }
+            if (GUI.Button(new Rect(20, 260, 200, 50), "로컬 접속"))
+            {
+                Network.Connect("127.0.0.1",port);
+            }
         }
-        
     }
     // 호스트 아이피를 찾는다.
     public void SetHostIP(string hostip)
@@ -88,19 +113,35 @@ public class NetworkMgr : MonoBehaviour
     }
     private void StartConnect()
     {
+        NetworkConnectionError errorCode = NetworkConnectionError.ConnectionFailed;
+
         // 내가 호스트가 아닐경우
         if (OtherIP != MyIP)
         {
-            for(int o = 0; o< 10000; o++)
+            while (errorCode == NetworkConnectionError.NoError)
             {
-                for (int j = 0; j < 10000; j++) ;
+                errorCode = Network.Connect(OtherIP, port);
+                if(errorCode == NetworkConnectionError.AlreadyConnectedToServer
+                    || errorCode == NetworkConnectionError.AlreadyConnectedToAnotherServer)
+                {
+                    // 연결을 끊고 자기자신을 불러온다.
+                    Network.Disconnect();
+                    this.StartConnect();
+                }
             }
-            Network.Connect(OtherIP, port);
         }
         // 내가 호스트인경우
         else
         {
-            Network.InitializeServer(20, port, _useNat);
+            errorCode = Network.InitializeServer(20, port, _useNat);
+            // 만약 이미 연결된 서버가 있다면
+            if (errorCode == NetworkConnectionError.AlreadyConnectedToAnotherServer ||
+                errorCode == NetworkConnectionError.AlreadyConnectedToServer)
+            {
+                // 연결을 끊고 자기자신을 불러온다.
+                Network.Disconnect();
+                this.StartConnect();
+            }
         }
     }
 
@@ -109,6 +150,7 @@ public class NetworkMgr : MonoBehaviour
     void OnServerInitialized()
     {
         CreatePlayer();
+        
     }
 
     // 클라이언트로 게임 서버에 접속했을 때 자동 호출됨.
@@ -128,6 +170,11 @@ public class NetworkMgr : MonoBehaviour
         // Network.Instantiate(프리펩, 생성위치, 각도, 그릅) 
         // 그릅을 지정하면 그릅에만 생성되게 할 수 있다.
         Network.Instantiate(player[MyInfoClass.GetInstance().MyCharNumb], pos, Quaternion.identity, 0);
+    }
+    // 모든 플레이어가 준비가 되었는지를 확인한다.
+    public void GettingStarted()
+    {
+        
     }
     // 접속이 종료된 플레이어의 네트워크 객체를 모두 소멸 처리
     void OnPlayerDisconnected(NetworkPlayer netPlayer)
