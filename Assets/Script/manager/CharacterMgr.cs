@@ -215,7 +215,15 @@ public class CharacterMgr : MonoBehaviour
             mainCamera = Camera.main;
         }
     }
+    public void SetStarted()
+    {
+        _networkView.RPC("Started", RPCMode.AllBuffered, null);
+    }
+    [RPC]
+    void Started()
+    {
 
+    }
     void Update()
     {
         //캐릭터 업데이트

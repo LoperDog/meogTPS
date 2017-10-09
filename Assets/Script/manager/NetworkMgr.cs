@@ -21,6 +21,7 @@ public class NetworkMgr : MonoBehaviour
     private bool _useNat = false;
     // 플레이어 프리팹
     public GameObject[] player = new GameObject[4];
+    public GameObject MyPlayer;
     public int MyPlayerNumb = 0;
 
     // 플레이어의 수를 확인한다.
@@ -33,11 +34,11 @@ public class NetworkMgr : MonoBehaviour
     private void Start()
     {
         PlayerCreatePosition[0] = new Vector3(-25f, 10f, 5f);
-        PlayerCreatePosition[1] = new Vector3(-25f, 10f, 0);
-        PlayerCreatePosition[2] = new Vector3(-25f, 10f, -5f);
-        PlayerCreatePosition[3] = new Vector3(25f, 10f, -5f);
-        PlayerCreatePosition[4] = new Vector3(25f, 10f, 0);
-        PlayerCreatePosition[5] = new Vector3(25f, 10f, 5f);
+        PlayerCreatePosition[2] = new Vector3(-25f, 10f, 0);
+        PlayerCreatePosition[4] = new Vector3(-25f, 10f, -5f);
+        PlayerCreatePosition[5] = new Vector3(25f, 10f, -5f);
+        PlayerCreatePosition[3] = new Vector3(25f, 10f, 0);
+        PlayerCreatePosition[1] = new Vector3(25f, 10f, 5f);
         
         // 싱글 플레이시에는 여기서 부터 스타트함수를 끝까지 주석한다.
         /*
@@ -169,12 +170,13 @@ public class NetworkMgr : MonoBehaviour
         // 사용자도 미리 생성된 프리팹을 볼 수 있다.
         // Network.Instantiate(프리펩, 생성위치, 각도, 그릅) 
         // 그릅을 지정하면 그릅에만 생성되게 할 수 있다.
-        Network.Instantiate(player[MyInfoClass.GetInstance().MyCharNumb], pos, Quaternion.identity, 0);
+        MyPlayer = Network.Instantiate(player[MyInfoClass.GetInstance().MyCharNumb], pos, Quaternion.identity, 0) as GameObject;
     }
     // 모든 플레이어가 준비가 되었는지를 확인한다.
     public void GettingStarted()
     {
-        
+        // 플레이어들에게 시작하라고 명ㄹ령을 내린다.
+        MyPlayer.GetComponent<Transform>().GetComponent<CharacterMgr>().SetStarted();
     }
     // 접속이 종료된 플레이어의 네트워크 객체를 모두 소멸 처리
     void OnPlayerDisconnected(NetworkPlayer netPlayer)
