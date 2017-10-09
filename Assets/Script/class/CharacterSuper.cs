@@ -82,7 +82,7 @@ public class CharacterSuper : MonoBehaviour{
     public float m_Jump_Force;
 
     // 캐릭터 제어가능 여부
-    protected bool cancontroll = true;
+    protected bool cancontroll = false;
 
     //시작 애니메이션
     public bool Long_Falling = true;
