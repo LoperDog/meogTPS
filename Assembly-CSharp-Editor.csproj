@@ -106,12 +106,6 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
  </Reference>
  <Reference Include="I18N.CJK">
- <HintPath>C:/Users/com/Desktop/meogTPS/Assets/I18N.CJK.dll</HintPath>
- </Reference>
- <Reference Include="I18N">
- <HintPath>C:/Users/com/Desktop/meogTPS/Assets/I18N.dll</HintPath>
- </Reference>
- <Reference Include="I18N.CJK">
  <HintPath>C:/Users/com/Desktop/meogTPS/Assets/Plugins/I18N.CJK.dll</HintPath>
  </Reference>
  <Reference Include="I18N">
