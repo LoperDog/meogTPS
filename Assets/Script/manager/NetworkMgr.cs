@@ -67,10 +67,11 @@ public class NetworkMgr : MonoBehaviour
     private void Update()
     {
         // 게임이 시작 되지도 않았고 서버라면
-        if (!IsStartGame) {
+        if (!IsStartGame)
+        {
             if (Network.isServer)
             {
-                if(Network.connections.Length == this.PlayerLimit - 1)
+                if (Network.connections.Length == this.PlayerLimit - 1)
                 {
                     Debug.Log("Player Is Limit");
                     this.IsStartGame = true;
