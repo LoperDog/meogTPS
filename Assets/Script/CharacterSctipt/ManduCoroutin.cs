@@ -25,7 +25,6 @@ public class ManduCoroutin : CoroutinClass
      //특수기
     public override void StartSpecialAttackSetting()
     {
-
         if (config == null)
         {
             config = new ConfigClass();

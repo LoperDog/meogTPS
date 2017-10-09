@@ -15,13 +15,16 @@ public class CharacterSuper : MonoBehaviour{
         Nuff_DotDemage
     };
 
-    // 공격 시작시간과 공격 
+    // 공격 시작시간과 공격
     public float m_CurrentAttack;
     public float m_CurrentStrongAttack;
     public float m_CurrentSpecialAttack;
     public float m_CurrentReload;
     public float m_TimeReload;
     public float m_JumpDelay;
+    //도발
+    public bool Is_Taunt = false;
+    public float Taunt_Time;
 
     static public ConfigClass config;
     public float CurrentAttack
@@ -124,6 +127,7 @@ public class CharacterSuper : MonoBehaviour{
         Check_Ground();
         Move();
         Run();
+        Taunt1();
     }
     // 생성자.
     public void SetCharacterSuper()
@@ -248,6 +252,11 @@ public class CharacterSuper : MonoBehaviour{
     {
         Debug.Log("상속전 캐릭터 재장전 끝");
     }
+    //도발1
+    public virtual void Taunt1()
+    {
+
+    }
     #endregion
     #region 캐릭터 기본 세팅
 
@@ -369,6 +378,7 @@ public class CharacterSuper : MonoBehaviour{
     public virtual bool GetIsStrongAttack() { return IsStrongAttack; }
     public virtual bool GetIsSpecialAttack() { return IsSpecialAttack; }
     public virtual bool GetIsLong_Falling() { return Long_Falling; }
+    public virtual bool GetIsTaunt() { return Is_Taunt; }
     // 0 이라면 트루
     public virtual bool GetEmptyBullet() { return m_Current_Bullet == 0; }
     #endregion

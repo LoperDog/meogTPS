@@ -70,6 +70,7 @@ public class NetworkMgr : MonoBehaviour
         // 게임이 시작 되지도 않았고 서버라면
         if (!IsStartGame)
         {
+<<<<<<< HEAD
             Debug.Log("게임상태가 아님");
             if (Network.isServer)
             {
@@ -77,6 +78,13 @@ public class NetworkMgr : MonoBehaviour
                 if (Network.connections.Length == this.PlayerLimit - 1 && MyPlayer != null)
                 { 
                     Debug.Log("Player Is Limit : " + Network.connections.Length + " 제한수 " + this.PlayerLimit);
+=======
+            if (Network.isServer)
+            {
+                if (Network.connections.Length == this.PlayerLimit - 1)
+                {
+                    Debug.Log("Player Is Limit");
+>>>>>>> ad9cc8727f2b2ad81c039e222d12f0c52f1e2356
                     this.IsStartGame = true;
                     GettingStarted();
                 }

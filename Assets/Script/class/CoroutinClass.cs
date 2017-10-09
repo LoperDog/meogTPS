@@ -39,7 +39,6 @@ public class CoroutinClass : MonoBehaviour
     {
         StartCoroutine(SetReLoad());
     }
-
     public virtual void StartBuffSetting(float time, CharacterSuper.ItemCode code, float value)
     {
         switch (code)
