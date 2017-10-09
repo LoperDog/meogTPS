@@ -377,6 +377,7 @@ public class CharacterMgr : MonoBehaviour
     {
         Key_H = Input.GetAxis("Horizontal");
         Key_V = Input.GetAxis("Vertical");
+
         Click_Left = Input.GetMouseButton(0);
         if (Input.GetMouseButton(0))
         {
@@ -402,18 +403,17 @@ public class CharacterMgr : MonoBehaviour
             thisCharacter.SetRun(Key_Shift);
         }
         thisCharacter.SetRun(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift));
+        Key_Space = Input.GetKey(KeyCode.Space);
         if (Input.GetKey(KeyCode.Space))
         {
             //_networkView.RPC("SetCharacterJump", RPCMode.AllBuffered, null);
             thisCharacter.Jump();
         }
+        Key_Space = Input.GetKey(KeyCode.R);
         if (Input.GetKey(KeyCode.R))
         {
             _networkView.RPC("SetCharacterReload", RPCMode.AllBuffered, null);
         }
-
-        Key_Space = Input.GetKey(KeyCode.Space);
-
     }
     public void PlayAnimation()
     {

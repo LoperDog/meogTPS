@@ -36,7 +36,7 @@ public class ManduCharacter : CharacterSuper
     //강공격 시작
     public override void StrongAttack()
     {
-        if (!IsStrongAttack && GetIsGroud() && mgr.StrongAttackCoolTime == 0)//강공격이 아니고 땅에 있을 때
+        if (!IsStrongAttack && GetIsGroud() && mgr.StrongAttackCoolTime == 0)//강공격이 아니고 땅에 있고 쿨타임이 0초일때
         {
             coroutine.StartStrongAttckSetting();
         }
@@ -57,6 +57,15 @@ public class ManduCharacter : CharacterSuper
     {
         CharAnim.SetSpecialAttackEnd();
     }
+    //도발 시작
+    public override void Taunt1()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Debug.Log("1");
+        }
+    }
+
     public override void SetAnimator(AnimationSuper anim)
     {
         base.SetAnimator(anim);

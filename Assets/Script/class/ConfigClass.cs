@@ -44,7 +44,9 @@ public class ConfigClass {
 
         ManduStatus["SpecialAttack"] = 100.0f;
         ManduStatus["SpecialAttack_CoolTime"] = 30.0f;
-        ManduStatus["SpecialAttackTime"] = 3.4f; 
+        ManduStatus["SpecialAttackTime"] = 3.4f;
+
+        ManduStatus["Taunt1"] = 1.0f;
 
         ManduPosition.Add("FirePosition", new Vector3(0.0f, 0.9f, 0.8f));
         #endregion
