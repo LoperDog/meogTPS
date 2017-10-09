@@ -202,9 +202,10 @@ public class CharacterMgr : MonoBehaviour
         thisAnim.SetAnimator(gameObject.GetComponent<Animator>());
         // 캐릭터 마스터 스테이터스,
         thisCharacter.SetCharacterStatus(config.StatusConfigs[CharType]);
-
+        Debug.Log("캐릭터 생성");
         if (_networkView.isMine)
         {
+            Debug.Log("이게 기준이 되는 캐릭터");
             HP_image = GameObject.Find("Hp_Image").GetComponent<Image>();
             Bullet_count = GameObject.Find("Bullet_Count").GetComponent<Text>();
             Special = GameObject.Find("Special_Black").GetComponent<Image>();
@@ -213,16 +214,18 @@ public class CharacterMgr : MonoBehaviour
             Special_Cool = GameObject.Find("Special_Cool").GetComponent<Text>();
             Camera.main.GetComponent<Cam>().SetPlayer(Player_tr);
             mainCamera = Camera.main;
+            GameObject.FindGameObjectWithTag("MGR").GetComponent<NetworkMgr>().SetPlayer(gameObject.GetComponent<Transform>().GetComponent<GameObject>());
         }
     }
     public void SetStarted()
     {
+        Debug.Log("여기는 들어오는 것인가?");
         _networkView.RPC("Started", RPCMode.AllBuffered, null);
     }
     [RPC]
     void Started()
     {
-
+        Debug.Log("게임 시작0");
     }
     void Update()
     {

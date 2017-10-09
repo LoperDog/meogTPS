@@ -113,12 +113,6 @@
       <HintPath>Library\UnityAssemblies\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
     <Reference Include="I18N.CJK">
-      <HintPath>Assets\I18N.CJK.dll</HintPath>
-    </Reference>
-    <Reference Include="I18N">
-      <HintPath>Assets\I18N.dll</HintPath>
-    </Reference>
-    <Reference Include="I18N.CJK">
       <HintPath>Assets\Plugins\I18N.CJK.dll</HintPath>
     </Reference>
     <Reference Include="I18N">

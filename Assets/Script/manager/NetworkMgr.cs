@@ -66,18 +66,26 @@ public class NetworkMgr : MonoBehaviour
     }
     private void Update()
     {
+        Debug.Log("실행중");
         // 게임이 시작 되지도 않았고 서버라면
-        if (!IsStartGame) {
+        if (!IsStartGame)
+        {
+            Debug.Log("게임상태가 아님");
             if (Network.isServer)
             {
-                if(Network.connections.Length == this.PlayerLimit - 1)
-                {
-                    Debug.Log("Player Is Limit");
+                Debug.Log("호스트임을 확인" + Network.connections.Length);
+                if (Network.connections.Length == this.PlayerLimit - 1 && MyPlayer != null)
+                { 
+                    Debug.Log("Player Is Limit : " + Network.connections.Length + " 제한수 " + this.PlayerLimit);
                     this.IsStartGame = true;
                     GettingStarted();
                 }
             }
         }
+    }
+    public void SetPlayer(GameObject Player) {
+        Debug.Log(Player.name);
+        MyPlayer = Player;
     }
     void OnGUI()
     {
@@ -170,12 +178,15 @@ public class NetworkMgr : MonoBehaviour
         // 사용자도 미리 생성된 프리팹을 볼 수 있다.
         // Network.Instantiate(프리펩, 생성위치, 각도, 그릅) 
         // 그릅을 지정하면 그릅에만 생성되게 할 수 있다.
-        MyPlayer = Network.Instantiate(player[MyInfoClass.GetInstance().MyCharNumb], pos, Quaternion.identity, 0) as GameObject;
+        Network.Instantiate(player[MyInfoClass.GetInstance().MyCharNumb], pos, Quaternion.identity, 0);
+        Debug.Log("되는건가? " + MyPlayer.name);
     }
     // 모든 플레이어가 준비가 되었는지를 확인한다.
     public void GettingStarted()
     {
         // 플레이어들에게 시작하라고 명ㄹ령을 내린다.
+        Debug.Log("이게 느린건가? " + MyPlayer.name);
+
         MyPlayer.GetComponent<Transform>().GetComponent<CharacterMgr>().SetStarted();
     }
     // 접속이 종료된 플레이어의 네트워크 객체를 모두 소멸 처리
