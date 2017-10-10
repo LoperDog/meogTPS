@@ -184,7 +184,7 @@ public class NetworkMgr : MonoBehaviour
     // 모든 플레이어가 준비가 되었는지를 확인한다.
     public void GettingStarted()
     {
-        // 플레이어들에게 시작하라고 명ㄹ령을 내린다.
+        // 플레이어들에게 시작하라고 명령을 내린다.
         Debug.Log("이게 느린건가? " + MyPlayer.name);
 
         MyPlayer.GetComponent<Transform>().GetComponent<CharacterMgr>().SetStarted();
