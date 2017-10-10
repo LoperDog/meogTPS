@@ -202,9 +202,10 @@ public class CharacterMgr : MonoBehaviour
         thisAnim.SetAnimator(gameObject.GetComponent<Animator>());
         // 캐릭터 마스터 스테이터스,
         thisCharacter.SetCharacterStatus(config.StatusConfigs[CharType]);
-
+        Debug.Log("캐릭터 생성");
         if (_networkView.isMine)
         {
+            Debug.Log("이게 기준이 되는 캐릭터");
             HP_image = GameObject.Find("Hp_Image").GetComponent<Image>();
             Bullet_count = GameObject.Find("Bullet_Count").GetComponent<Text>();
             Special = GameObject.Find("Special_Black").GetComponent<Image>();
@@ -213,9 +214,19 @@ public class CharacterMgr : MonoBehaviour
             Special_Cool = GameObject.Find("Special_Cool").GetComponent<Text>();
             Camera.main.GetComponent<Cam>().SetPlayer(Player_tr);
             mainCamera = Camera.main;
+            GameObject.FindGameObjectWithTag("MGR").GetComponent<NetworkMgr>().SetPlayer(gameObject.GetComponent<Transform>().GetComponent<GameObject>());
         }
     }
-
+    public void SetStarted()
+    {
+        Debug.Log("여기는 들어오는 것인가?");
+        _networkView.RPC("Started", RPCMode.AllBuffered, null);
+    }
+    [RPC]
+    void Started()
+    {
+        Debug.Log("게임 시작0");
+    }
     void Update()
     {
         //캐릭터 업데이트
@@ -274,7 +285,7 @@ public class CharacterMgr : MonoBehaviour
         Bullet_count.text = Current_Bullet + "/" + Max_Bullet + ToString();
         //강공격
         StrongAttackCoolTime = Mathf.Floor(StrongAttackCoolTime * 10) / 10;
-        Right_Black.fillAmount = StrongAttackCoolTime / config.StatusConfigs[CharType]["StrongAttackSpeed"];
+        Right_Black.fillAmount = StrongAttackCoolTime / config.StatusConfigs[CharType]["StrongAttack_CoolTime"];
         Right_Cool.text = StrongAttackCoolTime.ToString();
         if (StrongAttackCoolTime <= 0.1)
         {
@@ -286,7 +297,7 @@ public class CharacterMgr : MonoBehaviour
         }
         //특수기
         SpecialAttackCoolTime = Mathf.Floor(SpecialAttackCoolTime * 10) / 10;
-        Special.fillAmount = SpecialAttackCoolTime / config.StatusConfigs[CharType]["SpecialAttackSpeed"];
+        Special.fillAmount = SpecialAttackCoolTime / config.StatusConfigs[CharType]["SpecialAttack_CoolTime"];
         Special_Cool.text = SpecialAttackCoolTime.ToString();
         if (SpecialAttackCoolTime == 0)
         {
@@ -377,6 +388,7 @@ public class CharacterMgr : MonoBehaviour
     {
         Key_H = Input.GetAxis("Horizontal");
         Key_V = Input.GetAxis("Vertical");
+
         Click_Left = Input.GetMouseButton(0);
         if (Input.GetMouseButton(0))
         {
@@ -402,18 +414,17 @@ public class CharacterMgr : MonoBehaviour
             thisCharacter.SetRun(Key_Shift);
         }
         thisCharacter.SetRun(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift));
+        Key_Space = Input.GetKey(KeyCode.Space);
         if (Input.GetKey(KeyCode.Space))
         {
             //_networkView.RPC("SetCharacterJump", RPCMode.AllBuffered, null);
             thisCharacter.Jump();
         }
+        Key_Space = Input.GetKey(KeyCode.R);
         if (Input.GetKey(KeyCode.R))
         {
             _networkView.RPC("SetCharacterReload", RPCMode.AllBuffered, null);
         }
-
-        Key_Space = Input.GetKey(KeyCode.Space);
-
     }
     public void PlayAnimation()
     {

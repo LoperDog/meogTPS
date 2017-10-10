@@ -17,13 +17,12 @@ public class AnimationSuper
         PlayMove();
         PlayRun();
         PlayJump(); 
-        PlayLanding();
         PlayAttack();
         PlayReload();
         Long_Landing();
         PlayDie();
     }
-    public virtual void Long_Landing()//시작애니메이션
+    public virtual void Long_Landing()//시작 착지 애니메이션
     {
         if (m_Char_State.GetIsGroud())
         {
@@ -41,23 +40,11 @@ public class AnimationSuper
     }
     public virtual void PlayJump() //점프
     {
-        m_Anim.SetBool("Falling", !m_Char_State.GetIsGroud());
-    }
-    public virtual void PlayLanding()//착지
-    {
-        m_Anim.SetBool("Landing", m_Char_State.GetIsGroud());
+        m_Anim.SetBool("Falling", m_Char_State.GetIsJump());
     }
     public virtual void PlayAttack()// 공격
     {
         //m_Anim.SetBool("Is_Attack", m_Char_State.GetIsAttack());
-    }
-    public virtual void PlayStrongAttack()
-    {
-        m_Anim.SetBool("StringAttack",m_Char_State.GetIsStrongAttack());
-    }
-    public virtual void PlaySpecialAttack()
-    {
-        m_Anim.SetBool("StringAttack", m_Char_State.GetIsSpecialAttack());
     }
     public virtual void PlayReload()// 재장전
     {

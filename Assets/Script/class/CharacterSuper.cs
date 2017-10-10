@@ -15,13 +15,16 @@ public class CharacterSuper : MonoBehaviour{
         Nuff_DotDemage
     };
 
-    // 공격 시작시간과 공격 
+    // 공격 시작시간과 공격
     public float m_CurrentAttack;
     public float m_CurrentStrongAttack;
     public float m_CurrentSpecialAttack;
     public float m_CurrentReload;
     public float m_TimeReload;
     public float m_JumpDelay;
+    //도발
+    public bool Is_Taunt = false;
+    public float Taunt_Time;
 
     static public ConfigClass config;
     public float CurrentAttack
@@ -82,8 +85,10 @@ public class CharacterSuper : MonoBehaviour{
     public float m_Jump_Force;
 
     // 캐릭터 제어가능 여부
-    protected bool cancontroll = true;
+    protected bool cancontroll = false;
 
+    //시작 애니메이션
+    public bool Long_Falling = true;
 
     public bool CanControll
     {
@@ -122,7 +127,7 @@ public class CharacterSuper : MonoBehaviour{
         Check_Ground();
         Move();
         Run();
-        Debug.Log(m_JumpDelay);
+        Taunt1();
     }
     // 생성자.
     public void SetCharacterSuper()
@@ -150,16 +155,16 @@ public class CharacterSuper : MonoBehaviour{
     {
         if (Is_Run && (m_Move_V > 0.1) && Is_Ground && m_Current_Speed <= m_Run_Speed && !GetIsReload() && !IsAttack && (m_Move_H == 0))
         {
-            m_Current_Speed += 20.0f * Time.deltaTime;
+            m_Current_Speed += 5.0f * Time.deltaTime;
         }
         else if ((m_Move_H != 0.0f || m_Move_V != 0.0f) && m_Current_Speed <= m_Move_Speed)
         {
-            m_Current_Speed += 20.0f * Time.deltaTime;
+            m_Current_Speed += 5.0f * Time.deltaTime;
         }
         else if(m_Current_Speed != 0)
         {
-            m_Current_Speed += (m_Current_Speed > 0) ? -20.0f * Time.deltaTime :
-                                                        20.0f * Time.deltaTime;
+            m_Current_Speed += (m_Current_Speed > 0) ? -5.0f * Time.deltaTime :
+                                                        5.0f * Time.deltaTime;
             m_Current_Speed = (m_Current_Speed >= -0.1f && m_Current_Speed <= 0.1f) ? 0.0f : m_Current_Speed;
         }
     }
@@ -168,17 +173,24 @@ public class CharacterSuper : MonoBehaviour{
         if (Is_Ground && !Is_Jump)
         {
             Player_rb.AddForce(0, m_Jump_Force, 0);
+            Is_Jump = true;
         }
     }
     public virtual void Check_Ground()
     {
         RaycastHit hit;
-        Debug.DrawRay(Player_tr.position, Vector3.down * 0.3f, Color.red);
-        if (Physics.Raycast(Player_tr.position, Vector3.down, out hit, 0.3f))
+        Debug.DrawRay(Player_tr.position, Vector3.down * 0.2f, Color.red);
+        if (Physics.Raycast(Player_tr.position, Vector3.down, out hit, 0.2f))
         {
+            if (Long_Falling && hit.collider.tag == "GROUND")
+            {
+                Long_Falling = false;
+            }
+
             if (hit.collider.tag == "GROUND")
             {
                 Is_Ground = true;
+                Is_Jump = false;
                 return;
             }
         }
@@ -240,6 +252,11 @@ public class CharacterSuper : MonoBehaviour{
     {
         Debug.Log("상속전 캐릭터 재장전 끝");
     }
+    //도발1
+    public virtual void Taunt1()
+    {
+
+    }
     #endregion
     #region 캐릭터 기본 세팅
 
@@ -253,8 +270,8 @@ public class CharacterSuper : MonoBehaviour{
         SetReLoadTime(data["ReLoadTime"]);
 
         CurrentAttack = data["AtttackSpeed"];
-        CurrentStrongAttack = data["StrongAttackSpeed"];
-        CurrentSpecialAttack = data["SpecialAttackSpeed"];
+        CurrentStrongAttack = data["StrongAttack_CoolTime"];
+        CurrentSpecialAttack = data["SpecialAttack_CoolTime"];
     }
     public virtual void SetAnimator(AnimationSuper anim)
     {
@@ -360,6 +377,8 @@ public class CharacterSuper : MonoBehaviour{
     public virtual bool GetIsDead() { return Is_Dead; }
     public virtual bool GetIsStrongAttack() { return IsStrongAttack; }
     public virtual bool GetIsSpecialAttack() { return IsSpecialAttack; }
+    public virtual bool GetIsLong_Falling() { return Long_Falling; }
+    public virtual bool GetIsTaunt() { return Is_Taunt; }
     // 0 이라면 트루
     public virtual bool GetEmptyBullet() { return m_Current_Bullet == 0; }
     #endregion

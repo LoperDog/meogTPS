@@ -40,4 +40,13 @@ public class ManduAnimation : AnimationSuper
     {
         m_Anim.SetBool("Is_SpecialAttackReady", false);
     }
+    //도발
+    public void SetTaunt1Ready()
+    {
+
+    }
+    public void SetTaunt1End()
+    {
+
+    }
 }
