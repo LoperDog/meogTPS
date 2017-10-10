@@ -10,7 +10,7 @@ public class CharacterMgr : MonoBehaviour
     [SerializeField]
     public ConfigClass config;
 
-    private Transform Player_tr;
+    public Transform Player_tr;
     private Rigidbody Player_rb;
     private Transform Camera_tr;
 
@@ -65,6 +65,10 @@ public class CharacterMgr : MonoBehaviour
 
     public float RAY_MaxDist = 500;
 
+    private bool IsCharacterLoaded = false; // 캐릭터 세팅이 끝났는가?
+    private bool IsGameLoaded = false;      // 게임로딩이 끝났는가?
+    private bool IsInGameSetting = false;   // 요청이 떨어졌는가?
+
     #endregion
     #region UI표현에 필요한 변수
     //강공격
@@ -80,7 +84,8 @@ public class CharacterMgr : MonoBehaviour
     [SerializeField]
     private AnimationSuper thisAnim;
 
-    // 이 캐릭터가 실행할 스크립트
+    // 이 캐릭터가 실행할 스크립트\
+    [SerializeField]
     private CharacterSuper thisCharacter;
     public float Current_Bullet;
     public float Max_Bullet;
@@ -141,6 +146,7 @@ public class CharacterMgr : MonoBehaviour
         switch (Character_ID)
         {
             case Chacracter_Type.Dubu:
+                Debug.Log("두부생성됨");
                 thisCharacter = new DubuCharacter();
                 thisAnim = new DubuAnimation();
                 CharType = config.DubuString;
@@ -154,6 +160,7 @@ public class CharacterMgr : MonoBehaviour
                 Dubu_Right.enabled = true;
                 break;
             case Chacracter_Type.Mandu:
+                Debug.Log("만두생성됨");
                 thisCharacter = new ManduCharacter();
                 thisAnim = new ManduAnimation();
                 CharType = config.ManduString;
@@ -214,18 +221,22 @@ public class CharacterMgr : MonoBehaviour
             Special_Cool = GameObject.Find("Special_Cool").GetComponent<Text>();
             Camera.main.GetComponent<Cam>().SetPlayer(Player_tr);
             mainCamera = Camera.main;
-            GameObject.FindGameObjectWithTag("MGR").GetComponent<NetworkMgr>().SetPlayer(gameObject.GetComponent<Transform>().GetComponent<GameObject>());
+            GameObject.FindGameObjectWithTag("MGR").GetComponent<NetworkMgr>().SetPlayer(gameObject);
         }
+        IsCharacterLoaded = true;
+        Debug.Log("세팅 정상 종료");
     }
     public void SetStarted()
     {
         Debug.Log("여기는 들어오는 것인가?");
         _networkView.RPC("Started", RPCMode.AllBuffered, null);
+        IsInGameSetting = true;
     }
     [RPC]
     void Started()
     {
         Debug.Log("게임 시작0");
+        IsInGameSetting = true;
     }
     void Update()
     {
@@ -239,6 +250,15 @@ public class CharacterMgr : MonoBehaviour
             //InputControll();
             // 키를 적용해준다.
             //thisCharacter.SetCharacterMove(Key_H, Key_V);
+        }
+
+        // 게임이 시작었고 세팅요청이 왔다. 근데 내쪽에서 인게임 세팅이 안되어있다.-> 로딩이 끝나 게임 시작 요청을 처음 받았음.
+        if (IsInGameSetting && !IsGameLoaded && IsInGameSetting)
+        {
+            Debug.Log("세팅이 끝났고 게임이 시작되어도 좋다.");
+            IsGameLoaded = true;
+            thisCharacter.CanControll = true;
+            //Debug.Log(thisCharacter.GetComponent<Transform>().name + "캐릭터가 움직일수 있다" + thisCharacter.CanControll);
         }
         /*
         else
@@ -349,9 +369,10 @@ public class CharacterMgr : MonoBehaviour
         thisCharacter.UpAttack();
     }
     // 데미지를 전해준다.
-    public void ShotPlayer(NetworkView Player,float de)
+    public void ShotPlayer(NetworkView Player, float de)
     {
-        if (_networkView.isMine) {
+        if (_networkView.isMine)
+        {
             Player.RPC("GetDamage", RPCMode.AllBuffered, (float)de);
         }
     }
@@ -369,6 +390,7 @@ public class CharacterMgr : MonoBehaviour
         thisAnim.PlayAnimation();
         if (_networkView.isMine)
         {
+            Debug.Log("입력을 하로 왔다." + thisCharacter.CanControll);
             if (!thisCharacter.CanControll)
             {
                 Key_H = 0f;
@@ -381,6 +403,7 @@ public class CharacterMgr : MonoBehaviour
             }
             InputControll();
             thisCharacter.Turn();
+            Debug.Log("입력이 진행되고 있다.");
         }
     }
 
@@ -425,6 +448,7 @@ public class CharacterMgr : MonoBehaviour
         {
             _networkView.RPC("SetCharacterReload", RPCMode.AllBuffered, null);
         }
+
     }
     public void PlayAnimation()
     {
@@ -467,7 +491,7 @@ public class CharacterMgr : MonoBehaviour
 
             // 키 동기화
             Key_Shift = thisCharacter.GetIsRun();
-            
+
             // 위치 전송
             stream.Serialize(ref pos);
             stream.Serialize(ref rot);

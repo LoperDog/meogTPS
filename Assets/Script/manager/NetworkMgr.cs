@@ -29,7 +29,7 @@ public class NetworkMgr : MonoBehaviour
     public int PlayerLimit = 2;
     // 게임이 시작되었는지 확인한다.
     public bool IsStartGame = false;
-    
+
     // 시작할때 플레이어들의 번호에 맞추어 넣자.
     private void Start()
     {
@@ -39,14 +39,13 @@ public class NetworkMgr : MonoBehaviour
         PlayerCreatePosition[5] = new Vector3(25f, 10f, -5f);
         PlayerCreatePosition[3] = new Vector3(25f, 10f, 0);
         PlayerCreatePosition[1] = new Vector3(25f, 10f, 5f);
-        
+
         // 싱글 플레이시에는 여기서 부터 스타트함수를 끝까지 주석한다.
-        /*
         MyInfoClass.GetInstance().MyNetwork = this;
 
         if (Network.peerType == NetworkPeerType.Disconnected)
         {
-            
+
             IPHostEntry host = Dns.GetHostByName(Dns.GetHostName());
             foreach (IPAddress ip in host.AddressList)
             {
@@ -62,20 +61,18 @@ public class NetworkMgr : MonoBehaviour
             CSender tempSender = CSender.GetInstance();
             DataPacketInfo tempData = new DataPacketInfo((int)ProtocolInfo.ServerCommend, (int)ProtocolDetail.GetHostIP, 0, null);
             tempSender.Sendn(ref tempData);
-        }*/
+        }
     }
     private void Update()
     {
-        Debug.Log("실행중");
         // 게임이 시작 되지도 않았고 서버라면
         if (!IsStartGame)
         {
-            Debug.Log("게임상태가 아님");
             if (Network.isServer)
             {
-                Debug.Log("호스트임을 확인" + Network.connections.Length);
                 if (Network.connections.Length == this.PlayerLimit - 1 && MyPlayer != null)
-                { 
+                {
+                    //Debug.Log("호스트의 플레이어 수 : " + GameObject.FindGameObjectsWithTag("PLAYER").Length);
                     Debug.Log("Player Is Limit : " + Network.connections.Length + " 제한수 " + this.PlayerLimit);
                     this.IsStartGame = true;
                     GettingStarted();
@@ -83,13 +80,14 @@ public class NetworkMgr : MonoBehaviour
             }
         }
     }
-    public void SetPlayer(GameObject Player) {
-        Debug.Log(Player.name);
+    public void SetPlayer(GameObject Player)
+    {
+        //Debug.Log(Player.name);
         MyPlayer = Player;
     }
     void OnGUI()
     {
-        
+        /*
         // 싱글플레이시 여길 연다
         if (Network.peerType == NetworkPeerType.Disconnected)
         {
@@ -111,7 +109,7 @@ public class NetworkMgr : MonoBehaviour
             {
                 Network.Connect("127.0.0.1",port);
             }
-        }
+        }*/
     }
     // 호스트 아이피를 찾는다.
     public void SetHostIP(string hostip)
@@ -130,7 +128,7 @@ public class NetworkMgr : MonoBehaviour
             while (errorCode == NetworkConnectionError.NoError)
             {
                 errorCode = Network.Connect(OtherIP, port);
-                if(errorCode == NetworkConnectionError.AlreadyConnectedToServer
+                if (errorCode == NetworkConnectionError.AlreadyConnectedToServer
                     || errorCode == NetworkConnectionError.AlreadyConnectedToAnotherServer)
                 {
                     // 연결을 끊고 자기자신을 불러온다.
@@ -159,7 +157,7 @@ public class NetworkMgr : MonoBehaviour
     void OnServerInitialized()
     {
         CreatePlayer();
-        
+
     }
 
     // 클라이언트로 게임 서버에 접속했을 때 자동 호출됨.
@@ -179,14 +177,17 @@ public class NetworkMgr : MonoBehaviour
         // Network.Instantiate(프리펩, 생성위치, 각도, 그릅) 
         // 그릅을 지정하면 그릅에만 생성되게 할 수 있다.
         Network.Instantiate(player[MyInfoClass.GetInstance().MyCharNumb], pos, Quaternion.identity, 0);
-        Debug.Log("되는건가? " + MyPlayer.name);
+        //.Log("되는건가? " + MyPlayer.name);
     }
     // 모든 플레이어가 준비가 되었는지를 확인한다.
     public void GettingStarted()
     {
         // 플레이어들에게 시작하라고 명령을 내린다.
         Debug.Log("이게 느린건가? " + MyPlayer.name);
-
+        for (int i = 0; i < 1000; i++)
+        {
+            Debug.Log("시작준비중..");
+        }
         MyPlayer.GetComponent<Transform>().GetComponent<CharacterMgr>().SetStarted();
     }
     // 접속이 종료된 플레이어의 네트워크 객체를 모두 소멸 처리

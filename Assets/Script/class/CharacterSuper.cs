@@ -1,9 +1,10 @@
-﻿ using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterSuper : MonoBehaviour{
-    
+public class CharacterSuper : MonoBehaviour
+{
+
     // 버프 아이템이나 종류
     public enum ItemCode
     {
@@ -47,10 +48,12 @@ public class CharacterSuper : MonoBehaviour{
     public CharacterMgr CharMgr;
     public CharacterMgr mgr
     {
-        get {
+        get
+        {
             return CharMgr;
         }
-        set {
+        set
+        {
             CharMgr = value;
             coroutine.SetMgr(CharMgr);
         }
@@ -99,6 +102,7 @@ public class CharacterSuper : MonoBehaviour{
         set
         {
             cancontroll = value;
+            Debug.Log("컨트롤 가능 값이 바뀌었다." + cancontroll);
         }
     }
 
@@ -109,7 +113,7 @@ public class CharacterSuper : MonoBehaviour{
     protected GameObject BaseBullet;
     protected GameObject StrongBullet;
     protected GameObject SpecialBullet;
-    
+
     protected Dictionary<int, Queue<GameObject>> BulletPool = new Dictionary<int, Queue<GameObject>>();
 
     public CoroutinClass coroutine;
@@ -119,7 +123,7 @@ public class CharacterSuper : MonoBehaviour{
 
     protected AnimationSuper Anim;
     // 이팩트 뜰 위치를 정한다.
-    public Transform [] effectPosition;
+    public Transform[] effectPosition;
     public Transform[] effect;
 
     public virtual void CharacterUpdate()
@@ -161,7 +165,7 @@ public class CharacterSuper : MonoBehaviour{
         {
             m_Current_Speed += 5.0f * Time.deltaTime;
         }
-        else if(m_Current_Speed != 0)
+        else if (m_Current_Speed != 0)
         {
             m_Current_Speed += (m_Current_Speed > 0) ? -5.0f * Time.deltaTime :
                                                         5.0f * Time.deltaTime;
@@ -226,10 +230,10 @@ public class CharacterSuper : MonoBehaviour{
     // 기본 총알을 발사한다.
     public virtual void ShotBullet()
     {
-        coroutine.StartAttackSetting();        
+        coroutine.StartAttackSetting();
         ReuseBullet(BaseBullet, FirePoint.transform.position, FirePoint.transform.rotation);
     }
-    public virtual void ReuseBullet(GameObject Object,Vector3 position, Quaternion rotation)
+    public virtual void ReuseBullet(GameObject Object, Vector3 position, Quaternion rotation)
     {
         int poolkey = Object.GetInstanceID();
 
@@ -241,7 +245,7 @@ public class CharacterSuper : MonoBehaviour{
             // 오브젝트 사용하기 위해 세팅을 하자.
             // 발사할 위치를 정하거나 하는 둥의 액션.
             objectToReuse.GetComponent<BulletSuper>().FireBullet(FirePoint.transform.position,
-                FirePoint.transform.rotation,1.0f,PlayerCode);
+                FirePoint.transform.rotation, 1.0f, PlayerCode);
         }
     }
     public virtual void StartReload()
@@ -289,13 +293,14 @@ public class CharacterSuper : MonoBehaviour{
     public virtual void SetJumpForce(float jump_Force) { m_Jump_Force = jump_Force; }
     public virtual void SetPlayerTr(Transform player) { Player_tr = player; }
     public virtual void SetPlayerOb(GameObject player_ob) { Player_Object = player_ob; }
-    public virtual void SetCoroutine(CoroutinClass co) {
+    public virtual void SetCoroutine(CoroutinClass co)
+    {
         coroutine = co;
         coroutine.SetCharacterScript(this);
     }
     public virtual void SetCameraTr(Transform camera) { Camera_tr = camera; }
     public virtual void SetPlayerRb(Rigidbody rigidbody) { Player_rb = rigidbody; }
-    public virtual void SetCharacterMove(float H, float V) {m_Move_H = H; m_Move_V = V;}
+    public virtual void SetCharacterMove(float H, float V) { m_Move_H = H; m_Move_V = V; }
     // 기본 총알 생성자.
     public virtual void SetBulletObject(GameObject bullet) { BaseBullet = bullet; }
 
@@ -316,7 +321,7 @@ public class CharacterSuper : MonoBehaviour{
         {
             // 풀에 키값을 넣고 그에 맞는 총알 큐를 만든다.
             BulletPool.Add(poolkey, new Queue<GameObject>());
-            for(int i = 0; i < size; i++)
+            for (int i = 0; i < size; i++)
             {
                 GameObject newBullet = Instantiate(Object) as GameObject;
                 newBullet.SetActive(false);
@@ -336,12 +341,12 @@ public class CharacterSuper : MonoBehaviour{
     }
     #endregion
     #region 아이템 영역
-    protected virtual void SetItem(float time,ItemCode code,float val)
+    protected virtual void SetItem(float time, ItemCode code, float val)
     {
         switch (code)
         {
             case ItemCode.Buff_Attack:
-                
+
                 break;
             case ItemCode.Buff_DotHill:
                 break;
@@ -359,10 +364,10 @@ public class CharacterSuper : MonoBehaviour{
     }
     #endregion
     #region 키세팅영역
-    public virtual void SetRun(bool KeyShift){ Is_Run = KeyShift;}
+    public virtual void SetRun(bool KeyShift) { Is_Run = KeyShift; }
     public virtual void SetMoveH(float KeyH) { m_Move_H = KeyH; }
     public virtual void SetMoveV(float KeyV) { m_Move_V = KeyV; }
-    
+
     #endregion
     #region 캐릭터 상태값 가져오기
     public virtual bool GetAttackorReload() { return IsAttack || IsReLoad; }
@@ -382,7 +387,7 @@ public class CharacterSuper : MonoBehaviour{
     // 0 이라면 트루
     public virtual bool GetEmptyBullet() { return m_Current_Bullet == 0; }
     #endregion
-    
+
     // 소멸
     ~CharacterSuper()
     {
