@@ -145,6 +145,10 @@ public class CListener {
                         //CheckState.ChangeState(State.ClientNotReady);
                         mRecvMatchInfoQueue.Enqueue(new DataMatchInfo((ProtocolDetail)dataPacket.InfoProtocolDetail, (ProtocolCharacterTagIndex)dataPacket.InfoTagNumber, dataPacket.InfoValue));
                         break;
+                    case (int)ProtocolDetail.GetHostIP:
+                        Debug.Log("호스트 번호 받았음" + dataPacket.InfoValue);
+                        MyInfoClass.GetInstance().MyNetwork.SetHostIP(dataPacket.InfoValue);
+                        break;
                     default:
                         Debug.Log("분류 할 수 없는 enum InfoProtocolDetail에 등록 되어 있지 않음");
                         break;

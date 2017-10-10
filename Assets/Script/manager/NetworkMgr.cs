@@ -16,7 +16,7 @@ public class NetworkMgr : MonoBehaviour
     //접속 IP
     private const string ip = "192.168.30.64";
     //접속 Port
-    private const int port = 9000;
+    private const int port = 9001;
     //NAT 기능의 사용 여부
     private bool _useNat = false;
     // 플레이어 프리팹
@@ -30,6 +30,8 @@ public class NetworkMgr : MonoBehaviour
     // 게임이 시작되었는지 확인한다.
     public bool IsStartGame = false;
 
+    // 자신이 서버일때
+    public bool ReadyToInitializeServer = false;    // 서버가 시작되었는지를 확인한다.
     // 시작할때 플레이어들의 번호에 맞추어 넣자.
     private void Start()
     {
@@ -45,7 +47,7 @@ public class NetworkMgr : MonoBehaviour
 
         if (Network.peerType == NetworkPeerType.Disconnected)
         {
-            
+            Debug.Log("세팅이 된다");
             IPHostEntry host = Dns.GetHostByName(Dns.GetHostName());
             foreach (IPAddress ip in host.AddressList)
             {
@@ -61,6 +63,7 @@ public class NetworkMgr : MonoBehaviour
             CSender tempSender = CSender.GetInstance();
             DataPacketInfo tempData = new DataPacketInfo((int)ProtocolInfo.ServerCommend, (int)ProtocolDetail.GetHostIP, 0, null);
             tempSender.Sendn(ref tempData);
+            Debug.Log("요청 후");
         }
     }
     private void Update()
@@ -68,11 +71,20 @@ public class NetworkMgr : MonoBehaviour
         // 게임이 시작 되지도 않았고 서버라면
         if (!IsStartGame)
         {
+            Debug.Log("설마 여기도 안되?");
+            // 서버는 시작되지 않았고 초기화준비는 되었다.
+            if (ReadyToInitializeServer)
+            {
+                Debug.Log("업데이트에서 연결을 시도한다.");
+                StartConnect();
+            }
             if (Network.isServer)
             {
+                Debug.Log("1");
                 int LoadedPlayerCnt = GameObject.FindGameObjectsWithTag("PLAYER").Length;
                 if (Network.connections.Length == this.PlayerLimit - 1 && MyPlayer != null && LoadedPlayerCnt == PlayerLimit)
                 {
+                    Debug.Log("2");
                     //Debug.Log("호스트의 플레이어 수 : " + GameObject.FindGameObjectsWithTag("PLAYER").Length);
                     //Debug.Log("Player Is Limit : " + Network.connections.Length + " 제한수 " + this.PlayerLimit);
                     this.IsStartGame = true;
@@ -118,26 +130,30 @@ public class NetworkMgr : MonoBehaviour
     {
         OtherIP = hostip;
         Debug.Log("접속해야 하는 호스트 번호" + OtherIP);
-        StartConnect();
+        ReadyToInitializeServer = true;
     }
     private void StartConnect()
     {
         NetworkConnectionError errorCode = NetworkConnectionError.ConnectionFailed;
-
         // 내가 호스트가 아닐경우
         if (OtherIP != MyIP)
         {
-            while (errorCode == NetworkConnectionError.NoError)
+            Debug.Log("클라이언트가 연결시도를 시작한다.");
+            while (errorCode != NetworkConnectionError.NoError)
             {
+                Debug.Log("에러가 아니다.");
                 errorCode = Network.Connect(OtherIP, port);
-                if (errorCode == NetworkConnectionError.AlreadyConnectedToServer
-                    || errorCode == NetworkConnectionError.AlreadyConnectedToAnotherServer)
-                {
-                    // 연결을 끊고 자기자신을 불러온다.
-                    Network.Disconnect();
-                    this.StartConnect();
-                }
+                //if (errorCode == NetworkConnectionError.AlreadyConnectedToServer
+                //    || errorCode == NetworkConnectionError.AlreadyConnectedToAnotherServer)
+                //{
+                //    // 연결을 끊고 자기자신을 불러온다.
+                //    Debug.Log("----------------씨발");
+                //    Network.Disconnect();
+                //    this.StartConnect();
+                //}
             }
+            Debug.Log("정상적으로 연결이 되었다.");
+            ReadyToInitializeServer = false;
         }
         // 내가 호스트인경우
         else
@@ -151,6 +167,7 @@ public class NetworkMgr : MonoBehaviour
                 Network.Disconnect();
                 this.StartConnect();
             }
+            ReadyToInitializeServer = false;
         }
     }
 
@@ -159,7 +176,6 @@ public class NetworkMgr : MonoBehaviour
     void OnServerInitialized()
     {
         CreatePlayer();
-
     }
 
     // 클라이언트로 게임 서버에 접속했을 때 자동 호출됨.
