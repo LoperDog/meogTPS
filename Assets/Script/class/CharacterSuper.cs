@@ -126,6 +126,10 @@ public class CharacterSuper : MonoBehaviour
     public Transform[] effectPosition;
     public Transform[] effect;
 
+    public CharacterSuper()
+    {
+
+    }
     public virtual void CharacterUpdate()
     {
         Check_Ground();
@@ -221,7 +225,7 @@ public class CharacterSuper : MonoBehaviour
     }
     public virtual void ReLoad()
     {
-        if ((!IsReLoad) && (m_Current_Bullet != m_Max_Bullet))  //재장전이 아니고 총알이 최대가 아니며 R키를 누를 때 재장전
+        if ((!IsReLoad) && (m_Current_Bullet != m_Max_Bullet) && !IsAttack)  //재장전이 아니고 총알이 최대가 아니며 R키를 누를 때 재장전
         {
             IsReLoad = true;
             coroutine.StartReLoad();

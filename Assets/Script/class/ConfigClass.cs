@@ -34,10 +34,10 @@ public class ConfigClass {
         ManduStatus["JumpForce"] = 1500f;
 
         ManduStatus["Cartridge"] = 7f;
-        ManduStatus["ReLoadTime"] = 2.0f;
+        ManduStatus["ReLoadTime"] = 3.14f;
 
         ManduStatus["Attack"] = 50f;
-        ManduStatus["AtttackSpeed"] = 1.7f;
+        ManduStatus["AtttackSpeed"] = 1.9f;
 
         ManduStatus["StrongAttack"] = 50f;
         ManduStatus["StrongAttack_CoolTime"] = 10.0f;

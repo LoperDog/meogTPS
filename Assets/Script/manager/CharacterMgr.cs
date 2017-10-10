@@ -146,7 +146,6 @@ public class CharacterMgr : MonoBehaviour
         switch (Character_ID)
         {
             case Chacracter_Type.Dubu:
-                Debug.Log("두부생성됨");
                 thisCharacter = new DubuCharacter();
                 thisAnim = new DubuAnimation();
                 CharType = config.DubuString;
@@ -160,7 +159,6 @@ public class CharacterMgr : MonoBehaviour
                 Dubu_Right.enabled = true;
                 break;
             case Chacracter_Type.Mandu:
-                Debug.Log("만두생성됨");
                 thisCharacter = new ManduCharacter();
                 thisAnim = new ManduAnimation();
                 CharType = config.ManduString;
@@ -209,7 +207,6 @@ public class CharacterMgr : MonoBehaviour
         thisAnim.SetAnimator(gameObject.GetComponent<Animator>());
         // 캐릭터 마스터 스테이터스,
         thisCharacter.SetCharacterStatus(config.StatusConfigs[CharType]);
-        Debug.Log("캐릭터 생성");
         if (_networkView.isMine)
         {
             Debug.Log("이게 기준이 되는 캐릭터");
@@ -224,13 +221,15 @@ public class CharacterMgr : MonoBehaviour
             GameObject.FindGameObjectWithTag("MGR").GetComponent<NetworkMgr>().SetPlayer(gameObject);
         }
         IsCharacterLoaded = true;
-        Debug.Log("세팅 정상 종료");
     }
     public void SetStarted()
     {
-        Debug.Log("여기는 들어오는 것인가?");
-        _networkView.RPC("Started", RPCMode.AllBuffered, null);
-        IsInGameSetting = true;
+        GameObject[] AllPlayer = GameObject.FindGameObjectsWithTag("PLAYER");
+        for (int i = 0; i < AllPlayer.Length; i++)
+        {
+            AllPlayer[i].GetComponent<Transform>().GetComponent<NetworkView>().RPC("Started", RPCMode.AllBuffered, null);
+        }
+
     }
     [RPC]
     void Started()
@@ -390,7 +389,7 @@ public class CharacterMgr : MonoBehaviour
         thisAnim.PlayAnimation();
         if (_networkView.isMine)
         {
-            Debug.Log("입력을 하로 왔다." + thisCharacter.CanControll);
+            //Debug.Log("입력을 하로 왔다." + thisCharacter.CanControll);
             if (!thisCharacter.CanControll)
             {
                 Key_H = 0f;
@@ -403,7 +402,7 @@ public class CharacterMgr : MonoBehaviour
             }
             InputControll();
             thisCharacter.Turn();
-            Debug.Log("입력이 진행되고 있다.");
+            //Debug.Log("입력이 진행되고 있다.");
         }
     }
 

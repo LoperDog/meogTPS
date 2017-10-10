@@ -39,13 +39,13 @@ public class NetworkMgr : MonoBehaviour
         PlayerCreatePosition[5] = new Vector3(25f, 10f, -5f);
         PlayerCreatePosition[3] = new Vector3(25f, 10f, 0);
         PlayerCreatePosition[1] = new Vector3(25f, 10f, 5f);
-
+        
         // 싱글 플레이시에는 여기서 부터 스타트함수를 끝까지 주석한다.
         MyInfoClass.GetInstance().MyNetwork = this;
 
         if (Network.peerType == NetworkPeerType.Disconnected)
         {
-
+            
             IPHostEntry host = Dns.GetHostByName(Dns.GetHostName());
             foreach (IPAddress ip in host.AddressList)
             {
@@ -70,10 +70,11 @@ public class NetworkMgr : MonoBehaviour
         {
             if (Network.isServer)
             {
-                if (Network.connections.Length == this.PlayerLimit - 1 && MyPlayer != null)
+                int LoadedPlayerCnt = GameObject.FindGameObjectsWithTag("PLAYER").Length;
+                if (Network.connections.Length == this.PlayerLimit - 1 && MyPlayer != null && LoadedPlayerCnt == PlayerLimit)
                 {
                     //Debug.Log("호스트의 플레이어 수 : " + GameObject.FindGameObjectsWithTag("PLAYER").Length);
-                    Debug.Log("Player Is Limit : " + Network.connections.Length + " 제한수 " + this.PlayerLimit);
+                    //Debug.Log("Player Is Limit : " + Network.connections.Length + " 제한수 " + this.PlayerLimit);
                     this.IsStartGame = true;
                     GettingStarted();
                 }
@@ -87,29 +88,30 @@ public class NetworkMgr : MonoBehaviour
     }
     void OnGUI()
     {
-        /*
         // 싱글플레이시 여길 연다
-        if (Network.peerType == NetworkPeerType.Disconnected)
-        {
-            // 게임 서버 생성 버튼+
-            if (GUI.Button(new Rect(20, 20, 200, 50), "두부 캐릭터로 세팅"))
-            {
-                MyInfoClass.GetInstance().MyCharNumb = 0;
-            }
-            // 게임에 접속하는 버튼
-            if (GUI.Button(new Rect(20, 100, 200, 50), "만두 캐릭터 세팅"))
-            {
-                MyInfoClass.GetInstance().MyCharNumb = 1;
-            }
-            if (GUI.Button(new Rect(20, 180, 200, 50), "호스트"))
-            {
-                Network.InitializeServer(20, port, _useNat);
-            }
-            if (GUI.Button(new Rect(20, 260, 200, 50), "로컬 접속"))
-            {
-                Network.Connect("127.0.0.1",port);
-            }
-        }*/
+        //if (Network.peerType == NetworkPeerType.Disconnected)
+        //{
+        //    // 게임 서버 생성 버튼+
+        //    if (GUI.Button(new Rect(20, 20, 200, 50), "두부 캐릭터로 세팅"))
+        //    {
+        //        MyInfoClass.GetInstance().MyCharNumb = 0;
+        //        MyInfoClass.GetInstance().MyGameNumb = 0;
+        //    }
+        //    // 게임에 접속하는 버튼
+        //    if (GUI.Button(new Rect(20, 100, 200, 50), "만두 캐릭터 세팅"))
+        //    {
+        //        MyInfoClass.GetInstance().MyCharNumb = 1;
+        //        MyInfoClass.GetInstance().MyGameNumb = 1;
+        //    }
+        //    if (GUI.Button(new Rect(20, 180, 200, 50), "호스트"))
+        //    {
+        //        Network.InitializeServer(20, port, _useNat);
+        //    }
+        //    if (GUI.Button(new Rect(20, 260, 200, 50), "로컬 접속"))
+        //    {
+        //        Network.Connect("127.0.0.1", port);
+        //    }
+        //}
     }
     // 호스트 아이피를 찾는다.
     public void SetHostIP(string hostip)
@@ -183,11 +185,11 @@ public class NetworkMgr : MonoBehaviour
     public void GettingStarted()
     {
         // 플레이어들에게 시작하라고 명령을 내린다.
-        Debug.Log("이게 느린건가? " + MyPlayer.name);
-        for (int i = 0; i < 1000; i++)
-        {
-            Debug.Log("시작준비중..");
-        }
+        //Debug.Log("이게 느린건가? " + MyPlayer.name);
+        //for(int i =0; i < 1000; i++)
+        //{
+        //    Debug.Log("시작준비중..");
+        //}
         MyPlayer.GetComponent<Transform>().GetComponent<CharacterMgr>().SetStarted();
     }
     // 접속이 종료된 플레이어의 네트워크 객체를 모두 소멸 처리
