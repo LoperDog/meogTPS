@@ -1,7 +1,19 @@
 ﻿
+<<<<<<< HEAD
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2015
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "meogTPS", "meogTPS.csproj", "{46B8CF1C-1714-4BF8-070B-C2E60021188F}"
+=======
+<<<<<<< HEAD
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2017
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "meogTPS", "meogTPS.csproj", "{46B8CF1C-1714-4BF8-070B-C2E60021188F}"
+=======
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "meogTPS", "Assembly-CSharp.csproj", "{C090928D-44FE-0559-C043-2CCB40627CD6}"
+>>>>>>> e23b915ccbb497027e593622d47c3e9445176c81
+>>>>>>> 96a8aa4bc415cd68e57aea9dc74c6f2638c71491
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "meogTPS.Editor", "meogTPS.Editor.csproj", "{E8AD233A-D0B6-759E-72BB-78C4F3CD8913}"
 EndProject
