@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2015
+# Visual Studio 2017
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "meogTPS", "meogTPS.csproj", "{46B8CF1C-1714-4BF8-070B-C2E60021188F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "meogTPS.Editor", "meogTPS.Editor.csproj", "{E8AD233A-D0B6-759E-72BB-78C4F3CD8913}"
